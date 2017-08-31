@@ -7,3 +7,4 @@
 [Leon França]
 [Matheus Caldas](https://github.com/matheuscaldasrj),
 [Vinicius Arcoverde]
+[Pedro Gomes](https://github.com/Helvets)
