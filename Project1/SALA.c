@@ -3,12 +3,12 @@
  *
  *  Letras identificadoras:      SAL
  *
- *  Autores: mc - Matheus Calads
- *
+ *  Autores: mc - Matheus Caldas
+ *	     bp - Bruno Pedrazza
  *  Historico de evolucaoo:
  *     Vers‹o       Autor          Data            Observacoes
  *      1.00         mc        30/08/2017   Inicio do desenvolvimento
- *
+ *	1.10         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
