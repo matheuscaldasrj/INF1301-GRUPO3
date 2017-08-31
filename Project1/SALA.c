@@ -96,8 +96,8 @@ SAL_tpCondRet SAL_criarSala(Sala * sala)
  * Funcao: SAL seta codigo da sala                                        *
  *                                                                        *
  **   $FV Valor retornado                                                 *
- *    SAL_CondRetOK                                                      *
- *    SAL_CondRetErroEstrutura                                           *
+ *    SAL_CondRetOK                                                       *
+ *    SAL_CondRetErroEstrutura                                            *
  *                                                                        *
  **************************************************************************/
 
@@ -112,11 +112,11 @@ SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo)
 /**************************************************************************
  *                                                                        *
  * Funcao: Sal get codigo da sala                                         *
-*                                                                         *
+ *                                                                         *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
  *     SAL_CondRetErroEstrutura                                           *
-*                                                                        *
+ *                                                                         *
  **************************************************************************/
 
 SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo)
@@ -125,6 +125,69 @@ SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo)
 
 } 
 /* Fim funcao: Sal get codigo da sala */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal get numero da sala                                         *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
+
+int Sal_getNumero (Sala *sala){
+	if (sala->cod[4] == NULL)
+		return ((sala->cod[1]-'0')*100+(sala->cod[2]-'0')*10+(sala->cod[3]-'0'));
+	return ((sala->cod[1]-'0')*1000+(sala->cod[2]-'0')*100+(sala->cod[3]-'0')*10+(sala->cod[4]-'0'));
+}
+/* Fim funcao: Sal get numero da sala */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal get predio da sala                                         *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
+
+char* Sal_getPredio (Sala *sala){
+	switch (sala->cod[0]){
+		case 'L' :
+			return ("Leme");
+		case 'F' :
+			return ("Frings");
+		case 'K' :
+			return ("Kennedy");
+		case 'I' :
+			return ("IAG");
+		default :
+			return NULL;
+	}
+}
+/* Fim funcao: Sal get predio da sala */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal get andar da sala                                          *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
+
+int Sal_getAndar (Sala *sala){
+	int i;
+	i = pegaNumero(sala);
+	return i/100;
+}
+/* Fim funcao: Sal get andar da sala */
 
 
 
