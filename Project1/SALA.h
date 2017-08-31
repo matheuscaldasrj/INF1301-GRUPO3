@@ -7,11 +7,11 @@
 *  Letras identificadoras:      SAL
 *
 *  Autores: mc - Matheus Calads
-*
+*           bp - Bruno Pedrazza
 *  Historico de evolucaoo:
 *     Vers‹o       Autor          Data            Observacoes
 *      1.00         mc        30/08/2017   Inicio do desenvolvimento
-*
+*      1.10         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar	
 *  $ED Descrição do módulo
 *    Este módulo define a interface de Sala com seus métodos de criação
 *	 gets, sets assim como define as condicoes de retorno SAL_tpCondRet
@@ -83,6 +83,39 @@ typedef enum {
 ***********************************************************************/
 
   SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo);
+
+/***********************************************************************
+*
+*  $FC Função: SAL get numero da sala
+*
+*  $ED Descrição da função
+*     Pega o codigo da sala recebida e retorna o inteiro correspondente
+*     ao numero da sala
+***********************************************************************/
+
+int Sal_getNumero (Sala *sala);
+
+/***********************************************************************
+*
+*  $FC Função: SAL get predio da sala
+*
+*  $ED Descrição da função
+*     Pega o codigo da sala recebida e retorna uma string com o predio
+*     que a sala e localizada
+***********************************************************************/
+
+int Sal_getPredio (Sala *sala);
+
+/***********************************************************************
+*
+*  $FC Função: SAL get andar da sala
+*
+*  $ED Descrição da função
+*     Pega o codigo da sala recebida e retorna o inteiro correspondente
+*     ao andar da sala
+***********************************************************************/
+
+int Sal_getAndar (Sala *sala);
 
 
 
