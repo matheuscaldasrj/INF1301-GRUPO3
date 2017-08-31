@@ -6,7 +6,7 @@
 * *
 *  Letras identificadoras:      SAL
 *
-*  Autores: mc - Matheus Calads
+*  Autores: mc - Matheus Caldas
 *           bp - Bruno Pedrazza
 *  Historico de evolucaoo:
 *     Vers‹o       Autor          Data            Observacoes
