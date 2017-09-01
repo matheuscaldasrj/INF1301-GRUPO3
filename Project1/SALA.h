@@ -117,7 +117,9 @@ int Sal_getPredio (Sala *sala);
 
 int Sal_getAndar (Sala *sala);
 
+void Sal_setMaxAlunos(Sala *sala, int numeroAlunos);
 
+void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim);
 
 #undef SALA_EXT
 
