@@ -114,11 +114,11 @@ SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo)
 /**************************************************************************
  *                                                                        *
  * Funcao: Sal get codigo da sala                                         *
- *                                                                         *
+ *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
  *     SAL_CondRetErroEstrutura                                           *
- *                                                                         *
+ *                                                                        *
  **************************************************************************/
 
 SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo)
@@ -191,16 +191,30 @@ int Sal_getAndar (Sala *sala){
 }
 /* Fim funcao: Sal get andar da sala */
 
-void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
-{
-	sala->maxAlunos = numeroAlunos;
-}
 
 /**************************************************************************
  *                                                                        *
  * Funcao: Sal set Max Alunos                                             *
  *                                                                        *
  **   $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
+
+void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
+{
+	sala->maxAlunos = numeroAlunos;
+}
+/* Fim funcao: Sal set Max Alunos */
+
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal reserva Sala                                               *
+ *                                                                        *
+ *    $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
  *     SAL_CondRetErroEstrutura                                           *
  *                                                                        *
@@ -222,15 +236,7 @@ void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim)
 		sala->disponibilidade [hora][dia] = 0;
 	}
 }
+/* Fim funcao: Sal reserva Sala */
 
-/**************************************************************************
- *                                                                        *
- * Funcao: Sal reserva	Sala	                                          *
- *                                                                        *
- *    $FV Valor retornado                                                 *
- *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
- *                                                                        *
- **************************************************************************/
 
 /********** Fim do modulo de implementacao: Modulo Sala **********/
