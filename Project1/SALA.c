@@ -9,9 +9,9 @@
  *  Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
- *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
- *	    1.2.0	     pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
- *
+ *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
+ *	    1.2.0	       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *      1.2.1         bp        01/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -35,8 +35,7 @@
  *
  ***********************************************************************/
 
-typedef struct sala
-{   
+typedef struct SAL_tagSala  {   
     /* Código da sala, ex: L232,
      indicando 'L' o prédio e 232 o número */
     char codigo[6];
@@ -71,9 +70,9 @@ typedef struct sala
        22|  0    |  1  |  0   |  1   |  0  |   
        --------------------------------------
      */
-    int[16][5] disponibilidade;
+    int disponibilidade[16][5];
     
-} Sala;
+} SAL_tpSala;
 
 
 /*****  Codigo das funcoes exportadas pelo modulo  *****/
@@ -84,7 +83,7 @@ typedef struct sala
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_criarSala(Sala * sala)
+SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala)
 {
     //TODO
 
@@ -103,9 +102,9 @@ SAL_tpCondRet SAL_criarSala(Sala * sala)
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo)
+SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, int codigo)
 {
-    strcpy(sala->cod, codigo);
+    strcpy(pSala->cod, codigo);
 	//return especifico
 } 
 /* Fim funcao: SAL seta codigo da sala */
@@ -121,7 +120,7 @@ SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo)
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo)
+SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo)
 {
     //TODO
 
@@ -139,10 +138,16 @@ SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo)
  *                                                                        *
  **************************************************************************/
 
-int Sal_getNumero (Sala *sala){
-	if (sala->cod[4] == NULL)
-		return ((sala->cod[1]-'0')*100+(sala->cod[2]-'0')*10+(sala->cod[3]-'0'));
-	return ((sala->cod[1]-'0')*1000+(sala->cod[2]-'0')*100+(sala->cod[3]-'0')*10+(sala->cod[4]-'0'));
+SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero){
+	if (sala->cod[4] == NULL){
+		*numero = (pSala->cod[1]-'0')*100+(pSala->cod[2]-'0')*10+(pSala->cod[3]-'0');
+    return SAL_CondRetOK;
+  }
+  else{
+    *numero = (pSala->cod[1]-'0')*1000+(pSala->cod[2]-'0')*100+(pSala->cod[3]-'0')*10+(pSala->cod[4]-'0');
+    return SAL_CondRetOK;
+  }
+  return SAL_CondRetErroCodSala;
 }
 /* Fim funcao: Sal get numero da sala */
 
@@ -157,19 +162,20 @@ int Sal_getNumero (Sala *sala){
  *                                                                        *
  **************************************************************************/
 
-char* Sal_getPredio (Sala *sala){
-	switch (sala->cod[0]){
+SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio){
+	switch (pSala->cod[0]){
 		case 'L' :
-			return ("Leme");
+			*predio = "Leme";
 		case 'F' :
-			return ("Frings");
+			*predio = "Frings";
 		case 'K' :
-			return ("Kennedy");
+			*predio = "Kennedy";
 		case 'I' :
-			return ("IAG");
+			*predio = "IAG";
 		default :
-			return NULL;
+			return SAL_CondRetPredioNaoExiste;
 	}
+  return SAL_CondRetOK
 }
 /* Fim funcao: Sal get predio da sala */
 
@@ -184,10 +190,14 @@ char* Sal_getPredio (Sala *sala){
  *                                                                        *
  **************************************************************************/
 
-int Sal_getAndar (Sala *sala){
-	int i;
-	i = pegaNumero(sala);
-	return i/100;
+SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar){
+  SAL_tpCondRet retorno;
+  int numero;
+  retorno = SAL_getNumero (pSala,&numero);
+  if (retorno != SAL_CondRetOK)
+    return retorno;
+	*andar = numero/100;
+	return SAL_CondRetOK;
 }
 /* Fim funcao: Sal get andar da sala */
 
@@ -202,9 +212,9 @@ int Sal_getAndar (Sala *sala){
  *                                                                        *
  **************************************************************************/
 
-void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
+SAL_tpCondRet SAL_setMaxAlunos(SAL_tpSala * pSala, int numeroAlunos)
 {
-	sala->maxAlunos = numeroAlunos;
+	pSala->maxAlunos = numeroAlunos;
 }
 /* Fim funcao: Sal set Max Alunos */
 
@@ -220,20 +230,20 @@ void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
  *                                                                        *
  **************************************************************************/
 
-void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim)
+SAL_tpCondRet SAL_reservaSala(SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
 {
 	int hora = horaInicio -7;
 	for(hora; hora < horaFim - 7; hora++)
 	{
-		if(Sal_consultaHoranoDia(&sala, dia, hora) == 0) //fazer função
+		if(Sal_consultaHoranoDia(&pSala, dia, hora) == 0) //fazer função
 		{
-			printf("A sala %s na hora %d esta indisponivel.\n", sala->cod, hora);
+			printf("A sala %s na hora %d esta indisponivel.\n", pSala->cod, hora);
 			exit();
 		}
 	}
 	for(hora = horaInicio -7; hora < horaFim -7; hora++)
 	{
-		sala->disponibilidade [hora][dia] = 0;
+		pSala->disponibilidade [hora][dia] = 0;
 	}
 }
 /* Fim funcao: Sal reserva Sala */
