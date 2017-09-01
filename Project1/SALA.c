@@ -5,10 +5,12 @@
  *
  *  Autores: mc - Matheus Caldas
  *	     bp - Bruno Pedrazza
+ *	     pg - Pedro Gomes
  *  Historico de evolucaoo:
  *     Vers‹o       Autor          Data            Observacoes
  *      1.00         mc        30/08/2017   Inicio do desenvolvimento
  *	1.10         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
+ *	1.20	     pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -103,8 +105,8 @@ SAL_tpCondRet SAL_criarSala(Sala * sala)
 
 SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo)
 {
-    //TODO
-
+    strcpy(sala->cod, codigo);
+	//return especifico
 } 
 /* Fim funcao: SAL seta codigo da sala */
 
@@ -189,9 +191,46 @@ int Sal_getAndar (Sala *sala){
 }
 /* Fim funcao: Sal get andar da sala */
 
+void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
+{
+	sala->maxAlunos = numeroAlunos;
+}
 
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal set Max Alunos                                             *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
 
+void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim)
+{
+	int hora = horaInicio;
+	for(hora; hora < horaFim; hora++)
+	{
+		if(Sal_consultaHoranoDia(&sala, dia, hora) == 0) //fazer função
+		{
+			printf("A sala %s na hora %d esta indisponivel.\n", sala->cod, hora);
+			exit();
+		}
+	}
+	for(hora = horaInicio; hora < horaFim; hora++)
+	{
+		sala->disponibilidade [hora][dia] = 0;
+	}
+}
 
-
+/**************************************************************************
+ *                                                                        *
+ * Funcao: Sal reserva	Sala	                                          *
+ *                                                                        *
+ *    $FV Valor retornado                                                 *
+ *     SAL_CondRetOK                                                      *
+ *     SAL_CondRetErroEstrutura                                           *
+ *                                                                        *
+ **************************************************************************/
 
 /********** Fim do modulo de implementacao: Modulo Sala **********/
