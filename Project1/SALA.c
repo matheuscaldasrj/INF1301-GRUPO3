@@ -9,8 +9,8 @@
  *  Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
- *	1.1.0         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
- *	1.2.0	      pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
+ *	    1.2.0	     pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
