@@ -222,8 +222,8 @@ void Sal_setMaxAlunos(Sala *sala, int numeroAlunos)
 
 void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim)
 {
-	int hora = horaInicio;
-	for(hora; hora < horaFim; hora++)
+	int hora = horaInicio -7;
+	for(hora; hora < horaFim - 7; hora++)
 	{
 		if(Sal_consultaHoranoDia(&sala, dia, hora) == 0) //fazer função
 		{
@@ -231,7 +231,7 @@ void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim)
 			exit();
 		}
 	}
-	for(hora = horaInicio; hora < horaFim; hora++)
+	for(hora = horaInicio -7; hora < horaFim -7; hora++)
 	{
 		sala->disponibilidade [hora][dia] = 0;
 	}
