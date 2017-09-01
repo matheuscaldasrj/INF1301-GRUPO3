@@ -35,9 +35,15 @@ typedef enum {
 			   
 		SAL_CondRetRecebeuPonteiroNulo = 2 ,
 				/* Recebeu ponteiro para sala nulo */
-		SAL_CondRetErroEstrutura
-				/* Recebeu estrutura com erro */
 
+		SAL_CondRetErroEstrutura = 3 ,
+        /* Recebeu estrutura com erro */
+
+    SAL_CondRetPredioNaoExiste = 4 ,
+        /* O predio não existe */
+
+    SAL_CondRetErroCodSala = 5 ,
+        /* Erro no código da sala */
 
    } SAL_tpCondRet ;
 
@@ -56,7 +62,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   SAL_tpCondRet SAL_criarSala( Sala * sala );
+   SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala);
 
 
 /***********************************************************************
@@ -69,7 +75,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   SAL_tpCondRet Sal_setCodigo(Sala * sala, int codigo);
+   SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, int codigo);
 
 
 /***********************************************************************
@@ -82,44 +88,82 @@ typedef enum {
 *
 ***********************************************************************/
 
-  SAL_tpCondRet Sal_getCodigo(Sala * sala, char *codigo);
+  SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo);
 
 /***********************************************************************
 *
-*  $FC Função: SAL get numero da sala
+*  $FC Função: SAL_getNumero
 *
 *  $ED Descrição da função
-*     Pega o codigo da sala recebida e retorna o inteiro correspondente
-*     ao numero da sala
+*     Pega numero da sala.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     SAL_CondRetErroCodSala
+*
 ***********************************************************************/
 
-int Sal_getNumero (Sala *sala);
+SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero);
 
 /***********************************************************************
 *
-*  $FC Função: SAL get predio da sala
+*  $FC Função: SAL_getPredio
 *
 *  $ED Descrição da função
-*     Pega o codigo da sala recebida e retorna uma string com o predio
-*     que a sala e localizada
+*     Pega predio da sala.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     SAL_CondRetPredioNaoExiste
+*
 ***********************************************************************/
 
-int Sal_getPredio (Sala *sala);
+SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio);
 
 /***********************************************************************
 *
-*  $FC Função: SAL get andar da sala
+*  $FC Função: SAL_getAndar
 *
 *  $ED Descrição da função
-*     Pega o codigo da sala recebida e retorna o inteiro correspondente
-*     ao andar da sala
+*     Pega andar da sala.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     SAL_CondRetErroCodSala
+*
 ***********************************************************************/
 
-int Sal_getAndar (Sala *sala);
+SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar);
 
-void Sal_setMaxAlunos(Sala *sala, int numeroAlunos);
+/***********************************************************************
+*
+*  $FC Função: SAL_setMaxAlunos
+*
+*  $ED Descrição da função
+*     Seta numero max de alunos da sala.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     
+*
+***********************************************************************/
 
-void Sal_reservaSala(Sala *sala, int dia, int horaInicio, int horaFim);
+SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int numeroAlunos);
+
+/***********************************************************************
+*
+*  $FC Função: SAL_reservaSala
+*
+*  $ED Descrição da função
+*     Rserva horario na sala.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     
+*
+***********************************************************************/
+
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
 #undef SALA_EXT
 
