@@ -6,11 +6,11 @@
  *  Autores: mc - Matheus Caldas
  *	     bp - Bruno Pedrazza
  *	     pg - Pedro Gomes
- *  Historico de evolucaoo:
- *     Vers‹o       Autor          Data            Observacoes
- *      1.00         mc        30/08/2017   Inicio do desenvolvimento
- *	    1.10         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
- *	    1.20	       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *  Historico de evolucao:
+ *     Versao       Autor          Data            Observacoes
+ *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
+ *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNUmero, getPredio, getAndar
+ *	    1.2.0	     pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -39,7 +39,7 @@ typedef struct sala
 {   
     /* Código da sala, ex: L232,
      indicando 'L' o prédio e 232 o número */
-    char[] codigo;
+    char codigo[6];
 
     /* Quantidade de computadores na sala */
     int qtdComputadores;
