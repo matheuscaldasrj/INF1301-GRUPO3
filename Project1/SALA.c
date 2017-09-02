@@ -10,9 +10,10 @@
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
  *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
- *	    1.2.0	       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *	    1.2.0	      pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
- *  Descrição do módulo
+ *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
+*  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
  *
@@ -39,13 +40,13 @@
 typedef struct SAL_tagSala  {   
     /* Código da sala, ex: L232,
      indicando 'L' o prédio e 232 o número */
-    char codigo[6];
+	char codigo[6];
 
     /* Quantidade de computadores na sala */
-    int qtdComputadores;
+	int qtdComputadores;
 
     /* Número máximo de alunos que a sala comporta */
-    int maxAlunos;
+	int maxAlunos;
 
      /* Matriz de disponibilidade onde 1 representa sala "ocupada"
         e 0 "livre", assim, por exemplo, a sala estaria ocupada
@@ -71,8 +72,8 @@ typedef struct SAL_tagSala  {
        22|  0    |  1  |  0   |  1   |  0  |   
        --------------------------------------
      */
-    int disponibilidade[16][5];
-    
+	int disponibilidade[16][5];
+
 } SAL_tpSala;
 
 
@@ -107,7 +108,7 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
-    strcpy(pSala->cod, codigo);
+	strcpy(pSala->cod, codigo);
 	return SAL_CondRetOK;
 } 
 /* Fim funcao: SAL seta codigo da sala */
@@ -174,15 +175,15 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	switch (pSala->cod[0]){
 		case 'L' :
-			*predio = "Leme";
+		*predio = "Leme";
 		case 'F' :
-			*predio = "Frings";
+		*predio = "Frings";
 		case 'K' :
-			*predio = "Kennedy";
+		*predio = "Kennedy";
 		case 'I' :
-			*predio = "IAG";
+		*predio = "IAG";
 		default :
-			return SAL_CondRetPredioNaoExiste;
+		return SAL_CondRetPredioNaoExiste;
 	}
 	return SAL_CondRetOK
 }
@@ -265,6 +266,38 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 		pSala->disponibilidade [hora][dia] = 0;
 	}
 }
+
+
+SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores){
+	
+	if(psala == null){
+		return SAL_CondRetRecebeuPonteiroNulo;
+	}
+
+	*qtdComputadores = pSala->qtdComputadores;
+
+	if(*qtdComputadores == null){
+		return SAL_CondRetErroEstrutura;
+	}
+
+	return SAL_CondRetOK;
+}
+
+SAL_tpCondRet SAL_setQtdComputadores (SAL_tpSala * pSala, int qtdComputadores){
+
+	if(psala == null){
+		return SAL_CondRetRecebeuPonteiroNulo
+	}
+
+	if(qtdComputadores == null || qtdComputadores < 0){
+		return SAL_CondRetParamSetInvalido;
+	}
+
+	pSala->qtdComputadores = qtdComputadores;
+
+	return SAL_CondRetOK;
+}
+
 /* Fim funcao: Sal reserva Sala */
 
 
