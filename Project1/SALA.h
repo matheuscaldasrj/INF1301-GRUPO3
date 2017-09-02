@@ -73,9 +73,14 @@ typedef enum {
 *     Seta o codigo recebido pelo parametro no código
 *     da sala recebida
 *
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                       
+*    SAL_CondRetErroEstrutura                                            
+*    SAL_CondRetPredioNaoExiste
+* 
 ***********************************************************************/
 
-   SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, int codigo);
+   SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
 
 
 /***********************************************************************
@@ -85,6 +90,10 @@ typedef enum {
 *  $ED Descrição da função
 *     Pega o codigo da sala recebida e armazena no conteudo
 *     do ponteiro recebido como codigo
+*
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                      
+*    SAL_CondRetErroEstrutura
 *
 ***********************************************************************/
 
@@ -99,6 +108,7 @@ typedef enum {
 *
 *  $FV Valor retornado
 *     SAL_CondRetOK
+*     SAL_CondRetRecebeuPonteiroNulo 
 *     SAL_CondRetErroCodSala
 *
 ***********************************************************************/
@@ -115,6 +125,7 @@ SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero);
 *  $FV Valor retornado
 *     SAL_CondRetOK
 *     SAL_CondRetPredioNaoExiste
+*     SAL_CondRetRecebeuPonteiroNulo
 *
 ***********************************************************************/
 
@@ -130,7 +141,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio);
 *  $FV Valor retornado
 *     SAL_CondRetOK
 *     SAL_CondRetErroCodSala
-*
+*     SAL_CondRetRecebeuPonteiroNulo
 ***********************************************************************/
 
 SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar);
@@ -144,7 +155,7 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar);
 *
 *  $FV Valor retornado
 *     SAL_CondRetOK
-*     
+*     SAL_CondRetRecebeuPonteiroNulo
 *
 ***********************************************************************/
 
@@ -159,6 +170,7 @@ SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int numeroAlunos);
 *
 *  $FV Valor retornado
 *     SAL_CondRetOK
+*     SAL_CondRetRecebeuPonteiroNulo
 *     
 *
 ***********************************************************************/

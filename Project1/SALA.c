@@ -11,7 +11,7 @@
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
  *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
  *	    1.2.0	       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
- *      1.2.1         bp        01/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar
+ *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -22,6 +22,7 @@
 
 /* Inclusões do compilador */
 #include  <stdio.h>
+#include  <string.h>
 
 /* Inclusão do respectivo módulo de definição */
 
@@ -83,7 +84,7 @@ typedef struct SAL_tagSala  {
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala)
+SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala)
 {
     //TODO
 
@@ -99,13 +100,15 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala)
  **   $FV Valor retornado                                                 *
  *    SAL_CondRetOK                                                       *
  *    SAL_CondRetErroEstrutura                                            *
- *                                                                        *
+ *    SAL_CondRetPredioNaoExiste                                          *
  **************************************************************************/
 
-SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, int codigo)
+SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 {
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
     strcpy(pSala->cod, codigo);
-	//return especifico
+	return SAL_CondRetOK;
 } 
 /* Fim funcao: SAL seta codigo da sala */
 
@@ -120,7 +123,7 @@ SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, int codigo)
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo)
+SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
 {
     //TODO
 
@@ -134,20 +137,23 @@ SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo)
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
- *                                                                        *
+ *     SAL_CondRetRecebeuPonteiroNulo                                     *
+ *     SAL_CondRetErroCodSala                                             *
  **************************************************************************/
 
-SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero){
+SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero)
+{
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
 	if (sala->cod[4] == NULL){
 		*numero = (pSala->cod[1]-'0')*100+(pSala->cod[2]-'0')*10+(pSala->cod[3]-'0');
-    return SAL_CondRetOK;
-  }
-  else{
-    *numero = (pSala->cod[1]-'0')*1000+(pSala->cod[2]-'0')*100+(pSala->cod[3]-'0')*10+(pSala->cod[4]-'0');
-    return SAL_CondRetOK;
-  }
-  return SAL_CondRetErroCodSala;
+		return SAL_CondRetOK;
+	}
+	else{
+		*numero = (pSala->cod[1]-'0')*1000+(pSala->cod[2]-'0')*100+(pSala->cod[3]-'0')*10+(pSala->cod[4]-'0');
+		return SAL_CondRetOK;
+	}
+	return SAL_CondRetErroCodSala;
 }
 /* Fim funcao: Sal get numero da sala */
 
@@ -158,11 +164,14 @@ SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero){
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
- *                                                                        *
+ *     SAL_CondRetPredioNaoExiste                                         *
+ *     SAL_CondRetRecebeuPonteiroNulo                                     *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio){
+SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
+{
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
 	switch (pSala->cod[0]){
 		case 'L' :
 			*predio = "Leme";
@@ -175,7 +184,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio){
 		default :
 			return SAL_CondRetPredioNaoExiste;
 	}
-  return SAL_CondRetOK
+	return SAL_CondRetOK
 }
 /* Fim funcao: Sal get predio da sala */
 
@@ -187,15 +196,18 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio){
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
  *     SAL_CondRetErroEstrutura                                           *
- *                                                                        *
+ *     SAL_CondRetRecebeuPonteiroNulo                                     *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar){
-  SAL_tpCondRet retorno;
-  int numero;
-  retorno = SAL_getNumero (pSala,&numero);
-  if (retorno != SAL_CondRetOK)
-    return retorno;
+SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
+{
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
+	SAL_tpCondRet retorno;
+	int numero;
+	retorno = SAL_getNumero (pSala,&numero);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
 	*andar = numero/100;
 	return SAL_CondRetOK;
 }
@@ -209,12 +221,16 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar){
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
  *     SAL_CondRetErroEstrutura                                           *
+ *     SAL_CondRetRecebeuPonteiroNulo									  *
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_setMaxAlunos(SAL_tpSala * pSala, int numeroAlunos)
+SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int numeroAlunos)
 {
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
 	pSala->maxAlunos = numeroAlunos;
+	return SAL_CondRetOK;
 }
 /* Fim funcao: Sal set Max Alunos */
 
@@ -224,14 +240,17 @@ SAL_tpCondRet SAL_setMaxAlunos(SAL_tpSala * pSala, int numeroAlunos)
  *                                                                        *
  * Funcao: Sal reserva Sala                                               *
  *                                                                        *
- *    $FV Valor retornado                                                 *
+ *    $FV Valor retornado 												  *
+ *	   SAL_CondRetRecebeuPonteiroNulo                                     *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
+ *                                                *
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_reservaSala(SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
 {
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
 	int hora = horaInicio -7;
 	for(hora; hora < horaFim - 7; hora++)
 	{
