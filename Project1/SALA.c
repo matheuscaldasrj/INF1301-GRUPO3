@@ -106,8 +106,9 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala)
 
 SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 {
-	if (pSala == NULL)
+	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
+	}
 	strcpy(pSala->cod, codigo);
 	return SAL_CondRetOK;
 } 
@@ -120,13 +121,24 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
+ *     SAL_CondRetErroEstrutura 
+ *	   SAL_CondRetParamInvalido                                          *
  *                                                                        *
  **************************************************************************/
 
 SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
 {
-    //TODO
+    if(pSala == null){
+    	return SAL_CondRetRecebeuPonteiroNulo;
+    }
+
+    if(codigo == null){
+    	return SAL_CondRetParamInvalido
+    }
+
+    strcpy(codigo, pSala->cod);
+    
+	return SAL_CondRetOK;
 
 } 
 /* Fim funcao: Sal get codigo da sala */
@@ -290,7 +302,7 @@ SAL_tpCondRet SAL_setQtdComputadores (SAL_tpSala * pSala, int qtdComputadores){
 	}
 
 	if(qtdComputadores == null || qtdComputadores < 0){
-		return SAL_CondRetParamSetInvalido;
+		return SAL_CondRetParamInvalido;
 	}
 
 	pSala->qtdComputadores = qtdComputadores;

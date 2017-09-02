@@ -47,8 +47,8 @@ typedef enum {
   SAL_CondRetErroCodSala = 5 ,
       /* Erro no código da sala */
 
-  SAL_CondRetParamSetInvalido = 6
-    /* Erro no parametro recebido em funcao set */
+  SAL_CondRetParamInvalido = 6
+    /* Erro no parametro recebido em funcao get/set */
 
 } SAL_tpCondRet ;
 
