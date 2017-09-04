@@ -26,6 +26,9 @@
 #include  <stdio.h>
 #include  <string.h>
 
+#define HORARIOS 16
+#define DIAS 5
+
 /* Inclusão do respectivo módulo de definição */
 
 #define SALA_OWN
@@ -73,7 +76,7 @@ typedef struct SAL_tagSala  {
        22|  0    |  1  |  0   |  1   |  0  |   
        --------------------------------------
      */
-	int disponibilidade[16][5];
+	int disponibilidade[HORARIOS][DIAS];
 
 } SAL_tpSala;
 
@@ -110,7 +113,7 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
-	if (codigo == NULL)
+	if (codigo == NULL || strlen(codigo) > 6)
 		return SAL_CondRetParamInvalido;
 
 	strcpy(pSala->cod, codigo);
@@ -139,7 +142,8 @@ SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
     }
 
     strcpy(codigo, pSala->cod);
-    if (codigo == NULL)
+
+    if (codigo == NULL || strlen(codigo) > 6)
     	return SAL_CondRetErroEstrutura;
 
     return SAL_CondRetOK;
@@ -153,7 +157,7 @@ SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
+ *     SAL_CondRetParamInvalido                                           *
  *     SAL_CondRetRecebeuPonteiroNulo									  *
  *                                                                        *
  **************************************************************************/
@@ -163,8 +167,8 @@ SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	if (maxAlunos == NULL)
-		return SAL_CondRetErroEstrutura;
+	if (maxAlunos == NULL || maxAlunos <= 0)
+		return SAL_CondRetParamInvalido;
 	
 	pSala->maxAlunos = maxAlunos;
 	return SAL_CondRetOK;
@@ -190,7 +194,7 @@ SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos)
 	
 	*maxAlunos = pSala->maxAlunos;
 
-	if (maxAlunos == NULL)
+	if (maxAlunos == NULL || maxAlunos <= 0)
 		return SAL_CondRetErroEstrutura;
 
 	return SAL_CondRetOK;
@@ -200,11 +204,11 @@ SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos)
 
 /**************************************************************************
  *                                                                        *
- * Funcao: Sal set eLaboratorio                                             *
+ * Funcao: Sal set eLaboratorio                                           *
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
- *     SAL_CondRetErroEstrutura                                           *
+ *     SAL_CondRetParamInvalido                                           *
  *     SAL_CondRetRecebeuPonteiroNulo									  *
  *                                                                        *
  **************************************************************************/
@@ -214,8 +218,8 @@ SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	
-	if (eLaboratorio == NULL)
-		return SAL_CondRetErroEstrutura;
+	if (eLaboratorio == NULL || (eLaboratorio != 1 && eLaboratorio != 0))
+		return SAL_CondRetParamInvalido;
 
 	pSala->eLaboratorio = eLaboratorio;
 
@@ -242,7 +246,7 @@ SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio)
 	
 	*eLaboratorio = pSala->eLaboratorio;
 	
-	if (eLaboratorio == NULL)
+	if (eLaboratorio == NULL || (eLaboratorio != 1 && eLaboratorio != 0))
 		return SAL_CondRetErroEstrutura;
 
 	return SAL_CondRetOK;
@@ -266,7 +270,7 @@ SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	if (sala->cod[4] == NULL){
+	if (sala->cod[4] == '\0'){
 		*numero = (pSala->cod[1]-'0')*100+(pSala->cod[2]-'0')*10+(pSala->cod[3]-'0');
 		return SAL_CondRetOK;
 	}
@@ -358,6 +362,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
+
 	int hora = horaInicio -7;
 	for(hora; hora < horaFim - 7; hora++)
 	{
