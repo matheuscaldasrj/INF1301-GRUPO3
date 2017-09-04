@@ -14,6 +14,7 @@
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
  *		1.2.3	      bp		03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
+ 		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -28,6 +29,13 @@
 
 #define HORARIOS 16
 #define DIAS 5
+#define ajusteHora 7
+#define salaReservada 1
+#define reservaFalhou 0
+#define inicioDiaLetivo 7
+#define fimDiaLetivo 23
+#define inicioSemanaLetiva 0
+#define fimSemanaLetiva 5
 
 /* Inclusão do respectivo módulo de definição */
 
@@ -358,24 +366,31 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim, int *pSucesso)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	int hora = horaInicio -7;
-	for(hora; hora < horaFim - 7; hora++)
+	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva)
+		return  SAL_CondRetParamInvalido;
+
+	int hora = horaInicio - ajusteHora;
+	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
-		if(Sal_consultaHoranoDia(&pSala, dia, hora) == 0) //fazer função
+		if(disponibilidade[hora][dia] == salaReservada)
 		{
-			printf("A sala %s na hora %d esta indisponivel.\n", pSala->cod, hora);
-			exit();
+			*pSucesso = reservaFalhou;
+			return SAL_CondRetOK;
 		}
 	}
-	for(hora = horaInicio -7; hora < horaFim -7; hora++)
+
+	for(hora = horaInicio -ajusteHora; hora < horaFim -ajusteHora; hora++)
 	{
-		pSala->disponibilidade [hora][dia] = 0;
+		pSala->disponibilidade [hora][dia] = salaReservada;
 	}
+
+	*pSucesso = salaReservada;
+	return SAL_CondRetOK;
 }
 
 /* Fim funcao: Sal reserva Sala */
