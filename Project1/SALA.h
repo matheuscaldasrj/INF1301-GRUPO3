@@ -1,24 +1,30 @@
 #if ! defined( SALA_ )
 #define SALA_
-/***************************************************************************
-*
-*  Módulo de definição: Módulo árvore
-* *
-*  Letras identificadoras:      SAL
-*
-*  Autores: mc - Matheus Caldas
-*           bp - Bruno Pedrazza
-*  Historico de evolucaoo:
-*     Vers‹o       Autor          Data            Observacoes
-*      1.00         mc        30/08/2017   Inicio do desenvolvimento
-*      1.10         bp        31/08/2017   Adicionada funcoes getNUmero, getPredio, getAndar	
-*      1.11         mc        02/09/2017   Adiconada funcoes setQtdComputadores e getQtdComputadores e SAL_CondRetParamSetInvalido
 
-*  $ED Descrição do módulo
-*    Este módulo define a interface de Sala com seus métodos de criação
-*	 gets, sets assim como define as condicoes de retorno SAL_tpCondRet
-*
-***************************************************************************/
+
+/***************************************************************************
+ *  Modulo de definição: Modulo Sala
+ *
+ *  Letras identificadoras:      SAL
+ *
+ *  Autores: mc - Matheus Caldas
+ *       bp - Bruno Pedrazza
+ *       pg - Pedro Gomes
+ *  Historico de evolucao:
+ *     Versao       Autor          Data            Observacoes
+ *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
+ *      1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
+ *      1.2.0       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
+ *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
+ *    1.2.3       bp    03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
+ *  Descrição do módulo
+ *     Este módulo implementa um conjunto de funcoes para criar e manipular
+ *     atributos do módulo Sala.
+ *
+ *
+ *
+ ***************************************************************************/
 
 #if defined( SALA_OWN )
    #define SALA_EXT
@@ -41,14 +47,8 @@ typedef enum {
   SAL_CondRetErroEstrutura = 3 ,
 		/* Recebeu estrutura com erro */
 
-  SAL_CondRetPredioNaoExiste = 4 ,
-      /* O predio não existe */
-
-  SAL_CondRetErroCodSala = 5 ,
-      /* Erro no código da sala */
-
-  SAL_CondRetParamInvalido = 6
-    /* Erro no parametro recebido em funcao get/set */
+  SAL_CondRetParamInvalido = 4 ,
+    /* Erro no parametro recebido em funcao set */
 
 } SAL_tpCondRet ;
 
@@ -79,10 +79,9 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala);
 *     da sala recebida
 *
 *  $FV Valor retornado
-*    SAL_CondRetOK                                                       
-*    SAL_CondRetErroEstrutura                                            
-*    SAL_CondRetPredioNaoExiste
-* 
+*    SAL_CondRetOK                                                                                                  
+*    SAL_CondRetRecebeuPonteiroNulo
+*    SAL_CondRetParamInvalido
 ***********************************************************************/
 
 SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
@@ -99,10 +98,71 @@ SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
 *  $FV Valor retornado
 *    SAL_CondRetOK                                                      
 *    SAL_CondRetErroEstrutura
-*
+*    SAL_CondRetRecebeuPonteiroNulo
 ***********************************************************************/
 
 SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo);
+
+/***********************************************************************
+*
+*  $FC Função: SAL set max de alunos que a sala comporta
+*
+*  $ED Descrição da função
+*     Seta na estrutura a qtd max de alunos
+*
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                      
+*    SAL_CondRetErroEstrutura
+*    SAL_CondRetRecebeuPonteiroNulo
+***********************************************************************/
+
+SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos);
+
+/***********************************************************************
+*
+*  $FC Função: SAL get maxAlunos
+*
+*  $ED Descrição da função
+*     Pega o inteiro maxAlunos recebido e armazena no conteudo
+*     do ponteiro recebido 
+*
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                      
+*    SAL_CondRetErroEstrutura
+*    SAL_CondRetRecebeuPonteiroNulo
+***********************************************************************/
+
+SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos);
+
+/***********************************************************************
+*
+*  $FC Função: SAL set se é laboratorio (1 se sim, 0 se não)
+*
+*  $ED Descrição da função
+*     Seta se a sala é laboratório
+*
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                      
+*    SAL_CondRetErroEstrutura
+*    SAL_CondRetRecebeuPonteiroNulo
+***********************************************************************/
+
+SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio);
+
+/***********************************************************************
+*
+*  $FC Função: SAL get se é laboratorio (1 se sim, 0 se não)
+*
+*  $ED Descrição da função
+*     Pega se a sala é laboratório
+*
+*  $FV Valor retornado
+*    SAL_CondRetOK                                                      
+*    SAL_CondRetErroEstrutura
+*    SAL_CondRetRecebeuPonteiroNulo
+***********************************************************************/
+
+SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio);
 
 /***********************************************************************
 *
@@ -114,7 +174,7 @@ SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo);
 *  $FV Valor retornado
 *     SAL_CondRetOK
 *     SAL_CondRetRecebeuPonteiroNulo 
-*     SAL_CondRetErroCodSala
+*     SAL_CondRetErroEstrutura
 *
 ***********************************************************************/
 
@@ -129,7 +189,7 @@ SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero);
 *
 *  $FV Valor retornado
 *     SAL_CondRetOK
-*     SAL_CondRetPredioNaoExiste
+*     SAL_CondRetErroEstrutura
 *     SAL_CondRetRecebeuPonteiroNulo
 *
 ***********************************************************************/
@@ -145,7 +205,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio);
 *
 *  $FV Valor retornado
 *     SAL_CondRetOK
-*     SAL_CondRetErroCodSala
+*     SAL_CondRetErroEstrutura 
 *     SAL_CondRetRecebeuPonteiroNulo
 ***********************************************************************/
 
