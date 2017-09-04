@@ -14,7 +14,9 @@
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
  *		1.2.3	      bp		03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
- 		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
+ *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
+ *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
+ *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -28,9 +30,11 @@
 #include  <string.h>
 
 #define HORARIOS 16
-#define DIAS 5
+#define DIAS 6
+#define tamCodigoSala 6
 #define ajusteHora 7
 #define salaReservada 1
+#define salaLivre 0
 #define reservaFalhou 0
 #define inicioDiaLetivo 7
 #define fimDiaLetivo 23
@@ -52,7 +56,7 @@
 typedef struct SAL_tagSala  {   
     /* Código da sala, ex: L232,
      indicando 'L' o prédio e 232 o número */
-	char codigo[6];
+	char codigo[tamCodigoSala];
 
     /* Número máximo de alunos que a sala comporta */
 	int maxAlunos;
@@ -65,23 +69,23 @@ typedef struct SAL_tagSala  {
         segunda e quarta (7-9) e
         terca e quinta (21-23)
 
-        |Segunda|Terca|Quarta|Quinta|Sexta|
-        7|  1    |  0  |  1   |  0   |  0  |     
-        8|  1    |  0  |  1   |  0   |  0  |   
-        9|  0    |  0  |  0   |  0   |  0  |   
-       10|  0    |  0  |  0   |  0   |  0  |   
-       11|  0    |  0  |  0   |  0   |  0  |   
-       12|  0    |  0  |  0   |  0   |  0  |   
-       13|  0    |  0  |  0   |  0   |  0  |   
-       14|  0    |  0  |  0   |  0   |  0  |   
-       15|  0    |  0  |  0   |  0   |  0  |   
-       16|  0    |  0  |  0   |  0   |  0  |   
-       17|  0    |  0  |  0   |  0   |  0  |   
-       18|  0    |  0  |  0   |  0   |  0  |   
-       19|  0    |  0  |  0   |  0   |  0  |   
-       20|  0    |  0  |  0   |  0   |  0  |   
-       21|  0    |  1  |  0   |  1   |  0  |   
-       22|  0    |  1  |  0   |  1   |  0  |   
+        |Segunda|Terca|Quarta|Quinta|Sexta|Sábado|
+        7|  1    |  0  |  1   |  0   |  0  |  0  |
+        8|  1    |  0  |  1   |  0   |  0  |  0  |
+        9|  0    |  0  |  0   |  0   |  0  |  0  |
+       10|  0    |  0  |  0   |  0   |  0  |  0  |
+       11|  0    |  0  |  0   |  0   |  0  |  0  |
+       12|  0    |  0  |  0   |  0   |  0  |  0  |
+       13|  0    |  0  |  0   |  0   |  0  |  0  |
+       14|  0    |  0  |  0   |  0   |  0  |  0  |
+       15|  0    |  0  |  0   |  0   |  0  |  0  |
+       16|  0    |  0  |  0   |  0   |  0  |  0  |
+       17|  0    |  0  |  0   |  0   |  0  |  0  |
+       18|  0    |  0  |  0   |  0   |  0  |  0  |
+       19|  0    |  0  |  0   |  0   |  0  |  0  |
+       20|  0    |  0  |  0   |  0   |  0  |  0  |
+       21|  0    |  1  |  0   |  1   |  0  |  0  |
+       22|  0    |  1  |  0   |  1   |  0  |  0  |
        --------------------------------------
      */
 	int disponibilidade[HORARIOS][DIAS];
@@ -121,7 +125,7 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
-	if (codigo == NULL || strlen(codigo) > 6)
+	if (codigo == NULL || strlen(codigo) > tamCodigoSala)
 		return SAL_CondRetParamInvalido;
 
 	strcpy(pSala->cod, codigo);
@@ -151,7 +155,7 @@ SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
 
     strcpy(codigo, pSala->cod);
 
-    if (codigo == NULL || strlen(codigo) > 6)
+    if (codigo == NULL || strlen(codigo) > tamCodigoSala)
     	return SAL_CondRetErroEstrutura;
 
     return SAL_CondRetOK;
@@ -238,7 +242,7 @@ SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio)
 
 /**************************************************************************
  *                                                                        *
- * Funcao: Sal get eLaboratorio                                             *
+ * Funcao: Sal get eLaboratorio                                           *
  *                                                                        *
  **   $FV Valor retornado                                                 *
  *     SAL_CondRetOK                                                      *
@@ -361,8 +365,7 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
  *                                                                        *
  *    $FV Valor retornado 												  *
  *	   SAL_CondRetRecebeuPonteiroNulo                                     *
- *     SAL_CondRetOK                                                      *
- *                                                						  *
+ *     SAL_CondRetOK                                                 	  *
  *                                                                        *
  **************************************************************************/
 
@@ -395,6 +398,32 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 
 /* Fim funcao: Sal reserva Sala */
 
+
+/**************************************************************************
+ *                                                                        *  
+ * Funcao: Sal reset disponibilidade Sala                                 *
+ *                                                                        *
+ *    $FV Valor retornado 												  *
+ *	   SAL_CondRetRecebeuPonteiroNulo                                     *
+ *     SAL_CondRetOK                                                      *
+ *                                                						  *
+ *                                                                        *
+ **************************************************************************/
+
+SAL_tpContRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo; 
+	int i, j;
+	for (i = 0 ; i < HORARIOS ; i++){
+		for (j = 0; j < DIAS ; j++){
+			pSala->disponibilidade[i][j] = salaLivre;
+		}
+	}
+
+	return SAL_CondRetOK;
+}
+
+/* Fim funcao: Sal reset disponibilidade Sala */
 
 SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores){
 	

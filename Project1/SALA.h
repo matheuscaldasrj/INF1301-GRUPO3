@@ -260,7 +260,25 @@ SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores);
 *
 ***********************************************************************/
 
-SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim, int *pSucesso);
+
+
+/***********************************************************************
+*
+*  $FC Função: SAL_resetDisponibilidade
+*
+*  $ED Descrição da função
+*     Reseta a matriz disponibilidade (todos horarios disponiveis)
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     SAL_CondRetRecebeuPonteiroNulo
+*
+*     
+*
+***********************************************************************/
+
+SAL_tpContRet SAL_resetDisponibilidade (SAL_tpSala *pSala);
 
 #undef SALA_EXT
 
