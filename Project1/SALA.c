@@ -16,6 +16,7 @@
  *		1.2.3	      bp		03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
  *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
  *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
+ 		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -369,7 +370,7 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim, int *pSucesso)
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
@@ -382,8 +383,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	{
 		if(disponibilidade[hora][dia] == salaReservada)
 		{
-			*pSucesso = reservaFalhou;
-			return SAL_CondRetOK;
+			return SAL_CondRetReservada;
 		}
 	}
 
@@ -391,8 +391,6 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	{
 		pSala->disponibilidade [hora][dia] = salaReservada;
 	}
-
-	*pSucesso = salaReservada;
 	return SAL_CondRetOK;
 }
 
