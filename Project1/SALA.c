@@ -17,6 +17,7 @@
  *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
  *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
  		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
+		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -362,12 +363,17 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
 
 /**************************************************************************
  *                                                                        *
- * Funcao: Sal reserva Sala                                               *
+ * Funcao: Sal -Reserva a Sala                                            *
  *                                                                        *
- *    $FV Valor retornado 												  *
- *	   SAL_CondRetRecebeuPonteiroNulo                                     *
- *     SAL_CondRetOK                                                 	  *
- *                                                                        *
+ *    $FV Valor retornado 						  *
+ *	   SAL_CondRetRecebeuPonteiroNulo  				  *
+ *	SAL_CondRetParamInvalido					  *
+ *	SAL_CondRetReservada						  *
+ *	SAL_CondRetOK       						  *  
+ *									  *
+ *    $ED Descrição da Função     					  *
+ *	Atualiza a matriz disponibilidade para reservar a sala em	  *
+ *	determinador horários.						  *
  **************************************************************************/
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
