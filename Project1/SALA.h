@@ -17,7 +17,9 @@
  *      1.2.0       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
- *    1.2.3       bp    03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
+ *      1.2.3       bp    03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
+ *      1.2.4	    pg    04/09/2017	Implementação de SAL_CondRetReservada
+ *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -49,6 +51,9 @@ typedef enum {
 
   SAL_CondRetParamInvalido = 4 ,
     /* Erro no parametro recebido em funcao set */
+
+  SAL_CondRetReservada = 5,
+	/* Enviada quando uma sala ja esta reservada */
 
 } SAL_tpCondRet ;
 
