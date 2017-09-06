@@ -18,7 +18,7 @@
  *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
  		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
 		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
- *
+
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -315,15 +315,19 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	switch (pSala->codigo[0]){
 		case 'L' :
-		*predio = "Leme";
+			*predio = "Leme";
+			break;
 		case 'F' :
-		*predio = "Frings";
+			*predio = "Frings";
+			break;
 		case 'K' :
-		*predio = "Kennedy";
+			*predio = "Kennedy";
+			break;
 		case 'I' :
-		*predio = "IAG";
+			*predio = "IAG";
+			break;
 		default :
-		return SAL_CondRetErroEstrutura;
+			return SAL_CondRetErroEstrutura;
 	}
 	return SAL_CondRetOK;
 }
