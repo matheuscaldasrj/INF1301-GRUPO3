@@ -429,4 +429,25 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 
 /* Fim funcao: Sal reset disponibilidade Sala */
 
+/**************************************************************************
+*                                                                         *
+* Funcao: Sal pega disponibilidade Sala                                   *
+*                                                                         *
+*    $FV Valor retornado 												  *
+*	  SAL_CondRetRecebeuPonteiroNulo                                      *
+*     SAL_CondRetOK                                                       *
+*                                                						  *
+*                                                                         *
+**************************************************************************/
+
+SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][6]) {
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
+	
+	disponibilidade = pSala->disponibilidade;
+	return SAL_CondRetOK;
+}
+
+/* Fim funcao: Sal reset disponibilidade Sala */
+
 /********** Fim do modulo de implementacao: Modulo Sala **********/

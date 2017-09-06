@@ -285,6 +285,24 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 
 SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala);
 
+/***********************************************************************
+*
+*  $FC Função: SAL_pegaDisponibilidade
+*
+*  $ED Descrição da função
+*     Passa o valor da matriz disponibilidade (todos os horários disponiveis)
+*     para uma matriz passada como argumento.
+*
+*  $FV Valor retornado
+*     SAL_CondRetOK
+*     SAL_CondRetRecebeuPonteiroNulo
+*
+*
+*
+***********************************************************************/
+
+SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][6]);
+
 #undef SALA_EXT
 
 /********** Fim do módulo de definição: Módulo Sala **********/
