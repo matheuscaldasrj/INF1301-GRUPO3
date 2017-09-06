@@ -92,9 +92,6 @@ typedef struct SAL_tagSala  {
      */
 	int disponibilidade[HORARIOS][DIAS];
 
-	/* Quantidade de computadores que a sala possui */
-	int qtdComputadores;
-
 } SAL_tpSala;
 
 
@@ -431,36 +428,5 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 }
 
 /* Fim funcao: Sal reset disponibilidade Sala */
-
-SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores){
-	
-	if(pSala == NULL){
-		return SAL_CondRetRecebeuPonteiroNulo;
-	}
-
-	*qtdComputadores = pSala->qtdComputadores;
-
-	if(*qtdComputadores == NULL){
-		return SAL_CondRetErroEstrutura;
-	}
-
-	return SAL_CondRetOK;
-}
-
-SAL_tpCondRet SAL_setQtdComputadores (SAL_tpSala * pSala, int qtdComputadores){
-
-	if(pSala == NULL){
-		return SAL_CondRetRecebeuPonteiroNulo;
-	}
-
-	if(qtdComputadores == NULL || qtdComputadores < 0){
-		return SAL_CondRetParamInvalido;
-	}
-
-	pSala->qtdComputadores = qtdComputadores;
-
-	return SAL_CondRetOK;
-}
-
 
 /********** Fim do modulo de implementacao: Modulo Sala **********/
