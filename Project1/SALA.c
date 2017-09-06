@@ -63,7 +63,7 @@ typedef struct SAL_tagSala  {
     /* Número máximo de alunos que a sala comporta */
 	int maxAlunos;
 
-	/*Indica se a sala é laboratório: 1 se é 0 se não */
+	/* Indica se a sala é laboratório: 1 se é 0 se não */
 	int eLaboratorio;
 
      /* Matriz de disponibilidade onde 1 representa sala "ocupada"
@@ -91,6 +91,9 @@ typedef struct SAL_tagSala  {
        --------------------------------------
      */
 	int disponibilidade[HORARIOS][DIAS];
+
+	/* Quantidade de computadores que a sala possui */
+	int qtdComputadores;
 
 } SAL_tpSala;
 
@@ -130,7 +133,7 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 	if (codigo == NULL || strlen(codigo) > tamCodigoSala)
 		return SAL_CondRetParamInvalido;
 
-	strcpy(pSala->cod, codigo);
+	strcpy(pSala->codigo, codigo);
 
 	return SAL_CondRetOK;
 } 
@@ -151,11 +154,11 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 
 SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
 {
-    if(pSala == null){
+    if(pSala == NULL){
     	return SAL_CondRetRecebeuPonteiroNulo;
     }
 
-    strcpy(codigo, pSala->cod);
+    strcpy(codigo, pSala->codigo);
 
     if (codigo == NULL || strlen(codigo) > tamCodigoSala)
     	return SAL_CondRetErroEstrutura;
@@ -279,17 +282,17 @@ SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio)
  *     						                                              *
  **************************************************************************/
 
-SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero)
+SAL_tpCondRet SAL_getNumero (SAL_tpSala *pSala, int *numero)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	if (sala->cod[4] == '\0'){
-		*numero = (pSala->cod[1]-'0')*100+(pSala->cod[2]-'0')*10+(pSala->cod[3]-'0');
+	if (pSala->codigo[4] == '\0'){
+		*numero = (pSala->codigo[1]-'0')*100+(pSala->codigo[2]-'0')*10+(pSala->codigo[3]-'0');
 		return SAL_CondRetOK;
 	}
 	else{
-		*numero = (pSala->cod[1]-'0')*1000+(pSala->cod[2]-'0')*100+(pSala->cod[3]-'0')*10+(pSala->cod[4]-'0');
+		*numero = (pSala->codigo[1]-'0')*1000+(pSala->codigo[2]-'0')*100+(pSala->codigo[3]-'0')*10+(pSala->codigo[4]-'0');
 		return SAL_CondRetOK;
 	}
 
@@ -313,7 +316,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
-	switch (pSala->cod[0]){
+	switch (pSala->codigo[0]){
 		case 'L' :
 		*predio = "Leme";
 		case 'F' :
@@ -325,7 +328,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 		default :
 		return SAL_CondRetErroEstrutura;
 	}
-	return SAL_CondRetOK
+	return SAL_CondRetOK;
 }
 /* Fim funcao: Sal get predio da sala */
 
@@ -387,7 +390,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	int hora = horaInicio - ajusteHora;
 	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
-		if(disponibilidade[hora][dia] == salaReservada)
+		if(pSala->disponibilidade[hora][dia] == salaReservada)
 		{
 			return SAL_CondRetReservada;
 		}
@@ -414,7 +417,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
  *                                                                        *
  **************************************************************************/
 
-SAL_tpContRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
+SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo; 
 	int i, j;
@@ -431,13 +434,13 @@ SAL_tpContRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 
 SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores){
 	
-	if(psala == null){
+	if(pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
 
 	*qtdComputadores = pSala->qtdComputadores;
 
-	if(*qtdComputadores == null){
+	if(*qtdComputadores == NULL){
 		return SAL_CondRetErroEstrutura;
 	}
 
@@ -446,11 +449,11 @@ SAL_tpCondRet SAL_getQtdComputadores (SAL_tpSala * pSala, int *qtdComputadores){
 
 SAL_tpCondRet SAL_setQtdComputadores (SAL_tpSala * pSala, int qtdComputadores){
 
-	if(psala == null){
-		return SAL_CondRetRecebeuPonteiroNulo
+	if(pSala == NULL){
+		return SAL_CondRetRecebeuPonteiroNulo;
 	}
 
-	if(qtdComputadores == null || qtdComputadores < 0){
+	if(qtdComputadores == NULL || qtdComputadores < 0){
 		return SAL_CondRetParamInvalido;
 	}
 

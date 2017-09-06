@@ -183,7 +183,7 @@ SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio);
 *
 ***********************************************************************/
 
-SAL_tpContRet SAL_getNumero (SAL_tpSala *pSala, int *numero);
+SAL_tpCondRet SAL_getNumero (SAL_tpSala *pSala, int *numero);
 
 /***********************************************************************
 *
@@ -283,7 +283,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 *
 ***********************************************************************/
 
-SAL_tpContRet SAL_resetDisponibilidade (SAL_tpSala *pSala);
+SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala);
 
 #undef SALA_EXT
 
