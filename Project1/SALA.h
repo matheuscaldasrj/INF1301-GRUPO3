@@ -19,6 +19,7 @@
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
  *      1.2.3       bp    03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
  *      1.2.4	    pg    04/09/2017	Implementação de SAL_CondRetReservada
+ *      1.2.6		gp			05/09/2017		Implementação de SAL
  *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -310,6 +311,37 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala);
 ***********************************************************************/
 
 SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][6]);
+
+/*
+	Função SAL_getHorarioNoDia
+
+	Retorno:
+	
+	SAL_tpCondRet, onde:
+
+	- SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
+	- SAL_CondRetParamInvalido, se:
+	  
+	  1. O horário de início for maior ou igual ao horário de fim;
+	  2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
+	     durante o qual as aulas ocorrem;
+ 
+	- SAL_CondRetOK, se a função for concluída com sucesso
+
+	Parâmetros:
+
+	- SAL_tpSala: ponteiro para a sala desejada
+	- dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
+	  de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
+	- horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
+	  verificado
+	- horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
+	- estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
+	  selecionado estiver disponível, 0 se não estiver.
+
+ */
+
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala *pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel);
 
 #undef SALA_EXT
 
