@@ -57,6 +57,14 @@ typedef enum {
 
 } SAL_tpCondRet ;
 
+typedef enum {
+	SEGUNDA,
+	TERCA,
+	QUARTA,
+	QUINTA,
+	SEXTA,
+	SABADO
+} diasSemana;
 
 
 /***********************************************************************

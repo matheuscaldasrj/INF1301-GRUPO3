@@ -431,7 +431,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 
 /**************************************************************************
 *                                                                         *
-* Funcao: Sal pega disponibilidade Sala                                   *
+* Funcao: Sal get disponibilidade Sala                                    *
 *                                                                         *
 *    $FV Valor retornado 												  *
 *	  SAL_CondRetRecebeuPonteiroNulo                                      *
@@ -449,5 +449,68 @@ SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][
 }
 
 /* Fim funcao: Sal reset disponibilidade Sala */
+
+/*
+	Função SAL_getHorarioNoDia
+
+	Retorno:
+	
+	SAL_tpCondRet, onde:
+
+	- SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
+	- SAL_CondRetParamInvalido, se:
+	  
+	  1. O horário de início for maior ou igual ao horário de fim;
+	  2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
+	     durante o qual as aulas ocorrem;
+ 
+	- SAL_CondRetOK, se a função for concluída com sucesso
+
+	Parâmetros:
+
+	- SAL_tpSala: ponteiro para a sala desejada
+	- dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
+	  de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
+	- horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
+	  verificado
+	- horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
+	- estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
+	  selecionado estiver disponível, 0 se não estiver.
+
+ */
+
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala *pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel) {
+	int i;
+
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
+
+	horarioInicio -= 7;
+	horarioFim -= 7;
+
+	if (horarioInicio >= horarioFim) {
+		return SAL_CondRetParamInvalido;
+	}
+
+	if (horarioInicio < 0 || horarioInicio >= HORARIOS) {
+		return SAL_CondRetParamInvalido;
+	}
+
+	if (horarioFim < 0 || horarioFim >= HORARIOS) {
+		return SAL_CondRetParamInvalido;
+	}
+
+	for (i = horarioInicio; i < horarioFim; i++) {
+		if (pSala->disponibilidade[dia][i] != salaLivre) {
+			*estaDisponivel = 0;
+			return SAL_CondRetOK;
+		}
+	}
+
+	*estaDisponivel = 1;
+	return SAL_CondRetOK;
+}
+
+/* Fim da função SAL_getHorarioNoDia */
 
 /********** Fim do modulo de implementacao: Modulo Sala **********/
