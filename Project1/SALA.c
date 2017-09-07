@@ -19,6 +19,7 @@
  *		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
  *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
+ *		1.2.9	      pg	    07/09/2017	     Adicionando removeSala
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -128,6 +129,23 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala,
 } 
 /* Fim funcao: SAL Criar sala */
 
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: SAL remove sala	                                          *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *    SAL_CondRetOK  							  *
+ *									  *
+ **************************************************************************/
+
+
+SAL_tpCondRet Sal_removeSala (Sal_tpSala *pSala)
+{
+	free(pSala);
+	return SAL_CondRetOK ;
+}
+/* Fim funcao: SAL remove sala */
 
 /**************************************************************************
  *                                                                        *
