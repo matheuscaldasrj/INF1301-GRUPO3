@@ -19,7 +19,9 @@
  *		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
  *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
- *		1.2.9	      pg	    07/09/2017	     Adicionando removeSala
+ *      1.2.9         pg        07/09/2017   Adicionando removeSala
+ *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala
+ *
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -99,31 +101,27 @@ struct SAL_tagSala  {
                                                                          *
  **************************************************************************/
 
-SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala,
+SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
 							 char *codigo,
 							 int maxAlunos,
 							 int eLaboratorio)
 {
-	int disponibilidade[HORARIOS][DIAS];
+	SAL_tpCondRet retorno;
 
-	pSala = NULL;
+	*pSala = NULL;
+    *pSala = ( SAL_tpSala * ) malloc( sizeof( SAL_tpSala )) ;
     
-    pSala = ( SAL_tpSala * ) malloc( sizeof( SAL_tpSala )) ;
-    if( pSala == NULL )
-    {
-        return SAL_CondRetFaltouMemoria ;
-    }
+    if( *pSala == NULL )
+    	return SAL_CondRetFaltouMemoria ;
     
-    //contruindo sala
-	SAL_setCodigo(pSala,codigo);
-	SAL_setMaxAlunos(pSala,maxAlunos);
-	SAL_setELaboratorio(pSala,eLaboratorio);
-	//SAL_resetDisponibilidade(pSala);
-
-   
-  	if(SAL_resetDisponibilidade(pSala) != SAL_CondRetOK){
-  		return SAL_resetDisponibilidade(pSala);
-  	}
+	retorno = SAL_setCodigo(*pSala,codigo);
+	if (retorno != SAL_CondRetOK) return retorno;
+	retorno = SAL_setMaxAlunos(*pSala,maxAlunos);
+	if (retorno != SAL_CondRetOK) return retorno;
+	retorno = SAL_setELaboratorio(*pSala,eLaboratorio);
+	if (retorno != SAL_CondRetOK) return retorno;
+	retorno = SAL_resetDisponibilidade(*pSala);
+	if (retorno != SAL_CondRetOK) return retorno;
 
     return SAL_CondRetOK ;
 } 
@@ -132,20 +130,26 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala,
 
 /**************************************************************************
  *                                                                        *
- * Funcao: SAL remove sala	                                          *
+ * Funcao: SAL remove sala                                            	  *
  *                                                                        *
  **   $FV Valor retornado                                                 *
- *    SAL_CondRetOK  							  *
- *									  *
+ *    SAL_CondRetOK                                                       *
+ *                                                                        *
  **************************************************************************/
-
-
-SAL_tpCondRet Sal_removeSala (Sal_tpSala *pSala)
+ 
+SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala)
 {
-	free(pSala);
+	if (pSala != NULL)
+	{
+		free(pSala);
+		pSala = NULL;
+	}
 	return SAL_CondRetOK ;
 }
+ 
 /* Fim funcao: SAL remove sala */
+
+ 
 
 /**************************************************************************
  *                                                                        *
@@ -314,7 +318,7 @@ SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio)
  *     						                                              *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getNumero (SAL_tpSala *pSala, int *numero)
+SAL_tpCondRet SAL_getNumero (SAL_tpSala * pSala, int *numero)
 {
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
@@ -379,7 +383,7 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
  *     SAL_CondRetRecebeuPonteiroNulo                                     *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
+SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar)
 {	
 	SAL_tpCondRet retorno;
 	int numero;
@@ -404,15 +408,15 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
  *                                                                        *
  * Funcao: Sal -Reserva a Sala                                            *
  *                                                                        *
- *    $FV Valor retornado 						  *
- *	   SAL_CondRetRecebeuPonteiroNulo  				  *
- *	SAL_CondRetParamInvalido					  *
- *	SAL_CondRetReservada						  *
- *	SAL_CondRetOK       						  *  
- *									  *
- *    $ED Descrição da Função     					  *
- *	Atualiza a matriz disponibilidade para reservar a sala em	  *
- *	determinador horários.						  *
+ *    $FV Valor retornado 						  						  *
+ *	   SAL_CondRetRecebeuPonteiroNulo  				  					  *
+ *	SAL_CondRetParamInvalido					  					      *
+ *	SAL_CondRetReservada						  						  *
+ *	SAL_CondRetOK       						 						  *  
+ *									 									  *
+ *    $ED Descrição da Função     					  					  *
+ *	Atualiza a matriz disponibilidade para reservar a sala em	          *
+ *	determinador horários.						                		  *
  **************************************************************************/
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
@@ -453,7 +457,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
  *                                                                        *
  **************************************************************************/
 
-SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
+SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala){
 	int i, j;
 	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo; 
@@ -470,19 +474,19 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
 
 /* Fim funcao: Sal reset disponibilidade Sala */
 
-/**************************************************************************
-*                                                                         *
-* Funcao: Sal get disponibilidade Sala                                    *
-*                                                                         *
-*    $FV Valor retornado 												  *
-*	  SAL_CondRetRecebeuPonteiroNulo                                      *
-*     SAL_CondRetOK                                                       *
-*                                                						  *
-*                                                                         *
-**************************************************************************/
+/***************************************************************************
+ *                                                                         *
+ * Funcao: Sal get disponibilidade Sala                                    *
+ *                                                                         *
+ *    $FV Valor retornado 												   *
+ *	  SAL_CondRetRecebeuPonteiroNulo                                       *
+ *     SAL_CondRetOK                                                       *
+ *                                                						   *
+ *                                                                         *
+ **************************************************************************/
 
-SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][6]) {
-	if (pSala == NULL)
+SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala * pSala, int disponibilidade[HORARIOS][DIAS]) {
+	if (pSala == NULL) 
 		return SAL_CondRetRecebeuPonteiroNulo;
 	
 	disponibilidade = pSala->disponibilidade;
@@ -520,7 +524,7 @@ SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala *pSala, int disponibilidade[16][
 
  */
 
-SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala *pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel) {
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel) {
 	int i;
 
 	if (pSala == NULL)
