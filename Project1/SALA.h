@@ -131,7 +131,7 @@ SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
  	*									  									 
  	**************************************************************************/
 
-SAL_tpCondRet SAL_imprimeSala (SAL_tpSala * pSala)
+SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
 
 /*
 	**********************************************************************
@@ -321,7 +321,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 /*
  	**********************************************************************
 	*
-	*  $FC Função: SAL_imprimeMatrizDisponibilidade
+	*  $FC Função: SAL_printDisponibilidade
 	*
 	*  $ED Descrição da função
 	*    Imprime a matriz disponibilidade da Sala com XXXXXX quando 
@@ -335,7 +335,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 	*
 	***********************************************************************/
 
-SAL_tpCondRet SAL_imprimeMatrizDisponibilidade(SAL_tpSala * pSala);
+SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala);
 
 /*
 	Função SAL_getHorarioNoDia

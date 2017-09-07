@@ -160,7 +160,7 @@ SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala)
  *         																  *
  **************************************************************************/
 
-SAL_tpCondRet SAL_imprimeSala (SAL_tpSala * pSala)
+SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
 {
 	SAL_tpCondRet retorno;
 	char codigo [tamCodigoSala];
@@ -532,7 +532,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala){
  *                                                                         *
  **************************************************************************/
 
-SAL_tpCondRet SAL_imprimeMatrizDisponibilidade(SAL_tpSala * pSala) {
+SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 	int i, j;
 	if (pSala == NULL) 
 		return SAL_CondRetRecebeuPonteiroNulo;
