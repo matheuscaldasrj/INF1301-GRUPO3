@@ -48,45 +48,7 @@
 #define fimSemanaLetiva 5
 
 
-typedef struct SAL_tagSala  {   
-    /* Código da sala, ex: L232,
-     indicando 'L' o prédio e 232 o número */
-	char codigo[tamCodigoSala];
-
-    /* Número máximo de alunos que a sala comporta */
-	int maxAlunos;
-
-	/* Indica se a sala é laboratório: 1 se é 0 se não */
-	int eLaboratorio;
-
-     /* Matriz de disponibilidade onde 1 representa sala "ocupada"
-        e 0 "livre", assim, por exemplo, a sala estaria ocupada
-        segunda e quarta (7-9) e
-        terca e quinta (21-23)
-
-        |Segunda|Terca|Quarta|Quinta|Sexta|Sábado|
-        7|  1    |  0  |  1   |  0   |  0  |  0  |
-        8|  1    |  0  |  1   |  0   |  0  |  0  |
-        9|  0    |  0  |  0   |  0   |  0  |  0  |
-       10|  0    |  0  |  0   |  0   |  0  |  0  |
-       11|  0    |  0  |  0   |  0   |  0  |  0  |
-       12|  0    |  0  |  0   |  0   |  0  |  0  |
-       13|  0    |  0  |  0   |  0   |  0  |  0  |
-       14|  0    |  0  |  0   |  0   |  0  |  0  |
-       15|  0    |  0  |  0   |  0   |  0  |  0  |
-       16|  0    |  0  |  0   |  0   |  0  |  0  |
-       17|  0    |  0  |  0   |  0   |  0  |  0  |
-       18|  0    |  0  |  0   |  0   |  0  |  0  |
-       19|  0    |  0  |  0   |  0   |  0  |  0  |
-       20|  0    |  0  |  0   |  0   |  0  |  0  |
-       21|  0    |  1  |  0   |  1   |  0  |  0  |
-       22|  0    |  1  |  0   |  1   |  0  |  0  |
-       --------------------------------------
-     */
-	int disponibilidade[HORARIOS][DIAS];
-
-} SAL_tpSala;
-
+typedef struct SAL_tagSala SAL_tpSala;
 
 typedef enum {
 
