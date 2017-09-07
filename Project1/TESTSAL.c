@@ -28,7 +28,7 @@
 #include    "generico.h"
 #include    "lerparm.h"
 
-#include    "SALA.h"
+#include    "SALA.H"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
@@ -83,7 +83,8 @@
             char codigo;
             int maximo;
             int eLaboratorio;
-
+            SAL_tpSala  *pSala = NULL;
+            
             NumLidos = LER_LerParametros( "siii" ,
                                  &codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
             if ( NumLidos != 4 )
@@ -91,14 +92,9 @@
                return TST_CondRetParm ;
             } /* if */
          
-            tp_SALA  *pSala = null;
-            CondRetObtdo = SAL_criarSala(pSala, maximo,codigo,Edisponivel);
-         
-         
-            CondRetObtido = ARV_ObterValorCorr( &ValorObtido ) ;
-               
+            
+            CondRetObtido = SAL_criarSala(pSala, &codigo, maximo, eLaboratorio);     
 
-            CondRetObtido = SAL_criarSala( ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar sala." );
@@ -109,13 +105,14 @@
 
          else if ( strcmp( ComandoTeste , GET_COD_CMD ) == 0 )
          {
-
+			 /*
+			 TODO!!
             NumLidos = LER_LerParametros( "ci" ,
                                &ValorEsperado , &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
-            } /* if */
+            } /* if 
 
             CondRetObtido = SAL_getCodigo( &ValorObtido ) ;
 
@@ -125,6 +122,7 @@
             if ( Ret != TST_CondRetOK )
             {
                return Ret ;
+
             } /* if */
 
             return TST_CompararChar( ValorEsperado , ValorObtido ,

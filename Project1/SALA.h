@@ -35,6 +35,18 @@
    #define SALA_EXT extern
 #endif
 
+#define HORARIOS 16
+#define DIAS 6
+#define tamCodigoSala 6
+#define ajusteHora 7
+#define salaReservada 1
+#define salaLivre 0
+#define reservaFalhou 0
+#define inicioDiaLetivo 7
+#define fimDiaLetivo 23
+#define inicioSemanaLetiva 0
+#define fimSemanaLetiva 5
+
 
 typedef struct SAL_tagSala  {   
     /* Código da sala, ex: L232,

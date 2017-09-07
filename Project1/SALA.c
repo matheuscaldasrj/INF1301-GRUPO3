@@ -32,17 +32,7 @@
 #include  <string.h>
 #include  <malloc.h>
 
-#define HORARIOS 16
-#define DIAS 6
-#define tamCodigoSala 6
-#define ajusteHora 7
-#define salaReservada 1
-#define salaLivre 0
-#define reservaFalhou 0
-#define inicioDiaLetivo 7
-#define fimDiaLetivo 23
-#define inicioSemanaLetiva 0
-#define fimSemanaLetiva 5
+
 
 /* Inclusão do respectivo módulo de definição */
 
