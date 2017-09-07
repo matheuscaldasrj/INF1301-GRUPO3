@@ -56,44 +56,7 @@
  *
  ***********************************************************************/
 
-typedef struct SAL_tagSala  {   
-    /* Código da sala, ex: L232,
-     indicando 'L' o prédio e 232 o número */
-	char codigo[tamCodigoSala];
 
-    /* Número máximo de alunos que a sala comporta */
-	int maxAlunos;
-
-	/* Indica se a sala é laboratório: 1 se é 0 se não */
-	int eLaboratorio;
-
-     /* Matriz de disponibilidade onde 1 representa sala "ocupada"
-        e 0 "livre", assim, por exemplo, a sala estaria ocupada
-        segunda e quarta (7-9) e
-        terca e quinta (21-23)
-
-        |Segunda|Terca|Quarta|Quinta|Sexta|Sábado|
-        7|  1    |  0  |  1   |  0   |  0  |  0  |
-        8|  1    |  0  |  1   |  0   |  0  |  0  |
-        9|  0    |  0  |  0   |  0   |  0  |  0  |
-       10|  0    |  0  |  0   |  0   |  0  |  0  |
-       11|  0    |  0  |  0   |  0   |  0  |  0  |
-       12|  0    |  0  |  0   |  0   |  0  |  0  |
-       13|  0    |  0  |  0   |  0   |  0  |  0  |
-       14|  0    |  0  |  0   |  0   |  0  |  0  |
-       15|  0    |  0  |  0   |  0   |  0  |  0  |
-       16|  0    |  0  |  0   |  0   |  0  |  0  |
-       17|  0    |  0  |  0   |  0   |  0  |  0  |
-       18|  0    |  0  |  0   |  0   |  0  |  0  |
-       19|  0    |  0  |  0   |  0   |  0  |  0  |
-       20|  0    |  0  |  0   |  0   |  0  |  0  |
-       21|  0    |  1  |  0   |  1   |  0  |  0  |
-       22|  0    |  1  |  0   |  1   |  0  |  0  |
-       --------------------------------------
-     */
-	int disponibilidade[HORARIOS][DIAS];
-
-} SAL_tpSala;
 
 
 /*****  Codigo das funcoes exportadas pelo modulo  *****/
@@ -374,13 +337,11 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
 {	
 	SAL_tpCondRet retorno;
+	int numero;
 
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
-
-	SAL_tpCondRet retorno;
-	int numero;
-
+	
 	retorno = SAL_getNumero (pSala,&numero);
 
 	if (retorno != SAL_CondRetOK)
@@ -410,14 +371,14 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
  **************************************************************************/
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
-{
+{	
+	int hora = horaInicio - ajusteHora;
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
 	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva)
 		return  SAL_CondRetParamInvalido;
-
-	int hora = horaInicio - ajusteHora;
+	
 	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
 		if(pSala->disponibilidade[hora][dia] == salaReservada)
