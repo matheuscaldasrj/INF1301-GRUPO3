@@ -21,7 +21,7 @@
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
  *      1.2.9         pg        07/09/2017   Adicionando removeSala
  *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala
- *
+ *		1.3.1		  bp		07/09/2017	 Implementacao funcoes imprimeSala e imprimeMatriz
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -146,10 +146,57 @@ SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala)
 	}
 	return SAL_CondRetOK ;
 }
- 
-/* Fim funcao: SAL remove sala */
+ /* Fim funcao: SAL remove sala */
 
- 
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: SAL imprime sala                                            	  *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *    SAL_CondRetOK                                                       *
+ *    SAL_CondRetErroEstrutura											  *
+ *    SAL_CondRetRecebeuPonteiroNulo      								  *
+ *         																  *
+ **************************************************************************/
+
+SAL_tpCondRet SAL_imprimeSala (SAL_tpSala * pSala)
+{
+	SAL_tpCondRet retorno;
+	char codigo [tamCodigoSala];
+	char predio [tamPredio];
+	int andar, maxAlunos, eLab;
+
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo;
+
+	retorno = SAL_getCodigo(pSala,&codigo);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
+	retorno = SAL_getPredio(pSala,predio);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
+	retorno = SAL_getAndar(pSala,&andar);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
+	retorno = SAL_getMaxAlunos(pSala,&maxAlunos);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
+	retorno = SAL_getELaboratorio(pSala,&eLab);
+	if (retorno != SAL_CondRetOK)
+		return retorno;
+
+	printf ("Sala %s\nLocalizada no %do andar do edificio %s\nCapacidade: %d alunos\n",codigo,andar,predio,maxAlunos);
+	if (eLab)
+		printf("É laboratorio\n");
+	else 
+		printf("Nao é laboratorio\n");
+
+	return SAL_CondRetOK;	
+}
+
+/* Fim funcao: SAL imprime sala */
+
 
 /**************************************************************************
  *                                                                        *
@@ -410,13 +457,11 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar)
  *                                                                        *
  *    $FV Valor retornado 						  						  *
  *	   SAL_CondRetRecebeuPonteiroNulo  				  					  *
- *	SAL_CondRetParamInvalido					  					      *
- *	SAL_CondRetReservada						  						  *
- *	SAL_CondRetOK       						 						  *  
- *									 									  *
- *    $ED Descrição da Função     					  					  *
- *	Atualiza a matriz disponibilidade para reservar a sala em	          *
- *	determinador horários.						                		  *
+ *	   SAL_CondRetParamInvalido					  					      *
+ *	   SAL_CondRetReservada						  						  *
+ *	   SAL_CondRetOK       						 						  *  
+ *	   SAL_CondRetErroEstrutura							 				  *
+ *    						                		                      *
  **************************************************************************/
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
@@ -430,6 +475,8 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	
 	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
+		if (pSala->disponibilidade[i][j] != salaLivre || pSala->disponibilidade[i][j] != salaReservada)
+				return SAL_CondRetErroEstrutura;
 		if(pSala->disponibilidade[hora][dia] == salaReservada)
 		{
 			return SAL_CondRetReservada;
@@ -476,20 +523,34 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala){
 
 /***************************************************************************
  *                                                                         *
- * Funcao: Sal get disponibilidade Sala                                    *
+ * Funcao: Sal imprime matriz disponibilidade Sala                         *
  *                                                                         *
  *    $FV Valor retornado 												   *
  *	  SAL_CondRetRecebeuPonteiroNulo                                       *
- *     SAL_CondRetOK                                                       *
- *                                                						   *
+ *    SAL_CondRetOK                                                        *
+ *    SAL_CondRetErroEstrutura                                    		   *
  *                                                                         *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala * pSala, int disponibilidade[HORARIOS][DIAS]) {
+SAL_tpCondRet SAL_imprimeMatrizDisponibilidade(SAL_tpSala * pSala) {
+	int i, j;
 	if (pSala == NULL) 
 		return SAL_CondRetRecebeuPonteiroNulo;
+	printf("\n\tSegunda\tTerca\tQuarta\tQuinta\tSexta\tSabado\n");
+	for (i = 0 ; i < HORARIOS ; i++){
+		printf("%d-%d\t",i+7,i+8);
+		for (j = 0 ; j < DIAS ; j++){
+			if (pSala->disponibilidade[i][j] != salaLivre || pSala->disponibilidade[i][j] != salaReservada)
+				return SAL_CondRetErroEstrutura;
+			if (pSala->disponibilidade[i][j] == salaReservada)
+				printf("XXXXXX\t");
+			else
+				printf("\t");
+		}
+		printf("\n");
+	}
+	printf("\n");
 	
-	disponibilidade = pSala->disponibilidade;
 	return SAL_CondRetOK;
 }
 
@@ -524,7 +585,7 @@ SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala * pSala, int disponibilidade[HOR
 
  */
 
-SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel) {
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim){
 	int i;
 
 	if (pSala == NULL)
@@ -547,12 +608,10 @@ SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horari
 
 	for (i = horarioInicio; i < horarioFim; i++) {
 		if (pSala->disponibilidade[dia][i] != salaLivre) {
-			*estaDisponivel = 0;
-			return SAL_CondRetOK;
+			return SAL_CondRetReservada
 		}
 	}
 
-	*estaDisponivel = 1;
 	return SAL_CondRetOK;
 }
 

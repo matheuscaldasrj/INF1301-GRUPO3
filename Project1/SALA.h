@@ -38,6 +38,7 @@
 
 #define HORARIOS 16
 #define DIAS 6
+#define tamPredio 10
 #define tamCodigoSala 6
 #define ajusteHora 7
 #define salaReservada 1
@@ -86,10 +87,10 @@ typedef enum {
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL Criar sala
+	*  $FC Função: SAL_criarSala
 	*
 	*  $ED Descrição da função
-	*     Cria uma nova sala.
+	*     Cria uma nova sala com os parametros passados.
 	*
 	*  $FV Valor retornado
 	*     SAL_CondRetOK
@@ -101,20 +102,40 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala ** pSala, char *codigo, int maxAlunos, in
 
 /*
 	*************************************************************************
- 	*                                                                        *
- 	* Funcao: SAL remove sala	                                          	 *
- 	*                                                                        *
- 	**   $FV Valor retornado                                                 *
- 	*    SAL_CondRetOK  							  						 *
- 	*									  									 *
+ 	*                                                                        
+ 	*  $FC Função: SAL_removeSala	                                          	 
+ 	*             
+ 	*  $ED Descrição da função
+	*     Remove uma sala.                                                            
+ 	** 
+ 	*  $FV Valor retornado                                                 
+ 	*    SAL_CondRetOK  							  						 
+ 	*									  									 
  	**************************************************************************/
 
 SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
 
 /*
+	*************************************************************************
+ 	*                                                                        
+ 	*  $FC Função: SAL_imprimeSala	                                          	 
+ 	*          
+ 	*  $ED Descrição da função
+	*     Imprime código, prédio, andar, maxAlunos e se é laboratório.   
+	*                                                           
+ 	** $FV Valor retornado                                                 
+ 	*    SAL_CondRetOK
+ 	*    SAL_CondRetErroEstrutura	
+	*    SAL_CondRetRecebeuPonteiroNulo  							  						 
+ 	*									  									 
+ 	**************************************************************************/
+
+SAL_tpCondRet SAL_imprimeSala (SAL_tpSala * pSala)
+
+/*
 	**********************************************************************
 	*
-	*  $FC Função: SAL seta codigo da sala
+	*  $FC Função: SAL_setCodigo
 	*
 	*  $ED Descrição da função
 	*     Seta o codigo recebido pelo parametro no código
@@ -131,7 +152,7 @@ SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL get codigo da sala
+	*  $FC Função: SAL_getCodigo
 	*
 	*  $ED Descrição da função
 	*     Pega o codigo da sala recebida e armazena no conteudo
@@ -148,7 +169,7 @@ SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL set max de alunos que a sala comporta
+	*  $FC Função: SAL_setMaxAlunos
 	*
 	*  $ED Descrição da função
 	*     Seta na estrutura a qtd max de alunos
@@ -164,7 +185,7 @@ SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL get maxAlunos
+	*  $FC Função: SAL_getMaxAlunos
 	*
 	*  $ED Descrição da função
 	*     Pega o inteiro maxAlunos recebido e armazena no conteudo
@@ -181,10 +202,10 @@ SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL set se é laboratorio (1 se sim, 0 se não)
+	*  $FC Função: SAL_setELaboratorio
 	*
 	*  $ED Descrição da função
-	*     Seta se a sala é laboratório
+	*     Seta se a sala é laboratório (1 se sim, 0 se não)
 	*
 	*  $FV Valor retornado
 	*    SAL_CondRetOK                                                      
@@ -197,10 +218,10 @@ SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL get se é laboratorio (1 se sim, 0 se não)
+	*  $FC Função: SAL_getELaboratorio
 	*
 	*  $ED Descrição da função
-	*     Pega se a sala é laboratório
+	*     Pega se a sala é laboratório (1 se sim, 0 se não)
 	*
 	*  $FV Valor retornado
 	*    SAL_CondRetOK                                                      
@@ -262,19 +283,21 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 /*
 	**********************************************************************
 	*
-	*  $FC Função: SAL_setQtdComputadores
+	*  $FC Função: SAL_reservaSala
 	*
 	*  $ED Descrição da função
-	*     Seta numero max de computadores/alunos da sala.
+	*     Reserva a sala em um determinado dia em um determinado intervalo.
 	*
 	*  $FV Valor retornado
 	*     SAL_CondRetOK
 	*     SAL_CondRetRecebeuPonteiroNulo
-	*     SAL_CondRetErroEstrutura
-	*
+	*     SAL_CondRetReservada
+	*	  SAL_CondRetParamInvalido
+	*	  
+
 	***********************************************************************/
 
-SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim, int *pSucesso);
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
 /*
 	**********************************************************************
@@ -297,21 +320,21 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 /*
  	**********************************************************************
 	*
-	*  $FC Função: SAL_pegaDisponibilidade
+	*  $FC Função: SAL_imprimeMatrizDisponibilidade
 	*
 	*  $ED Descrição da função
-	*     Passa o valor da matriz disponibilidade (todos os horários disponiveis)
-	*     para uma matriz passada como argumento.
+	*    Imprime a matriz disponibilidade da Sala com XXXXXX quando 
+	*	 estiver ocupado e nada quando livre.
 	*
 	*  $FV Valor retornado
 	*     SAL_CondRetOK
 	*     SAL_CondRetRecebeuPonteiroNulo
-	*
+	*	  SAL_CondRetErroEstrutura
 	*
 	*
 	***********************************************************************/
 
-SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala * pSala, int disponibilidade[HORARIOS][DIAS]);
+SAL_tpCondRet SAL_imprimeMatrizDisponibilidade(SAL_tpSala * pSala);
 
 /*
 	Função SAL_getHorarioNoDia
@@ -342,7 +365,7 @@ SAL_tpCondRet SAL_getDisponibilidade(SAL_tpSala * pSala, int disponibilidade[HOR
 
  */
 
-SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim, int* estaDisponivel);
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim);
 
 #undef SALA_EXT
 
