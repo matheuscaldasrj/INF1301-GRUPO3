@@ -22,6 +22,7 @@
  *      1.2.6		  gp		05/09/2017		Implementação de SAL
  *		1.2.7		  mc        07/09/2017	  Mudança na estrutura básica da criaSala, agora recebendo os parametros.
  *	1.2.9	      pg	    07/09/2017	     Adicionando removeSala
+ *	1.2.9.1	      pg	07/09/2017	     Corrigindo parametros reservaSala
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -274,7 +275,7 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 	*
 	***********************************************************************/
 
-SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim, int *pSucesso);
+SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
 /*
 	**********************************************************************
