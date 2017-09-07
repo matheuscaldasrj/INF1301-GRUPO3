@@ -21,6 +21,7 @@
  *      1.2.4	      pg        04/09/2017	Implementação de SAL_CondRetReservada
  *      1.2.6		  gp		05/09/2017		Implementação de SAL
  *		1.2.7		  mc        07/09/2017	  Mudança na estrutura básica da criaSala, agora recebendo os parametros.
+ *	1.2.9	      pg	    07/09/2017	     Adicionando removeSala
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -97,6 +98,16 @@ typedef enum {
 
 SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala, char *codigo, int maxAlunos, int eLaboratorio);
 
+/**************************************************************************
+ *                                                                        *
+ * Funcao: SAL remove sala	                                          *
+ *                                                                        *
+ **   $FV Valor retornado                                                 *
+ *    SAL_CondRetOK  							  *
+ *									  *
+ **************************************************************************/
+
+SAL_tpCondRet Sal_removeSala (Sal_tpSala *pSala);
 
 /***********************************************************************
 *
