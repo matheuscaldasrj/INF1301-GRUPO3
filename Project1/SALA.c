@@ -16,9 +16,9 @@
  *		1.2.3	      bp		03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
  *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
  *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
- 		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
-		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
-
+ *		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
+ *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
+ *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -30,6 +30,7 @@
 /* Inclusões do compilador */
 #include  <stdio.h>
 #include  <string.h>
+#include  <malloc.h>
 
 #define HORARIOS 16
 #define DIAS 6
@@ -100,16 +101,42 @@ typedef struct SAL_tagSala  {
 /**************************************************************************
  *                                                                        *
  * Funcao: SAL Criar sala                                                 *
- *                                                                        *
+ *    $FV Valor retornado                                                 *
+ *    SAL_CondRetOK  													  *
+ *	  SAL_CondRetRecebeuPonteiroNulo                                      *
+ *    SAL_CondRetParamInvalido							                  *
+                                                                         *
  **************************************************************************/
 
-SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala)
+SAL_tpCondRet SAL_criarSala (SAL_tpSala * pSala,
+							 char *codigo,
+							 int maxAlunos,
+							 int eLaboratorio)
 {
-    //TODO
+	int disponibilidade[HORARIOS][DIAS];
 
+	pSala = NULL;
+    
+    pSala = ( SAL_tpSala * ) malloc( sizeof( SAL_tpSala )) ;
+    if( pSala == NULL )
+    {
+        return SAL_CondRetFaltouMemoria ;
+    }
+    
+    //contruindo sala
+	SAL_setCodigo(pSala,codigo);
+	SAL_setMaxAlunos(pSala,maxAlunos);
+	SAL_setELaboratorio(pSala,eLaboratorio);
+	//SAL_resetDisponibilidade(pSala);
+
+   
+  	if(SAL_resetDisponibilidade(pSala) != SAL_CondRetOK){
+  		return SAL_resetDisponibilidade(pSala);
+  	}
+
+    return SAL_CondRetOK ;
 } 
 /* Fim funcao: SAL Criar sala */
-
 
 
 /**************************************************************************
@@ -315,16 +342,16 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	switch (pSala->codigo[0]){
 		case 'L' :
-			*predio = "Leme";
+			strcpy(predio, "Leme");
 			break;
 		case 'F' :
-			*predio = "Frings";
+			strcpy(predio, "Frings");
 			break;
 		case 'K' :
-			*predio = "Kennedy";
+			strcpy(predio, "Kennedy");
 			break;
 		case 'I' :
-			*predio = "IAG";
+			strcpy(predio, "IAG");
 			break;
 		default :
 			return SAL_CondRetErroEstrutura;
@@ -345,7 +372,9 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
  **************************************************************************/
 
 SAL_tpCondRet SAL_getAndar (SAL_tpSala *pSala, int *andar)
-{
+{	
+	SAL_tpCondRet retorno;
+
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
@@ -419,9 +448,11 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
  **************************************************************************/
 
 SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala *pSala){
-	if (pSala == NULL)
-		return SAL_CondRetRecebeuPonteiroNulo; 
 	int i, j;
+	if (pSala == NULL){
+		return SAL_CondRetRecebeuPonteiroNulo; 
+	}
+
 	for (i = 0 ; i < HORARIOS ; i++){
 		for (j = 0; j < DIAS ; j++){
 			pSala->disponibilidade[i][j] = salaLivre;

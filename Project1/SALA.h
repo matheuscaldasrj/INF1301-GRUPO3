@@ -14,13 +14,13 @@
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
  *      1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
- *      1.2.0       pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *      1.2.0         pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
- *      1.2.3       bp    03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
- *      1.2.4	    pg    04/09/2017	Implementação de SAL_CondRetReservada
- *      1.2.6		gp			05/09/2017		Implementação de SAL
- *
+ *      1.2.3         bp        03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
+ *      1.2.4	      pg        04/09/2017	Implementação de SAL_CondRetReservada
+ *      1.2.6		  gp		05/09/2017		Implementação de SAL
+ *		1.2.7		  mc        07/09/2017	  Mudança na estrutura básica da criaSala, agora recebendo os parametros.
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -36,7 +36,7 @@
 #endif
 
 
-typedef enum {
+typedef enum diasSemana{
 
   SAL_CondRetOK = 0 ,
       /* Executou correto */
@@ -53,7 +53,7 @@ typedef enum {
   SAL_CondRetParamInvalido = 4 ,
     /* Erro no parametro recebido em funcao set */
 
-  SAL_CondRetReservada = 5,
+  SAL_CondRetReservada = 5
 	/* Enviada quando uma sala ja esta reservada */
 
 } SAL_tpCondRet ;
@@ -81,7 +81,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala);
+SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala, char *codigo, int maxAlunos, int eLaboratorio);
 
 
 /***********************************************************************
@@ -98,7 +98,7 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala * pSala);
 *    SAL_CondRetParamInvalido
 ***********************************************************************/
 
-SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
+SAL_tpCondRet SAL_setCodigo(SAL_tpSala *pSala, char *codigo);
 
 
 /***********************************************************************
