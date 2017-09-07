@@ -16,21 +16,7 @@
 *  $EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo sala:
 *
-*     =criar        - chama a função SAL_CriarArvore( )
-*     =insdir <Char>
-*                   - chama a função ARV_InserirDireita( <Char> )
-*                     Obs. notação: <Char>  é o valor do parâmetro
-*                     que se encontra no comando de teste.
-*
-*     "=insesq" <Char>
-*                   - chama a função ARV_InserirEsquerda( <Char> )
-*     "=irpai"      - chama a função ARV_IrPai( )
-*     "=iresq"      - chama a função ARV_IrEsquerda( )
-*     "=irdir"      - chama a função ARV_IrDireita( )
-*     "=obter" <Char>
-*                   - chama a função ARV_ObterValorCorr( ) e compara
-*                     o valor retornado com o valor <Char>
-*     "=destroi"    - chama a função ARV_DestruirArvore( )
+*     =criarSala        - chama a função SAL_criarSala( )
 *
 ***************************************************************************/
 
@@ -46,7 +32,7 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_SAL_CMD       "=criar"
+#define     CRIAR_SAL_CMD       "=criarSala"
 #define     GET_COD_CMD         "=getCodigo"
 
 
@@ -94,12 +80,23 @@
             //maxAlunos, int
             //eLaboratorio, int (0 ou 1)
             //matriz disponibilidade começa vazia
-            NumLidos = LER_LerParametros( "ii" ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            char codigo;
+            int maximo;
+            int eLaboratorio;
+
+            NumLidos = LER_LerParametros( "siii" ,
+                                 &codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
+            if ( NumLidos != 4 )
             {
                return TST_CondRetParm ;
             } /* if */
+         
+            tp_SALA  *pSala = null;
+            CondRetObtdo = SAL_criarSala(pSala, maximo,codigo,Edisponivel);
+         
+         
+            CondRetObtido = ARV_ObterValorCorr( &ValorObtido ) ;
+               
 
             CondRetObtido = SAL_criarSala( ) ;
 
@@ -133,9 +130,9 @@
             return TST_CompararChar( ValorEsperado , ValorObtido ,
                                      "Conteúdo do nó está errado." ) ;
 
-         } /* fim ativa: Testar SAL Adicionar filho à direita */
+         } /* fim ativa: Testar SAL getCodigo */
 
-      /* Testar SAL Adicionar filho à esquerda */
+      /* Testar getCodigo */
 
       return TST_CondRetNaoConhec ;
 

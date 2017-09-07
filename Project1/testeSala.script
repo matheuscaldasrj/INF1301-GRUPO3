@@ -1,0 +1,11 @@
+// Script:    TesteSala.script
+// Autor:     Grupo 3 - Modular 17.2
+// Data:      05/09/2017
+// Propósito: Testar as funções do módulo Sala
+//			  Para garantir seu correto funcionamento
+//
+
+== Verifica criar Sala
+=criarSala "L123" 45 1 0
+
+// fim
