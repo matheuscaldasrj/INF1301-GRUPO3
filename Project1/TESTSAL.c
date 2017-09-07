@@ -9,6 +9,7 @@
 
 *      Versão  Autor    Data     Observações
 *       3.00   MC   05/09/2017  Criação do arquivo básico de testes
+*		3.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -17,6 +18,7 @@
 *     Comandos de teste específicos para testar o módulo sala:
 *
 *     =criarSala        - chama a função SAL_criarSala( )
+*	  =reservaSala		- chama a função SAL_reservaSala( )
 *
 ***************************************************************************/
 
@@ -34,7 +36,7 @@
 
 #define     CRIAR_SAL_CMD       "=criarSala"
 #define     GET_COD_CMD         "=getCodigo"
-
+#define		RESERVA_SAL_CMD		"=reservaSala"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -54,6 +56,8 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
+#define MAX_SALS 10
+
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -68,6 +72,12 @@
 
       int  NumLidos = -1 ;
 
+	  char codigo;
+      int maximo;
+      int eLaboratorio;
+	  int index;
+      SAL_tpSala  pSala[MAX_SALS];
+
       TST_tpCondRet Ret ;
 
       /* Testar SAL Criar sala */
@@ -80,20 +90,16 @@
             //maxAlunos, int
             //eLaboratorio, int (0 ou 1)
             //matriz disponibilidade começa vazia
-            char codigo;
-            int maximo;
-            int eLaboratorio;
-            SAL_tpSala  *pSala = NULL;
             
-            NumLidos = LER_LerParametros( "siii" ,
-                                 &codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "isiii" ,
+                                 &index, &codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
             if ( NumLidos != 4 )
             {
                return TST_CondRetParm ;
             } /* if */
          
             
-            CondRetObtido = SAL_criarSala(pSala, &codigo, maximo, eLaboratorio);     
+            CondRetObtido = SAL_criarSala(pSala+index, &codigo, maximo, eLaboratorio);     
 
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -129,6 +135,25 @@
                                      "Conteúdo do nó está errado." ) ;
 
          } /* fim ativa: Testar SAL getCodigo */
+
+      /* Testar SAL reserva sala */		
+		 else if( strcmp( ComandoTeste , RESERVA_SAL_CMD ) == 0 ) 
+		 {
+			  NumLidos = LER_LerParametros( "iiiii" ,
+                                 &index, &dia, &horaInicio, &horaFim, &CondRetEsperada);
+
+			   if ( NumLidos != 5 )
+            {
+               return TST_CondRetParm ;
+            } 
+
+			  CondRetObtido = SAL_reservaSala(pSala[index], &dia, &horaInicio, &horaFim);    
+
+			  return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao reservar sala." );
+
+		 }
+	 /* fim ativa: Testar SAL reserva sala */	
 
       /* Testar getCodigo */
 
