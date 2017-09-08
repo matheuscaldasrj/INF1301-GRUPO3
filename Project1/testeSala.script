@@ -18,14 +18,14 @@
 
 == Declarar os conteúdos dos nós
 =declararparm codigo	string "L123"
-=declararparm maxalunos	int 45
+=declararparm maxAlunos	int 45
 =declararparm eLab	int 1
 
 
 == Verifica criar Sala
-=criarSala 0 codigo maxalunos elab 0
+=criarSala 0 codigo maxAlunos eLab 0
 
 == Verifica reserva Sala
-=reservaSala 0 0 7 9 0
+=reservaSala 0 4 9 10 0
 
 // fim

@@ -145,7 +145,7 @@
                return TST_CondRetParm ;
             } 
 
-			  CondRetObtido = SAL_reservaSala(pSala[index], dia, horaInicio, horaFim);    
+			  CondRetObtido = SAL_reservaSala(pSala+index, dia, horaInicio, horaFim);    
 
 			  return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao reservar sala." );
