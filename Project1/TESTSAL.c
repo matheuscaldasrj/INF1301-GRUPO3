@@ -1,23 +1,23 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo de teste específico
+*  $MCI MÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico
 *
 *  Arquivo gerado:              TESTSAL.C
 *  Letras identificadoras:      TSAL
 *
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
-*      Versão  Autor    Data     Observações
-*       3.00   MC   05/09/2017  Criação do arquivo básico de testes
-*		3.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
-*		3.1	   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*  $ED Descrição do módulo
-*     Este modulo contém as funções específicas para o teste do
-*     módulo Sala.
-*  $EIU Interface com o usuário pessoa
-*     Comandos de teste específicos para testar o módulo sala:
+*      VersÃ£o  Autor    Data     ObservaÃ§Ãµes
+*       3.00   MC   05/09/2017  CriaÃ§Ã£o do arquivo bÃ¡sico de testes
+*		3.01   PG   07/09/2017  AdiÃ§Ã£o do teste de reservaSala + ajustes no cÃ³digo geral
+*		3.1	   PG	07/09/2017  InicializaÃ§Ã£o de variaveis, correÃ§Ã£o de bugs
+*  $ED DescriÃ§Ã£o do mÃ³dulo
+*     Este modulo contÃ©m as funÃ§Ãµes especÃ­ficas para o teste do
+*     mÃ³dulo Sala.
+*  $EIU Interface com o usuÃ¡rio pessoa
+*     Comandos de teste especÃ­ficos para testar o mÃ³dulo sala:
 *
-*     =criarSala        - chama a função SAL_criarSala( )
-*	  =reservaSala		- chama a função SAL_reservaSala( )
+*     =criarSala        - chama a funÃ§Ã£o SAL_criarSala( )
+*	  =reservaSala		- chama a funÃ§Ã£o SAL_reservaSala( )
 *
 ***************************************************************************/
 
@@ -31,24 +31,24 @@
 
 #include    "SALA.H"
 
-/* Tabela dos nomes dos comandos de teste específicos */
+/* Tabela dos nomes dos comandos de teste especÃ­ficos */
 
 #define     CRIAR_SAL_CMD       "=criarSala"
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
 
-/*****  Código das funções exportadas pelo módulo  *****/
+/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC Função: TARV Efetuar operações de teste específicas para Sala
+*  $FC FunÃ§Ã£o: TARV Efetuar operaÃ§Ãµes de teste especÃ­ficas para Sala
 *
-*  $ED Descrição da função
-*     Efetua os diversos comandos de teste específicos para o módulo
+*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*     Efetua os diversos comandos de teste especÃ­ficos para o mÃ³dulo
 *     Sala sendo testado.
 *
-*  $EP Parâmetros
+*  $EP ParÃ¢metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -91,11 +91,11 @@
             //codigo, 1 char pra teste inicial. Vai ser cadeia de char
             //maxAlunos, int
             //eLaboratorio, int (0 ou 1)
-            //matriz disponibilidade começa vazia
+            //matriz disponibilidade comeÃ§a vazia
             
             NumLidos = LER_LerParametros( "isiii" ,
                                  &index, codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
-            if ( NumLidos != 4 )
+            if ( NumLidos != 5 )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -130,7 +130,7 @@
             } /* if */
 
             return TST_CompararChar( ValorEsperado , ValorObtido ,
-                                     "Conteúdo do nó está errado." ) ;
+                                     "ConteÃºdo do nÃ³ estÃ¡ errado." ) ;
 
          } /* fim ativa: Testar SAL getCodigo */
 
@@ -157,6 +157,6 @@
 
       return TST_CondRetNaoConhec ;
 
-   } /* Fim função: TSAL Efetuar operações de teste específicas para sala */
+   } /* Fim funÃ§Ã£o: TSAL Efetuar operaÃ§Ãµes de teste especÃ­ficas para sala */
 
-/********** Fim do módulo de implementação: Módulo de teste específico **********/
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico **********/
