@@ -42,7 +42,13 @@
 
 
 
-== Verifica reserva Sala
+== Verifica reserva Sala1
 =reservaSala 0 4 9 10 0
+
+== Verifica reserva Sala2
+=reservaSala 1 1 13 15 0
+
+== Verifica remove Sala2
+=removeSala 1 OK
 
 // fim
