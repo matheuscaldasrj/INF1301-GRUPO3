@@ -6,11 +6,10 @@
 *
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
-
 *      Versão  Autor    Data     Observações
 *       3.00   MC   05/09/2017  Criação do arquivo básico de testes
 *		3.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
-*
+*		3.1	   PG	07/09/2017  Inicialização de variaveis, correção de bugs
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -56,7 +55,7 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
-#define MAX_SALS 10
+#define MAX_SALS 3
 
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
@@ -72,11 +71,14 @@
 
       int  NumLidos = -1 ;
 
-	  char codigo;
+	  char codigo[4];
       int maximo;
       int eLaboratorio;
-	  int index;
-      SAL_tpSala  pSala[MAX_SALS];
+	  int index = 0;
+	  int dia;
+	  int horaInicio;
+	  int horaFim;
+	  SAL_tpSala  *pSala[MAX_SALS] = {NULL, NULL, NULL};
 
       TST_tpCondRet Ret ;
 
@@ -92,14 +94,14 @@
             //matriz disponibilidade começa vazia
             
             NumLidos = LER_LerParametros( "isiii" ,
-                                 &index, &codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
+                                 &index, codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
             if ( NumLidos != 4 )
             {
                return TST_CondRetParm ;
             } /* if */
          
             
-            CondRetObtido = SAL_criarSala(pSala+index, &codigo, maximo, eLaboratorio);     
+            CondRetObtido = SAL_criarSala(pSala+index, codigo, maximo, eLaboratorio);     
 
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -119,16 +121,12 @@
             {
                return TST_CondRetParm ;
             } /* if 
-
             CondRetObtido = SAL_getCodigo( &ValorObtido ) ;
-
             Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                    "Retorno errado ao obter valor corrente." );
-
             if ( Ret != TST_CondRetOK )
             {
                return Ret ;
-
             } /* if */
 
             return TST_CompararChar( ValorEsperado , ValorObtido ,
@@ -147,7 +145,7 @@
                return TST_CondRetParm ;
             } 
 
-			  CondRetObtido = SAL_reservaSala(pSala[index], &dia, &horaInicio, &horaFim);    
+			  CondRetObtido = SAL_reservaSala(pSala[index], dia, horaInicio, horaFim);    
 
 			  return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao reservar sala." );
@@ -162,4 +160,3 @@
    } /* Fim função: TSAL Efetuar operações de teste específicas para sala */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
-
