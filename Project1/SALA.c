@@ -267,7 +267,7 @@ SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	if (maxAlunos == NULL || maxAlunos <= 0)
+	if (maxAlunos <= 0)
 		return SAL_CondRetParamInvalido;
 	
 	pSala->maxAlunos = maxAlunos;
@@ -294,7 +294,7 @@ SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos)
 	
 	*maxAlunos = pSala->maxAlunos;
 
-	if (maxAlunos == NULL || maxAlunos <= 0)
+	if (*maxAlunos <= 0)
 		return SAL_CondRetErroEstrutura;
 
 	return SAL_CondRetOK;
@@ -318,7 +318,7 @@ SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	
-	if (eLaboratorio == NULL || (eLaboratorio != 1 && eLaboratorio != 0))
+	if (eLaboratorio != 1 && eLaboratorio != 0)
 		return SAL_CondRetParamInvalido;
 
 	pSala->eLaboratorio = eLaboratorio;
@@ -346,7 +346,7 @@ SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio)
 	
 	*eLaboratorio = pSala->eLaboratorio;
 	
-	if (eLaboratorio == NULL || (eLaboratorio != 1 && eLaboratorio != 0))
+	if (*eLaboratorio != 1 && *eLaboratorio != 0)
 		return SAL_CondRetErroEstrutura;
 
 	return SAL_CondRetOK;
@@ -475,7 +475,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	
 	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
-		if (pSala->disponibilidade[i][j] != salaLivre || pSala->disponibilidade[i][j] != salaReservada)
+		if (pSala->disponibilidade[hora][dia] != salaLivre || pSala->disponibilidade[hora][dia] != salaReservada)
 				return SAL_CondRetErroEstrutura;
 		if(pSala->disponibilidade[hora][dia] == salaReservada)
 		{
@@ -608,7 +608,7 @@ SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horari
 
 	for (i = horarioInicio; i < horarioFim; i++) {
 		if (pSala->disponibilidade[dia][i] != salaLivre) {
-			return SAL_CondRetReservada
+			return SAL_CondRetReservada;
 		}
 	}
 
