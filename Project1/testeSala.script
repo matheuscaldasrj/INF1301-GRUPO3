@@ -25,9 +25,14 @@
 =declararparm maxAlunos2	int 20
 =declararparm eLab2	        int 0
 
-=declararparm codigo3	    string "L776"
+=declararparm codigo3	    string "F776"
 =declararparm maxAlunos3	int 65
 =declararparm eLab3	        int 1
+
+=declararparm codigo4	    string "I224"
+=declararparm maxAlunos4	int 100
+=declararparm eLab4	        int 0
+
 
 
 
@@ -39,6 +44,9 @@
 
 == Verifica criar Sala3
 =criarSala 2 codigo3 maxAlunos3 eLab3 OK
+
+== Verifica criar Sala3
+=criarSala 3 codigo4 maxAlunos4 eLab4 OK
 
 
 ==Verifica getCodigo Sala1
@@ -79,11 +87,36 @@
 ==Verifica getAndar Sala 1
 =getAndar 0 1 OK
 
-==Verifica getAndar Sala 2
+==Verifica getAndar Sala 1
 =getAndar 0 3 OK
+=recuperar
+
+==Verifica getAndar Sala 1
+=getAndar 1 4 OK
+=recuperar
+
+==Verifica getAndar Sala 2
+=getAndar 1 3 OK
 
 ==Verifica getAndar Sala 3
-=getAndar 0 7 OK
+=getAndar 2 7 OK
+
+==Verifica getPredio Sala 1
+=getPredio 0 "Leme" OK
+
+==Verifica getPredio Sala 2
+=getPredio 1 "Leme" OK
+=recuperar
+
+==Verifica getPredio Sala 2
+=getPredio 1 "Kennedy" OK
+
+==Verifica getPredio Sala 3
+=getPredio 2 "Frings" OK
+
+==Verifica getPredio Sala 4
+=getPredio 3 "IAG" OK
+
 
 == Verifica remove Sala2
 =removeSala 1 OK

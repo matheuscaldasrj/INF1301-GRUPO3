@@ -10,7 +10,7 @@
 *       1.00   MC   05/09/2017  Criação do arquivo básico de testes
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo,setMaxAlunos, getMaxAlunos e getAndar
+*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo,setMaxAlunos, getMaxAlunos, getAndar e getPredio
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -63,8 +63,10 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
-#define MAX_SALS 3
-SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
+#define MAX_SALS 4
+#define MAX_SIZE_STRING 15
+
+SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -76,7 +78,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
       char ValorEsperado = '?'  ;
       char ValorObtido   = '!'  ;
 	  int ValorObtidoInt = -1;
-	  char ValorObtidoString[tamCodigoSala];
+	  char ValorObtidoString[MAX_SIZE_STRING];
       char ValorDado     = '\0' ;
 	  
 
@@ -90,6 +92,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 	  int horaInicio;
 	  int horaFim;
 	  int andar;
+	  char predio[MAX_SIZE_STRING];
 	  
 
       TST_tpCondRet Ret ;
@@ -241,10 +244,36 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
             } 
 
 			return TST_CompararInt( andar,ValorObtidoInt,
-                                     "Conteudo errado andar de sala." ) ;
+                                     "Conteudo errado no andar de sala." ) ;
 
 		}
 		/* fim ativa: Testar SAL getAndar */
+
+		/* Testar SAL getPredio */		
+		else if( strcmp( ComandoTeste , GET_PREDIO_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "isi" ,
+                               &index, predio , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
+            {
+               return TST_CondRetParm ;
+            }
+
+			CondRetObtido = SAL_getPredio(pSalas[index], ValorObtidoString);
+
+            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                   "Retorno errado ao obter predio de sala" );
+            if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } 
+
+			return TST_CompararString( predio,ValorObtidoString,
+                                     "Conteudo errado no predio de sala." ) ;
+
+		}
+		/* fim ativa: Testar SAL getPredio */
+
 
       return TST_CondRetNaoConhec ;
 
