@@ -41,18 +41,18 @@
 =criarSala 2 codigo3 maxAlunos3 eLab3 OK
 
 
-== Get Codigo Sala1
+==Verifica Get Codigo Sala1
 =getCodigo 0 codigo1 OK
 
-== Get Codigo errado esperado da Sala1
+==Verifica GetCodigo da Sala1
 =getCodigo 0 codigo2 OK
 =recuperar
 
 
-== Get Codigo Sala2
+==Verifica Get Codigo Sala2
 =getCodigo 1 codigo2 OK
 
-== Get Codigo errado esperado da Sala2
+==Verifica Get Codigo da Sala2
 =getCodigo 1 codigo1 OK
 =recuperar
 
@@ -61,6 +61,13 @@
 
 == Verifica reserva Sala2
 =reservaSala 1 1 13 15 0
+
+
+==Verifica Get Codigo Sala2
+=setMaxAlunos 0 maxAlunos3 OK
+
+
+
 
 == Verifica remove Sala2
 =removeSala 1 OK

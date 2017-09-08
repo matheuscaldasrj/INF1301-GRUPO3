@@ -10,7 +10,7 @@
 *       1.00   MC   05/09/2017  Criação do arquivo básico de testes
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*		1.11   MC   08/09/2017  Adicionada funcao testa getCodigo
+*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo e setMaxAlunos
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -39,6 +39,8 @@
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
 #define		REMOVE_SALA_CMD		"=removeSala"
+#define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -77,7 +79,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
       int  NumLidos = -1 ;
 
 	  char codigo[tamCodigoSala];
-      int maximo;
+      int maximoAlunos;
       int eLaboratorio;
 	  int index;
 	  int dia;
@@ -87,46 +89,41 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
       TST_tpCondRet Ret ;
 
-      /* Testar SAL Criar sala */
+      /* Teste SAL Criar sala */
 
          if ( strcmp( ComandoTeste , CRIAR_SAL_CMD ) == 0 )
          {
-
-            //params
-            //codigo, 1 char pra teste inicial. Vai ser cadeia de char
-            //maxAlunos, int
-            //eLaboratorio, int (0 ou 1)
-            //matriz disponibilidade começa vazia
-            
+           
             NumLidos = LER_LerParametros( "isiii" ,
-                                 &index, codigo, &maximo, &eLaboratorio, &CondRetEsperada ) ;
+                                 &index, codigo, &maximoAlunos, &eLaboratorio, &CondRetEsperada ) ;
             if ( NumLidos != 5 )
             {
                return TST_CondRetParm ;
             } /* if */
          
             
-            CondRetObtido = SAL_criarSala(&pSalas[index], codigo, maximo, eLaboratorio);
+            CondRetObtido = SAL_criarSala(&pSalas[index], codigo, maximoAlunos, eLaboratorio);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar sala." );
 
          } /* fim ativa: Testar SAL Criar sala */
 
-	 else if ( strcmp( ComandoTeste, REMOVE_SALA_CMD) == 0)
-	 {
-		 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
+		/* Teste SAL Criar sala */
+		 else if ( strcmp( ComandoTeste, REMOVE_SALA_CMD) == 0)
+		 {
+			 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
 
-		if( NumLidos != 2 )
-		{
-			 return TST_CondRetParm;
-		 }
+			if( NumLidos != 2 )
+			{
+				 return TST_CondRetParm;
+			 }
 
-		 CondRetObtido = SAL_removeSala(pSalas[index]);
+			 CondRetObtido = SAL_removeSala(pSalas[index]);
 
-		 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover sala.");
-	}
-	   
+			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover sala.");
+		}
+	   /* fim ativa: Testar SAL setMaxAlunos */
 	   
       /* Testar SAL get codigo */
 
@@ -164,9 +161,9 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
                                  &index, &dia, &horaInicio, &horaFim, &CondRetEsperada);
 
 			   if ( NumLidos != 5 )
-            {
-               return TST_CondRetParm ;
-            } 
+				{
+				 return TST_CondRetParm ;
+				} 
 
 			  CondRetObtido = SAL_reservaSala(pSalas[index], dia, horaInicio, horaFim);    
 
@@ -174,9 +171,26 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
                                     "Retorno errado ao reservar sala." );
 
 		 }
-	 /* fim ativa: Testar SAL reserva sala */	
+		/* fim ativa: Testar SAL reserva sala */	
 
-      /* Testar getCodigo */
+		/* Testar SAL setMaximoAlunos */		
+		else if( strcmp( ComandoTeste , SET_MAX_ALUNOS_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "iii" ,
+								&index, &maximoAlunos, &CondRetEsperada);
+
+			if ( NumLidos != 3 )
+			{
+				return TST_CondRetParm ;
+			} 
+
+			CondRetObtido = SAL_setMaxAlunos(pSalas[index],maximoAlunos);    
+
+			return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+								"Retorno errado ao setar maximo alunos." );
+
+		}
+		/* fim ativa: Testar SAL setMaximoAlunos */
 
       return TST_CondRetNaoConhec ;
 
