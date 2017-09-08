@@ -64,7 +64,6 @@ struct SAL_tagSala  {
         e 0 "livre", assim, por exemplo, a sala estaria ocupada
         segunda e quarta (7-9) e
         terca e quinta (21-23)
-
         |Segunda|Terca|Quarta|Quinta|Sexta|Sábado|
         7|  1    |  0  |  1   |  0   |  0  |  0  |
         8|  1    |  0  |  1   |  0   |  0  |  0  |
@@ -475,7 +474,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 	
 	for(hora; hora < horaFim - ajusteHora; hora++)
 	{
-		if (pSala->disponibilidade[hora][dia] != salaLivre || pSala->disponibilidade[hora][dia] != salaReservada)
+		if (pSala->disponibilidade[hora][dia] != salaLivre && pSala->disponibilidade[hora][dia] != salaReservada)
 				return SAL_CondRetErroEstrutura;
 		if(pSala->disponibilidade[hora][dia] == salaReservada)
 		{
@@ -558,11 +557,9 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 
 /*
 	Função SAL_getHorarioNoDia
-
 	Retorno:
 	
 	SAL_tpCondRet, onde:
-
 	- SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
 	- SAL_CondRetParamInvalido, se:
 	  
@@ -571,9 +568,7 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 	     durante o qual as aulas ocorrem;
  
 	- SAL_CondRetOK, se a função for concluída com sucesso
-
 	Parâmetros:
-
 	- SAL_tpSala: ponteiro para a sala desejada
 	- dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
 	  de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
@@ -582,7 +577,6 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 	- horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
 	- estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
 	  selecionado estiver disponível, 0 se não estiver.
-
  */
 
 SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim){
