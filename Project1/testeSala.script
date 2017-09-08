@@ -138,6 +138,9 @@
 ==Verifica setCodigo Sala 3
 =setCodigo 2 "F965" OK
 
+== Verifica getElaboratorio
+=getELaboratorio 0 eLab1 OK
+
 ==Verifica setELaboratorio Sala 2
 =setELaboratorio 0 0 OK
 
