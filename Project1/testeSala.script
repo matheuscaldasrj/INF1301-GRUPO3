@@ -70,9 +70,6 @@
 == Verifica reserva Sala2
 =reservaSala 1 1 13 15 0
 
-== Verifica reserva Sala2 
-=reservaSala 1 1 14 16 0
-=recuperar 
 
 ==Verifica getCodigo Sala1
 =setMaxAlunos 0 maxAlunos3 OK
@@ -119,6 +116,22 @@
 
 ==Verifica getPredio Sala 4
 =getPredio 3 "IAG" OK
+
+==Verifica getNumero Sala 1
+=getNumero 0 123 OK
+
+==Verifica getNumero Sala 2
+=getNumero 1 332 OK
+
+==Verifica getNumero Sala 3
+=getNumero 2 776 OK
+==Verifica getNumero Sala 3
+=getNumero 2 123 OK
+=recuperar
+
+==Verifica getNumero Sala 4
+=getNumero 3 224 OK
+
 
 
 == Verifica remove Sala2
