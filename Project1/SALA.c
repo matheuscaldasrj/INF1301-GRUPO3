@@ -170,7 +170,7 @@ SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	retorno = SAL_getCodigo(pSala,&codigo);
+	retorno = SAL_getCodigo(pSala,codigo);
 	if (retorno != SAL_CondRetOK)
 		return retorno;
 	retorno = SAL_getPredio(pSala,predio);
