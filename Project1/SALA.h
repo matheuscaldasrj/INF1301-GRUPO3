@@ -119,7 +119,7 @@ SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
 /*
 	*************************************************************************
  	*                                                                        
- 	*  $FC Função: SAL_imprimeSala	                                          	 
+ 	*  $FC Função: SAL_printSala	                                          	 
  	*          
  	*  $ED Descrição da função
 	*     Imprime código, prédio, andar, maxAlunos e se é laboratório.   
@@ -131,7 +131,7 @@ SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
  	*									  									 
  	**************************************************************************/
 
-SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
+SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala);
 
 /*
 	**********************************************************************
