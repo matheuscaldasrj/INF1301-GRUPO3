@@ -46,7 +46,10 @@
 
 /***********************************************************************
  *
- * Tipo de dados: SAL que define a estrutura do tipo SALA
+ *  $TC Tipo de dados: SAL que define a estrutura do tipo SALA
+ *
+ *	$ED Descrição do tipo
+ *		Descreve a estrutura de uma sala
  *
  ***********************************************************************/
 
