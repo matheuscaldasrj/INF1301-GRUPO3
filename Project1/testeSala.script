@@ -125,6 +125,7 @@
 
 ==Verifica getNumero Sala 3
 =getNumero 2 776 OK
+
 ==Verifica getNumero Sala 3
 =getNumero 2 123 OK
 =recuperar
@@ -140,6 +141,10 @@
 
 == Verifica getElaboratorio
 =getELaboratorio 0 eLab1 OK
+
+== Verifica getElaboratorio
+=getELaboratorio 0 eLab2 OK
+=recuperar
 
 ==Verifica setELaboratorio Sala 2
 =setELaboratorio 0 0 OK
