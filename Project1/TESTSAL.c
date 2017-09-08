@@ -11,7 +11,7 @@
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
 *		1.11   MC   08/09/2017  Adicionada funcao testa getCodigo
-*		3.2	   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
+*		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
