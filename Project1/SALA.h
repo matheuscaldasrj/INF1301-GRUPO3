@@ -3,14 +3,14 @@
 
 
 /***************************************************************************
- *  $MCD Modulo de definição: Modulo Sala
+ *  Modulo de definição: Modulo Sala
  *
  *  Letras identificadoras:      SAL
  *
  *  Autores: mc - Matheus Caldas
  *       bp - Bruno Pedrazza
  *       pg - Pedro Gomes
- *  $HA Historico de evolucao:
+ *  Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
  *      1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
@@ -21,11 +21,9 @@
  *      1.2.4	      pg        04/09/2017	Implementação de SAL_CondRetReservada
  *      1.2.6		  gp		05/09/2017		Implementação de SAL
  *		1.2.7		  mc        07/09/2017	  Mudança na estrutura básica da criaSala, agora recebendo os parametros.
- *		1.2.9	      pg	    07/09/2017	     Adicionando removeSala
- *		1.2.9.1	      pg		07/09/2017	     Corrigindo parametros reservaSala
- *		1.2.9.2		  va		07/09/2017       padronizando a documentação
-
- *  $ED Descrição do módulo
+ *	1.2.9	      pg	    07/09/2017	     Adicionando removeSala
+ *	1.2.9.1	      pg	07/09/2017	     Corrigindo parametros reservaSala
+ *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
  *
@@ -87,118 +85,109 @@ typedef enum {
 } diasSemana;
 
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_criarSala
-	*
-	*  $ED Descrição da função
-	*     Cria uma nova sala com os parametros passados.
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetFaltouMemoria
-	*
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_criarSala
+*$ED Descrição da função
+*	Cria umsa sala, chama todas as funções set para preencher todas as dependências nescessárias.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetErroEstrutura
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetParamInvalido
+*$EP Parametros
+*$P	psala: Ponteiro para tipo estruturado sala onde será armazenada a sala resultante.
+*$P	codigo: Código da sala a ser inserido
+*$P	maxAlunos: Capacidade máxima de alunos da sala a ser inserida.
+*$P	eLaboratorio: Valor entre 1 e 0 para a dependência se a sala é ou não um laboratório.
+*
+*$.***********************************************************************/
+
 
 SAL_tpCondRet SAL_criarSala(SAL_tpSala ** pSala, char *codigo, int maxAlunos, int eLaboratorio);
 
-/*
-	*************************************************************************
- 	*                                                                        
- 	*  $FC Função: SAL_removeSala	                                          	 
- 	*             
- 	*  $ED Descrição da função
-	*     Remove uma sala.                                                            
- 	** 
- 	*  $FV Valor retornado                                                 
- 	*    SAL_CondRetOK  							  						 
- 	*									  									 
- 	**************************************************************************/
+/***********************************************************************
+*$FC Função: SAL_removeSala
+*$ED Descrição da função
+*	Remove uma sala, destruindo toda as informações contidas no tipo estruturado.
+*$FV Valor retornado
+*	SAL_CondRetOK                                                    
+*$EP Parametros
+*$P	psala: Ponteiro para tipo estruturado sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
 
-/*
-	*************************************************************************
- 	*                                                                        
- 	*  $FC Função: SAL_printSala	                                          	 
- 	*          
- 	*  $ED Descrição da função
-	*     Imprime código, prédio, andar, maxAlunos e se é laboratório.   
-	*                                                           
- 	** $FV Valor retornado                                                 
- 	*    SAL_CondRetOK
- 	*    SAL_CondRetErroEstrutura	
-	*    SAL_CondRetRecebeuPonteiroNulo  							  						 
- 	*									  									 
- 	**************************************************************************/
+/***********************************************************************
+*$FC Função: SAL_printSala
+*$ED Descrição da função
+*	Imprime no terminal todas as informações pertinentes a sala fornecida.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetErroEstrutura						
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	psala: Ponteiro para tipo estruturado sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_setCodigo
-	*
-	*  $ED Descrição da função
-	*     Seta o codigo recebido pelo parametro no código
-	*     da sala recebida
-	*	
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                                                                  
-	*    SAL_CondRetRecebeuPonteiroNulo
-	*    SAL_CondRetParamInvalido
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_setCodigo
+*$ED Descrição da função
+*	Define o código da sala fornecida.
+*$FV Valor retornado
+*	SAL_CondRetOK					
+*	SAL_CondRetRecebeuPonteiroNulo
+*    	SAL_CondRetParamInvalido
+*$EP Parametros
+*$P	pSala: Ponteiro para tipo estruturado sala.
+*$P	codigo: Código da sala a ser inserido.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getCodigo
-	*
-	*  $ED Descrição da função
-	*     Pega o codigo da sala recebida e armazena no conteudo
-	*     do ponteiro recebido como codigo
-	*
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                      
-	*    SAL_CondRetErroEstrutura
-	*    SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getCodigo
+*$ED Descrição da função
+*	Pega o código de uma sala e retorna no conteúdo do ponteiro codigo.
+*$FV Valor retornado
+*	SAL_CondRetOK                                                      
+*	SAL_CondRetErroEstrutura
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pSala: Ponteiro para tipo estruturado sala.
+*$P	codigo: Código da sala a ser retornado.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getCodigo(SAL_tpSala * pSala, char *codigo);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_setMaxAlunos
-	*
-	*  $ED Descrição da função
-	*     Seta na estrutura a qtd max de alunos
-	*
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                      
-	*    SAL_CondRetErroEstrutura	
-	*    SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_setMaxAlunos
+*$ED Descrição da função
+*	Insere a capacidade máxima de alunos em uma sala.
+*$FV Valor retornado
+*	SAL_CondRetOK					
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetErroEstrutura	
+*$EP Parametros
+*$P	pSala: Ponteiro para tipo estruturado sala.
+*$P	maxAlunos: Capacidade máxima de alunos na sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getMaxAlunos
-	*
-	*  $ED Descrição da função
-	*     Pega o inteiro maxAlunos recebido e armazena no conteudo
-	*     do ponteiro recebido 
-	*
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                      
-	*    SAL_CondRetErroEstrutura
-	*    SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getMaxAlunos
+*$ED Descrição da função
+*	Retorna no conteúdo de um ponteiro a capacidade máxima de alunos da sala fornecida.
+*$FV Valor retornado
+*	SAL_CondRetOK					
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetErroEstrutura	
+*$EP Parametros
+*$P	pSala: Ponteiro para tipo estruturado sala.
+*$P	maxAlunos: Capacidade máxima de alunos na sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos);
 
@@ -339,26 +328,34 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 
 SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala);
 
-//****************************************************************
-//	$FC Função SAL_getHorarioNoDia
-//	$FV Valor retornado
-//		SAL_tpCondRet, onde:
-//			SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
-//			SAL_CondRetParamInvalido, se:
-//				1. O horário de início for maior ou igual ao horário de fim;
-//				2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
-//				durante o qual as aulas ocorrem;
-//			SAL_CondRetOK, se a função for concluída com sucesso
-//	$EP Parâmetros da Função:
-//		$P SAL_tpSala: ponteiro para a sala desejada
-//		$P dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
-//			de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
-//		$P horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
-//			verificado
-//		$P horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
-//			estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
-//			selecionado estiver disponível, 0 se não estiver.
-//$. *************************************************************/
+/*
+	Função SAL_getHorarioNoDia
+
+	Retorno:
+	
+	SAL_tpCondRet, onde:
+
+	- SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
+	- SAL_CondRetParamInvalido, se:
+	  
+	  1. O horário de início for maior ou igual ao horário de fim;
+	  2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
+	     durante o qual as aulas ocorrem;
+ 
+	- SAL_CondRetOK, se a função for concluída com sucesso
+
+	Parâmetros:
+
+	- SAL_tpSala: ponteiro para a sala desejada
+	- dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
+	  de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
+	- horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
+	  verificado
+	- horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
+	- estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
+	  selecionado estiver disponível, 0 se não estiver.
+
+ */
 
 SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim);
 
