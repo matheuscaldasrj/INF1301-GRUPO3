@@ -12,7 +12,6 @@
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
 *		1.11   MC   08/09/2017  Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
-*		1.13   VA	08/09/2017  Adicionada getELaboratorio
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -47,8 +46,6 @@
 #define		GET_ANDAR_CMD		"=getAndar"
 #define		GET_PREDIO_CMD		"=getPredio"
 #define		GET_NUMERO_CMD		"=getNumero"
-#define		GET_E_LAB_CMD		"=getELaboratorio"
-
 
 
 
@@ -346,31 +343,6 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 		}
 		/* fim ativa: Testar SAL getNumero */
 
-
-		/* Testar SAL getELaboratorio */		
-		else if( strcmp( ComandoTeste , GET_E_LAB_CMD ) == 0 ) 
-		{
-			NumLidos = LER_LerParametros( "iii" ,
-                               &index, &eLaboratorio , &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
-            {
-               return TST_CondRetParm ;
-            }
-
-			CondRetObtido = SAL_getELaboratorio(pSalas[index], &ValorObtidoInt);
-
-            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                   "Retorno errado ao verificar se e laboratorio" );
-            if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } 
-
-			return TST_CompararInt( eLaboratorio,ValorObtidoInt,
-                                     "Conteudo errado ao verificar se e laboratorio." ) ;
-
-		}
-		/* fim ativa: Testar SAL getELaboratorio */
       return TST_CondRetNaoConhec ;
 
    } /* Fim função: TSAL Efetuar operações de teste específicas para sala */
