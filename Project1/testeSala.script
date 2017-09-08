@@ -138,7 +138,11 @@
 ==Verifica setCodigo Sala 3
 =setCodigo 2 "F965" OK
 
+==Verifica setELaboratorio Sala 2
+=setELaboratorio 0 0 OK
 
+==Verifica setELaboratorio Sala 4
+=setELaboratorio 1 1 OK
 
 == Verifica remove Sala2
 =removeSala 1 OK
