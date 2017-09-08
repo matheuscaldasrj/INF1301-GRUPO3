@@ -56,7 +56,7 @@
 *
 ***********************************************************************/
 #define MAX_SALS 3
-
+SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -74,11 +74,11 @@
 	  char codigo[tamCodigoSala];
       int maximo;
       int eLaboratorio;
-	  int index = 0;
+	  int index;
 	  int dia;
 	  int horaInicio;
 	  int horaFim;
-	  SAL_tpSala  *pSala[MAX_SALS] = {NULL, NULL, NULL};
+	  
 
       TST_tpCondRet Ret ;
 
@@ -101,8 +101,7 @@
             } /* if */
          
             
-            CondRetObtido = SAL_criarSala(pSala+index, codigo, maximo, eLaboratorio);     
-
+            CondRetObtido = SAL_criarSala(pSalas+index, codigo, maximo, eLaboratorio);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar sala." );
@@ -145,7 +144,7 @@
                return TST_CondRetParm ;
             } 
 
-			  CondRetObtido = SAL_reservaSala(pSala+index, dia, horaInicio, horaFim);    
+			  CondRetObtido = SAL_reservaSala(pSalas[index], dia, horaInicio, horaFim);    
 
 			  return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao reservar sala." );
