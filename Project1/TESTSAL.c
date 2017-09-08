@@ -7,9 +7,10 @@
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
 *      Versão  Autor    Data     Observações
-*       3.00   MC   05/09/2017  Criação do arquivo básico de testes
-*		3.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
-*		3.1	   PG	07/09/2017  Inicialização de variaveis, correção de bugs
+*       1.00   MC   05/09/2017  Criação do arquivo básico de testes
+*		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
+*		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
+*		1.11   MC   08/09/2017  Adicionada funcao testa getCodigo
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -67,7 +68,9 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
       char ValorEsperado = '?'  ;
       char ValorObtido   = '!'  ;
+	  char ValorObtidoString[tamCodigoSala];
       char ValorDado     = '\0' ;
+	  
 
       int  NumLidos = -1 ;
 
@@ -112,26 +115,30 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
          else if ( strcmp( ComandoTeste , GET_COD_CMD ) == 0 )
          {
-			 /*
-			 TODO!!
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorEsperado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+			 
+			
+            NumLidos = LER_LerParametros( "isi" ,
+
+                               &index, codigo , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
-            } /* if 
-            CondRetObtido = SAL_getCodigo( &ValorObtido ) ;
+            }
+
+			CondRetObtido = SAL_getCodigo(pSalas[index], ValorObtidoString);
+
             Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                   "Retorno errado ao obter valor corrente." );
+                                   "Retorno errado ao obter o codigo de Sala" );
             if ( Ret != TST_CondRetOK )
             {
                return Ret ;
-            } /* if */
+            } 
 
-            return TST_CompararChar( ValorEsperado , ValorObtido ,
-                                     "Conteúdo do nó está errado." ) ;
+			return TST_CompararString( codigo , ValorObtidoString ,
+                                     "Conteudo ao obter get de sala errado." ) ;
 
-         } /* fim ativa: Testar SAL getCodigo */
+         } 
+	  /* fim ativa: Testar SAL getCodigo */
 
       /* Testar SAL reserva sala */		
 		 else if( strcmp( ComandoTeste , RESERVA_SAL_CMD ) == 0 ) 
