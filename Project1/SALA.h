@@ -149,7 +149,7 @@ SAL_tpCondRet SAL_setCodigo(SAL_tpSala * pSala, char *codigo);
 /***********************************************************************
 *$FC Função: SAL_getCodigo
 *$ED Descrição da função
-*	Pega o código de uma sala e retorna no conteúdo do ponteiro codigo.
+*	Retrona o código da sala fornecida no conteúdo do ponteiro código.
 *$FV Valor retornado
 *	SAL_CondRetOK                                                      
 *	SAL_CondRetErroEstrutura
@@ -191,171 +191,148 @@ SAL_tpCondRet SAL_setMaxAlunos (SAL_tpSala * pSala, int maxAlunos);
 
 SAL_tpCondRet SAL_getMaxAlunos (SAL_tpSala * pSala, int *maxAlunos);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_setELaboratorio
-	*
-	*  $ED Descrição da função
-	*     Seta se a sala é laboratório (1 se sim, 0 se não)
-	*
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                      
-	*    SAL_CondRetErroEstrutura
-	*    SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************	
+*$FC Função: SAL_setELaboratorio
+*$ED Descrição da função
+*	Insere um inteiro (1 se sim, 0 se não) na dependência se a sala fornecida é laboratório. 
+*$FV Valor retornado
+*	SAL_CondRetOK                                                      
+*	SAL_CondRetErroEstrutura
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	eLaboratorio: Indicador de que a sala é laboratório (1 se sim, 0 se não)
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_setELaboratorio (SAL_tpSala * pSala, int eLaboratorio);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getELaboratorio
-	*
-	*  $ED Descrição da função
-	*     Pega se a sala é laboratório (1 se sim, 0 se não)
-	*
-	*  $FV Valor retornado
-	*    SAL_CondRetOK                                                      
-	*    SAL_CondRetErroEstrutura
-	*    SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getELaboratorio
+*$ED Descrição da função
+*	Retorna se a sala fornecida é um laboratório em um ponteiro (1 se sim, 0 se não).
+*$FV Valor retornado
+*	SAL_CondRetOK                                                      
+*	SAL_CondRetErroEstrutura
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+$P	pSala: ponteiro para tipo estruturado sala.
+$P	eLaboratorio: Indicador de que a sala é laboratório (1 se sim, 0 se não).
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getELaboratorio (SAL_tpSala * pSala, int *eLaboratorio);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getNumero
-	*
-	*  $ED Descrição da função
-	*     Pega numero da sala.
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetRecebeuPonteiroNulo 
-	*     SAL_CondRetErroEstrutura
-	*
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getNumero
+*$ED Descrição da função
+*	Pega numero da sala fornecida e coloca no conteúdo de um ponteiro.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetRecebeuPonteiroNulo 
+*	SAL_CondRetErroEstrutura
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	numero: numero da sala a ser retornado pela função.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getNumero (SAL_tpSala * pSala, int *numero);
 
-/*	
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getPredio
-	*
-	*  $ED Descrição da função
-	*     Pega predio da sala.
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetErroEstrutura
-	*     SAL_CondRetRecebeuPonteiroNulo
-	*
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getPredio
+*$ED Descrição da função
+*	Pega predio da sala.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetErroEstrutura
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	predio: string para retornar prédio da sala fornecida.
+*$.************************************************************************/
 
 SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_getAndar
-	*
-	*  $ED Descrição da função
-	*     Pega andar da sala.
-	*
-	*     SAL_CondRetOK
-	*     SAL_CondRetErroEstrutura 
-	*     SAL_CondRetRecebeuPonteiroNulo
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_getAndar
+*$ED Descrição da função
+*	Pega andar da sala.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetErroEstrutura 
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	andar: andar da sala fornecida.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_reservaSala
-	*
-	*  $ED Descrição da função
-	*     Reserva a sala em um determinado dia em um determinado intervalo.
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetRecebeuPonteiroNulo
-	*     SAL_CondRetReservada
-	*	  SAL_CondRetParamInvalido
-	*	  
-
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_reservaSala
+*$ED Descrição da função
+*	Reserva a sala em um determinado dia em um determinado intervalo.
+*
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetReservada
+*	SAL_CondRetParamInvalido
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	dia
+*$P	horaInicio: início do intervalo de tempo a ser reservado pela aula na sala.
+*$P	horaFim: fim do intervalo de tempo a ser reservado pela aula na sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
-/*
-	**********************************************************************
-	*
-	*  $FC Função: SAL_resetDisponibilidade
-	*
-	*  $ED Descrição da função
-	*     Reseta a matriz disponibilidade (todos horarios disponiveis)
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetRecebeuPonteiroNulo
-	*
-	*     
-	*
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_resetDisponibilidade
+*$ED Descrição da função
+*	Reseta a matriz disponibilidade (todos horarios disponiveis).
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 
-/*
- 	**********************************************************************
-	*
-	*  $FC Função: SAL_printDisponibilidade
-	*
-	*  $ED Descrição da função
-	*    Imprime a matriz disponibilidade da Sala com XXXXXX quando 
-	*	 estiver ocupado e nada quando livre.
-	*
-	*  $FV Valor retornado
-	*     SAL_CondRetOK
-	*     SAL_CondRetRecebeuPonteiroNulo
-	*	  SAL_CondRetErroEstrutura
-	*
-	*
-	***********************************************************************/
+/***********************************************************************
+*$FC Função: SAL_printDisponibilidade
+*$ED Descrição da função
+*	Imprime a matriz disponibilidade da Sala com XXXXXX quando 
+*	estiver ocupada e nada quando livre.
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetErroEstrutura
+*$EP Parâmetros
+***********************************************************************/
 
 SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala);
 
-/*
-	Função SAL_getHorarioNoDia
-
-	Retorno:
-	
-	SAL_tpCondRet, onde:
-
-	- SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
-	- SAL_CondRetParamInvalido, se:
-	  
-	  1. O horário de início for maior ou igual ao horário de fim;
-	  2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
-	     durante o qual as aulas ocorrem;
- 
-	- SAL_CondRetOK, se a função for concluída com sucesso
-
-	Parâmetros:
-
-	- SAL_tpSala: ponteiro para a sala desejada
-	- dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
-	  de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
-	- horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
-	  verificado
-	- horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
-	- estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
-	  selecionado estiver disponível, 0 se não estiver.
-
- */
+/***********************************************************************
+*$FC Função: SAL_getHorarioNoDia
+*$ED Descrição da função
+*	Pega horário da sala fornecida no dia especificado.
+*$FV Valor retornado
+*	SAL_CondRetOK, se a função for concluída com sucesso
+*	SAL_CondRetRecebeuPonteiroNulo, se a sala recebida for nula
+*	SAL_CondRetParamInvalido, se:
+*	  1. O horário de início for maior ou igual ao horário de fim;
+*	  2. Se algum dos horários não estiver compreendido no período de 7 a 22 horas
+*	  durante o qual as aulas ocorrem;
+*$EP	Parâmetros
+*$PpSala: ponteiro para a sala desejada
+*$P	dia: valor inteiro entre 0 e 5 (ambos inclusive) representando um dos dias da semana
+*	de segunda a sábado (0 = segunda, 1 = terça, ..., 5 = sábado)
+*$P	horarioInicio: valor entre 7 e 22 representando o horário de início do período a ser
+*	verificado
+*$P	horarioFim: valor entre 7 e 22 representando o horário de fim do período a ser verificado
+*$P	estaDisponivel: ponteiro para uma variável inteira onde será armazenado 1 se o intervalo
+*	selecionado estiver disponível, 0 se não estiver.
+*$.***********************************************************************/
 
 SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim);
 
