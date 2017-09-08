@@ -11,6 +11,7 @@
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
 *		1.11   MC   08/09/2017  Adicionada funcao testa getCodigo
+*		3.2	   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -104,13 +105,28 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
             } /* if */
          
             
-            CondRetObtido = SAL_criarSala(pSalas+index, codigo, maximo, eLaboratorio);
+            CondRetObtido = SAL_criarSala(&pSalas[index], codigo, maximo, eLaboratorio);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar sala." );
 
          } /* fim ativa: Testar SAL Criar sala */
 
+	 else if ( strcmp( ComandoTeste, REMOVE_SALA_CMD) == 0)
+	 {
+		 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
+
+		if( NumLidos != 2 )
+		{
+			 return TST_CondRetParm;
+		 }
+
+		 CondRetObtido = SAL_removeSala(pSalas[index]);
+
+		 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover sala.");
+	}
+	   
+	   
       /* Testar SAL get codigo */
 
          else if ( strcmp( ComandoTeste , GET_COD_CMD ) == 0 )
