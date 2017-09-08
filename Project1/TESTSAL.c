@@ -10,7 +10,7 @@
 *       1.00   MC   05/09/2017  Criação do arquivo básico de testes
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo e setMaxAlunos
+*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo,setMaxAlunos, getMaxAlunos e getAndar
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
