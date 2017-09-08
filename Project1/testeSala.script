@@ -1,7 +1,7 @@
-//Script:    TesteSala.script
+//Script:     TesteSala.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      05/09/2017
-// Propósito: Testar as funcoes do modulo Sala
+// Proposito: Testar as funcoes do modulo Sala
 //			  Para garantir seu correto funcionamento
 //
 
@@ -41,6 +41,20 @@
 =criarSala 2 codigo3 maxAlunos3 eLab3 OK
 
 
+== Get Codigo Sala1
+=getCodigo 0 codigo1 OK
+
+== Get Codigo errado esperado da Sala1
+=getCodigo 0 codigo2 OK
+=recuperar
+
+
+== Get Codigo Sala2
+=getCodigo 1 codigo2 OK
+
+== Get Codigo errado esperado da Sala2
+=getCodigo 1 codigo1 OK
+=recuperar
 
 == Verifica reserva Sala1
 =reservaSala 0 4 9 10 0
@@ -50,5 +64,6 @@
 
 == Verifica remove Sala2
 =removeSala 1 OK
+
 
 // fim
