@@ -41,15 +41,15 @@
 =criarSala 2 codigo3 maxAlunos3 eLab3 OK
 
 
-==Verifica Get Codigo Sala1
+==Verifica getCodigo Sala1
 =getCodigo 0 codigo1 OK
 
-==Verifica GetCodigo da Sala1
+==Verifica getCodigo da Sala1
 =getCodigo 0 codigo2 OK
 =recuperar
 
 
-==Verifica Get Codigo Sala2
+==Verifica getCodigo Sala2
 =getCodigo 1 codigo2 OK
 
 ==Verifica Get Codigo da Sala2
@@ -63,18 +63,27 @@
 =reservaSala 1 1 13 15 0
 
 
-==Verifica Get Codigo Sala1
+==Verifica getCodigo Sala1
 =setMaxAlunos 0 maxAlunos3 OK
 
-==Verifica Get MaximoAlunos Sala1
+==Verifica getMaximoAlunos Sala1
 =getMaxAlunos 0 maxAlunos1 OK
 =recuperar
 
-==Verifica Get MaximoAlunos Sala1
+==Verifica getMaximoAlunos Sala1
 =getMaxAlunos 0 maxAlunos3 OK
 
-==Verifica Get MaximoAlunos Sala2
+==Verifica getMaximoAlunos Sala2
 =getMaxAlunos 1 maxAlunos2 OK
+
+==Verifica getAndar Sala 1
+=getAndar 0 1 OK
+
+==Verifica getAndar Sala 2
+=getAndar 0 3 OK
+
+==Verifica getAndar Sala 3
+=getAndar 0 7 OK
 
 == Verifica remove Sala2
 =removeSala 1 OK

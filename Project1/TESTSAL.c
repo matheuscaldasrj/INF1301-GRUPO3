@@ -41,6 +41,9 @@
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
 #define		GET_MAX_ALUNOS_CMD	"=getMaxAlunos"
+#define		GET_ANDAR_CMD		"=getAndar"
+#define		GET_PREDIO_CMD		"=getPredio"
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -86,6 +89,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 	  int dia;
 	  int horaInicio;
 	  int horaFim;
+	  int andar;
 	  
 
       TST_tpCondRet Ret ;
@@ -212,10 +216,35 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
             } 
 
 			return TST_CompararInt( maximoAlunos,ValorObtidoInt,
-                                     "Conteudo errado ao obter get Maximo alunos de sala errado." ) ;
+                                     "Conteudo errado ao obter Maximo alunos de sala." ) ;
 
 		}
 		/* fim ativa: Testar SAL getMaximoAlunos */
+
+			/* Testar SAL getAndar */		
+		else if( strcmp( ComandoTeste , GET_ANDAR_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "iii" ,
+                               &index, &andar , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
+            {
+               return TST_CondRetParm ;
+            }
+
+			CondRetObtido = SAL_getAndar(pSalas[index], &ValorObtidoInt);
+
+            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                   "Retorno errado ao obter andar de sala" );
+            if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } 
+
+			return TST_CompararInt( andar,ValorObtidoInt,
+                                     "Conteudo errado andar de sala." ) ;
+
+		}
+		/* fim ativa: Testar SAL getAndar */
 
       return TST_CondRetNaoConhec ;
 
