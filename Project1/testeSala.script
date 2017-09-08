@@ -1,29 +1,46 @@
 //Script:    TesteSala.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      05/09/2017
-// Propósito: Testar as funções do módulo Sala
+// Propósito: Testar as funcoes do modulo Sala
 //			  Para garantir seu correto funcionamento
 //
 
 == Declarar as condicoes de retorno
-=declararparm  OK           int 0
-=declararparm  FaltaMemoria	int 1
+=declararparm  OK               int 0
+=declararparm  FaltaMemoria	    int 1
 =declararparm  PonteiroNullo	int 2
 =declararparm  ErroEstrutura	int 3
 =declararparm  ParamInvalido	int 4
-=declararparm  RetReservada	int 5
+=declararparm  RetReservada	    int 5
 
 
 
 
-== Declarar os conteúdos dos nós
-=declararparm codigo	string "L123"
-=declararparm maxAlunos	int 45
-=declararparm eLab	int 1
+== Declarar os conteudos das Salas
+=declararparm codigo1	    string "L123"
+=declararparm maxAlunos1	int 45
+=declararparm eLab1	        int 1
+
+=declararparm codigo2	    string "K332"
+=declararparm maxAlunos2	int 20
+=declararparm eLab2	        int 0
+
+=declararparm codigo3	    string "L776"
+=declararparm maxAlunos3	int 65
+=declararparm eLab3	        int 1
 
 
-== Verifica criar Sala
-=criarSala 0 codigo maxAlunos eLab 0
+
+== Verifica criar Sala1
+=criarSala 0 codigo1 maxAlunos1 eLab1 OK
+
+== Verifica criar Sala2
+=criarSala 1 codigo2 maxAlunos2 eLab2 OK
+
+== Verifica criar Sala3
+=criarSala 2 codigo3 maxAlunos3 eLab3 OK
+
+
 
 == Verifica reserva Sala
 =reservaSala 0 4 9 10 0
