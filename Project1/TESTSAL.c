@@ -37,6 +37,7 @@
 #define     CRIAR_SAL_CMD       "=criarSala"
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
+#define		REMOVE_SALA_CMD		"=removeSala"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
