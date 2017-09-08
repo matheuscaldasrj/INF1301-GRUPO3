@@ -10,7 +10,7 @@
 *       1.00   MC   05/09/2017  Criação do arquivo básico de testes
 *		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar
+*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -40,6 +40,7 @@
 #define		RESERVA_SAL_CMD		"=reservaSala"
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
+#define		SET_CODIGO_CMD		"=setCodigo"
 #define		GET_MAX_ALUNOS_CMD	"=getMaxAlunos"
 #define		GET_ANDAR_CMD		"=getAndar"
 #define		GET_PREDIO_CMD		"=getPredio"
@@ -193,13 +194,32 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 				return TST_CondRetParm ;
 			} 
 
-			CondRetObtido = SAL_setMaxAlunos(pSalas[index],maximoAlunos);    
+			CondRetObtido = SAL_setMaxAlunos(pSalas[index], maximoAlunos);    
 
 			return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-								"Retorno errado ao setar maximo alunos." );
+								"Retorno errado ao setar maximo alunos da sala." );
 
 		}
 		/* fim ativa: Testar SAL setMaximoAlunos */
+
+		 /* Testar SAL setCodigo */		
+		else if( strcmp( ComandoTeste , SET_CODIGO_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "isi" ,
+								&index, codigo, &CondRetEsperada);
+
+			if ( NumLidos != 3 )
+			{
+				return TST_CondRetParm ;
+			} 
+
+			CondRetObtido = SAL_setCodigo(pSalas[index],codigo);    
+
+			return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+								"Retorno errado ao setar codigo da sala." );
+
+		}
+		/* fim ativa: Testar SAL setCodigo */
 
 		/* Testar SAL getMaximoAlunos */		
 		else if( strcmp( ComandoTeste , GET_MAX_ALUNOS_CMD ) == 0 ) 

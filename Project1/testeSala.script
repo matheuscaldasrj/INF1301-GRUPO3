@@ -132,6 +132,12 @@
 ==Verifica getNumero Sala 4
 =getNumero 3 224 OK
 
+==Verifica setCodigo Sala 1
+=setCodigo 0 "F222" OK
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F965" OK
+
 
 
 == Verifica remove Sala2
