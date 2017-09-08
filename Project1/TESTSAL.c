@@ -26,8 +26,8 @@
 
 #include    "TST_ESPC.H"
 
-#include    "generico.h"
-#include    "lerparm.h"
+#include    "GENERICO.H"
+#include    "LERPARM.H"
 
 #include    "SALA.H"
 
@@ -71,7 +71,7 @@
 
       int  NumLidos = -1 ;
 
-	  char codigo[4];
+	  char codigo[tamCodigoSala];
       int maximo;
       int eLaboratorio;
 	  int index = 0;
