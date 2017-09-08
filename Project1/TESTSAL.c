@@ -40,7 +40,7 @@
 #define		RESERVA_SAL_CMD		"=reservaSala"
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
-
+#define		GET_MAX_ALUNOS_CMD	"=getMaxAlunos"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -72,6 +72,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
       char ValorEsperado = '?'  ;
       char ValorObtido   = '!'  ;
+	  int ValorObtidoInt = -1;
 	  char ValorObtidoString[tamCodigoSala];
       char ValorDado     = '\0' ;
 	  
@@ -132,7 +133,6 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 			 
 			
             NumLidos = LER_LerParametros( "isi" ,
-
                                &index, codigo , &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
@@ -191,6 +191,31 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL};
 
 		}
 		/* fim ativa: Testar SAL setMaximoAlunos */
+
+		/* Testar SAL getMaximoAlunos */		
+		else if( strcmp( ComandoTeste , GET_MAX_ALUNOS_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "iii" ,
+                               &index, &maximoAlunos , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
+            {
+               return TST_CondRetParm ;
+            }
+
+			CondRetObtido = SAL_getMaxAlunos(pSalas[index], &ValorObtidoInt);
+
+            Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                   "Retorno errado ao obter o maximo de alunos da Sala" );
+            if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+            } 
+
+			return TST_CompararInt( maximoAlunos,ValorObtidoInt,
+                                     "Conteudo errado ao obter get Maximo alunos de sala errado." ) ;
+
+		}
+		/* fim ativa: Testar SAL getMaximoAlunos */
 
       return TST_CondRetNaoConhec ;
 

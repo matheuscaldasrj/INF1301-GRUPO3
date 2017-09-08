@@ -63,11 +63,18 @@
 =reservaSala 1 1 13 15 0
 
 
-==Verifica Get Codigo Sala2
+==Verifica Get Codigo Sala1
 =setMaxAlunos 0 maxAlunos3 OK
 
+==Verifica Get MaximoAlunos Sala1
+=getMaxAlunos 0 maxAlunos1 OK
+=recuperar
 
+==Verifica Get MaximoAlunos Sala1
+=getMaxAlunos 0 maxAlunos3 OK
 
+==Verifica Get MaximoAlunos Sala2
+=getMaxAlunos 1 maxAlunos2 OK
 
 == Verifica remove Sala2
 =removeSala 1 OK
