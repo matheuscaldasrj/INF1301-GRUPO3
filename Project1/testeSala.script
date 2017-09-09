@@ -7,11 +7,12 @@
 
 == Declarar as condicoes de retorno
 =declararparm  OK               int 0
-=declararparm  FaltaMemoria	    int 1
-=declararparm  PonteiroNullo	int 2
+=declararparm  FaltaMemoria	int 1
+=declararparm  PonteiroNulo	int 2
 =declararparm  ErroEstrutura	int 3
 =declararparm  ParamInvalido	int 4
-=declararparm  RetReservada	    int 5
+=declararparm  RetReservada	int 5
+=declararparm  ErroAoLiberar    int 6
 
 
 
@@ -36,52 +37,52 @@
 
 
 
-== Verifica criar Sala1
+== Verifica criar Sala 1
 =criarSala 0 codigo1 maxAlunos1 eLab1 OK
 
-== Verifica criar Sala2
+== Verifica criar Sala 2
 =criarSala 1 codigo2 maxAlunos2 eLab2 OK
 
-== Verifica criar Sala3
+== Verifica criar Sala 3
 =criarSala 2 codigo3 maxAlunos3 eLab3 OK
 
-== Verifica criar Sala3
+== Verifica criar Sala 4
 =criarSala 3 codigo4 maxAlunos4 eLab4 OK
 
 
-==Verifica getCodigo Sala1
+==Verifica getCodigo Sala 1
 =getCodigo 0 codigo1 OK
 
-==Verifica getCodigo da Sala1
+==Verifica getCodigo da Sala 1
 =getCodigo 0 codigo2 OK
 =recuperar
 
 
-==Verifica getCodigo Sala2
+==Verifica getCodigo Sala 2
 =getCodigo 1 codigo2 OK
 
-==Verifica GetCodigo da Sala2
+==Verifica GetCodigo da Sala 2
 =getCodigo 1 codigo1 OK
 =recuperar
 
-== Verifica reserva Sala1
+== Verifica reserva Sala 1
 =reservaSala 0 4 9 10 0
 
-== Verifica reserva Sala2
+== Verifica reserva Sala 2
 =reservaSala 1 1 13 15 0
 
 
-==Verifica setMaxAlunos Sala1
+==Verifica setMaxAlunos Sala 1
 =setMaxAlunos 0 maxAlunos3 OK
 
-==Verifica getMaxAlunos Sala1
+==Verifica getMaxAlunos Sala 1
 =getMaxAlunos 0 maxAlunos1 OK
 =recuperar
 
-==Verifica getMaxAlunos Sala1
+==Verifica getMaxAlunos Sala 1
 =getMaxAlunos 0 maxAlunos3 OK
 
-==Verifica getMaxAlunos Sala2
+==Verifica getMaxAlunos Sala 2
 =getMaxAlunos 1 maxAlunos2 OK
 
 ==Verifica getAndar Sala 1
@@ -92,7 +93,7 @@
 =recuperar
 
 ==Verifica getAndar Sala 1
-=getAndar 1 4 OK
+=getAndar 0 4 OK
 =recuperar
 
 ==Verifica getAndar Sala 2
@@ -139,27 +140,26 @@
 ==Verifica setCodigo Sala 3
 =setCodigo 2 "F965" OK
 
-== Verifica getElaboratorio
+== Verifica getElaboratorio Sala 1
 =getELaboratorio 0 eLab1 OK
 
-== Verifica getElaboratorio
+== Verifica getElaboratorio Sala 1
 =getELaboratorio 0 eLab2 OK
 =recuperar
 
 ==Verifica setELaboratorio Sala 2
-=setELaboratorio 0 0 OK
+=setELaboratorio 1 0 OK
 
 ==Verifica setELaboratorio Sala 4
-=setELaboratorio 1 1 OK
+=setELaboratorio 3 1 OK
 
-== Verifica resetDisponibilidade Sala1
+== Verifica resetDisponibilidade Sala 1
 =resetDisponibilidade 0 OK
 
-== Verifica resetDisponibilidadeSala4 nao existe
-=resetDisponibilidade 4 OK
-=recuperar
+== Verifica resetDisponibilidade Sala 4
+=resetDisponibilidade 3 OK
 
-== Verifica remove Sala2
+== Verifica remove Sala 2
 =removeSala 1 OK
 
 
