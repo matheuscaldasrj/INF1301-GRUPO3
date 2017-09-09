@@ -60,7 +60,7 @@
 ==Verifica getCodigo Sala2
 =getCodigo 1 codigo2 OK
 
-==Verifica Get Codigo da Sala2
+==Verifica GetCodigo da Sala2
 =getCodigo 1 codigo1 OK
 =recuperar
 
@@ -71,17 +71,17 @@
 =reservaSala 1 1 13 15 0
 
 
-==Verifica getCodigo Sala1
+==Verifica setMaxAlunos Sala1
 =setMaxAlunos 0 maxAlunos3 OK
 
-==Verifica getMaximoAlunos Sala1
+==Verifica getMaxAlunos Sala1
 =getMaxAlunos 0 maxAlunos1 OK
 =recuperar
 
-==Verifica getMaximoAlunos Sala1
+==Verifica getMaxAlunos Sala1
 =getMaxAlunos 0 maxAlunos3 OK
 
-==Verifica getMaximoAlunos Sala2
+==Verifica getMaxAlunos Sala2
 =getMaxAlunos 1 maxAlunos2 OK
 
 ==Verifica getAndar Sala 1
