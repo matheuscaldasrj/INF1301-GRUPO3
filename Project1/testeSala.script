@@ -152,6 +152,13 @@
 ==Verifica setELaboratorio Sala 4
 =setELaboratorio 1 1 OK
 
+== Verifica resetDisponibilidade Sala1
+=resetDisponibilidade 0 OK
+
+== Verifica resetDisponibilidadeSala4 nao existe
+=resetDisponibilidade 4 OK
+=recuperar
+
 == Verifica remove Sala2
 =removeSala 1 OK
 

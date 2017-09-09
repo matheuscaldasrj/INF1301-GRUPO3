@@ -12,7 +12,8 @@
 *		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
 *		1.11   MC   08/09/2017  Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
-*		1.13   VA	08/09/2017	Adicionando getELabortorio
+*		1.13   VA	08/09/2017	Adicionado getELabortorio
+		1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -48,6 +49,7 @@
 #define		GET_PREDIO_CMD		"=getPredio"
 #define		GET_NUMERO_CMD		"=getNumero"
 #define		GET_E_LAB_CMD		"=getELaboratorio"
+#define		RESET_DISP_CMD		"=resetDisponibilidade"
 
 
 
@@ -358,7 +360,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 			CondRetObtido = SAL_getELaboratorio(pSalas[index], &ValorObtidoInt);
 
             Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                   "Retorno errado ao verificar se e laboratorio" );
+                                   "Retorno errado ao obter se e laboratorio" );
             if ( Ret != TST_CondRetOK )
             {
                return Ret ;
@@ -369,7 +371,26 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
 		}
 		/* fim ativa: Testar SAL getELaboratorio */
+
+		/* Testar SAL resetDisponibilidade */		
+		else if( strcmp( ComandoTeste , RESET_DISP_CMD ) == 0 ) 
+		{
+			NumLidos = LER_LerParametros( "ii" ,
+                               &index, &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
+            {
+               return TST_CondRetParm ;
+            }
+
+			CondRetObtido = SAL_resetDisponibilidade(pSalas[index]);
+
+			return TST_CompararInt( CondRetEsperada, CondRetObtido,
+                                     "Conteudo errado ao verificar se resetou a disponibilidade." ) ;
+
+		}
+		/* fim ativa: Testar SAL resetDisponibilidade */
       return TST_CondRetNaoConhec ;
+
 
 
 
