@@ -419,6 +419,37 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 
 /* Fim funcao: Sal reserva Sala */
 
+/**************************************************************************
+ *                                                                        *
+ * Funcao: SAL_Libera a Sala                                              *
+ **************************************************************************/
+SAL_tpCondRet SAL_liberaSala (SAL_tpSala * pSala, int dia, int HoraInicio, int HoraFim)
+{
+	int hora = horaInicio - ajusteHora;
+  if (pSala == NULL)
+  	return SAL_CondRetRecebeuPonteiroNulo;
+  
+	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva) 
+		return  SAL_CondRetParamInvalido;
+		
+	
+	for(hora; hora < horaFim - ajusteHora; hora++)
+	{
+		if (pSala->disponibilidade[hora][dia] != salaLivre && pSala->disponibilidade[hora][dia] != salaReservada)
+				return SAL_CondRetErroEstrutura;
+		if(disponibilidade[hora][dia] == salaLivre)
+		{
+			return tpCondRet_ErroAoLIberarSala;
+		}
+	}
+	
+	for(hora = horaInicio -ajusteHora; hora < horaFim -ajusteHora; hora++)
+	{
+		pSala->disponibilidade [hora][dia] = salaLiberada;
+	}
+	return SAL_CondRetOK;
+}
+/* Fim funcao: Sal libera Sala */
 
 /**************************************************************************
  *                                                                        *  
