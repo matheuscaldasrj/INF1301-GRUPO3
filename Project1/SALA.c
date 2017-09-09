@@ -21,8 +21,7 @@
  *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
  *      1.2.9         pg        07/09/2017   Adicionando removeSala
- *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala
- *		1.3.1		  bp		07/09/2017	 Implementacao funcoes imprimeSala e imprimeMatriz
+ *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala.Implementacao funcoes imprimeSala e imprimeMatriz
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.

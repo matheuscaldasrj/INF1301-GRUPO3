@@ -18,11 +18,10 @@
  *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
  *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
  *      1.2.3         bp        03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
- *      1.2.4	      pg        04/09/2017	Implementação de SAL_CondRetReservada
- *      1.2.6		  gp		05/09/2017		Implementação de SAL
- *		1.2.7		  mc        07/09/2017	  Mudança na estrutura básica da criaSala, agora recebendo os parametros.
- *	1.2.9	      pg	    07/09/2017	     Adicionando removeSala
- *	1.2.9.1	      pg	07/09/2017	     Corrigindo parametros reservaSala
+ *      1.2.4	      pg        04/09/2017	 Implementação de SAL_CondRetReservada
+ *      1.2.6		  gp		05/09/2017	 Implementação de SAL
+ *		1.2.7		  mc        07/09/2017	 Mudança na estrutura básica da criaSala, agora recebendo os parametros.
+ *	    1.2.9	      pg	    07/09/2017	 Adicionando removeSala, Corrigindo parametros reservaSala 
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -95,10 +94,10 @@ typedef enum {
 *	SAL_CondRetRecebeuPonteiroNulo
 *	SAL_CondRetParamInvalido
 *$EP Parametros
-*$P	psala: Ponteiro para tipo estruturado sala onde será armazenada a sala resultante.
+*$P	psala: Ponteiro de ponteiro para tipo estruturado sala onde será armazenada a sala resultante.
 *$P	codigo: Código da sala a ser inserido
 *$P	maxAlunos: Capacidade máxima de alunos da sala a ser inserida.
-*$P	eLaboratorio: Valor entre 1 e 0 para a dependência se a sala é ou não um laboratório.
+*$P	eLaboratorio: Valor entre 1(é laboratório) e 0(não é laboratório) para a dependência se a sala é ou não um laboratório.
 *
 *$.***********************************************************************/
 
