@@ -159,6 +159,10 @@
 == Verifica resetDisponibilidade Sala 4
 =resetDisponibilidade 3 OK
 
+==Verifica resetDisponibilidade Sala 2
+=resetDisponibilidade 1 ErroAoLiberar
+=recuperar
+
 == Verifica remove Sala 2
 =removeSala 1 OK
 
