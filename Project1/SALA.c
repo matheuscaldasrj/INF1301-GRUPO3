@@ -434,6 +434,8 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala){
 	for (i = 0 ; i < HORARIOS ; i++){
 		for (j = 0; j < DIAS ; j++){
 			pSala->disponibilidade[i][j] = salaLivre;
+			if (pSala->disponibilidade[i][j] != salaLivre)
+				return SAL_CondRetErroAoLiberarSala;
 		}
 	}
 

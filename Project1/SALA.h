@@ -55,10 +55,10 @@ typedef struct SAL_tagSala SAL_tpSala;
 typedef enum {
 
   SAL_CondRetOK = 0 ,
-      /* Executou correto */
+    /* Executou correto */
 
   SAL_CondRetFaltouMemoria = 1 ,
-      /* Erro ao tentar ciar sala */
+    /* Erro ao tentar ciar sala */
 
   SAL_CondRetRecebeuPonteiroNulo = 2 ,
 		/* Recebeu ponteiro para sala nulo */
@@ -69,8 +69,11 @@ typedef enum {
   SAL_CondRetParamInvalido = 4 ,
     /* Erro no parametro recebido em funcao set */
 
-  SAL_CondRetReservada = 5
-	/* Enviada quando uma sala ja esta reservada */
+  SAL_CondRetReservada = 5 ,
+	  /* Enviada quando uma sala ja esta reservada */
+
+  SAL_CondRetErroAoLiberarSala = 6 
+    /* Erro ao tentar liberar sala */
 
 } SAL_tpCondRet ;
 
@@ -291,6 +294,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 *$FV Valor retornado
 *	SAL_CondRetOK
 *	SAL_CondRetRecebeuPonteiroNulo
+* SAL_CondRetErroAoLiberarSala
 *$EP Parametros
 *$P	pSala: ponteiro para tipo estruturado sala.
 *$.***********************************************************************/
@@ -307,6 +311,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 *	SAL_CondRetRecebeuPonteiroNulo
 *	SAL_CondRetErroEstrutura
 *$EP Parâmetros
+*$P pSala: ponteiro para tipo estruturado sala.
 ***********************************************************************/
 
 SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala);
