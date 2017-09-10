@@ -65,7 +65,11 @@
 == Verifica criar Sala 8 (eLab diferente de 0 e 1, programa reconheceu)
 =criarSala 7 "I214" 30 7 ParamInvalido
 
+== Verifica criar Sala 9 (codigo com formato incorreto)
+=criarSala 8 "LL123" 30 1 ParamInvalido
 
+== Verifica criar Sala 10
+=criarSala 9 "R123" 20 0 OK
 
 
 == Verifica imprimir Sala 1

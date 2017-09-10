@@ -75,10 +75,10 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
-#define MAX_SALS 8
+#define MAX_SALS 10
 #define MAX_SIZE_STRING 15
 
-SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {

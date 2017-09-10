@@ -196,6 +196,7 @@ SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
 
 SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 {
+	int i;
 	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
@@ -204,11 +205,18 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 		return SAL_CondRetParamInvalido;
 	}
 
-	if (codigo[0] != 'L' && codigo[0] != 'K' && codigo[0] != 'F' && codigo[0] != 'I')
+	if (codigo[0] != 'L' && codigo[0] != 'K' && codigo[0] != 'F' && codigo[0] != 'I' && codigo[0] != 'R')
 	{
 		return SAL_CondRetParamInvalido;
 	}
 	
+	for(i=1;i< strlen(codigo);i++)
+	{
+		if(codigo[i] < '0' || codigo[i] > '9')
+		{
+			return SAL_CondRetParamInvalido;
+		}
+	}
 
 	strcpy(pSala->codigo, codigo);
 
@@ -230,8 +238,6 @@ SAL_tpCondRet SAL_getCodigo (SAL_tpSala * pSala, char *codigo)
 
     strcpy(codigo, pSala->codigo);
 
-    /*if (codigo[0] != 'L' || codigo[0] != 'K' || codigo[0] != 'F' || codigo[0] != 'I')
-		return SAL_CondRetParamInvalido;  corrompendo o codigo (SABER PQ!!) */
     if (codigo == NULL || strlen(codigo) > tamCodigoSala)
     	return SAL_CondRetErroEstrutura;
 
@@ -365,6 +371,9 @@ SAL_tpCondRet SAL_getPredio (SAL_tpSala * pSala, char *predio)
 			break;
 		case 'I' :
 			strcpy(predio, "IAG");
+			break;
+		case 'R' :
+			strcpy(predio, "RDC");
 			break;
 		default :
 			return SAL_CondRetErroEstrutura;
