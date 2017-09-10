@@ -107,7 +107,7 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
 							 char *codigo,
 							 int maxAlunos,
 							 int eLaboratorio)
-{ /*NAO CRIAR SALA SE RECEBER PARAMETROS INVALIDOS!!!*/
+{
 	SAL_tpCondRet retorno;
 	SAL_tpCondRet retornoDaRemove;
 
@@ -201,7 +201,7 @@ SAL_tpCondRet SAL_printSala (SAL_tpSala * pSala)
 
 SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 {
-	int i;
+	unsigned int i;
 	if (pSala == NULL){
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
