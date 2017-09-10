@@ -53,8 +53,20 @@
 #define inicioSemanaLetiva 0
 #define fimSemanaLetiva 5
 
+/***** Declarações exportadas pelo módulo *****/
 
+/*explicitar o que é */
 typedef struct SAL_tagSala SAL_tpSala;
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: SAL Condicoes de retorno
+*
+*
+*  $ED Descrição do tipo
+*     Condições de retorno das funções da Sala
+*
+***********************************************************************/
 
 typedef enum {
 
