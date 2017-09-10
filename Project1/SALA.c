@@ -503,7 +503,7 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 			if (pSala->disponibilidade[i][j] == salaReservada)
 				printf("XXXXXX\t");
 			else
-				printf("\t");
+				printf("------\t");
 		}
 		printf("\n");
 	}

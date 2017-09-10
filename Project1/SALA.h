@@ -297,7 +297,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala);
 *$FC Função: SAL_printDisponibilidade
 *$ED Descrição da função
 *	Imprime a matriz disponibilidade da Sala com XXXXXX quando 
-*	estiver ocupada e nada quando livre.
+*	estiver ocupada e ------ quando livre.
 *$FV Valor retornado
 *	SAL_CondRetOK
 *	SAL_CondRetRecebeuPonteiroNulo
