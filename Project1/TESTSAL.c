@@ -1,35 +1,51 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo de teste específico
-*
-*  Arquivo gerado:              TESTSAL.C
-*  Letras identificadoras:      TSAL
-*  Autores: mc - Matheus Caldas
-*	     bp - Bruno Pedrazza
-*	     pg - Pedro Gomes
-*	     va - Vinícius Arcoverde
-*	     lf - Leon França
-*	     gc - Gabriel Costa
+*$MCI Módulo de implementação: Módulo de teste específico
+*	Arquivo: TESTSAL.C
+*	Proprietário: Grupo 3 INF1301 17.2
+*	Projeto: Trabalho 1
+*	Gestor:  DI/PUC-Rio
+*  	Autores: mc - Matheus Caldas
+*	         bp - Bruno Pedrazza
+*	         pg - Pedro Gomes
+*	         va - Vinícius Arcoverde
+*	         lf - Leon França
+*	         gc - Gabriel Costa
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
+*$HA Alterações:
 *      Versão  Autor    Data     	Observações
-*	1.15   MC	10/09/2017	Corrigindo bug do tamanho da variavel codigo
-*	1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
-*	1.13   VA	08/09/2017	Adicionado getELabortorio
-*	1.12   PG	08/09/2017  	Adicionando removeSala e ajustando demais funções.
-*	1.11   MC   	08/09/2017  	Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
-*	1.10   PG	07/09/2017  	Inicialização de variaveis, correção de bugs
-*	1.01   PG   	07/09/2017  	Adição do teste de reservaSala + ajustes no código geral
-*       1.00   MC   	05/09/2017  	Criação do arquivo básico de testes
-*  $ED Descrição do módulo
+*	1.16	LF	10/09/2017	Criação e padronização da documentação
+*	1.15	MC	10/09/2017	Corrigindo bug do tamanho da variavel codigo
+*	1.14	VA	08/09/2017	Adiconado   resetDisponibilidade
+*	1.13	VA	08/09/2017	Adicionado getELabortorio
+*	1.12	PG	08/09/2017  	Adicionando removeSala e ajustando demais funções.
+*	1.11	MC   	08/09/2017  	Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
+*	1.10	PG	07/09/2017  	Inicialização de variaveis, correção de bugs
+*	1.01	PG   	07/09/2017  	Adição do teste de reservaSala + ajustes no código geral
+*       1.00	MC   	05/09/2017  	Criação do arquivo básico de testes
+*$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
-*  $EIU Interface com o usuário pessoa
+*$EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo sala:
 *
-*     =criarSala        - chama a função SAL_criarSala( )
-*	  =reservaSala		- chama a função SAL_reservaSala( )
-*
-*>>>>>>>>>>>>>TERMINAR DOCUMENTAÇÃO<<<<<<<<<<<<<<<<<<<<
+*	"=criarSala"		-chama a função SAL_criarSala(pSala, codigo, maxAlunos, eLaboratorio)
+*	"=reservaSala"		-chama a função SAL_reservaSala (pSala, dia, horaInicio, horaFim)
+*	"=printSala"		-chama a função SAL_printSala (pSala)
+*	"=getCodigo"		-chama a função SAL_getCodigo(pSala, pcodigo)
+*	"=liberaSala"		-chama a função SAL_liberaSala (pSala, dia, horaInicio, horaFim)
+*	"=printDisponibilidade" -chama a função SAL_printDisponibilidade(SpSala)
+*	"=removeSala"		-chama a função SAL_removeSala (pSala)
+*	"=setMaxAlunos"		-chama a função SAL_setMaxAlunos (pSala, pMaxAlunos);
+*	"=setCodigo"		-chama a função SAL_setCodigo(pSala, pCodigo)
+*	"=setELaboratorio"	-chama a função SAL_setELaboratorio (pSala, eLaboratorio)
+*	"=getMaxAlunos"		-chama a função SAL_getMaxAlunos (pSala, pMaxAlunos)
+*	"=getAndar"		-chama a função SAL_getAndar (pSala, pAndar)
+*	"=getPredio"		-chama a função SAL_getPredio (pSala, pPredio)
+*	"=getNumero"		-chama a função SAL_getNumero (pSala, pNumero)
+*	"=getELaboratorio"	-chama a função SAL_getELaboratorio (pSala, pELaboratorio)
+*	"=resetDisponibilidade"	-chama a função SAL_resetDisponibilidade (pSala)
+*	"=getHorarioNoDia"	-chama a função SAL_getHorarioNoDia(pSala, dia, horarioInicio, horarioFim)
 *
 ***************************************************************************/
 
