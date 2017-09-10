@@ -42,8 +42,8 @@
 #define tamCodigoSala 6
 #define ajusteHora 7
 #define salaReservada 1
+#define salaLiberada 0
 #define salaLivre 0
-#define reservaFalhou 0
 #define inicioDiaLetivo 7
 #define fimDiaLetivo 23
 #define inicioSemanaLetiva 0
@@ -69,22 +69,13 @@ typedef enum {
   SAL_CondRetParamInvalido = 4 ,
     /* Erro no parametro recebido em funcao set */
 
-  SAL_CondRetReservada = 5 ,
+  SAL_CondRetErroAoReservar = 5 ,
 	  /* Enviada quando uma sala ja esta reservada */
 
-  SAL_CondRetErroAoLiberarSala = 6 
+  SAL_CondRetErroAoLiberar = 6 
     /* Erro ao tentar liberar sala */
 
 } SAL_tpCondRet ;
-
-typedef enum {
-	SEGUNDA,
-	TERCA,
-	QUARTA,
-	QUINTA,
-	SEXTA,
-	SABADO
-} diasSemana;
 
 
 /***********************************************************************
@@ -112,7 +103,8 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala ** pSala, char *codigo, int maxAlunos, in
 *$ED Descrição da função
 *	Remove uma sala, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
-*	SAL_CondRetOK                                                    
+*	SAL_CondRetOK 
+* SAL_CondRetRecebeuPonteiroNulo                                                   
 *$EP Parametros
 *$P	psala: Ponteiro para tipo estruturado sala.
 *$.***********************************************************************/
@@ -276,7 +268,7 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 *$FV Valor retornado
 *	SAL_CondRetOK
 *	SAL_CondRetRecebeuPonteiroNulo
-*	SAL_CondRetReservada
+*	SAL_CondRetErroAoReservar
 *	SAL_CondRetParamInvalido
 *$EP Parametros
 *$P	pSala: ponteiro para tipo estruturado sala.
@@ -294,7 +286,7 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
 *$FV Valor retornado
 *	SAL_CondRetOK
 *	SAL_CondRetRecebeuPonteiroNulo
-* SAL_CondRetErroAoLiberarSala
+* SAL_CondRetErroAoLiberar
 *$EP Parametros
 *$P	pSala: ponteiro para tipo estruturado sala.
 *$.***********************************************************************/
@@ -338,7 +330,7 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala);
 *	selecionado estiver disponível, 0 se não estiver.
 *$.***********************************************************************/
 
-SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim);
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, int dia, int horarioInicio, int horarioFim);
 
 #undef SALA_EXT
 

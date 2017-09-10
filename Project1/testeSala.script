@@ -7,11 +7,11 @@
 
 == Declarar as condicoes de retorno
 =declararparm  OK               int 0
-=declararparm  FaltaMemoria	int 1
-=declararparm  PonteiroNulo	int 2
+=declararparm  FaltaMemoria		int 1
+=declararparm  PonteiroNulo		int 2
 =declararparm  ErroEstrutura	int 3
 =declararparm  ParamInvalido	int 4
-=declararparm  RetReservada	int 5
+=declararparm  ErroAoReservar	int 5
 =declararparm  ErroAoLiberar    int 6
 
 
@@ -53,7 +53,7 @@
 ==Verifica getCodigo Sala 1
 =getCodigo 0 codigo1 OK
 
-==Verifica getCodigo da Sala 1
+==Verifica getCodigo Sala 1
 =getCodigo 0 codigo2 OK
 =recuperar
 
@@ -61,15 +61,46 @@
 ==Verifica getCodigo Sala 2
 =getCodigo 1 codigo2 OK
 
-==Verifica GetCodigo da Sala 2
+==Verifica GetCodigo Sala 2
 =getCodigo 1 codigo1 OK
 =recuperar
 
 == Verifica reserva Sala 1
-=reservaSala 0 4 9 10 0
+=reservaSala 0 0 8 12 OK
+=reservaSala 0 1 5 8 OK
+=recuperar
+=reservaSala 0 2 21 24 OK
+=recuperar
+=reservaSala 0 3 7 23 OK
+=reservaSala 0 4 16 18 OK
+=reservaSala 0 5 13 11 OK
+=recuperar
+=reservaSala 0 6 13 15 OK
+=recuperar
+
+== Verifica libera Sala 1
+=liberaSala 0 0 9 11 OK
+=liberaSala 0 1 7 9 OK
+=recuperar
+=liberaSala 0 2 19 23 OK
+=recuperar
+=liberaSala 0 3 7 23 OK
+=liberaSala 0 4 15 19 OK
+=recuperar
+=liberaSala 0 5 11 13 OK
+=recuperar
+=liberaSala 0 6 1 2 OK
+=recuperar
 
 == Verifica reserva Sala 2
-=reservaSala 1 1 13 15 0
+=reservaSala 1 3 13 19 OK
+=reservaSala 1 5 8 16 OK
+
+== Verifica libera Sala 2
+=liberaSala 1 1 15 17 OK
+=recuperar
+=liberaSala 1 5 15 15 OK
+=recuperar
 
 
 ==Verifica setMaxAlunos Sala 1
@@ -163,8 +194,22 @@
 =resetDisponibilidade 1 ErroAoLiberar
 =recuperar
 
+== Verifica remove Sala 1
+=removeSala 0 OK
+
 == Verifica remove Sala 2
 =removeSala 1 OK
+
+== Verifica remove Sala 3
+=removeSala 2 OK
+
+== Verifica remove Sala 4
+=removeSala 3 OK
+
+== Verifica remove Sala 20
+=removeSala 19 OK
+=recuperar
+
 
 
 // fim

@@ -40,6 +40,7 @@
 #define     CRIAR_SAL_CMD       "=criarSala"
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
+#define     LIBERA_SAL_CMD    	"=liberaSala"
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
 #define		SET_CODIGO_CMD		"=setCodigo"
@@ -127,7 +128,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
          } /* fim ativa: Testar SAL Criar sala */
 
-		/* Teste SAL Criar sala */
+		/* Teste SAL Remove sala */
 		 else if ( strcmp( ComandoTeste, REMOVE_SALA_CMD) == 0)
 		 {
 			 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
@@ -141,7 +142,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
 			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover sala.");
 		}
-	   /* fim ativa: Testar SAL setMaxAlunos */
+	   /* fim ativa: Testar SAL Remove Sala */
 	   
       /* Testar SAL get codigo */
 
@@ -171,7 +172,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
          } 
 	  /* fim ativa: Testar SAL getCodigo */
 
-      /* Testar SAL reserva sala */		
+      /* Testar SAL reservaSala */		
 		 else if( strcmp( ComandoTeste , RESERVA_SAL_CMD ) == 0 ) 
 		 {
 			  NumLidos = LER_LerParametros( "iiiii" ,
@@ -188,7 +189,26 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
                                     "Retorno errado ao reservar sala." );
 
 		 }
-		/* fim ativa: Testar SAL reserva sala */	
+		/* fim ativa: Testar SAL reservaSala */	
+
+ 		/* Testar SAL liberaSala */		
+		 else if( strcmp( ComandoTeste , LIBERA_SAL_CMD ) == 0 ) 
+		 {
+			  NumLidos = LER_LerParametros( "iiiii" ,
+                                 &index, &dia, &horaInicio, &horaFim, &CondRetEsperada);
+
+			   if ( NumLidos != 5 )
+				{
+				 return TST_CondRetParm ;
+				} 
+
+			  CondRetObtido = SAL_liberaSala(pSalas[index], dia, horaInicio, horaFim);    
+
+			  return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao liberar sala." );
+
+		 }
+		/* fim ativa: Testar SAL liberaSala */
 
 		/* Testar SAL setMaximoAlunos */		
 		else if( strcmp( ComandoTeste , SET_MAX_ALUNOS_CMD ) == 0 ) 

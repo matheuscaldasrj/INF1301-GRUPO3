@@ -132,7 +132,10 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
  
 SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala)
 {
-	if (pSala != NULL)
+	if (pSala == NULL)
+		return SAL_CondRetRecebeuPonteiroNulo; 
+
+	else
 	{
 		free(pSala);
 		pSala = NULL;
@@ -393,24 +396,25 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar)
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
 {	
-	int hora = horaInicio - ajusteHora;
+	int hora;
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva)
+	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo
+	 || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva || horaInicio >= horaFim ) 
 		return  SAL_CondRetParamInvalido;
 	
-	for(hora; hora < horaFim - ajusteHora; hora++)
+	for(hora = horaInicio - ajusteHora; hora < horaFim - ajusteHora; hora++)
 	{
 		if (pSala->disponibilidade[hora][dia] != salaLivre && pSala->disponibilidade[hora][dia] != salaReservada)
-				return SAL_CondRetErroEstrutura;
+			return SAL_CondRetErroEstrutura;
 		if(pSala->disponibilidade[hora][dia] == salaReservada)
 		{
-			return SAL_CondRetReservada;
+			return SAL_CondRetErroAoReservar;
 		}
 	}
 
-	for(hora = horaInicio -ajusteHora; hora < horaFim -ajusteHora; hora++)
+	for(hora = horaInicio - ajusteHora; hora < horaFim - ajusteHora; hora++)
 	{
 		pSala->disponibilidade [hora][dia] = salaReservada;
 	}
@@ -423,27 +427,28 @@ SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int 
  *                                                                        *
  * Funcao: SAL_Libera a Sala                                              *
  **************************************************************************/
-SAL_tpCondRet SAL_liberaSala (SAL_tpSala * pSala, int dia, int HoraInicio, int HoraFim)
+SAL_tpCondRet SAL_liberaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim)
 {
-	int hora = horaInicio - ajusteHora;
-  if (pSala == NULL)
-  	return SAL_CondRetRecebeuPonteiroNulo;
+	int hora;
+  	if (pSala == NULL)
+  		return SAL_CondRetRecebeuPonteiroNulo;
   
-	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva) 
+	if( horaInicio < inicioDiaLetivo || horaInicio >= fimDiaLetivo || horaFim <= inicioDiaLetivo
+	 || horaFim > fimDiaLetivo || dia <inicioSemanaLetiva || dia > fimSemanaLetiva || horaInicio >= horaFim ) 
 		return  SAL_CondRetParamInvalido;
 		
 	
-	for(hora; hora < horaFim - ajusteHora; hora++)
+	for(hora = horaInicio - ajusteHora; hora < horaFim - ajusteHora; hora++)
 	{
 		if (pSala->disponibilidade[hora][dia] != salaLivre && pSala->disponibilidade[hora][dia] != salaReservada)
-				return SAL_CondRetErroEstrutura;
-		if(disponibilidade[hora][dia] == salaLivre)
+			return SAL_CondRetErroEstrutura;
+		if(pSala->disponibilidade[hora][dia] == salaLivre)
 		{
-			return tpCondRet_ErroAoLIberarSala;
+			return SAL_CondRetErroAoLiberar;
 		}
 	}
 	
-	for(hora = horaInicio -ajusteHora; hora < horaFim -ajusteHora; hora++)
+	for(hora = horaInicio - ajusteHora; hora < horaFim - ajusteHora; hora++)
 	{
 		pSala->disponibilidade [hora][dia] = salaLiberada;
 	}
@@ -466,7 +471,7 @@ SAL_tpCondRet SAL_resetDisponibilidade (SAL_tpSala * pSala){
 		for (j = 0; j < DIAS ; j++){
 			pSala->disponibilidade[i][j] = salaLivre;
 			if (pSala->disponibilidade[i][j] != salaLivre)
-				return SAL_CondRetErroAoLiberarSala;
+				return SAL_CondRetErroAoLiberar;
 		}
 	}
 
@@ -509,14 +514,14 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
  * Funcao: Sal get horario da sala em determinado dia                      *
  **************************************************************************/
 
-SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horarioInicio, int horarioFim){
+SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, int dia, int horarioInicio, int horarioFim){
 	int i;
 
 	if (pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo;
 
-	horarioInicio -= 7;
-	horarioFim -= 7;
+	horarioInicio -= ajusteHora;
+	horarioFim -= ajusteHora;
 
 	if (horarioInicio >= horarioFim) {
 		return SAL_CondRetParamInvalido;
@@ -532,7 +537,7 @@ SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, diasSemana dia, int horari
 
 	for (i = horarioInicio; i < horarioFim; i++) {
 		if (pSala->disponibilidade[dia][i] != salaLivre) {
-			return SAL_CondRetReservada;
+			return SAL_CondRetErroAoReservar;
 		}
 	}
 
