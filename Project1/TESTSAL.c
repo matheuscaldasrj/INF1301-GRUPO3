@@ -38,6 +38,7 @@
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define     CRIAR_SAL_CMD       "=criarSala"
+#define     PRINT_SAL_CMD		"=printSala"
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
 #define     LIBERA_SAL_CMD    	"=liberaSala"
@@ -128,7 +129,24 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
          } /* fim ativa: Testar SAL Criar sala */
 
-		/* Teste SAL Remove sala */
+	/* Teste SAL print sala */
+
+		 else if ( strcmp( ComandoTeste, PRINT_SAL_CMD) == 0)
+		 {
+			 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
+
+			if( NumLidos != 2 )
+			{
+				 return TST_CondRetParm;
+			 }
+
+			 CondRetObtido = SAL_printSala(pSalas[index]);
+
+			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao imprimir sala.");
+		}
+	   /* fim ativa: Testar SAL print Sala */
+
+	/* Teste SAL Remove sala */
 		 else if ( strcmp( ComandoTeste, REMOVE_SALA_CMD) == 0)
 		 {
 			 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);

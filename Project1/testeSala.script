@@ -34,6 +34,10 @@
 =declararparm maxAlunos4	int 100
 =declararparm eLab4	        int 0
 
+=declararparm codigo5	    string "L1111"
+=declararparm maxAlunos5	int 32
+=declararparm eLab5         int 1
+
 
 
 
@@ -49,6 +53,49 @@
 == Verifica criar Sala 4
 =criarSala 3 codigo4 maxAlunos4 eLab4 OK
 
+== Verifica criar Sala 5
+=criarSala 4 codigo5 maxAlunos5 eLab5 OK
+
+== Verifica criar Sala 6 (codigo fora do parametro, mas programa nao reconhece esse erro)
+=criarSala 5 "OI213" 10 0 ParamInvalido
+
+== Verifica criar Sala 7 (maxAlunos < 0, programa reconheceu)
+=criarSala 6 "K3214" -3 1 ParamInvalido
+
+== Verifica criar Sala 8 (eLab diferente de 0 e 1, programa reconheceu)
+=criarSala 7 "I214" 30 7 ParamInvalido
+
+
+
+
+== Verifica imprimir Sala 1
+=printSala 0 OK
+
+== Verifica imprimir Sala 2
+=printSala 1 OK
+
+== Verifica imprimir Sala 3
+=printSala 2 OK
+
+== Verifica imprimir Sala 4
+=printSala 3 OK
+
+== Verifica imprimir Sala 5
+=printSala 4 OK
+
+== Verifica imprimir Sala 6 (não deveria ter criado)
+=printSala 5 PonteiroNulo
+
+== Verifica imprimir Sala 7 (não deveria ter criado)
+=printSala 6 PonteiroNulo
+
+== Verifica imprimir Sala 8 (não deveria ter criado)
+=printSala 7 PonteiroNulo
+
+== Verifica imprimir Sala 30
+=printSala 29 OK
+=recuperar
+
 
 ==Verifica getCodigo Sala 1
 =getCodigo 0 codigo1 OK
@@ -61,9 +108,12 @@
 ==Verifica getCodigo Sala 2
 =getCodigo 1 codigo2 OK
 
-==Verifica GetCodigo Sala 2
+==Verifica getCodigo Sala 2
 =getCodigo 1 codigo1 OK
 =recuperar
+
+==Verifica getCodigo Sala 5
+=getCodigo 4 codigo5 OK
 
 == Verifica reserva Sala 1
 =reservaSala 0 0 8 12 OK
@@ -133,6 +183,9 @@
 ==Verifica getAndar Sala 3
 =getAndar 2 7 OK
 
+==Verifica getAndar Sala 5
+=getAndar 4 11 OK
+
 ==Verifica getPredio Sala 1
 =getPredio 0 "Leme" OK
 
@@ -164,6 +217,9 @@
 
 ==Verifica getNumero Sala 4
 =getNumero 3 224 OK
+
+==Verifica getNumero Sala 5
+=getNumero 4 1111 OK
 
 ==Verifica setCodigo Sala 1
 =setCodigo 0 "F222" OK
@@ -206,7 +262,20 @@
 == Verifica remove Sala 4
 =removeSala 3 OK
 
-== Verifica remove Sala 20
+== Verifica remove Sala 5
+=removeSala 4 OK
+
+== Verifica remove Sala 6 (não deveria ter criado)
+=removeSala 5 PonteiroNulo
+
+== Verifica remove Sala 7 (não deveria ter criado)
+=removeSala 6 PonteiroNulo
+
+== Verifica remove Sala 8 (não deveria ter criado)
+=removeSala 7 PonteiroNulo
+
+
+== Verifica remove Sala 20 (que não existe)
 =removeSala 19 OK
 =recuperar
 
