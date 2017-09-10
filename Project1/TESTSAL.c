@@ -59,6 +59,7 @@
 #define		GET_NUMERO_CMD		"=getNumero"
 #define		GET_E_LAB_CMD		"=getELaboratorio"
 #define		RESET_DISP_CMD		"=resetDisponibilidade"
+#define		GET_HORARIO_CMD		"=getHorarioNoDia"
 
 
 
@@ -451,6 +452,23 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 
 		}
 		/* fim ativa: Testar SAL resetDisponibilidade */
+
+		/* Testar SAL getHorarioNoDia */
+		else if (strcmp(ComandoTeste, GET_HORARIO_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("iiiii", &index, &dia, &horaInicio, &horaFim, &CondRetEsperada);
+
+			if (NumLidos != 5)
+			{
+				return TST_CondRetParm;
+			}
+
+			CondRetObtido = SAL_getHorarioNoDia(pSalas[index], dia, horaInicio, horaFim);
+
+			return TST_CompararInt(CondRetEsperada, CondRetObtido, "Conteudo errado ao verificar o horario no dia.");
+		}
+		/* fim ativa: Testar SAL getHorarioNoDia */
+
       return TST_CondRetNaoConhec ;
 
 

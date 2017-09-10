@@ -21,7 +21,7 @@
  *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
  *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
  *		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
- *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
+ *		1.2.7	      pg		05/09/2017   Agjustes menores de codumentação.
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
  *      1.2.9         pg        07/09/2017   Adicionando removeSala
  *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala.Implementacao funcoes imprimeSala e imprimeMatriz
@@ -99,7 +99,7 @@ struct SAL_tagSala  {
 
 /**************************************************************************
  *                                                                        *
- * Funcao: SAL Criar sala                                                 *                                                                 *
+ * Funcao: SAL Criar sala                                                 *
  **************************************************************************/
 
 SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,

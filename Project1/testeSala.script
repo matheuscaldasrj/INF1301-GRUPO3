@@ -140,6 +140,20 @@
 =reservaSala 0 5 11 17 OK
 =reservaSala 0 5 20 23 OK
 
+== Verifica getHorarioNoDia Sala 1
+=getHorarioNoDia 0 4 16 18 ErroAoReservar
+=getHorarioNoDia 0 4 12 14 OK
+=getHorarioNoDia 0 2 11 11 ParamInvalido
+=getHorarioNoDia 0 3 9 8 ParamInvalido
+=getHorarioNoDia 0 4 16 18 OK
+=recuperar
+=getHorarioNoDia 0 4 12 14 ParamInvalido
+=recuperar
+=getHorarioNoDia 0 2 11 11 ErroAoReservar
+=recuperar
+=getHorarioNoDia 0 3 9 8 OK
+=recuperar
+
 
 == Verifica imprimir matriz disponibilidade Sala 1 (antes da libera)
 =printDisponibilidade 0 OK
