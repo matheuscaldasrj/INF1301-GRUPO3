@@ -29,6 +29,8 @@
 *     =criarSala        - chama a função SAL_criarSala( )
 *	  =reservaSala		- chama a função SAL_reservaSala( )
 *
+*>>>>>>>>>>>>>TERMINAR DOCUMENTAÇÃO<<<<<<<<<<<<<<<<<<<<
+*
 ***************************************************************************/
 
 #include    <string.h>
