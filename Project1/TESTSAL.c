@@ -3,7 +3,12 @@
 *
 *  Arquivo gerado:              TESTSAL.C
 *  Letras identificadoras:      TSAL
-*
+*  Autores: mc - Matheus Caldas
+*	     bp - Bruno Pedrazza
+*	     pg - Pedro Gomes
+*	     va - Vinícius Arcoverde
+*	     lf - Leon França
+*	     gc - Gabriel Costa
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
 *      Versão  Autor    Data     Observações
