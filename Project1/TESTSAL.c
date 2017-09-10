@@ -45,11 +45,11 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_SAL_CMD       "=criarSala"
-#define     PRINT_SAL_CMD		"=printSala"
-#define     GET_COD_CMD         "=getCodigo"
+#define    	CRIAR_SAL_CMD       	"=criarSala"
+#define     	PRINT_SAL_CMD		"=printSala"
+#define    	GET_COD_CMD         	"=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
-#define     LIBERA_SAL_CMD    	"=liberaSala"
+#define    	LIBERA_SAL_CMD    	"=liberaSala"
 #define		PRINT_DISP_CMD		"=printDisponibilidade"
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
@@ -95,29 +95,28 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
       SAL_tpCondRet CondRetEsperada = SAL_CondRetFaltouMemoria ;
                                       /* inicializa para qualquer coisa */
 
-      char ValorEsperado = '?'  ;
-      char ValorObtido   = '!'  ;
-	  int ValorObtidoInt = -1;
-	  char ValorObtidoString[MAX_SIZE_STRING];
-      char ValorDado     = '\0' ;
+      	char ValorEsperado = '?'  ;
+	char ValorObtido   = '!'  ;
+	int ValorObtidoInt = -1;
+	char ValorObtidoString[MAX_SIZE_STRING];
+      	char ValorDado     = '\0' ;
+	  
+      	int  NumLidos = -1 ;
+	
+	char codigo[MAX_SIZE_STRING];
+      	int maximoAlunos;
+      	int eLaboratorio;
+	int index;
+	int dia;
+	int horaInicio;
+	int horaFim;
+	int andar;
+	char predio[MAX_SIZE_STRING];
+	int numeroDaSala;
+	int eLab;
 	  
 
-      int  NumLidos = -1 ;
-
-	  char codigo[MAX_SIZE_STRING];
-      int maximoAlunos;
-      int eLaboratorio;
-	  int index;
-	  int dia;
-	  int horaInicio;
-	  int horaFim;
-	  int andar;
-	  char predio[MAX_SIZE_STRING];
-	  int numeroDaSala;
-	  int eLab;
-	  
-
-      TST_tpCondRet Ret ;
+      	TST_tpCondRet Ret ;
 
       /* Teste SAL Criar sala */
 
