@@ -12,13 +12,13 @@
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
-=declararparm  OK               int 0
+=declararparm  OK             int 0
 =declararparm  FaltaMemoria		int 1
 =declararparm  PonteiroNulo		int 2
 =declararparm  ErroEstrutura	int 3
 =declararparm  ParamInvalido	int 4
 =declararparm  ErroAoReservar	int 5
-=declararparm  ErroAoLiberar    int 6
+=declararparm  ErroAoLiberar  int 6
 
 
 
@@ -26,23 +26,23 @@
 == Declarar os conteudos das Salas
 =declararparm codigo1	    string "L123"
 =declararparm maxAlunos1	int 45
-=declararparm eLab1	        int 1
+=declararparm eLab1	      int 1
 
 =declararparm codigo2	    string "K332"
 =declararparm maxAlunos2	int 20
-=declararparm eLab2	        int 0
+=declararparm eLab2	      int 0
 
 =declararparm codigo3	    string "F776"
 =declararparm maxAlunos3	int 65
-=declararparm eLab3	        int 1
+=declararparm eLab3	      int 1
 
 =declararparm codigo4	    string "I224"
 =declararparm maxAlunos4	int 100
-=declararparm eLab4	        int 0
+=declararparm eLab4	      int 0
 
 =declararparm codigo5	    string "L1111"
 =declararparm maxAlunos5	int 32
-=declararparm eLab5         int 1
+=declararparm eLab5       int 1
 
 
 
