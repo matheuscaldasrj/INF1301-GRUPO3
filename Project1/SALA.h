@@ -106,10 +106,10 @@ SAL_tpCondRet SAL_criarSala(SAL_tpSala ** pSala, char *codigo, int maxAlunos, in
 *	SAL_CondRetOK 
 * SAL_CondRetRecebeuPonteiroNulo                                                   
 *$EP Parametros
-*$P	psala: Ponteiro para tipo estruturado sala.
+*$P	psala: Endereço do ponteiro para tipo estruturado sala.
 *$.***********************************************************************/
 
-SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala);
+SAL_tpCondRet SAL_removeSala (SAL_tpSala ** pSala);
 
 /***********************************************************************
 *$FC Função: SAL_printSala

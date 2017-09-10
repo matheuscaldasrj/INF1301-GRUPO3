@@ -113,13 +113,13 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
     	return SAL_CondRetFaltouMemoria ;
     
 	retorno = SAL_setCodigo(*pSala,codigo);
-	if (retorno != SAL_CondRetOK) return retorno;
+	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
 	retorno = SAL_setMaxAlunos(*pSala,maxAlunos);
-	if (retorno != SAL_CondRetOK) return retorno;
+	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
 	retorno = SAL_setELaboratorio(*pSala,eLaboratorio);
-	if (retorno != SAL_CondRetOK) return retorno;
+	if (retorno != SAL_CondRetOK){SAL_removeSala(pSala); return retorno;}
 	retorno = SAL_resetDisponibilidade(*pSala);
-	if (retorno != SAL_CondRetOK) return retorno;
+	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
 
     return SAL_CondRetOK ;
 } 
@@ -131,15 +131,15 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
  * Funcao: SAL remove sala                                            	  *
  **************************************************************************/
  
-SAL_tpCondRet SAL_removeSala (SAL_tpSala * pSala)
+SAL_tpCondRet SAL_removeSala (SAL_tpSala ** pSala)
 {
-	if (pSala == NULL)
+	if (*pSala == NULL)
 		return SAL_CondRetRecebeuPonteiroNulo; 
 
 	else
 	{
-		free(pSala);
-		pSala = NULL;
+		free(*pSala);
+		*pSala = NULL;
 	}
 	return SAL_CondRetOK ;
 }

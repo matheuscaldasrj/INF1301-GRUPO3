@@ -158,7 +158,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 				 return TST_CondRetParm;
 			 }
 
-			 CondRetObtido = SAL_removeSala(pSalas[index]);
+			 CondRetObtido = SAL_removeSala(&pSalas[index]);
 
 			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover sala.");
 		}
