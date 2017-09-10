@@ -4,21 +4,23 @@
 
 /****************************************************************
 *$AD Módulo de definição
-*	Nome: SALA.h
+*	Arquivo: SALA.h
 *	Proprietário: Grupo 3 INF1301 17.2
 *	Projeto: Trabalho 1
-*	Gestor: Prof. Flavio
-*	Arquivo: SALA.h
+*	Gestor:  DI/PUC-Rio
+*	Letras Identificadoras: SAL
 *	Autores: mc - Matheus Caldas
-*	     bp - Bruno Pedrazza
-*	     pg - Pedro Gomes
-*	     va - Vinícius Arcoverde
-*	     lf - Leon França
-*	     gc - Gabriel Costa
+*		 bp - Bruno Pedrazza
+*	         pg - Pedro Gomes
+*	         va - Vinícius Arcoverde
+*	         lf - Leon França
+*	         gc - Gabriel Costa
 *
 *$ED Descricao do modulo
 *     Este módulo implementa um conjunto de funcoes para criar e manipular
 *     atributos do módulo Sala.
+*
+*
 *
 *$HA Alterações:
 *       Versao       Autor         Data            Observacoes
