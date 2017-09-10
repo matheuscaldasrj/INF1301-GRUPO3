@@ -108,6 +108,7 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
 							 int eLaboratorio)
 { /*NAO CRIAR SALA SE RECEBER PARAMETROS INVALIDOS!!!*/
 	SAL_tpCondRet retorno;
+	SAL_tpCondRet retornoDaRemove;
 
 	*pSala = NULL;
     *pSala = ( SAL_tpSala * ) malloc( sizeof( SAL_tpSala )) ;
@@ -116,13 +117,13 @@ SAL_tpCondRet SAL_criarSala (SAL_tpSala ** pSala,
     	return SAL_CondRetFaltouMemoria ;
     
 	retorno = SAL_setCodigo(*pSala,codigo);
-	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
+	if (retorno != SAL_CondRetOK) {retornoDaRemove = SAL_removeSala(pSala); if( retornoDaRemove != SAL_CondRetOK) return retornoDaRemove; return retorno;}
 	retorno = SAL_setMaxAlunos(*pSala,maxAlunos);
-	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
+	if (retorno != SAL_CondRetOK){retornoDaRemove = SAL_removeSala(pSala); if( retornoDaRemove != SAL_CondRetOK) return retornoDaRemove; return retorno;}
 	retorno = SAL_setELaboratorio(*pSala,eLaboratorio);
-	if (retorno != SAL_CondRetOK){SAL_removeSala(pSala); return retorno;}
+	if (retorno != SAL_CondRetOK){retornoDaRemove = SAL_removeSala(pSala); if( retornoDaRemove != SAL_CondRetOK) return retornoDaRemove; return retorno;}
 	retorno = SAL_resetDisponibilidade(*pSala);
-	if (retorno != SAL_CondRetOK) {SAL_removeSala(pSala); return retorno;}
+	if (retorno != SAL_CondRetOK){retornoDaRemove = SAL_removeSala(pSala); if( retornoDaRemove != SAL_CondRetOK) return retornoDaRemove; return retorno;}
 
     return SAL_CondRetOK ;
 } 
