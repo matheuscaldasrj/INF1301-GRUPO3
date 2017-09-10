@@ -11,15 +11,15 @@
 *	     gc - Gabriel Costa
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  DI/PUC-Rio
-*      Versão  Autor    Data     Observações
-*       1.00   MC   05/09/2017  Criação do arquivo básico de testes
-*		1.01   PG   07/09/2017  Adição do teste de reservaSala + ajustes no código geral
-*		1.10   PG	07/09/2017  Inicialização de variaveis, correção de bugs
-*		1.11   MC   08/09/2017  Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
-*		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
-*		1.13   VA	08/09/2017	Adicionado getELabortorio
-*		1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
-*		1.15   MC	10/09/2017	Corrigindo bug do tamanho da variavel codigo
+*      Versão  Autor    Data     	Observações
+*	1.15   MC	10/09/2017	Corrigindo bug do tamanho da variavel codigo
+*	1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
+*	1.13   VA	08/09/2017	Adicionado getELabortorio
+*	1.12   PG	08/09/2017  	Adicionando removeSala e ajustando demais funções.
+*	1.11   MC   	08/09/2017  	Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
+*	1.10   PG	07/09/2017  	Inicialização de variaveis, correção de bugs
+*	1.01   PG   	07/09/2017  	Adição do teste de reservaSala + ajustes no código geral
+*       1.00   MC   	05/09/2017  	Criação do arquivo básico de testes
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
