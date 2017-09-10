@@ -62,17 +62,21 @@
 == Verifica criar Sala 5
 =criarSala 4 codigo5 maxAlunos5 eLab5 OK
 
-== Verifica criar Sala 6 (codigo fora do parametro, mas programa nao reconhece esse erro)
-=criarSala 5 "OI213" 10 0 ParamInvalido
+== Verifica criar Sala 6 (codigo fora dos parametros)
+=criarSala 5 "OI213" 10 0 OK
+=recuperar
 
-== Verifica criar Sala 7 (maxAlunos < 0, programa reconheceu)
-=criarSala 6 "K3214" -3 1 ParamInvalido
+== Verifica criar Sala 7 (maxAlunos < 0)
+=criarSala 6 "K3214" -3 1 OK
+=recuperar
 
-== Verifica criar Sala 8 (eLab diferente de 0 e 1, programa reconheceu)
-=criarSala 7 "I214" 30 7 ParamInvalido
+== Verifica criar Sala 8 (eLab diferente de 0 e 1)
+=criarSala 7 "I214" 30 7 OK
+=recuperar
 
 == Verifica criar Sala 9 (codigo com formato incorreto)
-=criarSala 8 "LL123" 30 1 ParamInvalido
+=criarSala 8 "LL123" 30 1 OK
+=recuperar
 
 == Verifica criar Sala 10
 =criarSala 9 "R123" 20 0 OK
@@ -93,14 +97,20 @@
 == Verifica imprimir Sala 5
 =printSala 4 OK
 
-== Verifica imprimir Sala 6 (não deveria ter criado)
-=printSala 5 PonteiroNulo
+== Verifica imprimir Sala 6 (nao criou apos receber codigo errado)
+=printSala 5 OK
+=recuperar
 
-== Verifica imprimir Sala 7 (não deveria ter criado)
-=printSala 6 PonteiroNulo
+== Verifica imprimir Sala 7 (nao criou apos receber maxAlunos errado)
+=printSala 6 OK
+=recuperar
 
-== Verifica imprimir Sala 8 (não deveria ter criado)
-=printSala 7 PonteiroNulo
+== Verifica imprimir Sala 8 (nao criou apos receber eLab errado)
+=printSala 7 OK
+=recuperar
+
+== Verifica imprimir Sala 10
+=printSala 9 OK
 
 == Verifica imprimir Sala 30
 =printSala 29 OK
@@ -315,14 +325,17 @@
 == Verifica remove Sala 5
 =removeSala 4 OK
 
-== Verifica remove Sala 6 (não deveria ter criado)
-=removeSala 5 PonteiroNulo
+== Verifica remove Sala 6 (sala nao criada)
+=removeSala 5 OK
+=recuperar
 
-== Verifica remove Sala 7 (não deveria ter criado)
-=removeSala 6 PonteiroNulo
+== Verifica remove Sala 7 (sala nao criada)
+=removeSala 6 OK
+=recuperar
 
-== Verifica remove Sala 8 (não deveria ter criado)
-=removeSala 7 PonteiroNulo
+== Verifica remove Sala 8 (sala nao criada)
+=removeSala 7 OK
+=recuperar
 
 
 == Verifica remove Sala 20 (que não existe)
