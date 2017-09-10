@@ -431,7 +431,7 @@ SAL_tpCondRet SAL_getHorarioNoDia(SAL_tpSala * pSala, int dia, int horaInicio, i
 		return SAL_CondRetParamInvalido;
 	}
 
-	if (dia < inicioDiaLetivo || dia > fimDiaLetivo) {
+	if (dia < inicioSemanaLetiva || dia > fimSemanaLetiva) {
 		return SAL_CondRetParamInvalido;
 	}
 
