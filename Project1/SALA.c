@@ -12,20 +12,21 @@
  *	     gc - Gabriel Costa
  *  $HA Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
- *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
- *	    1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
- *	    1.2.0	      pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
- *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
- *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
- *		1.2.3	      bp		03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
- *		1.2.4         pg		04/09/2017	 Ajustando reservaSala e incluindo novos defines
- *		1.2.5	      bp		04/09/2017   Implementacao resetDisponibilidade, adicao de sábados e novos defines
- *		1.2.6	      pg		04/09/2017   Ajustando reservaSala com nova condRet
- *		1.2.7	      pg		05/09/2017   Ajustes menores de codumentação.
- *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
- *      1.2.9         pg        07/09/2017   Adicionando removeSala
- *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala.Implementacao funcoes imprimeSala e imprimeMatriz
- *		1.15		  mc	    10/09/2017	 Corrigindo caso de erro na setCodigo
+ *	1.3.1	      mc	10/09/2017	 Corrigindo caso de erro na setCodigo
+ *	1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala.
+ *							Implementacao funcoes imprimeSala e imprimeMatriz
+ *      1.2.9         pg        07/09/2017  	 Adicionando removeSala
+ *	1.2.8	      mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
+ *	1.2.7	      pg	05/09/2017  	 Ajustes menores de codumentação.
+ *	1.2.6	      pg	04/09/2017   	 Ajustando reservaSala com nova condRet
+ *	1.2.5	      bp	04/09/2017   	 Implementacao resetDisponibilidade, adicao de sábados e novos defines
+ *	1.2.4         pg	04/09/2017	 Ajustando reservaSala e incluindo novos defines
+ *	1.2.3	      bp	03/09/2017	 Implementacao funcoes getELaboratorio e setELaboratorio
+ *      1.2.2         mc        02/09/2017   	 Implementacao funcoes setQtdComputadores e getQtdComputadores
+ *      1.2.1         bp        02/09/2017  	 Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
+ *	1.2.0	      pg        31/08/2017  	 Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *	1.1.0         bp        31/08/2017   	 Implementacao funcoes getNumero, getPredio, getAndar
+ *      1.0.0         mc        30/08/2017  	 Inicio do desenvolvimento
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
