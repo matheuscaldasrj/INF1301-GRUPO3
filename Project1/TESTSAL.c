@@ -13,7 +13,8 @@
 *		1.11   MC   08/09/2017  Adicionada funcao de testes p/ setCodigo, getCodigo,setMaxAlunos, getMaxAlunos, getAndar,getPredio,getAndar, setELaboratorio
 *		1.12   PG	08/09/2017  Adicionando removeSala e ajustando demais funções.
 *		1.13   VA	08/09/2017	Adicionado getELabortorio
-		1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
+*		1.14   VA	08/09/2017	Adiconado   resetDisponibilidade
+*		1.15   MC	10/09/2017	Corrigindo bug do tamanho da variavel codigo
 *  $ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Sala.
@@ -74,10 +75,10 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
-#define MAX_SALS 4
+#define MAX_SALS 8
 #define MAX_SIZE_STRING 15
 
-SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
+SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -95,7 +96,7 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
       int  NumLidos = -1 ;
 
-	  char codigo[tamCodigoSala];
+	  char codigo[MAX_SIZE_STRING];
       int maximoAlunos;
       int eLaboratorio;
 	  int index;

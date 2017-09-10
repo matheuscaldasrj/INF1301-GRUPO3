@@ -238,6 +238,21 @@
 ==Verifica setCodigo Sala 3
 =setCodigo 2 "F965" OK
 
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F9999" OK
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F99999" OK
+=recuperar
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "H123" OK
+=recuperar
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "H123123" OK
+=recuperar
+
 == Verifica getElaboratorio Sala 1
 =getELaboratorio 0 eLab1 OK
 

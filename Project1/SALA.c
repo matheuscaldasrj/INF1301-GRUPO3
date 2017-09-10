@@ -22,6 +22,7 @@
  *		1.2.8		  mc        07/09/2017	 Implementação básica da criaSala, agora recebendo os parametros.
  *      1.2.9         pg        07/09/2017   Adicionando removeSala
  *		1.3.0         bp        07/09/2017	 Ajeitando ponteiros e consicoes de retorno de criarSala e removeSala.Implementacao funcoes imprimeSala e imprimeMatriz
+ *		1.15		  mc	    10/09/2017	 Corrigindo caso de erro na setCodigo
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
@@ -199,10 +200,15 @@ SAL_tpCondRet SAL_setCodigo (SAL_tpSala * pSala, char *codigo)
 		return SAL_CondRetRecebeuPonteiroNulo;
 	}
 
-	/*if (codigo[0] != 'L' || codigo[0] != 'K' || codigo[0] != 'F' || codigo[0] != 'I')
-		return SAL_CondRetParamInvalido;  corrompendo o codigo (SABER PQ!!) */ 
-	if (codigo == NULL || strlen(codigo) > tamCodigoSala)
+	if (codigo == NULL || strlen(codigo) >= tamCodigoSala){
 		return SAL_CondRetParamInvalido;
+	}
+
+	if (codigo[0] != 'L' && codigo[0] != 'K' && codigo[0] != 'F' && codigo[0] != 'I')
+	{
+		return SAL_CondRetParamInvalido;
+	}
+	
 
 	strcpy(pSala->codigo, codigo);
 
