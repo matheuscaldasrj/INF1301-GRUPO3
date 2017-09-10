@@ -301,6 +301,10 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
+
+/*documentação liberaSala*/
+SAL_tpCondRet SAL_liberaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
+
 /***********************************************************************
 *$FC Função: SAL_resetDisponibilidade
 *$ED Descrição da função
