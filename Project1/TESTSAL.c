@@ -42,6 +42,7 @@
 #define     GET_COD_CMD         "=getCodigo"
 #define		RESERVA_SAL_CMD		"=reservaSala"
 #define     LIBERA_SAL_CMD    	"=liberaSala"
+#define		PRINT_DISP_CMD		"=printDisponibilidade"
 #define		REMOVE_SALA_CMD		"=removeSala"
 #define		SET_MAX_ALUNOS_CMD	"=setMaxAlunos"
 #define		SET_CODIGO_CMD		"=setCodigo"
@@ -227,6 +228,23 @@ SAL_tpSala  *pSalas[MAX_SALS] = {NULL, NULL, NULL, NULL};
 
 		 }
 		/* fim ativa: Testar SAL liberaSala */
+
+		/* Teste SAL print disponibilidade */
+
+		 else if ( strcmp( ComandoTeste, PRINT_DISP_CMD) == 0)
+		 {
+			 NumLidos = LER_LerParametros("ii", &index, &CondRetEsperada);
+
+			if( NumLidos != 2 )
+			{
+				 return TST_CondRetParm;
+			 }
+
+			 CondRetObtido = SAL_printDisponibilidade(pSalas[index]);
+
+			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao imprimir matriz disponibilidade.");
+		}
+	    /* fim ativa: Testar SAL print Disponibilidade */
 
 		/* Testar SAL setMaximoAlunos */		
 		else if( strcmp( ComandoTeste , SET_MAX_ALUNOS_CMD ) == 0 ) 

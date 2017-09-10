@@ -494,11 +494,11 @@ SAL_tpCondRet SAL_printDisponibilidade(SAL_tpSala * pSala) {
 	int i, j;
 	if (pSala == NULL) 
 		return SAL_CondRetRecebeuPonteiroNulo;
-	printf("\n\tSegunda\tTerca\tQuarta\tQuinta\tSexta\tSabado\n");
+	printf("\n\n\tSegunda\tTerca\tQuarta\tQuinta\tSexta\tSabado\n");
 	for (i = 0 ; i < HORARIOS ; i++){
 		printf("%d-%d\t",i+7,i+8);
 		for (j = 0 ; j < DIAS ; j++){
-			if (pSala->disponibilidade[i][j] != salaLivre || pSala->disponibilidade[i][j] != salaReservada)
+			if (pSala->disponibilidade[i][j] != salaLivre && pSala->disponibilidade[i][j] != salaReservada)
 				return SAL_CondRetErroEstrutura;
 			if (pSala->disponibilidade[i][j] == salaReservada)
 				printf("XXXXXX\t");

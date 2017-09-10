@@ -128,6 +128,11 @@
 =reservaSala 0 6 13 15 OK
 =recuperar
 
+
+== Verifica imprimir matriz disponibilidade Sala 1 (antes da libera)
+=printDisponibilidade 0 OK
+
+
 == Verifica libera Sala 1
 =liberaSala 0 0 9 11 OK
 =liberaSala 0 1 7 9 OK
@@ -141,6 +146,11 @@
 =recuperar
 =liberaSala 0 6 1 2 OK
 =recuperar
+
+
+== Verifica imprimir matriz disponibilidade Sala 1 (depois da libera)
+=printDisponibilidade 0 OK
+
 
 == Verifica reserva Sala 2
 =reservaSala 1 3 13 19 OK
