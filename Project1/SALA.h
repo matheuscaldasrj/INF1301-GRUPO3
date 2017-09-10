@@ -55,7 +55,10 @@
 
 /***** Declarações exportadas pelo módulo *****/
 
-/*explicitar o que é */
+/*Tipo estruturado tpSala é constituido por quatro (4) tipos de dados diferentes, criados para identificação, categorização
+e manipulação dos horários das salas de aula do curso de informática da PUC-Rio, são eles o Código da sala (exs: L222, F765, K1001), 
+a Capacidade Máxima de alunos da mesma (exs: 42, 25, 34), um parametro categorizador entre salas laboratórios e não laboratórios
+e por fim uma matriz de disponibilidade que indica em que dia e horário a sala está sendo ultilizada ou não por uma turma de alunos*/
 typedef struct SAL_tagSala SAL_tpSala;
 
 /***********************************************************************
