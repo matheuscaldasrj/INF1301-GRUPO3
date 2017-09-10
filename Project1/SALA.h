@@ -302,7 +302,23 @@ SAL_tpCondRet SAL_getAndar (SAL_tpSala * pSala, int *andar);
 SAL_tpCondRet SAL_reservaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
 
-/*documentação liberaSala*/
+/***********************************************************************
+*$FC Função: SAL_liberaSala
+*$ED Descrição da função
+*	Libera a sala em um determinado dia em um determinado intervalo de tempo.
+*
+*$FV Valor retornado
+*	SAL_CondRetOK
+*	SAL_CondRetRecebeuPonteiroNulo
+*	SAL_CondRetErroAoLiberar
+*	SAL_CondRetParamInvalido
+*$EP Parametros
+*$P	pSala: ponteiro para tipo estruturado sala.
+*$P	dia
+*$P	horaInicio: início do intervalo de tempo a ser liberado da aula na sala.
+*$P	horaFim: fim do intervalo de tempo a ser liberado da aula na sala.
+*$.***********************************************************************/
+
 SAL_tpCondRet SAL_liberaSala (SAL_tpSala * pSala, int dia, int horaInicio, int horaFim);
 
 /***********************************************************************
