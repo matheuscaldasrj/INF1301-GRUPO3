@@ -7,6 +7,9 @@
  *  Autores: mc - Matheus Caldas
  *	     bp - Bruno Pedrazza
  *	     pg - Pedro Gomes
+ *	     va - Vinícius Arcoverde
+ *	     lf - Leon França
+ *	     gc - Gabriel Costa
  *  $HA Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
  *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
