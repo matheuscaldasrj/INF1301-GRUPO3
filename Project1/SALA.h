@@ -15,17 +15,17 @@
  *	     gc - Gabriel Costa
  *  Historico de evolucao:
  *     Versao       Autor          Data            Observacoes
- *      1.0.0         mc        30/08/2017   Inicio do desenvolvimento
- *      1.1.0         bp        31/08/2017   Implementacao funcoes getNumero, getPredio, getAndar
- *      1.2.0         pg        31/08/2017   Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
- *      1.2.1         bp        02/09/2017   Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
- *      1.2.2         mc        02/09/2017   Implementacao funcoes setQtdComputadores e getQtdComputadores
- *      1.2.3         bp        03/09/2017   Implementacao funcoes getELaboratorio e setELaboratorio
- *      1.2.4	      pg        04/09/2017	 Implementação de SAL_CondRetReservada
- *      1.2.6		  gp		05/09/2017	 Implementação de SAL
- *		1.2.7		  mc        07/09/2017	 Mudança na estrutura básica da criaSala, agora recebendo os parametros.
- *	    1.2.9	      pg	    07/09/2017	 Adicionando removeSala, Corrigindo parametros reservaSala 
- *	    1.3.0	      mc	    10/09/2017	 Remove sala agora usa ponteiro de ponteiro 
+ *	1.3.0	      mc	10/09/2017	Remove sala agora usa ponteiro de ponteiro
+ *	1.2.7	      pg	07/09/2017	Adicionando removeSala, Corrigindo parametros reservaSala
+ *	1.2.6	      mc        07/09/2017	Mudança na estrutura básica da criaSala, agora recebendo os parametros.
+ *      1.2.5	      gp	05/09/2017	Implementação de SAL
+ *      1.2.4	      pg        04/09/2017	Implementação de SAL_CondRetReservada
+ *      1.2.3         bp        03/09/2017   	Implementacao funcoes getELaboratorio e setELaboratorio
+ *      1.2.2         mc        02/09/2017   	Implementacao funcoes setQtdComputadores e getQtdComputadores
+ *      1.2.1         bp        02/09/2017   	Mudanca nas condicoes de retorno funcoes getNumero, getPredio, getAndar, setCodigo
+ *      1.2.0         pg        31/08/2017   	Implementacao das funcoes setaCodigo, setaMaxAlunos, reservaSala
+ *      1.1.0         bp        31/08/2017   	Implementacao funcoes getNumero, getPredio, getAndar
+ *      1.0.0         mc        30/08/2017   	Inicio do desenvolvimento
  *  Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Sala.
