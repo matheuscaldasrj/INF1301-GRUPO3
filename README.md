@@ -2,8 +2,8 @@
 
 ### Members
 
-[Bruno Pedrazza](https://github.com/brunopedrazza),
-[Gabriel Costa]
+[Bruno Pedrazza](https://github.com/brunopedrazza)
+[Gabriel Costa](https://github.com/ogabrielp)
 [Leon França](https://github.com/FMleon1805),
 [Matheus Caldas](https://github.com/matheuscaldasrj),
 [Vinicius Arcoverde]

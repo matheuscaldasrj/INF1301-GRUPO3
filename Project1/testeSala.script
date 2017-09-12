@@ -1,0 +1,347 @@
+//Script:     TesteSala.script
+// Autor:     Grupo 3 - Modular 17.2
+// Data:      05/09/2017
+// Proposito: Testar as funcoes do modulo Sala
+//			  Para garantir seu correto funcionamento
+//
+//  Autores: mc - Matheus Caldas
+//	     bp - Bruno Pedrazza
+//	     pg - Pedro Gomes
+//	     va - Vinícius Arcoverde
+//	     lf - Leon França
+//	     gc - Gabriel Costa
+
+== Declarar as condicoes de retorno
+=declararparm  OK             int 0
+=declararparm  FaltaMemoria		int 1
+=declararparm  PonteiroNulo		int 2
+=declararparm  ErroEstrutura	int 3
+=declararparm  ParamInvalido	int 4
+=declararparm  ErroAoReservar	int 5
+=declararparm  ErroAoLiberar  int 6
+
+
+
+
+== Declarar os conteudos das Salas
+=declararparm codigo1	    string "L123"
+=declararparm maxAlunos1	int 45
+=declararparm eLab1	      int 1
+
+=declararparm codigo2	    string "K332"
+=declararparm maxAlunos2	int 20
+=declararparm eLab2	      int 0
+
+=declararparm codigo3	    string "F776"
+=declararparm maxAlunos3	int 65
+=declararparm eLab3	      int 1
+
+=declararparm codigo4	    string "I224"
+=declararparm maxAlunos4	int 100
+=declararparm eLab4	      int 0
+
+=declararparm codigo5	    string "L1111"
+=declararparm maxAlunos5	int 32
+=declararparm eLab5       int 1
+
+
+
+
+== Verifica criar Sala 1
+=criarSala 0 codigo1 maxAlunos1 eLab1 OK
+
+== Verifica criar Sala 2
+=criarSala 1 codigo2 maxAlunos2 eLab2 OK
+
+== Verifica criar Sala 3
+=criarSala 2 codigo3 maxAlunos3 eLab3 OK
+
+== Verifica criar Sala 4
+=criarSala 3 codigo4 maxAlunos4 eLab4 OK
+
+== Verifica criar Sala 5
+=criarSala 4 codigo5 maxAlunos5 eLab5 OK
+
+== Verifica criar Sala 6 (codigo fora dos parametros)
+=criarSala 5 "OI213" 10 0 OK
+=recuperar
+
+== Verifica criar Sala 7 (maxAlunos < 0)
+=criarSala 6 "K3214" -3 1 OK
+=recuperar
+
+== Verifica criar Sala 8 (eLab diferente de 0 e 1)
+=criarSala 7 "I214" 30 7 OK
+=recuperar
+
+== Verifica criar Sala 9 (codigo com formato incorreto)
+=criarSala 8 "LL123" 30 1 OK
+=recuperar
+
+== Verifica criar Sala 10
+=criarSala 9 "R123" 20 0 OK
+
+
+== Verifica imprimir Sala 1
+=printSala 0 OK
+
+== Verifica imprimir Sala 2
+=printSala 1 OK
+
+== Verifica imprimir Sala 3
+=printSala 2 OK
+
+== Verifica imprimir Sala 4
+=printSala 3 OK
+
+== Verifica imprimir Sala 5
+=printSala 4 OK
+
+== Verifica imprimir Sala 6 (nao criou apos receber codigo errado)
+=printSala 5 OK
+=recuperar
+
+== Verifica imprimir Sala 7 (nao criou apos receber maxAlunos errado)
+=printSala 6 OK
+=recuperar
+
+== Verifica imprimir Sala 8 (nao criou apos receber eLab errado)
+=printSala 7 OK
+=recuperar
+
+== Verifica imprimir Sala 10
+=printSala 9 OK
+
+== Verifica imprimir Sala 30
+=printSala 29 OK
+=recuperar
+
+
+==Verifica getCodigo Sala 1
+=getCodigo 0 codigo1 OK
+
+==Verifica getCodigo Sala 1
+=getCodigo 0 codigo2 OK
+=recuperar
+
+
+==Verifica getCodigo Sala 2
+=getCodigo 1 codigo2 OK
+
+==Verifica getCodigo Sala 2
+=getCodigo 1 codigo1 OK
+=recuperar
+
+==Verifica getCodigo Sala 5
+=getCodigo 4 codigo5 OK
+
+== Verifica reserva Sala 1
+=reservaSala 0 0 8 12 OK
+=reservaSala 0 1 5 8 OK
+=recuperar
+=reservaSala 0 2 21 24 OK
+=recuperar
+=reservaSala 0 3 7 23 OK
+=reservaSala 0 4 16 18 OK
+=reservaSala 0 5 13 11 OK
+=recuperar
+=reservaSala 0 6 13 15 OK
+=recuperar
+=reservaSala 0 5 11 17 OK
+=reservaSala 0 5 20 23 OK
+
+== Verifica getHorarioNoDia Sala 1
+=getHorarioNoDia 0 4 16 18 ErroAoReservar
+=getHorarioNoDia 0 4 12 14 OK
+=getHorarioNoDia 0 2 11 11 ParamInvalido
+=getHorarioNoDia 0 3 9 8 ParamInvalido
+=getHorarioNoDia 0 4 16 18 OK
+=recuperar
+=getHorarioNoDia 0 4 12 14 ParamInvalido
+=recuperar
+=getHorarioNoDia 0 2 11 11 ErroAoReservar
+=recuperar
+=getHorarioNoDia 0 3 9 8 OK
+=recuperar
+
+
+== Verifica imprimir matriz disponibilidade Sala 1 (antes da libera)
+=printDisponibilidade 0 OK
+
+
+== Verifica libera Sala 1
+=liberaSala 0 0 9 11 OK
+=liberaSala 0 1 7 9 OK
+=recuperar
+=liberaSala 0 2 19 23 OK
+=recuperar
+=liberaSala 0 3 7 23 OK
+=liberaSala 0 4 15 19 OK
+=recuperar
+=liberaSala 0 6 1 2 OK
+=recuperar
+=liberaSala 0 5 14 16 OK
+
+
+== Verifica imprimir matriz disponibilidade Sala 1 (depois da libera)
+=printDisponibilidade 0 OK
+
+
+== Verifica reserva Sala 2
+=reservaSala 1 3 13 19 OK
+=reservaSala 1 5 8 16 OK
+
+== Verifica libera Sala 2
+=liberaSala 1 1 15 17 OK
+=recuperar
+=liberaSala 1 5 15 15 OK
+=recuperar
+
+
+==Verifica setMaxAlunos Sala 1
+=setMaxAlunos 0 maxAlunos3 OK
+
+==Verifica getMaxAlunos Sala 1
+=getMaxAlunos 0 maxAlunos1 OK
+=recuperar
+
+==Verifica getMaxAlunos Sala 1
+=getMaxAlunos 0 maxAlunos3 OK
+
+==Verifica getMaxAlunos Sala 2
+=getMaxAlunos 1 maxAlunos2 OK
+
+==Verifica getAndar Sala 1
+=getAndar 0 1 OK
+
+==Verifica getAndar Sala 1
+=getAndar 0 3 OK
+=recuperar
+
+==Verifica getAndar Sala 1
+=getAndar 0 4 OK
+=recuperar
+
+==Verifica getAndar Sala 2
+=getAndar 1 3 OK
+
+==Verifica getAndar Sala 3
+=getAndar 2 7 OK
+
+==Verifica getAndar Sala 5
+=getAndar 4 11 OK
+
+==Verifica getPredio Sala 1
+=getPredio 0 "Leme" OK
+
+==Verifica getPredio Sala 2
+=getPredio 1 "Leme" OK
+=recuperar
+
+==Verifica getPredio Sala 2
+=getPredio 1 "Kennedy" OK
+
+==Verifica getPredio Sala 3
+=getPredio 2 "Frings" OK
+
+==Verifica getPredio Sala 4
+=getPredio 3 "IAG" OK
+
+==Verifica getNumero Sala 1
+=getNumero 0 123 OK
+
+==Verifica getNumero Sala 2
+=getNumero 1 332 OK
+
+==Verifica getNumero Sala 3
+=getNumero 2 776 OK
+
+==Verifica getNumero Sala 3
+=getNumero 2 123 OK
+=recuperar
+
+==Verifica getNumero Sala 4
+=getNumero 3 224 OK
+
+==Verifica getNumero Sala 5
+=getNumero 4 1111 OK
+
+==Verifica setCodigo Sala 1
+=setCodigo 0 "F222" OK
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F965" OK
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F9999" OK
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "F99999" OK
+=recuperar
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "H123" OK
+=recuperar
+
+==Verifica setCodigo Sala 3
+=setCodigo 2 "H123123" OK
+=recuperar
+
+== Verifica getElaboratorio Sala 1
+=getELaboratorio 0 eLab1 OK
+
+== Verifica getElaboratorio Sala 1
+=getELaboratorio 0 eLab2 OK
+=recuperar
+
+==Verifica setELaboratorio Sala 2
+=setELaboratorio 1 0 OK
+
+==Verifica setELaboratorio Sala 4
+=setELaboratorio 3 1 OK
+
+== Verifica resetDisponibilidade Sala 1
+=resetDisponibilidade 0 OK
+
+== Verifica resetDisponibilidade Sala 4
+=resetDisponibilidade 3 OK
+
+==Verifica resetDisponibilidade Sala 2
+=resetDisponibilidade 1 ErroAoLiberar
+=recuperar
+
+== Verifica remove Sala 1
+=removeSala 0 OK
+
+== Verifica remove Sala 2
+=removeSala 1 OK
+
+== Verifica remove Sala 3
+=removeSala 2 OK
+
+== Verifica remove Sala 4
+=removeSala 3 OK
+
+== Verifica remove Sala 5
+=removeSala 4 OK
+
+== Verifica remove Sala 6 (sala nao criada)
+=removeSala 5 OK
+=recuperar
+
+== Verifica remove Sala 7 (sala nao criada)
+=removeSala 6 OK
+=recuperar
+
+== Verifica remove Sala 8 (sala nao criada)
+=removeSala 7 OK
+=recuperar
+
+
+== Verifica remove Sala 20 (que não existe)
+=removeSala 19 OK
+=recuperar
+
+
+
+// fim
