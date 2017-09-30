@@ -70,7 +70,7 @@ HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
 HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
 {
 	if (*pHistorico == NULL)
-		return HIST_CondRetRecebeuPonteiroNulo; 
+		return HIS_CondRetRecebeuPonteiroNulo; 
 
 	else
 	{
