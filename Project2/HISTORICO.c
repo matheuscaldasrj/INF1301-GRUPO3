@@ -54,7 +54,7 @@ struct HIS_tagHistorico  {
  * Funcao: HIS Criar Historico                                                 *
  **************************************************************************/
 
-HIS_tpCondRet SAL_criarHistorico (HIS_tpHistorico ** pHistorico)
+HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
 {
 	//TODO
     return HIS_CondRetOK ;
@@ -67,7 +67,7 @@ HIS_tpCondRet SAL_criarHistorico (HIS_tpHistorico ** pHistorico)
  * Funcao: HIS remove removeHistorico                                            	  *
  **************************************************************************/
  
-SAL_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
+HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
 {
 	if (*pHistorico == NULL)
 		return HIST_CondRetRecebeuPonteiroNulo; 
