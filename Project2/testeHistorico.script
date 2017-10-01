@@ -1,0 +1,18 @@
+//Script:     TesteHistorico.script
+// Autor:     Grupo 3 - Modular 17.2
+// Data:      01/10/2017
+// Proposito: Testar as funcoes do modulo Historico
+//			  Para garantir seu correto funcionamento
+//
+//  Autores: mc - Matheus Caldas
+//	     bp - Bruno Pedrazza
+//	     pg - Pedro Gomes
+//	     va - Vinícius Arcoverde
+//	     lf - Leon França
+//	     gc - Gabriel Costa
+
+== Declarar as condicoes de retorno
+=declararparm  OK             int 0
+=declararparm  FaltaMemoria   int 1
+=declararparm  PonteiroNulo   int 2
+=declararparm  ParamInvalido  int 3
