@@ -43,6 +43,8 @@
  ***********************************************************************/
 
 struct HIS_tagHistorico  {   
+	//TODO
+	int x;
 	//Lista<DisplinaCursadas>;
 };
 

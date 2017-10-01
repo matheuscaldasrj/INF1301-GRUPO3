@@ -1,7 +1,6 @@
 #if ! defined( DISCIPLINACURSADA_ )
 #define DISCIPLINACURSADA_
 
-
 /****************************************************************
 *$AD Módulo de definição
 *	Arquivo: DISCIPLINACURSADA.h

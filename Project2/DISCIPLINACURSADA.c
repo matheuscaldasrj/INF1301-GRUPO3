@@ -26,6 +26,7 @@
 #include  <stdio.h>
 #include  <string.h>
 #include  <malloc.h>
+#include "disciplina.h"
 
 /* Inclusão do respectivo módulo de definição */
 #define DISCIPLINACURSADA_OWN
@@ -34,7 +35,7 @@
 
 
 /* Inclusao dos modulos dependentes */
-#include <disciplina.h>
+
 
 /***********************************************************************
  *
@@ -47,9 +48,9 @@
 
 struct DIC_tagDisciplinaCursada  {   
 
-	Disciplina disciplina;
+	Disciplina *disciplina;
 	int situacao;
-	char[7] periodo;
+	char periodo[7];
 	int grau;	
 };
 
@@ -74,7 +75,7 @@ DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplina
  * Funcao: DIC remove removeDisciplinaCursada                                            	  *
  **************************************************************************/
  
-SAL_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada)
+DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada)
 {
 	if (*pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo; 
