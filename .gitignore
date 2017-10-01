@@ -3,3 +3,9 @@ Project1/.vs/Project1/v14/.suo
 Project1/Project1.sln
 Project1/Project1.VC.VC.opendb
 Project1/Project1.VC.db
+*.lib
+Project1/TST_ESPC.H
+Project1/LERPARM.H
+Project1/GENERICO.H
+*.c
+Project2/listas.c

@@ -250,8 +250,9 @@ LIS_tpCondRet get_val_cursor(List* l, void** val)
 *  ****/
 LIS_tpCondRet list_size(List* l, unsigned int size)
 {
+	Node* Tnode;
 	size = 0;
-	Node* Tnode = l->first;
+	Tnode = l->first;
 	if(l->first == NULL)
 		return LIS_CondRetListaVazia;
 	while(Tnode != l->last)
