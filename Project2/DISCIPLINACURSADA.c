@@ -27,11 +27,14 @@
 #include  <string.h>
 #include  <malloc.h>
 
-
 /* Inclusão do respectivo módulo de definição */
 #define DISCIPLINACURSADA_OWN
 #include "DISCIPLINACURSADA.H"
 #undef DISCIPLINACURSADA_OWN
+
+
+/* Inclusao dos modulos dependentes */
+#include <disciplina.h>
 
 /***********************************************************************
  *
@@ -44,7 +47,7 @@
 
 struct DIC_tagDisciplinaCursada  {   
 
-	Displina disciplina;
+	Disciplina disciplina;
 	int situacao;
 	char[7] periodo;
 	int grau;	
