@@ -26,6 +26,7 @@
 #include  <stdio.h>
 #include  <string.h>
 #include  <malloc.h>
+#include "listas.h"
 
 
 /* Inclusão do respectivo módulo de definição */
@@ -44,7 +45,7 @@
 
 struct HIS_tagHistorico  {   
 	//TODO
-	int x;
+	List *disciplinasCursadas;
 	//Lista<DisplinaCursadas>;
 };
 
@@ -58,7 +59,24 @@ struct HIS_tagHistorico  {
 
 HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
 {
-	//TODO
+	List ** discplinasCursadas;
+	LIS_tpCondRet retCriacao;
+
+	*pHistorico = NULL;
+    *pHistorico = ( HIS_tpHistorico * ) malloc( sizeof( HIS_tpHistorico )) ;
+
+	retCriacao = createList(discplinasCursadas);
+
+	if(retCriacao  != LIS_CondRetOK){
+		return HIS_CondRetProblemaListaDisciplinas;
+	};
+
+    
+    if( *pHistorico == NULL ){
+		return HIS_CondRetFaltouMemoria ;
+		}
+
+
     return HIS_CondRetOK ;
 } 
 /* Fim funcao: HIS Criar Historico */

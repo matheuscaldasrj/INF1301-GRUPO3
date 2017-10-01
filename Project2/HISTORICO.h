@@ -61,6 +61,8 @@ typedef enum {
 
   HIS_CondRetParamInvalido = 3 ,
     /* Erro no parametro recebido em funcao set */
+  HIS_CondRetProblemaListaDisciplinas = 4 ,
+    /* Erro na criacao/manipulacao da lista de disciplinas */ 
 
 
 } HIS_tpCondRet ;
