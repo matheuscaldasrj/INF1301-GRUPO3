@@ -7,5 +7,8 @@ Project1/Project1.VC.db
 Project1/TST_ESPC.H
 Project1/LERPARM.H
 Project1/GENERICO.H
+Project2/TST_ESPC.H
+Project2/LERPARM.H
+Project2/GENERICO.H
 *.c
 Project2/listas.c
