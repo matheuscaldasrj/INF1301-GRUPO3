@@ -51,7 +51,7 @@ struct DIC_tagDisciplinaCursada  {
 	Disciplina *disciplina;
 	int situacao;
 	char periodo[7];
-	int grau;	
+	float grau;	
 };
 
 
