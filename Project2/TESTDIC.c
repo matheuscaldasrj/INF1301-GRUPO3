@@ -142,14 +142,14 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issiisfi", &indexD, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos, &situacao, &periodo, &grau, &CondRetEsperada);
+		 NumLidos = LER_LerParametros( "issiisfi", &indexDC, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos, &situacao, &periodo, &grau, &CondRetEsperada);
 
 		 if ( NumLidos != 8)
 		 {
 			 return TST_CondRetParm;
 		 } /* if */
 
-		 CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[index], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, situacao, periodo, grau);
+		 CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, situacao, periodo, grau);
 
 		 return TST_CompararInt ( CondRetEsperada, CondRetObtido, "Retorno errado ao criar sala.");
 
@@ -159,7 +159,7 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 
 		else if ( strcmp ( ComandoTeste, REMOVE_DIC_CMD ) == 0)
 		{
-			NumLidos = LER_LerParametros("ii", &indexDCm CondRetEsperada);
+			NumLidos = LER_LerParametros("ii", &indexDC, CondRetEsperada);
 
 			if( NumLidos != 2)
 			{
