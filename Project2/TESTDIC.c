@@ -151,7 +151,7 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 
 		 CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, situacao, periodo, grau);
 
-		 return TST_CompararInt ( CondRetEsperada, CondRetObtido, "Retorno errado ao criar sala.");
+		 return TST_CompararInt ( CondRetEsperada, CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
 
 	/* fim ativa: Teste DIC Criar Disciplina Cursada*/
 		 
