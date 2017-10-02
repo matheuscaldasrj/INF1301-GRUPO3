@@ -59,22 +59,21 @@ struct HIS_tagHistorico  {
 
 HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
 {
-	List ** discplinasCursadas;
 	LIS_tpCondRet retCriacao;
 
 	*pHistorico = NULL;
     *pHistorico = ( HIS_tpHistorico * ) malloc( sizeof( HIS_tpHistorico )) ;
 
-	retCriacao = createList(discplinasCursadas);
-
-	if(retCriacao  != LIS_CondRetOK){
-		return HIS_CondRetProblemaListaDisciplinas;
-	};
-
-    
     if( *pHistorico == NULL ){
 		return HIS_CondRetFaltouMemoria ;
 		}
+		
+	retCriacao = createList(&((*pHistorico)->disciplinasCursadas));
+
+
+	if(retCriacao  != LIS_CondRetOK){
+		return HIS_CondRetProblemaListaDisciplinas;
+	}
 
 
     return HIS_CondRetOK ;
