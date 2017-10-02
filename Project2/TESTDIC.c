@@ -15,7 +15,7 @@
 *$HA Alterações:
 *      Versão  Autor    Data     	Observações
 *	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
-*	1.1		PG		02/10/2017		Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada
+*	1.1	PG	02/10/2017	Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -50,7 +50,7 @@
 
 
 #define    	CRIAR_DIC_CMD       	"=criarDIC"
-#define		REMOVA_DIC_CMD			"=removeDIC"
+#define		REMOVA_DIC_CMD		"=removeDIC"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -79,9 +79,9 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
  {
 	 /* Disciplina */
 
-	  DIS_tpCondRet CondRetObtido  ;
-      DIS_tpCondRet CondRetEsperada  ;
-                                      /* inicializa para qualquer coisa */
+	DIS_tpCondRet CondRetObtido  ;
+	DIS_tpCondRet CondRetEsperada  ;
+        		/* inicializa para qualquer coisa */
 
 
 
@@ -94,10 +94,10 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 
       int  NumLidos = -1 ;
       char *ValorObtido1;
-	  char *ValorEsperado1;
+      char *ValorEsperado1;
       int ValorEsperado33;
-	  int ValorObtido33;
-	  int indexD;
+      int ValorObtido33;
+      int indexD;
 
 	 /* Disciplina Cursada*/
 
