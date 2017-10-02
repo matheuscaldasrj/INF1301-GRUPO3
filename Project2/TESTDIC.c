@@ -15,7 +15,7 @@
 *$HA Alterações:
 *      Versão  Autor    Data     	Observações
 *	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
-*	1.1	PG	02/10/2017	Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada
+*	1.1	PG	02/10/2017	Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -153,7 +153,26 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 
 		 return TST_CompararInt ( CondRetEsperada, CondRetObtido, "Retorno errado ao criar sala.");
 
-		 /* fim ativa: Teste DIC Criar Disciplina Cursada*/
+	/* fim ativa: Teste DIC Criar Disciplina Cursada*/
+		 
+	/*Teste DIC Remove Disciplina Cursada*/
+
+		else if ( strcmp ( ComandoTeste, REMOVE_DIC_CMD ) == 0)
+		{
+			NumLidos = LER_LerParametros("ii", &indexDCm CondRetEsperada);
+
+			if( NumLidos != 2)
+			{
+				return TST_CondRetParm;
+			}
+
+			CondRetObtido = DIC_removeDisciplinaCursada(&pDisciplinaCursada[indexDC]);
+
+			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover Disciplina Cursada.");
+
+		}
+
+		 /*fim ativa: Teste DIC Remove Disciplina Cursada */
 
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
