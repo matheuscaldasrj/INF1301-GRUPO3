@@ -14,6 +14,8 @@
  *  $HA DisciplinaCursada de evolucao:
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       30/09/17			Criacao inicial do modulo
+ *	1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
+												set situacao, grau e periodo.
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo DisciplinaCursada.
@@ -62,9 +64,17 @@ struct DIC_tagDisciplinaCursada  {
  * Funcao: DIC Criar DisciplinaCursada                                                 *
  **************************************************************************/
 
-DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada)
+DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, int situacao, char* periodo, float grau)
 {
-	//TODO
+	*pDisciplinaCursada = NULL;
+	*pDisciplinaCursada = ( DIC_tpDisciplinaCursada * ) malloc( sizeof( DIC_tpDisciplinaCursada )) ;
+	if (*pDisciplinaCursada == NULL)
+		return DIC_CondRetFaltouMemoria;
+
+	DIC_setGrau(*pDisciplinaCursada, grau);
+	DIC_setGrau(*pDisciplinaCursada, *periodo);
+	DIC_setSituacao(*pDisciplinaCursada, situacao);
+
     return DIC_CondRetOK ;
 } 
 /* Fim funcao: DIC Criar DisciplinaCursada */
@@ -79,7 +89,6 @@ DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplin
 {
 	if (*pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo; 
-
 	else
 	{
 		free(*pDisciplinaCursada);
@@ -87,8 +96,90 @@ DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplin
 	}
 	return DIC_CondRetOK ;
 }
+
  /* Fim funcao: DIC remove DisciplinaCursada */
 
+/**************************************************************************
+ *                                                                        *
+ * Funcao: DIC set grau da disciplina cursada                                                *
+ **************************************************************************/
+
+DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, Disciplina *disciplina)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+
+    return DIC_CondRetOK ;
+} 
+/* Fim funcao: DIC set grau da disciplina cursada */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: DIC set grau da disciplina cursada                                                *
+ **************************************************************************/
+
+DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+	
+	if (grau > 10 || grau < 0)		
+		return DIC_CondRetParamInvalido;
+
+	pDisciplinaCursada->grau = grau;
+
+    return DIC_CondRetOK ;
+} 
+/* Fim funcao: DIC set grau da disciplina cursada */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: DIC set periodo da disciplina cursada                                                *
+ **************************************************************************/
+
+DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* periodo)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+	
+	if (periodo == NULL || strlen(periodo) >= 7)
+		return DIC_CondRetParamInvalido;
+	
+	strcpy(pDisciplinaCursada->periodo, periodo);
+
+    return DIC_CondRetOK ;
+} 
+/* Fim funcao: DIC set periodo da disciplina cursada */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: DIC set situacao da disciplina cursada                                                *
+ **************************************************************************/
+
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, int situacao)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+	
+	if (situacao < 1 || situacao > 4)		
+		return DIC_CondRetParamInvalido;
+
+	pDisciplinaCursada->situacao = situacao;
+
+    return DIC_CondRetOK ;
+} 
+/* Fim funcao: DIC set grau da disciplina cursada */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: DIC get grau da disciplina cursada                                                *
+ **************************************************************************/
+DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau)
+{
+
+    return DIC_CondRetOK ;
+} 
+/* Fim funcao: DIC get grau da disciplina cursada */
 
 
 /********** Fim do modulo de implementacao: Modulo DisciplinaCursada **********/

@@ -24,6 +24,8 @@
 *$HA Alterações:
 *       Versao       Autor         Data            Observacoes
 *       1.0.0         mc        30/09/2017   	Inicio do desenvolvimento
+*		1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
+												set situacao, grau e periodo.
 *
 *$.***************************************************************************/
 
@@ -80,7 +82,7 @@ typedef enum {
 *$.***********************************************************************/
 
 
-DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaCursada);
+DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaCursada, int situacao, float grau);
 
 /***********************************************************************
 *$FC Função: DIC_removeDisciplinaCursada
@@ -95,10 +97,57 @@ DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaC
 
 DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada);
 
+/***********************************************************************
+*$FC Função: DIC_setGrau
+*$ED Descrição da função
+*	define o grau da disciplina cursada fornecida
+*$FV Valor retornado
+*	DIC_CondRetOK 
+*   DIC_CondRetParamInvalido 
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+$P	grau:: grau da disciplina ser inserido
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau);
+
+/***********************************************************************
+*$FC Função: DIC_setPeriodo
+*$ED Descrição da função
+*	define o periodo da disciplina cursada fornecida
+*$FV Valor retornado
+*	DIC_CondRetOK 
+*   DIC_CondRetParamInvalido 
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+$P	periodo: periodo da disciplina a ser inserida
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char *periodo);
+
+/***********************************************************************
+*$FC Função: DIC_setGrau
+*$ED Descrição da função
+*	define o situaacao da disciplina cursada fornecida
+*$FV Valor retornado
+*	DIC_CondRetOK 
+*   DIC_CondRetParamInvalido 
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+$P	situacao: situcao na disciplina a ser inserida
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, float situcao);
+
+
 
 #undef DISCIPLINACURSADA_EXT
 
 /********** Fim do módulo de definição: Módulo DisciplinaCursada **********/
+
 
 #else
 #endif
