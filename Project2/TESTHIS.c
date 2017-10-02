@@ -14,7 +14,7 @@
 *  Gestor:  DI/PUC-Rio
 *$HA Alterações:
 *      Versão  Autor    Data     	Observações
-*	
+*	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
 *	
 *       1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
 *$ED Descrição do módulo
