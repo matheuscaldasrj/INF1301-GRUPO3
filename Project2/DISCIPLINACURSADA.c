@@ -64,14 +64,14 @@ struct DIC_tagDisciplinaCursada  {
  * Funcao: DIC Criar DisciplinaCursada                                                 *
  **************************************************************************/
 
-DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, char *situacao, char* periodo, float grau)
+DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, Disciplina *disciplina, char *situacao, char* periodo, float grau)
 {
 	*pDisciplinaCursada = NULL;
 	*pDisciplinaCursada = ( DIC_tpDisciplinaCursada * ) malloc( sizeof( DIC_tpDisciplinaCursada )) ;
 	if (*pDisciplinaCursada == NULL)
 		return DIC_CondRetFaltouMemoria;
 
-
+	DIC_setDisciplina(*pDisciplinaCursada, disciplina);
 	DIC_setGrau(*pDisciplinaCursada, grau);
 	DIC_setPeriodo(*pDisciplinaCursada, periodo);
 	DIC_setSituacao(*pDisciplinaCursada, situacao);
@@ -156,6 +156,7 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 } 
 /* Fim funcao: DIC set periodo da disciplina cursada */
 
+
 /**************************************************************************
  *                                                                        *
  * Funcao: DIC set situacao da disciplina cursada                                                *
@@ -166,7 +167,9 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
-	if (situacao == NULL || strlen(situacao) > 3)		
+	if (situacao == NULL || strlen(situacao) > 3 || strcmp(situacao, "AP") != 0 || strcmp(situacao, "RN") != 0 || strcmp(situacao, "RF") != 0)		
+		return DIC_CondRetParamInvalido;
+			
 		return DIC_CondRetParamInvalido;
 
 	strcpy(pDisciplinaCursada->situacao, situacao);
@@ -177,8 +180,26 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 
 /**************************************************************************
  *                                                                        *
+ * Funcao: DIC get disicplina da disciplina cursada                                                *
+ **************************************************************************/
+
+DIC_tpCondRet DIC_getDisciplina (DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+
+	disciplina = pDisciplinaCursada->disciplina;
+
+    return DIC_CondRetOK;
+} 
+/* Fim funcao: DIC get disciplina da disciplina cursada */
+
+/**************************************************************************
+ *                                                                        *
  * Funcao: DIC get grau da disciplina cursada                                                *
  **************************************************************************/
+
+
 DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float* grau)
 {
 	if (pDisciplinaCursada == NULL)

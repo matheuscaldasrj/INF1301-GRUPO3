@@ -150,14 +150,14 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issfi", &indexDC, situacao, periodo, &grau, &DIC_CondRetEsperada);
+		 NumLidos = LER_LerParametros( "issfi", &indexDC,  &indexD,  situacao, periodo, &grau, &DIC_CondRetEsperada);
 
 		 if ( NumLidos != 8)
 		 {
 			 return TST_CondRetParm;
 		 } /* if */
 
-		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], situacao, periodo, grau);
+		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], pDisciplina[indexD],  situacao, periodo, grau);
 
 		 return TST_CompararInt ( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
 	 }

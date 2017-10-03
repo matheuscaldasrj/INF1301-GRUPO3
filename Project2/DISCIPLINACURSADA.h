@@ -83,7 +83,7 @@ typedef enum {
 *$.***********************************************************************/
 
 
-DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaCursada, char * situacao, char *periodo, float grau);
+DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaCursada, struct disciplina *disciplina, char * situacao, char *periodo, float grau);
 
 /***********************************************************************
 *$FC Função: DIC_removeDisciplinaCursada
