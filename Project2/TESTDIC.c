@@ -186,7 +186,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_setDisciplina(&pDisciplinaCursada[indexDC], &pDisciplina[indexD]);
+			//DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], &pDisciplina[indexD]);
 
 			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
 
