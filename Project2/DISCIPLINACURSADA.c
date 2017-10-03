@@ -51,7 +51,7 @@
 struct DIC_tagDisciplinaCursada  {   
 
 	Disciplina *disciplina;
-	int situacao;
+	char situacao[3];
 	char periodo[7];
 	float grau;	
 };
@@ -64,16 +64,17 @@ struct DIC_tagDisciplinaCursada  {
  * Funcao: DIC Criar DisciplinaCursada                                                 *
  **************************************************************************/
 
-DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, int situacao, char* periodo, float grau)
+DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, char *situacao, char* periodo, float grau)
 {
 	*pDisciplinaCursada = NULL;
 	*pDisciplinaCursada = ( DIC_tpDisciplinaCursada * ) malloc( sizeof( DIC_tpDisciplinaCursada )) ;
 	if (*pDisciplinaCursada == NULL)
 		return DIC_CondRetFaltouMemoria;
 
+
 	DIC_setGrau(*pDisciplinaCursada, grau);
 	DIC_setGrau(*pDisciplinaCursada, *periodo);
-	DIC_setSituacao(*pDisciplinaCursada, situacao);
+	DIC_setSituacao(*pDisciplinaCursada, *situacao);
 
     return DIC_CondRetOK ;
 } 
@@ -122,7 +123,7 @@ DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, D
  * Funcao: DIC set grau da disciplina cursada                                                *
  **************************************************************************/
 
-DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau)
+DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada *pDisciplinaCursada, float grau)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
@@ -160,7 +161,7 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
  * Funcao: DIC set situacao da disciplina cursada                                                *
  **************************************************************************/
 
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao)
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char* situacao)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
@@ -192,7 +193,7 @@ DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float* 
 *                                                                        *
 * Funcao: DIC get situacao da disciplina cursada                         *
 **************************************************************************/
-DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao)
+DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada *pDisciplinaCursada, char* situacao)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
