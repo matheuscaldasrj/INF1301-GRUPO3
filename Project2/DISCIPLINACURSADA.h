@@ -25,7 +25,8 @@
 *       Versao       Autor         Data            Observacoes
 *       1.0.0         mc        30/09/2017   	Inicio do desenvolvimento
 *		1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
-												set situacao, grau e periodo.
+*												set situacao, grau e periodo.
+*		1.0.2		  pg		03/09/2017		Adicionando DIC_setDisciplina.
 *
 *$.***************************************************************************/
 
@@ -109,6 +110,21 @@ DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplin
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 $P	grau:: grau da disciplina ser inserido
 *$.***********************************************************************/
+
+
+DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, Disciplina *disciplina);
+
+/***********************************************************************
+*
+*
+*
+//////////////////////Escrever descrição
+*
+*
+*
+
+*$.***********************************************************************/
+
 
 DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau);
 
