@@ -99,6 +99,22 @@ DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaC
 
 DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada);
 
+
+/***********************************************************************
+*$FC Função: DIC_setDisciplinaCursada
+*$ED Descrição da função
+*	Define a disciplina que foi cursada
+*$FV Valor retornado
+*	DIC_CondRetOK 
+*   DIC_CondRetParamInvalido  
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	disciplina: endereco do ponteio para tipo estruturado disciplina
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, struct disciplina *disciplina);
+
 /***********************************************************************
 *$FC Função: DIC_setGrau
 *$ED Descrição da função
@@ -111,21 +127,6 @@ DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplin
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 $P	grau:: grau da disciplina ser inserido
 *$.***********************************************************************/
-
-
-DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, struct disciplina *disciplina);
-
-/***********************************************************************
-*
-*
-*
-//////////////////////Escrever descrição
-*
-*
-*
-
-*$.***********************************************************************/
-
 
 DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau);
 
