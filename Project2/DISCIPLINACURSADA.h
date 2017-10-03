@@ -125,22 +125,51 @@ DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float g
 $P	periodo: periodo da disciplina a ser inserida
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char *periodo);
+DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char *periodo);
 
 /***********************************************************************
-*$FC Função: DIC_setGrau
+*$FC Função: DIC_setSituacao
 *$ED Descrição da função
-*	define o situaacao da disciplina cursada fornecida
+*	define a situação da disciplina cursada fornecida
 *$FV Valor retornado
 *	DIC_CondRetOK 
 *   DIC_CondRetParamInvalido 
 *	CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-$P	situacao: situcao na disciplina a ser inserida
+*$P	situacao: situação na disciplina a ser inserida
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, float situcao);
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, int situacao);
+
+/***********************************************************************
+*$FC Função: DIC_getGrau
+*$ED Descrição da função
+*	insere o grau de um aluno em uma disciplina em particular num ponteiro para uma variável float
+*$FV Valor retornado
+*	DIC_CondRetOK
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	grau: ponteiro para a variável float que receberá o grau
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_getGrau(DIC_tpDisciplinaCursada * pDisciplinaCursada, float* grau);
+
+/***********************************************************************
+*$FC Função: DIC_getSituacao
+*$ED Descrição da função
+*	insere a situação de um aluno em uma disciplina em um array de caracteres
+*$FV Valor retornado
+*	DIC_CondRetOK
+*   DIC_CondRetParamInvalido
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	situacao: situação na disciplina a ser inserida
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
 
 

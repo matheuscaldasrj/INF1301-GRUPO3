@@ -174,12 +174,29 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, int
  *                                                                        *
  * Funcao: DIC get grau da disciplina cursada                                                *
  **************************************************************************/
-DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau)
+DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float* grau)
 {
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
 
+	*grau = pDisciplinaCursada->grau;
     return DIC_CondRetOK ;
 } 
 /* Fim funcao: DIC get grau da disciplina cursada */
+
+/**************************************************************************
+*                                                                        *
+* Funcao: DIC get situacao da disciplina cursada                         *
+**************************************************************************/
+DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+
+	*situacao = pDisciplinaCursada->situacao;
+	return DIC_CondRetOK;
+}
+/* Fim funcao: DIC get situacao da disciplina cursada */
 
 
 /********** Fim do modulo de implementacao: Modulo DisciplinaCursada **********/
