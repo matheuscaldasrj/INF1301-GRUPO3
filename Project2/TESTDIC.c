@@ -15,7 +15,9 @@
 *$HA Alterações:
 *      Versão  Autor    Data     	Observações
 *	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
-*	1.1	PG	02/10/2017	Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
+*	1.1		PG		02/10/2017		Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
+*	1.2		PG		03/10/2017		Corrigindo erros + Adicionando SetDisciplina
+*
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -49,8 +51,9 @@
 /* Disciplinas Cursadas */
 
 
-#define    	CRIAR_DIC_CMD       	"=criarDIC"
-#define		REMOVA_DIC_CMD		"=removeDIC"
+#define    	CRIAR_DIC_CMD       "=criarDIC"
+#define		REMOVE_DIC_CMD		"=removeDIC"
+#define		SET_DIC_CMD			"=setDIC"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -73,14 +76,14 @@
 #define MAX_DISC 15
 
 Disciplina *pDisciplina[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
  TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
  {
 	 /* Disciplina */
 
-	DIS_tpCondRet CondRetObtido  ;
-	DIS_tpCondRet CondRetEsperada  ;
+	DIS_tpCondRet DIS_CondRetObtido = DIS_CondRetOK ;
+	DIS_tpCondRet DIS_CondRetEsperada = DIS_CondRetFaltouMemoria;
         		/* inicializa para qualquer coisa */
 
 
@@ -102,34 +105,35 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 	 /* Disciplina Cursada*/
 
 
-	 DIC_tpCondRet CondRetObtido	= DIC_CondRetOK;
-	 DIC_topCondRet	CondRetEsperada	= DIC_CondRetFaltouMemoria;
+	 DIC_tpCondRet DIC_CondRetObtido	= DIC_CondRetOK;
+	 DIC_tpCondRet DIC_CondRetEsperada	= DIC_CondRetFaltouMemoria;
 									 /* inicializa para qualquer coisa */
 
-
-	 TST_tpCondRet Ret ;
-
-	 /* Disciplina */
-
+	 
 	 int indexDC;
 	 int situacao;
-	 char periodo
+	 char periodo;
 	 float grau;
+
+
+	TST_tpCondRet Ret ;
+
+	 /* Disciplina */
 
 	  /* Testar DIS Gerar discipina por parametros externos */
 
          if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ississi" , indexD, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "ississi" , &indexD, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &DIS_CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_gera_param( &pDisciplina, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+            DIS_CondRetObtido = DIS_gera_param( &pDisciplina[indexD], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+            return TST_CompararInt( DIS_CondRetEsperada , DIS_CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
 
          } /* fim ativa: Testar DIS Gerar disciplina por parametros externos */
@@ -142,16 +146,17 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issiisfi", &indexDC, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos, &situacao, &periodo, &grau, &CondRetEsperada);
+		 NumLidos = LER_LerParametros( "issfi", &indexDC, &situacao, &periodo, &grau, &DIC_CondRetEsperada);
 
 		 if ( NumLidos != 8)
 		 {
 			 return TST_CondRetParm;
 		 } /* if */
 
-		 CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, situacao, periodo, grau);
+		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], situacao, periodo, grau);
 
-		 return TST_CompararInt ( CondRetEsperada, CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
+		 return TST_CompararInt ( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
+	 }
 
 	/* fim ativa: Teste DIC Criar Disciplina Cursada*/
 		 
@@ -159,20 +164,35 @@ DIC_tagDisciplinaCursada *pDisciplinaCursada[MAX_DISC] =  = {NULL, NULL, NULL, N
 
 		else if ( strcmp ( ComandoTeste, REMOVE_DIC_CMD ) == 0)
 		{
-			NumLidos = LER_LerParametros("ii", &indexDC, CondRetEsperada);
+			NumLidos = LER_LerParametros("ii", &indexDC, &DIC_CondRetEsperada);
 
 			if( NumLidos != 2)
 			{
 				return TST_CondRetParm;
 			}
 
-			CondRetObtido = DIC_removeDisciplinaCursada(&pDisciplinaCursada[indexDC]);
+			DIC_CondRetObtido = DIC_removeDisciplinaCursada(&pDisciplinaCursada[indexDC]);
 
-			 return TST_CompararInt( CondRetEsperada, CondRetObtido, "Retorno errado ao remover Disciplina Cursada.");
+			 return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao remover Disciplina Cursada.");
+
+		}
+
+		else if( strcmp ( ComandoTeste, SET_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("iii", &indexDC, &indexD, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setDisciplina(&pDisciplinaCursada[indexDC], &pDisciplina[indexD]);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
 
 		}
 
 		 /*fim ativa: Teste DIC Remove Disciplina Cursada */
 
-
+ }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
