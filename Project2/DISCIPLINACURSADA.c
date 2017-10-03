@@ -109,6 +109,10 @@ DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, D
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 
+	if (disciplina == NULL)
+		return DIC_CondRetParamInvalido;
+
+	pDisciplinaCursada->disciplina = disciplina;
     return DIC_CondRetOK ;
 } 
 /* Fim funcao: DIC set grau da disciplina cursada */
@@ -156,15 +160,15 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
  * Funcao: DIC set situacao da disciplina cursada                                                *
  **************************************************************************/
 
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, int situacao)
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
-	if (situacao < 1 || situacao > 4)		
+	if (situacao == NULL || strlen(situacao) > 3)		
 		return DIC_CondRetParamInvalido;
 
-	pDisciplinaCursada->situacao = situacao;
+	strcpy(pDisciplinaCursada->situacao, situacao);
 
     return DIC_CondRetOK ;
 } 
@@ -193,7 +197,7 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 
-	*situacao = pDisciplinaCursada->situacao;
+	strcpy(situacao, pDisciplinaCursada->situacao);
 	return DIC_CondRetOK;
 }
 /* Fim funcao: DIC get situacao da disciplina cursada */

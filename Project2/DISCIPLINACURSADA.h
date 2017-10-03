@@ -140,7 +140,7 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 *$P	situacao: situação na disciplina a ser inserida
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, int situacao);
+DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau
