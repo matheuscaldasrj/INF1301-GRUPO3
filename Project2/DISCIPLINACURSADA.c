@@ -181,6 +181,35 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 /* Fim funcao: DIC set grau da disciplina cursada */
 
 /**************************************************************************
+*                                                                        	*
+* Funcao: DIC set TODOS os campos de uma disciplina cursada        				*
+**************************************************************************/
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina disciplina, int situacao, char * periodo, float grau)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+	
+	if (disciplina == NULL)
+		return DIC_CondRetParamInvalido;
+	pDisciplinaCursada->disciplina = disciplina;
+	
+	if(periodo == NULL || strlen(periodo) >= 7)
+		return DIC_CondRetParamInvalido;
+	strcpy(pDisciplinaCursada->periodo, periodo);
+	
+	if( situacao == NULL || strlen(situacao) > 3 || !strcmp(situacao, "AP") || !strcmp(situacao, "RN") || !strcmp(situacao, "RF"))
+		return DIC_CondRetParamInvalido;
+	strcpy(pDisciplinaCursada->situacao, situacao);
+	
+	if(grau > 10 || grau < 0)
+		return DIC_CondRetParamInvalido;
+	pDisciplinaCursada->grau = grau;
+	
+	return DIC_CondRetOK;
+}
+/* Fim funcao: DIC set Todos Os Campos da disciplina cursada*/
+
+/**************************************************************************
  *                                                                        *
  * Funcao: DIC get disicplina da disciplina cursada                                                *
  **************************************************************************/
