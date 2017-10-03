@@ -160,6 +160,23 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
 /***********************************************************************
+*$FC Função: DIC_setTodosOsCampos
+*$ED Descrição da função
+*	insere todos as informações referentes ao aluno em uma disciplina, valendo
+*$FV Valor retornado
+*	DIC_CondRetOK
+*   DIC_CondRetParamInvalido
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	situacao: situação na disciplina a ser inserida
+*$P	periodo: periodo da disciplina a ser inserida
+*$P	grau: grau da disciplina ser inserido
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina disciplina, int situacao, char * periodo, float grau);
+
+/***********************************************************************
 *$FC Função: DIC_getGrau
 *$ED Descrição da função
 *	insere o grau de um aluno em uma disciplina em particular num ponteiro para uma variável float
