@@ -111,8 +111,8 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 	 
 	 int indexDC;
-	 int situacao;
-	 char periodo;
+	 char situacao[3];
+	 char periodo[7];
 	 float grau;
 
 
