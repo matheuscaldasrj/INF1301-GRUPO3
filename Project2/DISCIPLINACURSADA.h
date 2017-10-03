@@ -112,7 +112,7 @@ $P	grau:: grau da disciplina ser inserido
 *$.***********************************************************************/
 
 
-//DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, Disciplina *disciplina);
+DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, struct disciplina *disciplina);
 
 /***********************************************************************
 *
