@@ -17,6 +17,7 @@
 *	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
 *	1.1		PG		02/10/2017		Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
 *	1.2		PG		03/10/2017		Corrigindo erros + Adicionando SetDisciplina
+*	2.0		PG		03/10/2017		Adicionando Todos sets e todos Gets
 *
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -54,6 +55,11 @@
 #define    	CRIAR_DIC_CMD       "=criarDIC"
 #define		REMOVE_DIC_CMD		"=removeDIC"
 #define		SET_DIC_CMD			"=setDIC"
+#define		SET_GRAU_DIC_CMD	"=setGrauDIC"
+#define		SET_PER_DIC_CMD		"=setPerDic"
+#define		SET_SIT_DIC_CMD		"=setSitDic"
+#define		GET_SIT_DIC_CMD		"=getSitDic"
+#define		GET_GRAU_DIC_CMD	"=getGrauDic"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -96,10 +102,6 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
       char ValorDado5Ementa[300];
 
       int  NumLidos = -1 ;
-      char *ValorObtido1;
-      char *ValorEsperado1;
-      int ValorEsperado33;
-      int ValorObtido33;
       int indexD;
 
 	 /* Disciplina Cursada*/
@@ -114,6 +116,8 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 char situacao[3];
 	 char periodo[7];
 	 float grau;
+	 char ValorObtidoString[3];
+	 float ValorObtidoFloat = -1;
 
 
 	TST_tpCondRet Ret ;
@@ -146,7 +150,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issfi", &indexDC, &situacao, &periodo, &grau, &DIC_CondRetEsperada);
+		 NumLidos = LER_LerParametros( "issfi", &indexDC, situacao, periodo, &grau, &DIC_CondRetEsperada);
 
 		 if ( NumLidos != 8)
 		 {
@@ -193,6 +197,107 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 		}
 
 		 /*fim ativa: Teste DIC Remove Disciplina Cursada */
+
+		else if( strcmp (ComandoTeste, SET_GRAU_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setGrau(pDisciplinaCursada[indexDC], grau);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar grau a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, SET_PER_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, periodo, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setPeriodo(pDisciplinaCursada[indexDC], periodo);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar periodo a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, SET_SIT_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, situacao, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setSituacao(pDisciplinaCursada[indexDC], situacao);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar situacao a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, GET_GRAU_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getGrau(pDisciplinaCursada[indexDC], &ValorObtidoFloat);
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Grau de uma Disciplina Cursada.");
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararInt( grau, ValorObtidoFloat, "Conteudo errado ao obter grau.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, GET_SIT_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, situacao, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoString);
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
+
+			 if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararString( situacao, ValorObtidoString, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+	 return TST_CondRetNaoConhec ;
 
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
