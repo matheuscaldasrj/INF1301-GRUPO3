@@ -73,8 +73,8 @@ DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplina
 
 
 	DIC_setGrau(*pDisciplinaCursada, grau);
-	DIC_setGrau(*pDisciplinaCursada, *periodo);
-	DIC_setSituacao(*pDisciplinaCursada, *situacao);
+	DIC_setPeriodo(*pDisciplinaCursada, periodo);
+	DIC_setSituacao(*pDisciplinaCursada, situacao);
 
     return DIC_CondRetOK ;
 } 
