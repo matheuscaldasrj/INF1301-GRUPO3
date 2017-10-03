@@ -27,6 +27,7 @@
 *		1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
 *												set situacao, grau e periodo.
 *		1.0.2		  pg		03/09/2017		Adicionando DIC_setDisciplina.
+*		1.0.3		  pva		03/09/2017		Correção de paramentros de criar disciplina
 *
 *$.***************************************************************************/
 

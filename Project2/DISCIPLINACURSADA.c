@@ -16,6 +16,8 @@
  *	0.0.1		  mc       30/09/17			Criacao inicial do modulo
  *	1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
 												set situacao, grau e periodo.
+*	1.0.2		  va       03/09/17			Correção de parametros do criarDisciplina e comparando string da situacao
+
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo DisciplinaCursada.

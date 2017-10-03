@@ -18,6 +18,7 @@
 *	1.1		PG		02/10/2017		Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
 *	1.2		PG		03/10/2017		Corrigindo erros + Adicionando SetDisciplina
 *	2.0		PG		03/10/2017		Adicionando Todos sets e todos Gets
+*	2.1		PG		03/10/2017		Correção de parametros de criar disciplinas
 *
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
