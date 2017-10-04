@@ -1,14 +1,14 @@
-//Script:     TesteHistorico.script
+//Script:     TesteDisciplinasCursadas.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
-// Proposito: Testar as funcoes do modulo Historico
+// Proposito: Testar as funcoes do modulo DisciplinasCursadas
 //			  Para garantir seu correto funcionamento
 //
 //  Autores: mc - Matheus Caldas
 //	     bp - Bruno Pedrazza
 //	     pg - Pedro Gomes
-//	     va - Vinícius Arcoverde
-//	     lf - Leon França
+//	     va - VinÃ­cius Arcoverde
+//	     lf - Leon FranÃ§a
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
@@ -16,3 +16,21 @@
 =declararparm  FaltaMemoria   int 1
 =declararparm  PonteiroNulo   int 2
 =declararparm  ParamInvalido  int 3
+
+==Declarar os conteudos de Disciplina Cursada
+=declararparm  creditoC      int  0
+=declararparm  nome          string "ALUNO"
+=declararparm  creditoA      int    2
+=declararparm  bibliografia  string "teste_biblio"
+=declararparm  ementa        string "ementa_teste"
+=declararparm  codigo        string "inf1301"
+=declararparm  ementaB       string "\0"
+=declararparm  nomeB         string "\0"
+=declararparm  bibliografiaB string "\0"
+=declararparm codigoB string "\0"
+
+== Criar disciplina por parametro
+=gerapar 0 nome codigo creditoA bibliografia ementa 2
+
+
+//fim
