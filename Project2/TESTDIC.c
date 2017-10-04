@@ -19,6 +19,7 @@
 *	1.2		PG		03/10/2017		Corrigindo erros + Adicionando SetDisciplina
 *	2.0		PG		03/10/2017		Adicionando Todos sets e todos Gets
 *	2.1		PG		03/10/2017		Correção de parametros de criar disciplinas
+*	2.5		PG		03/10/2017		Correção de diversos bugs graves. teste.script funcionando.
 *
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
@@ -82,7 +83,7 @@
 ***********************************************************************/
 #define MAX_DISC 15
 
-Disciplina *pDisciplina[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+Disciplina *pDisciplina = NULL;
 DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
  TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
@@ -103,7 +104,6 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
       char ValorDado5Ementa[300];
 
       int  NumLidos = -1 ;
-      int indexD;
 
 	 /* Disciplina Cursada*/
 
@@ -119,6 +119,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 float grau;
 	 char ValorObtidoString[3];
 	 float ValorObtidoFloat = -1;
+	 double tolerancia = 0.5;
 
 
 	TST_tpCondRet Ret ;
@@ -130,13 +131,13 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
          if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ississi" , &indexD, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &DIS_CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "ssissi" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &DIS_CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            DIS_CondRetObtido = DIS_gera_param( &pDisciplina[indexD], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+            DIS_CondRetObtido = DIS_gera_param( &pDisciplina, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
 
             return TST_CompararInt( DIS_CondRetEsperada , DIS_CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
@@ -151,14 +152,14 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issfi", &indexDC,  &indexD,  situacao, periodo, &grau, &DIC_CondRetEsperada);
+		 NumLidos = LER_LerParametros( "issfi", &indexDC, &pDisciplina, situacao, periodo, &grau, &DIC_CondRetEsperada);
 
 		 if ( NumLidos != 8)
 		 {
 			 return TST_CondRetParm;
 		 } /* if */
 
-		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], pDisciplina[indexD],  situacao, periodo, grau);
+		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], pDisciplina,  situacao, periodo, grau);
 
 		 return TST_CompararInt ( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
 	 }
@@ -184,14 +185,14 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp ( ComandoTeste, SET_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("iii", &indexDC, &indexD, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("iii", &indexDC, &pDisciplina, &DIC_CondRetEsperada);
 
 			if( NumLidos != 3)
 			{
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplina[indexD]);
+			DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplina);
 
 			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
 
@@ -268,7 +269,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararInt( grau, ValorObtidoFloat, "Conteudo errado ao obter grau.");
+			return TST_CompararFloat( grau, ValorObtidoFloat, tolerancia, "Conteudo errado ao obter grau.");
 		}
 
 		///////////////////////////////////////////////////////////////////////
