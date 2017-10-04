@@ -64,6 +64,9 @@ typedef enum {
   HIS_CondRetProblemaListaDisciplinas = 4 ,
     /* Erro na criacao/manipulacao da lista de disciplinas */ 
 
+  HIS_CondRetErroAoAbrirArquivo = 5 ,
+    /* Erro ao abrir arquivo de texto*/ 
+
 
 } HIS_tpCondRet ;
 
@@ -98,6 +101,21 @@ HIS_tpCondRet HIS_criarHistorico(HIS_tpHistorico ** pHistorico);
 
 HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
 
+
+/***********************************************************************
+*$FC Função: HIS_removeHistorico
+*$ED Descrição da função
+*	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
+*$FV Valor retornado
+*	HIS_CondRetOK 
+*   HIS_CondRetParamInvalido
+*   HIS_CondRetErroAoAbrirArquivo
+*   HIS_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$.***********************************************************************/
+
+//HIS_tpCondRet HIS_imprimeHistorico (HIS_tpHistorico ** pHistorico);
 
 #undef HISTORICO_EXT
 

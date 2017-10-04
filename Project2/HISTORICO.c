@@ -13,7 +13,8 @@
  *	     gc - Gabriel Costa
  *  $HA Historico de evolucao:
  *  Versao       Autor		Data            Observacoes
- *	0.0.1		  mc       28/09/17			Criacao inicial do modulp
+ *	0.0.1		  mc       28/09/17			Criacao inicial do modulo
+  *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -100,6 +101,55 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
 }
  /* Fim funcao: HIS remove Historico */
 
+/**************************************************************************
+ *                                                                        *
+ * Funcao interna: HIS ordena removeHistorico                                            	  *
+ **************************************************************************/
 
+//List* HIS_ordenaHistorico(List* disciplinasCursadas)
+//{
+//	List* tmp, listaOrdenada;
+//	tmp =  disciplinasCursadas->next;
+//
+//	while(tmp != NULL) 
+//	{
+//		int valPeriodoCursor = 00
+//		if (get_val_cursor(disciplinasCursadas)->periodo )
+//
+//		tmp = tmp->next;
+//	}
+//}
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: HIS imprimeHistorico                                            	  *
+ **************************************************************************/
+//HIS_tpCondRet HIS_imprimeHistorico(List* disciplinasCursadas)
+//{
+//	if(disciplinasCursadas == NULL)
+//		HIS_CondRetRecebeuPonteiroNulo;
+//	
+//	FILE*f = fopen("historico.txt", "w");
+//	if (f == NULL)
+//	{
+//		printf("Error opening file!\n");
+//		return HIS_CondRetErroAoAbrirArquivo ;
+//	}
+//
+//	List* tmp;
+//	tmp =  next(disciplinasCursadas);
+//	while(tmp != NULL) 
+//	{
+//		fprintf(f, "Periodo: " + get_val_cursor(tmp)->periodo);
+//		fprintf(f, get_val_cursor(tmp)->disciplina->nome + ": " + get_val_cursor(tmp)->grau + "  " + get_val_cursor(tmp)->situacao);
+//		tmp = tmp->next;
+//	}
+//	
+//	fclose(f);
+//
+//	return HIS_CondRetOK;
+//}
+
+ /* Fim funcao: HIS imprime Historico */
 
 /********** Fim do modulo de implementacao: Modulo Historico **********/
