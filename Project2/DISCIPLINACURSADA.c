@@ -184,7 +184,7 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 *                                                                        	*
 * Funcao: DIC set TODOS os campos de uma disciplina cursada        				*
 **************************************************************************/
-DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina disciplina, int situacao, char * periodo, float grau)
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char * periodo, float grau)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;

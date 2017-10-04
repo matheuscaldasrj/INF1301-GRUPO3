@@ -176,7 +176,7 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, cha
 *$P	grau: grau da disciplina ser inserido
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina disciplina, int situacao, char * periodo, float grau);
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float grau);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau
