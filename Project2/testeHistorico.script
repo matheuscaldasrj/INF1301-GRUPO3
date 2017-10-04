@@ -29,8 +29,15 @@
 =declararparm  bibliografiaB string "\0"
 =declararparm codigoB string "\0"
 
+
+=declararparm	situacao	string "a"
+=declararparm	periodo		string "2010.2"
+=declararparm	grau		float 5.0
+
 == Criar disciplina por parametro
 =gerapar 0 nome codigo creditoA bibliografia ementa 2
 
+== Crar disciplina cursada
+=criarDIC 0 situacao periodo grau
 
 //fim
