@@ -17,7 +17,7 @@
  *	1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
 												set situacao, grau e periodo.
 *	1.0.2		  va       03/09/17			Correção de parametros do criarDisciplina e comparando string da situacao
-
+	1.0.3		 bp        04/10/17		    ajustando condicoes de retorno criaDisciplinaCursada
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo DisciplinaCursada.
@@ -68,15 +68,41 @@ struct DIC_tagDisciplinaCursada  {
 
 DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, Disciplina *disciplina, char *situacao, char* periodo, float grau)
 {
+	DIC_tpCondRet retornoSet, retornoRemove;
 	*pDisciplinaCursada = NULL;
 	*pDisciplinaCursada = ( DIC_tpDisciplinaCursada * ) malloc( sizeof( DIC_tpDisciplinaCursada )) ;
 	if (*pDisciplinaCursada == NULL)
 		return DIC_CondRetFaltouMemoria;
 
-	DIC_setDisciplina(*pDisciplinaCursada, disciplina);
-	DIC_setGrau(*pDisciplinaCursada, grau);
-	DIC_setPeriodo(*pDisciplinaCursada, periodo);
-	DIC_setSituacao(*pDisciplinaCursada, situacao);
+	retornoSet = DIC_setDisciplina(*pDisciplinaCursada, disciplina);
+	if (retornoSet != DIC_CondRetOK) {
+		retornoRemove = DIC_removeDisciplinaCursada (pDisciplinaCursada);
+		if (retornoRemove != DIC_CondRetOK)
+			return retornoRemove;
+		else return retornoSet;
+	}
+
+	retornoSet = DIC_setGrau(*pDisciplinaCursada, grau);
+	if (retornoSet != DIC_CondRetOK) {
+		retornoRemove = DIC_removeDisciplinaCursada (pDisciplinaCursada);
+		if (retornoRemove != DIC_CondRetOK)
+			return retornoRemove;
+		else return retornoSet;
+	}
+	retornoSet = DIC_setPeriodo(*pDisciplinaCursada, periodo);
+	if (retornoSet != DIC_CondRetOK) {
+		retornoRemove = DIC_removeDisciplinaCursada (pDisciplinaCursada);
+		if (retornoRemove != DIC_CondRetOK)
+			return retornoRemove;
+		else return retornoSet;
+	}
+	retornoSet = IC_setSituacao(*pDisciplinaCursada, situacao);
+	if (retornoSet != DIC_CondRetOK) {
+		retornoRemove = DIC_removeDisciplinaCursada (pDisciplinaCursada);
+		if (retornoRemove != DIC_CondRetOK)
+			return retornoRemove;
+		else return retornoSet;
+	}
 
     return DIC_CondRetOK ;
 } 
@@ -170,8 +196,6 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
 	if (situacao == NULL || strlen(situacao) > 3 || strcmp(situacao, "AP") != 0 || strcmp(situacao, "RN") != 0 || strcmp(situacao, "RF") != 0)		
-		return DIC_CondRetParamInvalido;
-			
 		return DIC_CondRetParamInvalido;
 
 	strcpy(pDisciplinaCursada->situacao, situacao);
