@@ -73,10 +73,10 @@
 =criarDIC 3 3 situacao4 periodo4 grau4 DIC_CondRetOK
 
 == Pega Situação de Disciplina Cursada
-=getSitDic 0 "RN" 0
+=getSitDIC 0 situacao1 0
 
 == Pega Grau de Disciplina Cursada
-=getGrauDic 0 grau1 0
+=getGrauDIC 0 grau1 0
 
 == Remove DisciplinaCursada
 =removeDIC 2 DIC_CondRetOK
