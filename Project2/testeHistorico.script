@@ -109,13 +109,7 @@
 =adicDisc 0 2 PonteiroNulo
 =recuperar
 
-== Imprimir histórico
-=imprimeHist 0 OK
-=imprimeHist 1 PonteiroNulo
-=imprimeHist 6 OK
-=recuperar
-=imprimeHist 1 OK
-=recuperar
+
 
 == Pegar historico completo
 =getHisCompleto 0 OK

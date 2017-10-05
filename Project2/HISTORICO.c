@@ -512,7 +512,8 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	List *disciplinasPeriodo = NULL;
 	HIS_tpHistorico *copiaHistorico = (HIS_tpHistorico *) malloc(sizeof(HIS_tpHistorico));
 
-	FILE* f = fopen("historico.txt", "w");	
+	FILE* f = fopen("historico.txt", "w+");	
+	
 
 	if (f == NULL)
 	{
@@ -522,7 +523,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	}
 
 	createList(&(copiaHistorico->disciplinasCursadas));
-
+	
 	// Verificação dos parâmetros
 	if(disciplinasCursadas == NULL || pHistorico == NULL)
 		return HIS_CondRetRecebeuPonteiroNulo;
@@ -531,7 +532,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
 	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
 	
-
+	
 	while(response != LIS_CondRetListaVazia) 
 	{
 		response = pop_front(copiaHistorico->disciplinasCursadas, (void**) disciplinaCursada);
@@ -539,17 +540,20 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 
 		DIC_getGrau(disciplinaCursada, &grau);
 		DIC_getPeriodo(disciplinaCursada, periodoDisc);
+		DIC_getSituacao(disciplinaCursada, situacao);
 		DIS_get_creditos(disciplina, &creditos);
 		DIS_get_codigo(disciplina, &codigoDaDisc);
+		DIS_get_codigo(disciplina, &codigoDaDisc);
+		
 
-		/*fprintf(f, "Periodo: " + *periodoDisc);
+		fprintf(f, "Periodo: %s", periodoDisc);
 		fprintf(f, "\n");
-		fprintf(f, codigoDaDisc);
+		fprintf(f, "Codigo: %s", codigoDaDisc);
 		fprintf(f, ": ");
-		fprintf(f, "%f", grau);
+		fprintf(f, "\nNota: %.1f", grau);
 		fprintf(f, "  ");
-		fprintf(f, situacao);
-		fprintf(f, "\n\n");*/
+		fprintf(f, "Situacao: %s", situacao);
+		fprintf(f, "\n\n");
 	}
 	
 	fclose(f);
