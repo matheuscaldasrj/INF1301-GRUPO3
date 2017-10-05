@@ -89,10 +89,10 @@ typedef enum {
 *	$P	grau: grau da disciplina ser inserido
 *	$P	periodo: periodo da disciplina a ser inserida
 $EAE Assertivas de entrada
-*	disicplina válida
-*	situacao válida
-*	periodo váldio
-*	grau válido
+*	disciplina com os parametros preenchidos
+*	situacao == "AP" || situacao ==  "RP" || situacao == "RN" || situacao == "TR" 
+*	periodo == string com 7 characteres
+*	grau >= 0 && <= 10
 *$EAE Assertivas de saída esperadas
 *	DIC_COndRetOK
 *	valores de disicplina cursada preenchidos com os parâmetros
