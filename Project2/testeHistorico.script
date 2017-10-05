@@ -16,3 +16,15 @@
 =declararparm  FaltaMemoria   int 1
 =declararparm  PonteiroNulo   int 2
 =declararparm  ParamInvalido  int 3
+
+==Declarar os conteudos de Historico
+=declararparm  CR1	string "6.2"
+//LEMBRAR QUE AS NOTAS ESTÃO ENTRANDO COMO STRING
+
+=declararparm	periodo1	string "2010.2"
+
+== Criar Historico
+=criaHIS 0 OK
+
+== Remover Historico
+=removeHIS 0 OK
