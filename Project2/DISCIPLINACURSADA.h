@@ -237,7 +237,7 @@ DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char*
 *$P	grau: grau da disciplina ser retornado
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float *grau)
+DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina *disciplina, char *situacao, char *periodo, float *grau);
 
 #undef DISCIPLINACURSADA_EXT
 
