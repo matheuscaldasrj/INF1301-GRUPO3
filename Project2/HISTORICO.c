@@ -123,7 +123,8 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List* disci
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
 {
 	// Inicialização de variáveis
-	int response = -1;
+	int listResponse = -1;
+	int functionResponse = -1;
 	char* discPeriodo = (char*) malloc(sizeof(char) * 7);
 	Disciplina *disciplina = NULL;
 	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
@@ -131,26 +132,89 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 	HIS_tpHistorico copiaHistorico;
 
 	// Verificação dos parâmetros
-	if (pHistorico == NULL || disciplinas == NULL)
+	if (pHistorico == NULL || disciplinas == NULL) {
+		free(discPeriodo);
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
 		return HIS_CondRetRecebeuPonteiroNulo;
+	}
+
+	if (strlen(periodo) != 6) {
+		free(discPeriodo);
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetParamInvalido;
+	}
 
 	// Copia o valor de pHistorico para uma variável local
 	copiaHistorico = *pHistorico;
 
 	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+	functionResponse = DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
+
+	if (functionResponse != DIS_CondRetOK) {
+		free(discPeriodo);
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetErroInterno;
+	}
+
+	functionResponse = DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	if (functionResponse != DIC_CondRetOK) {
+		free(discPeriodo);
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetErroInterno;
+	}
 
 	// Instancia uma nova lista vazia
-	createList(&disciplinasPeriodo);	
+	functionResponse = createList(&disciplinasPeriodo);
+
+	if (functionResponse != LIS_CondRetOK) {
+		free(discPeriodo);
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetErroInterno;
+	}
 
 	// Percorre a lista até que ela esteja vazia
-	while (response != LIS_CondRetListaVazia) {
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getPeriodo(disciplinaCursada, discPeriodo);
+	while (listResponse != LIS_CondRetListaVazia) {
+		listResponse = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+
+		if (listResponse != LIS_CondRetOK && listResponse != LIS_CondRetListaVazia) {
+			free(discPeriodo);
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
+
+		functionResponse = DIC_getPeriodo(disciplinaCursada, discPeriodo);
+
+		if (functionResponse != DIC_CondRetOK) {
+			free(discPeriodo);
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
 
 		if (strcmp(periodo, discPeriodo) == 0) {
-			push_back(disciplinasPeriodo, disciplinaCursada);			
+			functionResponse = push_back(disciplinasPeriodo, disciplinaCursada);
+
+			if (functionResponse != DIC_CondRetOK) {
+				free(discPeriodo);
+				free(disciplina);
+				free(disciplinaCursada);
+				free(disciplinasPeriodo);
+				return HIS_CondRetErroInterno;
+			}
 		}
 	}
 
@@ -172,7 +236,8 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 {
 	// Inicialização de variáveis
-	int response = -1;
+	int functionResponse = -1;
+	int listResponse = -1;
 
 	float grau = 0;
 	float somaGraus = 0;	
@@ -195,16 +260,61 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 	copiaHistorico = *pHistorico;
 
 	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+	functionResponse = DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
+
+	if (functionResponse != DIS_CondRetOK) {
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetErroInterno;
+	}
+
+	functionResponse = DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	if (functionResponse != DIC_CondRetOK) {
+		free(disciplina);
+		free(disciplinaCursada);
+		free(disciplinasPeriodo);
+		return HIS_CondRetErroInterno;
+	}
 
 	// Percorre a lista até que ela esteja vazia
-	while (response != LIS_CondRetListaVazia) {
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, disciplina);
+	while (listResponse != LIS_CondRetListaVazia) {
+		listResponse = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+
+		if (listResponse != LIS_CondRetOK && listResponse != LIS_CondRetListaVazia) {
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
+
+		functionResponse = DIC_getDisciplina(disciplinaCursada, disciplina);
+
+		if (functionResponse != DIC_CondRetOK) {
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
 		
-		DIC_getGrau(disciplinaCursada, &grau);
-		DIS_get_creditos(disciplina, &creditos);
+		functionResponse = DIC_getGrau(disciplinaCursada, &grau);
+
+		if (functionResponse != DIC_CondRetOK) {
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
+
+		functionResponse = DIS_get_creditos(disciplina, &creditos);
+
+		if (functionResponse != DIS_CondRetOK) {
+			free(disciplina);
+			free(disciplinaCursada);
+			free(disciplinasPeriodo);
+			return HIS_CondRetErroInterno;
+		}
 
 		somaGraus += grau;
 		somaCreditos += creditos;
