@@ -292,7 +292,7 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 			return HIS_CondRetErroInterno;
 		}
 
-		functionResponse = DIC_getDisciplina(disciplinaCursada, disciplina);
+		functionResponse = DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		if (functionResponse != DIC_CondRetOK) {
 			free(disciplina);
@@ -370,7 +370,7 @@ HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, f
 	// Percorre a lista até que ela esteja vazia
 	while (response != LIS_CondRetListaVazia) {
 		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, disciplina);
+		DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		DIC_getGrau(disciplinaCursada, &grau);
 		DIC_getPeriodo(disciplinaCursada, periodoDisc);
@@ -510,7 +510,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	Disciplina *disciplina = NULL;
 	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
 	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
+	HIS_tpHistorico *copiaHistorico = (HIS_tpHistorico *) malloc(sizeof(HIS_tpHistorico));
 
 	FILE* f = fopen("historico.txt", "w");	
 
@@ -520,6 +520,8 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 		fclose(f);
 		//return HIS_CondRetErroAoAbrirArquivo;
 	}
+
+	createList(&(copiaHistorico->disciplinasCursadas));
 
 	// Verificação dos parâmetros
 	if(disciplinasCursadas == NULL || pHistorico == NULL)
@@ -532,7 +534,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 
 	while(response != LIS_CondRetListaVazia) 
 	{
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+		response = pop_front(copiaHistorico->disciplinasCursadas, (void**) disciplinaCursada);
 		DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		DIC_getGrau(disciplinaCursada, &grau);
@@ -555,7 +557,6 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	free(situacao);
 	free(periodoDisc);
 	free(codigoDaDisc);
-	free(situacao);
 	free(disciplina);
 	free(disciplinaCursada);
 	free(disciplinasPeriodo);
