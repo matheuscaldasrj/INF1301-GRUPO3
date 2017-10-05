@@ -28,6 +28,8 @@
 #include  <string.h>
 #include  <malloc.h>
 #include "listas.h"
+#include "disciplina.h"
+#include "DISCIPLINACURSADA.h"
 
 
 /* Inclusão do respectivo módulo de definição */
@@ -92,14 +94,75 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
 	if (*pHistorico == NULL)
 		return HIS_CondRetRecebeuPonteiroNulo; 
 
-	else
-	{
-		free(*pHistorico);
-		*pHistorico = NULL;
-	}
+	free(*pHistorico);
+	*pHistorico = NULL;
 	return HIS_CondRetOK ;
 }
  /* Fim funcao: HIS remove Historico */
+
+ /**************************************************************************
+ *                                                                        *
+ * Funcao: HIS get historico completo                                  	  *
+ **************************************************************************/
+
+HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List* disciplinasCursadas)
+{
+	if (pHistorico == NULL || disciplinasCursadas == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;	
+
+	disciplinasCursadas = pHistorico->disciplinasCursadas;
+	return HIS_CondRetOK;
+}
+/* Fim funcao: HIS remove Historico */
+
+/**************************************************************************
+*                                                                        *
+* Funcao: HIS get historico completo                                  	  *
+**************************************************************************/
+
+HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
+{
+	// Inicialização de variáveis
+	int response = -1;
+	char* discPeriodo = (char*) malloc(sizeof(char) * 7);
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
+	// Verificação dos parâmetros
+	if (pHistorico == NULL || disciplinas == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;
+
+	// Copia o valor de pHistorico para uma variável local
+	copiaHistorico = *pHistorico;
+
+	// Apenas pra alocar o struct na memória
+	DIS_gera_param(disciplina, "X", "X", 0, "X", "X");
+	DIC_criarDisciplinaCursada(disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	// Instancia uma nova lista vazia
+	createList(disciplinasPeriodo);	
+
+	// Percorre a lista até que ela esteja vazia
+	while (response != LIS_CondRetListaVazia) {
+		response = pop_front(copiaHistorico.disciplinasCursadas, disciplinaCursada);
+		DIC_getPeriodo(disciplinaCursada, discPeriodo);
+
+		if (strcmp(periodo, discPeriodo) == 0) {
+			push_back(disciplinasPeriodo, disciplinaCursada);			
+		}
+	}
+
+	disciplinas = disciplinasPeriodo;
+	free(discPeriodo);
+	free(disciplina);
+	free(disciplinaCursada);
+	free(disciplinasPeriodo);
+
+	return HIS_CondRetOK;
+}
+/* Fim funcao: HIS remove Historico */
 
 /**************************************************************************
  *                                                                        *
