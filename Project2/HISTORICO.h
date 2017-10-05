@@ -208,7 +208,23 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
 *
 *$.***********************************************************************/
 
-HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
+HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
+
+/***********************************************************************
+*$FC Função: HIS_imprimeHistorico
+*$ED Descrição da função
+*	Imprime em um arquivo toda a informação contida em um histórico
+*$FV Valor retornado
+*	HIS_CondRetOK 
+*   HIS_CondRetParamInvalido
+*   HIS_CondRetErroAoAbrirArquivo
+*   HIS_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P pHistorico: Endereço do ponteiro para tipo estruturado historico.
+*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$.***********************************************************************/
+
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, struct list* disciplinasCursadas);
 
 /***********************************************************************
 *$FC Função: HIS_removeHistorico
@@ -216,14 +232,11 @@ HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, floa
 *	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
 *	HIS_CondRetOK 
-*   HIS_CondRetParamInvalido
 *   HIS_CondRetErroAoAbrirArquivo
 *   HIS_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	disciplinasCursadas: List composta pelas disciplinas cursadas
 *$.***********************************************************************/
-
-//HIS_tpCondRet HIS_imprimeHistorico (HIS_tpHistorico ** pHistorico);
 
 #undef HISTORICO_EXT
 

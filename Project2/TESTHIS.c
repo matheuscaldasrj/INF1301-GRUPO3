@@ -39,6 +39,7 @@
 
 #include    "HISTORICO.H"
 #include	"listas.h"
+#include	"disciplina.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
@@ -48,6 +49,7 @@
 #define	GET_HIS_PRD_CMD		"=getHisPeriodo"
 #define	GET_CR_TOTAL_CMD	"=getCrTotal"
 #define	GET_CR_PRD_CMD		"=getCrPeioro"
+#define IMPRIME_HIST_CMD	"=imprimeHist"
 
 #define MAX 15
 
@@ -59,13 +61,14 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	 HIS_tpCondRet HIS_CondRetEsperada = HIS_CondRetFaltouMemoria;
 											/* inicializa para qualquer coisa */
 
+	 int i = 0;
 	 int indexH; //indice Historico
 	 int  NumLidos = -1 ;
 	 int LIST_CondRetObtido = -999;
 	 char periodo[7];
 	 float cr;
 	 List* list;
-
+	 Disciplina* disciplinas[5];
 
 	 TST_tpCondRet Ret;
 
@@ -123,6 +126,53 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
 
+	   ////////////////////////////////////////////
+	   ////////////////////////////////////////////
+
+	   else if( strcmp( ComandoTeste , GET_CR_TOTAL_CMD ) == 0 )
+	   {
+		   NumLidos = LER_LerParametros("ii", &indexH, &HIS_CondRetEsperada);
+		   if (NumLidos != 2) {
+			   return TST_CondRetParm;
+		   }
+
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+		   HIS_CondRetObtido = HIS_getCrTotal(pHistorico[indexH], &cr);		   
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar CR total");
+	   }
+
+	   ////////////////////////////////////////////
+	   ////////////////////////////////////////////
+
+	   else if( strcmp( ComandoTeste , GET_CR_PRD_CMD ) == 0 )
+	   {
+		   NumLidos = LER_LerParametros("isi", &indexH, &periodo, &HIS_CondRetEsperada);
+		   if (NumLidos != 3) {
+			   return TST_CondRetParm;
+		   }
+
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+		   HIS_CondRetObtido = HIS_getCrDoPeriodo(pHistorico[indexH], periodo, &cr);		   
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar CR total");
+	   }
+
+	   ////////////////////////////////////////////
+	   ////////////////////////////////////////////
+
 	   else if( strcmp( ComandoTeste , GET_HIS_PRD_CMD ) == 0 )
 	   {
 		   NumLidos = LER_LerParametros("isi", &indexH, &periodo, &HIS_CondRetEsperada);
@@ -140,6 +190,28 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   HIS_CondRetObtido = HIS_getHistoricoDoPeriodo(pHistorico[indexH], periodo, list);		   
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
+	   }
+
+	   ////////////////////////////////////////////
+	   ////////////////////////////////////////////
+
+	   else if( strcmp( ComandoTeste , IMPRIME_HIST_CMD ) == 0 )
+	   {
+		   NumLidos = LER_LerParametros("ii", &indexH, &HIS_CondRetEsperada);
+		   if (NumLidos != 2) {
+			   return TST_CondRetParm;
+		   }
+
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+		   HIS_CondRetObtido = HIS_imprimeHistorico(pHistorico[indexH], list);
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
 	   }
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/

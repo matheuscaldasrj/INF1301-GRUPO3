@@ -337,7 +337,7 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 *                                                                        *
 * Funcao: HIS get cr do período		                                  	  *
 **************************************************************************/
-HIS_tpCondRet getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr) {
+HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr) {
 	// Inicialização de variáveis
 	int response = -1;
 	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
@@ -461,16 +461,18 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	List *disciplinasPeriodo = NULL;
 	HIS_tpHistorico copiaHistorico;
 
-		FILE* f = fopen("historico.txt", "w");
+	FILE* f = fopen("historico.txt", "w");	
+
 	if (f == NULL)
 	{
 		printf("Error opening file!\n");
-		return HIS_CondRetErroAoAbrirArquivo ;
+		fclose(f);
+		//return HIS_CondRetErroAoAbrirArquivo;
 	}
 
 	// Verificação dos parâmetros
-	if(disciplinasCursadas == NULL)
-		HIS_CondRetRecebeuPonteiroNulo;
+	if(disciplinasCursadas == NULL || pHistorico == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;
 
 	// Apenas pra alocar o struct na memória
 	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
@@ -487,14 +489,14 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 		DIS_get_creditos(disciplina, &creditos);
 		DIS_get_codigo(disciplina, &codigoDaDisc);
 
-		fprintf(f, "Periodo: " + *periodoDisc);
+		/*fprintf(f, "Periodo: " + *periodoDisc);
 		fprintf(f, "\n");
 		fprintf(f, codigoDaDisc);
 		fprintf(f, ": ");
 		fprintf(f, "%f", grau);
 		fprintf(f, "  ");
 		fprintf(f, situacao);
-		fprintf(f, "\n\n");
+		fprintf(f, "\n\n");*/
 	}
 	
 	fclose(f);
