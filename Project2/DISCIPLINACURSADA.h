@@ -24,9 +24,13 @@
 *$HA Alterações:
 *				Versao       Autor         Data            Observacoes
 *       1.0.0         mc        30/09/2017   	Inicio do desenvolvimento
-*				1.0.1         va        30/09/2017   	Implementaçacao das funcoes criar, set situacao, grau e periodo.
-*				1.0.2		  		pg		03/09/2017		Adicionando DIC_setDisciplina.
-*				1.0.3		  		va		05/10/2017		Correção de parametros de criar disciplina
+*		1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
+*												set situacao, grau e periodo.
+*		1.0.2		  pg		03/09/2017		Adicionando DIC_setDisciplina.
+*		1.0.3		  va		03/09/2017		Correção de parametros de criar disciplina
+*		1.0.3		  va		03/09/2017		Documentacao setDisciplina
+*		1.0.4		  mc		05/09/2017		Updating getDisciplina header
+*
 *				1.0.4		  		va		05/10/2017		Documentacao setDisciplina
 *				1.0.5					lf		05/10/2017		Correção e finalização de documentação voltada ao cliente
 *$.***************************************************************************/
@@ -282,10 +286,10 @@ $EAE Assertivas de entrada
 *	segundo ponteiro referencia um tipo estruturado Disciplina.
 *
 *$EAE Assertivas de saída esperadas
-* retorna endereço para disciplina cursada pelo aluno por referência.
+*	**disciplina = endereço de pDisciplinaCursada->disciplina
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina  *disciplina);
+DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina  **disciplina);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau

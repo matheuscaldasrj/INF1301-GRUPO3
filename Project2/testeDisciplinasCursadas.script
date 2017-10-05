@@ -101,7 +101,9 @@
 =recuperar
 
 == Set Disciplina do param1 em DisciplinasCursadas de index param2
-=setDIC 0 2 DIC_CondRetOK
+=setDIS 0 2 DIC_CondRetOK
+== Get disciplina de DisciplinaCursada[param1] e compara com Disciplinas[param2]
+=getDIS 1 1 DIC_CondRetOK
 
 == Seta/Pega Situação de Disciplina Cursada
 =setSitDIC 3 "RF" DIC_CondRetOK
