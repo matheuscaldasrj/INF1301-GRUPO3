@@ -59,10 +59,10 @@
 #define		REMOVE_DIC_CMD		"=removeDIC"
 #define		SET_DIC_CMD			"=setDIC"
 #define		SET_GRAU_DIC_CMD	"=setGrauDIC"
-#define		SET_PER_DIC_CMD		"=setPerDic"
-#define		SET_SIT_DIC_CMD		"=setSitDic"
-#define		GET_SIT_DIC_CMD		"=getSitDic"
-#define		GET_GRAU_DIC_CMD	"=getGrauDic"
+#define		SET_PER_DIC_CMD		"=setPerDIC"
+#define		SET_SIT_DIC_CMD		"=setSitDIC"
+#define		GET_SIT_DIC_CMD		"=getSitDIC"
+#define		GET_GRAU_DIC_CMD	"=getGrauDIC"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -255,8 +255,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp (ComandoTeste, GET_GRAU_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("isi", &indexDC, &grauStr, &DIC_CondRetEsperada);
 
+			grau = atof(grauStr);
 			if( NumLidos != 3)
 			{
 				return TST_CondRetParm;

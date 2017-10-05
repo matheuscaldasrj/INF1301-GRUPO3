@@ -12,7 +12,7 @@
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
-=declararparm  DIS_CondRetOK             int 0
+=declararparm  DIC_CondRetOK             int 0
 =declararparm  DIS_CondRetDisciplinaCriada   int 2
 
 
@@ -67,10 +67,10 @@
 =gerapar 3 nome2 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
 
 == Crar disciplina cursada
-=criarDIC 0 0 situacao1 periodo1 grau1 DIS_CondRetOK
-=criarDIC 1 1 situacao2 periodo2 grau2 DIS_CondRetOK
-=criarDIC 2 2 situacao3 periodo3 grau3 DIS_CondRetOK
-=criarDIC 3 3 situacao4 periodo4 grau4 DIS_CondRetOK
+=criarDIC 0 0 situacao1 periodo1 grau1 DIC_CondRetOK
+=criarDIC 1 1 situacao2 periodo2 grau2 DIC_CondRetOK
+=criarDIC 2 2 situacao3 periodo3 grau3 DIC_CondRetOK
+=criarDIC 3 3 situacao4 periodo4 grau4 DIC_CondRetOK
 
 == Pega Situação de Disciplina Cursada
 =getSitDic 0 "RN" 0
@@ -78,5 +78,7 @@
 == Pega Grau de Disciplina Cursada
 =getGrauDic 0 grau1 0
 
+== Remove DisciplinaCursada
+=removeDIC 2 DIC_CondRetOK
 
 //fim
