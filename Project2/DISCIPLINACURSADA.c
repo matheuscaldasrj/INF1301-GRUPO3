@@ -269,5 +269,21 @@ DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada *pDisciplinaCursada, char* 
 }
 /* Fim funcao: DIC get situacao da disciplina cursada */
 
+/**************************************************************************
+*                                                                         *
+* Funcao: DIC get TODOS os campos de uma disciplina cursada        		  *
+**************************************************************************/
+DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float *grau)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+	disciplina = pDisciplinaCursada->disciplina;
+	strcpy(situacao, pDisciplinaCursada->situacao);
+	strcpy(periodo, pDisciplinaCursada->periodo);
+	*grau = pDisciplinaCursada->grau;
+	return DIC_CondRetOK;
+}
+
+/* Fim funcao: DIC get Todos Os Campos da disciplina cursada*/
 
 /********** Fim do modulo de implementacao: Modulo DisciplinaCursada **********/
