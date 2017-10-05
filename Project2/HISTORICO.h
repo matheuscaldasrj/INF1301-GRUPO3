@@ -121,6 +121,20 @@ HIS_tpCondRet HIS_criarHistorico(HIS_tpHistorico ** pHistorico);
 HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
 
 /***********************************************************************
+*$FC Função: HIS_getHistoricoCompleto
+*$ED Descrição da função
+*	Obtem todas as disciplinas cursadas por um aluno
+*$FV Valor retornado
+*	HIS_CondRetOK
+*   HIS_CondRetParamInvalido
+*$EP Parametros
+*$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
+*$P disciplinas: ponteiro para uma lista onde serão armazenadas as disciplinas do período
+*$.***********************************************************************/
+
+HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, struct list* disciplinas);
+
+/***********************************************************************
 *$FC Função: HIS_getHistoricoDoPeriodo
 *$ED Descrição da função
 *	Obtem todas as disciplinas cursadas em um determinado período
