@@ -29,6 +29,7 @@
 *		1.0.2		  pg		03/09/2017		Adicionando DIC_setDisciplina.
 *		1.0.3		  va		03/09/2017		Correção de parametros de criar disciplina
 *		1.0.3		  va		03/09/2017		Documentacao setDisciplina
+*		1.0.4		  mc		05/09/2017		Updating getDisciplina header
 *
 *$.***************************************************************************/
 
@@ -241,10 +242,10 @@ DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, 
 $EAE Assertivas de entrada
 *	pDisciplinaCursada válida
 *$EAE Assertivas de saída esperadas
-*	*disciplina = pDisciplinaCursada->disciplina
+*	**disciplina = endereço de pDisciplinaCursada->disciplina
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina  *disciplina);
+DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina  **disciplina);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau
