@@ -117,6 +117,20 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas);
 
 /***********************************************************************
+*$FC Função: HIS_getCrTotal
+*$ED Descrição da função
+*	Obtem o CR geral odo aluno
+*$FV Valor retornado
+*	HIS_CondRetOK
+*   HIS_CondRetParamInvalido
+*$EP Parametros
+*$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
+*$P cr: endereço de memória de uma variável float que receberá o valor do CR
+*$.***********************************************************************/
+
+HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
+
+/***********************************************************************
 *$FC Função: HIS_removeHistorico
 *$ED Descrição da função
 *	Remove um historico, destruindo toda as informações contidas no tipo estruturado.

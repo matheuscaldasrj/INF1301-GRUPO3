@@ -176,7 +176,21 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, cha
 *$P	grau: grau da disciplina ser inserido
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina *disciplina, char *situacao, char *periodo, float grau);
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float grau);
+
+/***********************************************************************
+*$FC Função: DIC_getDisciplina
+*$ED Descrição da função
+*	pega a disciplina do struct DisciplinaCursada
+*$FV Valor retornado
+*	DIC_CondRetOK
+*	DIC_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	disciplina: ponteiro para a variável que receberá o struct
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau

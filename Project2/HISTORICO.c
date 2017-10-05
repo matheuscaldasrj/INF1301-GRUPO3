@@ -162,7 +162,64 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 
 	return HIS_CondRetOK;
 }
-/* Fim funcao: HIS remove Historico */
+/* Fim funcao: HIS get historico completo */
+
+/**************************************************************************
+*                                                                        *
+* Funcao: HIS get historico completo                                  	  *
+**************************************************************************/
+
+HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
+{
+	// Inicialização de variáveis
+	int response = -1;
+
+	float grau = 0;
+	float somaGraus = 0;	
+	
+	int creditos = 0;
+	int somaCreditos = 0;
+
+	float crTotal = 0;
+
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
+	// Verificação dos parâmetros
+	if (pHistorico == NULL || cr == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;
+
+	// Copia o valor de pHistorico para uma variável local
+	copiaHistorico = *pHistorico;
+
+	// Apenas pra alocar o struct na memória
+	DIS_gera_param(disciplina, "X", "X", 0, "X", "X");
+	DIC_criarDisciplinaCursada(disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	// Percorre a lista até que ela esteja vazia
+	while (response != LIS_CondRetListaVazia) {
+		response = pop_front(copiaHistorico.disciplinasCursadas, disciplinaCursada);
+		DIC_getDisciplina(disciplinaCursada, disciplina);
+		
+		DIC_getGrau(disciplinaCursada, &grau);
+		DIS_get_creditos(disciplina, &creditos);
+
+		somaGraus += grau;
+		somaCreditos += creditos;
+	}
+
+	crTotal = somaGraus / somaCreditos;
+	*cr = crTotal;
+
+	free(disciplina);
+	free(disciplinaCursada);
+	free(disciplinasPeriodo);
+
+	return HIS_CondRetOK;
+}
+/* Fim funcao: HIS get historico completo */
 
 /**************************************************************************
  *                                                                        *
