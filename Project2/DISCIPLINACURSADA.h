@@ -40,8 +40,11 @@
 
 
 /***** Declarações exportadas pelo módulo *****/
-//TODO
-/*Tipo estruturado tpDisciplinaCursada é constituido por .... */
+/*Tipo estruturado tpDisciplinaCursada é constituido por quatro(4) tipos de dados diferentes criados para identificação, categorização
+e manipulação das DISCIPLINAS CURSADAS peloas alunos de informática da PUC-Rio, são eles a disciplinaque foi cursada que é um tipo 
+estruturado contendo os dados proprios a ela(para maiores detalhes verificar docuemntacao do modulo), um parâmetro para definir a situação do
+aluno após a  conclusão da disciplina que pode ser "AP" como aprovada, "RP" reprovado por nota ou então "RF" reprovado por faltas, outro parâmetro 
+é o periodo em que a matéria foi feita (exs:2014.1, 2017.2, 3000.3) e por fim o grau final obtido na materia*/
 typedef struct DIC_tagDisciplinaCursada DIC_tpDisciplinaCursada;
 
 /***********************************************************************
@@ -81,6 +84,10 @@ typedef enum {
 *	DIC_CondRetParamInvalido
 *$EP Parametros
 *$P	pDisciplinaCursada: Ponteiro de ponteiro para tipo estruturado DisciplinaCursada onde será armazenada a DisciplinaCursada resultante.
+*$P disciplina: endereco do ponteio para tipo estruturado disciplina
+*$P	situacao: situação na disciplina a ser inserida
+*$P	periodo: periodo da disciplina a ser inserida
+*$P	grau: grau da disciplina ser inserido
 *
 *$.***********************************************************************/
 
@@ -234,6 +241,24 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
+
+/***********************************************************************
+*$FC Função: DIC_getTodosOsCampos
+*$ED Descrição da função
+*	Retorna por referência todos as informações referentes ao aluno em uma disciplina, sendo elas:
+*	ponteiro para disciplina cursada, situação do aluno na disciplina , período cursado e grau referente.
+*$FV Valor retornado
+*	DIC_CondRetOK
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	disciplina: endereco do ponteio para tipo estruturado disciplina a ser inserida.
+*$P	situacao: situação na disciplina a ser retornada
+*$P	periodo: periodo da disciplina a ser retornado
+*$P	grau: grau da disciplina ser retornado
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina *disciplina, char *situacao, char *periodo, float *grau);
 
 #undef DISCIPLINACURSADA_EXT
 

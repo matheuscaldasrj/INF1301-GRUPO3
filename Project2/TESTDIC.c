@@ -1,236 +1,305 @@
 /***************************************************************************
- *  $MCD Modulo de implementacao: Modulo DisciplinaCursada.c
- *
- *	Arquivo gerado
- *  Letras identificadoras:      DIC
- *
- *  Autores: 
-*		 mc - Matheus Caldas
- *	     bp - Bruno Pedrazza
- *	     pg - Pedro Gomes
- *	     va - Vinícius Arcoverde
- *	     lf - Leon França
- *	     gc - Gabriel Costa
- *  $HA DisciplinaCursada de evolucao:
- *  Versao       Autor		Data            Observacoes
- *	0.0.1		  mc       30/09/17			Criacao inicial do modulo
- *	1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
-												set situacao, grau e periodo.
-*	1.0.2		  va       03/09/17			Correção de parametros do criarDisciplina e comparando string da situacao
+*$MCI Módulo de implementação: Módulo de teste específico
+*	Arquivo: TESTDIC.C
+*	Proprietário: Grupo 3 INF1301 17.2
+*	Projeto: Trabalho 2
+*	Gestor:  DI/PUC-Rio
+*  	Autores: mc - Matheus Caldas
+*	         bp - Bruno Pedrazza
+*	         pg - Pedro Gomes
+*	         va - Vinícius Arcoverde
+*	         lf - Leon França
+*	         gc - Gabriel Costa
+*  Projeto: Disciplinas INF 1301
+*  Gestor:  DI/PUC-Rio
+*$HA Alterações:
+*      Versão  Autor    Data     	Observações
+*	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
+*	1.1		PG		02/10/2017		Adicionando e ajustando criação de Disciplina, adição Teste DIC Criar Disciplina Cursada. adição Teste DIC Remove Disciplina Cursada
+*	1.2		PG		03/10/2017		Corrigindo erros + Adicionando SetDisciplina
+*	2.0		PG		03/10/2017		Adicionando Todos sets e todos Gets
+*	2.1		PG		03/10/2017		Correção de parametros de criar disciplinas
+*	2.5		PG		03/10/2017		Correção de diversos bugs graves. teste.script funcionando.
+*
+*$ED Descrição do módulo
+*     Este modulo contém as funções específicas para o teste do
+*     módulo Disciplinas Cursadas.
+*$EIU Interface com o usuário pessoa
+*     Comandos de teste específicos para testar o módulo Disciplinas Cursadas:
+*
+*
+*
+***************************************************************************/
 
- *  $ED Descrição do módulo
- *     Este módulo implementa um conjunto de funcoes para criar e manipular
- *     atributos do módulo DisciplinaCursada.
- *
- *
- *
- ***************************************************************************/
+#include    <string.h>
+#include    <stdio.h>
 
-/* Inclusões do compilador */
-#include  <stdio.h>
-#include  <string.h>
-#include  <malloc.h>
-#include "disciplina.h"
+#include    "TST_ESPC.H"
 
-/* Inclusão do respectivo módulo de definição */
-#define DISCIPLINACURSADA_OWN
-#include "DISCIPLINACURSADA.H"
-#undef DISCIPLINACURSADA_OWN
+#include    "GENERICO.H"
+#include    "LERPARM.H"
+
+#include    "DISCIPLINACURSADA.H"
+
+#include    "disciplina.h"
 
 
-/* Inclusao dos modulos dependentes */
+/* Tabela dos nomes dos comandos de teste específicos */
+
+/* Disciplinas */
+
+#define     GERA_INP_DIS_CMD    "=gerainp"
+#define     GERA_PAR_DIS_CMD    "=gerapar"
+
+/* Disciplinas Cursadas */
+
+
+#define    	CRIAR_DIC_CMD       "=criarDIC"
+#define		REMOVE_DIC_CMD		"=removeDIC"
+#define		SET_DIC_CMD			"=setDIC"
+#define		SET_GRAU_DIC_CMD	"=setGrauDIC"
+#define		SET_PER_DIC_CMD		"=setPerDic"
+#define		SET_SIT_DIC_CMD		"=setSitDic"
+#define		GET_SIT_DIC_CMD		"=getSitDic"
+#define		GET_GRAU_DIC_CMD	"=getGrauDic"
+
+/*****  Código das funções exportadas pelo módulo  *****/
 
 
 /***********************************************************************
- *
- *  $TC Tipo de dados: DIC que define a estrutura do tipo DisciplinaCursada
- *
- *	$ED Descrição do tipo
- *		Descreve a estrutura de uma DisciplinaCursada
- *
- ***********************************************************************/
-
-struct DIC_tagDisciplinaCursada  {   
-
-	Disciplina *disciplina;
-	char situacao[3];
-	char periodo[7];
-	float grau;	
-};
-
-
-/*****  Codigo das funcoes exportadas pelo modulo  *****/
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC Criar DisciplinaCursada                                                 *
- **************************************************************************/
-
-DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada, Disciplina *disciplina, char *situacao, char* periodo, float grau)
-{
-	*pDisciplinaCursada = NULL;
-	*pDisciplinaCursada = ( DIC_tpDisciplinaCursada * ) malloc( sizeof( DIC_tpDisciplinaCursada )) ;
-	if (*pDisciplinaCursada == NULL)
-		return DIC_CondRetFaltouMemoria;
-
-	DIC_setDisciplina(*pDisciplinaCursada, disciplina);
-	DIC_setGrau(*pDisciplinaCursada, grau);
-	DIC_setPeriodo(*pDisciplinaCursada, periodo);
-	DIC_setSituacao(*pDisciplinaCursada, situacao);
-
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC Criar DisciplinaCursada */
-
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC remove removeDisciplinaCursada                                            	  *
- **************************************************************************/
- 
-DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada)
-{
-	if (*pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo; 
-	else
-	{
-		free(*pDisciplinaCursada);
-		*pDisciplinaCursada = NULL;
-	}
-	return DIC_CondRetOK ;
-}
-
- /* Fim funcao: DIC remove DisciplinaCursada */
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC set grau da disciplina cursada                                                *
- **************************************************************************/
-
-DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, Disciplina *disciplina)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-
-	if (disciplina == NULL)
-		return DIC_CondRetParamInvalido;
-
-	pDisciplinaCursada->disciplina = disciplina;
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC set grau da disciplina cursada */
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC set grau da disciplina cursada                                                *
- **************************************************************************/
-
-DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada *pDisciplinaCursada, float grau)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-	
-	if (grau > 10 || grau < 0)		
-		return DIC_CondRetParamInvalido;
-
-	pDisciplinaCursada->grau = grau;
-
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC set grau da disciplina cursada */
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC set periodo da disciplina cursada                                                *
- **************************************************************************/
-
-DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* periodo)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-	
-	if (periodo == NULL || strlen(periodo) >= 7)
-		return DIC_CondRetParamInvalido;
-	
-	strcpy(pDisciplinaCursada->periodo, periodo);
-
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC set periodo da disciplina cursada */
-
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC set situacao da disciplina cursada                                                *
- **************************************************************************/
-
-DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char* situacao)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-	
-	if (situacao == NULL || strlen(situacao) > 3 || strcmp(situacao, "AP") != 0 || strcmp(situacao, "RN") != 0 || strcmp(situacao, "RF") != 0)		
-		return DIC_CondRetParamInvalido;
-			
-		return DIC_CondRetParamInvalido;
-
-	strcpy(pDisciplinaCursada->situacao, situacao);
-
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC set grau da disciplina cursada */
-
-/**************************************************************************
-*                                                                        	*
-* Funcao: DIC set TODOS os campos de uma disciplina cursada        				*
 *
-/* Fim funcao: DIC set Todos Os Campos da disciplina cursada*/
+*  $FC Função: TARV Efetuar operações de teste específicas para Sala
+*
+*  $ED Descrição da função
+*     Efetua os diversos comandos de teste específicos para o módulo
+*     Sala sendo testado.
+*
+*  $EP Parâmetros
+*     $P ComandoTeste - String contendo o comando
+*
+*  $FV Valor retornado
+*     Ver TST_tpCondRet definido em TST_ESPC.H
+*
+***********************************************************************/
+#define MAX_DISC 15
 
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC get disicplina da disciplina cursada                                                *
- **************************************************************************/
+Disciplina *pDisciplina = NULL;
+DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
-DIC_tpCondRet DIC_getDisciplina (DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
+ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+ {
+	 /* Disciplina */
 
-	disciplina = pDisciplinaCursada->disciplina;
-
-    return DIC_CondRetOK;
-} 
-/* Fim funcao: DIC get disciplina da disciplina cursada */
-
-/**************************************************************************
- *                                                                        *
- * Funcao: DIC get grau da disciplina cursada                                                *
- **************************************************************************/
-
-
-DIC_tpCondRet DIC_getGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float* grau)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-
-	*grau = pDisciplinaCursada->grau;
-    return DIC_CondRetOK ;
-} 
-/* Fim funcao: DIC get grau da disciplina cursada */
-
-/**************************************************************************
-*                                                                        *
-* Funcao: DIC get situacao da disciplina cursada                         *
-**************************************************************************/
-DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada *pDisciplinaCursada, char* situacao)
-{
-	if (pDisciplinaCursada == NULL)
-		return DIC_CondRetRecebeuPonteiroNulo;
-
-	strcpy(situacao, pDisciplinaCursada->situacao);
-	return DIC_CondRetOK;
-}
-/* Fim funcao: DIC get situacao da disciplina cursada */
+	DIS_tpCondRet DIS_CondRetObtido = DIS_CondRetOK ;
+	DIS_tpCondRet DIS_CondRetEsperada = DIS_CondRetFaltouMemoria;
+        		/* inicializa para qualquer coisa */
 
 
-/********** Fim do modulo de implementacao: Modulo DisciplinaCursada **********/
+
+      //char ValorEsperado;
+      char ValorDado1Nome[25];
+      char ValorDado2Codigo[8];
+      int ValorDado3Creditos;
+      char ValorDado4Bib[300];
+      char ValorDado5Ementa[300];
+
+      int  NumLidos = -1 ;
+
+	 /* Disciplina Cursada*/
+
+
+	 DIC_tpCondRet DIC_CondRetObtido	= DIC_CondRetOK;
+	 DIC_tpCondRet DIC_CondRetEsperada	= DIC_CondRetFaltouMemoria;
+									 /* inicializa para qualquer coisa */
+
+	 
+	 int indexDC;
+	 char situacao[3];
+	 char periodo[7];
+	 float grau;
+	 char ValorObtidoString[3];
+	 float ValorObtidoFloat = -1;
+	 double tolerancia = 0.5;
+
+
+	TST_tpCondRet Ret ;
+
+	 /* Disciplina */
+
+	  /* Testar DIS Gerar discipina por parametros externos */
+
+         if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
+         {
+
+            NumLidos = LER_LerParametros( "ssissi" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &DIS_CondRetEsperada ) ;
+            if ( NumLidos != 6 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            DIS_CondRetObtido = DIS_gera_param( &pDisciplina, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+
+            return TST_CompararInt( DIS_CondRetEsperada , DIS_CondRetObtido ,
+                                    "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
+
+         } /* fim ativa: Testar DIS Gerar disciplina por parametros externos */
+
+
+	/* Disciplina Cursada */
+
+	 /*Teste DIC Criar Disciplina Cursada*/
+
+	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
+	 {
+
+		 NumLidos = LER_LerParametros( "issfi", &indexDC, situacao, periodo, &grau, &DIC_CondRetEsperada);
+
+		 if ( NumLidos != 5)
+		 {
+			 return TST_CondRetParm;
+		 } /* if */
+
+		 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], pDisciplina, situacao, periodo, grau);
+
+		 return TST_CompararInt ( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
+	 }
+
+	/* fim ativa: Teste DIC Criar Disciplina Cursada*/
+		 
+	/*Teste DIC Remove Disciplina Cursada*/
+
+		else if ( strcmp ( ComandoTeste, REMOVE_DIC_CMD ) == 0)
+		{
+			NumLidos = LER_LerParametros("ii", &indexDC, &DIC_CondRetEsperada);
+
+			if( NumLidos != 2)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_removeDisciplinaCursada(&pDisciplinaCursada[indexDC]);
+
+			 return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao remover Disciplina Cursada.");
+
+		}
+
+		else if( strcmp ( ComandoTeste, SET_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("iii", &indexDC, &pDisciplina, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplina);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
+
+		}
+
+		 /*fim ativa: Teste DIC Remove Disciplina Cursada */
+
+		else if( strcmp (ComandoTeste, SET_GRAU_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setGrau(pDisciplinaCursada[indexDC], grau);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar grau a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, SET_PER_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, periodo, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setPeriodo(pDisciplinaCursada[indexDC], periodo);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar periodo a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, SET_SIT_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, situacao, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_setSituacao(pDisciplinaCursada[indexDC], situacao);
+
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar situacao a Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, GET_GRAU_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getGrau(pDisciplinaCursada[indexDC], &ValorObtidoFloat);
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Grau de uma Disciplina Cursada.");
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararFloat( grau, ValorObtidoFloat, tolerancia, "Conteudo errado ao obter grau.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, GET_SIT_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, situacao, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoString);
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
+
+			 if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararString( situacao, ValorObtidoString, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
+		}
+
+		///////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+
+	 return TST_CondRetNaoConhec ;
+
+ }
+/********** Fim do módulo de implementação: Módulo de teste específico **********/
