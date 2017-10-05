@@ -207,7 +207,7 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
-	if (strlen(situacao) > 3 ||
+	if (strlen(situacao) != 2 ||
 		( strcmp(situacao, "AP") != 0 && strcmp(situacao, "RN") != 0 && strcmp(situacao, "RF") && strcmp(situacao, "TR")) != 0){
 		return DIC_CondRetParamInvalido;
 	}

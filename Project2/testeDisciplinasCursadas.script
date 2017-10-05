@@ -1,4 +1,4 @@
-//Script:     TesteDisciplinasCursadas.script
+﻿//Script:     TesteDisciplinasCursadas.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
 // Proposito: Testar as funcoes do modulo DisciplinasCursadas
@@ -43,6 +43,18 @@
 =declararparm  bibliografia4 string "teste_biblio4"
 =declararparm  ementa4       string "ementa_teste4"
 
+=declararparm  codigo5       string "inf1018"
+=declararparm  credito5      int    6
+=declararparm  nome5         string "SOFTWARE"
+=declararparm  bibliografia5 string "teste_biblio5"
+=declararparm  ementa5       string "ementa_teste5"
+
+=declararparm  codigo6       string "fis1051"
+=declararparm  credito6      int    2
+=declararparm  nome6         string "FISICA"
+=declararparm  bibliografia6 string "teste_biblio6"
+=declararparm  ementa6       string "ementa_teste6"
+
 
 ==Declarar os conteudos de DisciplinaCursada
 =declararparm	situacao1	string "AP"
@@ -61,32 +73,72 @@
 =declararparm	periodo4	string "2017.2"
 =declararparm	grau4		string "10"
 
+=declararparm	situacao5	string "AP"
+=declararparm	periodo5	string "0017.2"
+=declararparm	grau5		string "2.3"
+
+=declararparm	situacao6	string "AP"
+=declararparm	periodo6	string "2017.3"
+=declararparm	grau6		string "9.2"
+
 
 == Criar disciplina por parametro
 =gerapar 0 nome1 codigo1 credito1 bibliografia1 ementa1 DIS_CondRetDisciplinaCriada
 =gerapar 1 nome2 codigo2 credito2 bibliografia2 ementa2 DIS_CondRetDisciplinaCriada
-=gerapar 2 nome2 codigo3 credito3 bibliografia3 ementa3 DIS_CondRetDisciplinaCriada
-=gerapar 3 nome2 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
+=gerapar 2 nome3 codigo3 credito3 bibliografia3 ementa3 DIS_CondRetDisciplinaCriada
+=gerapar 3 nome4 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
+=gerapar 4 nome5 codigo5 credito5 bibliografia5 ementa5 DIS_CondRetDisciplinaCriada
+=gerapar 5 nome6 codigo6 credito6 bibliografia6 ementa6 DIS_CondRetDisciplinaCriada
 
-== Crar disciplina cursada
+== Criar disciplina cursada
 =criarDIC 0 0 situacao1 periodo1 grau1 DIC_CondRetOK
 =criarDIC 1 1 situacao2 periodo2 grau2 DIC_CondRetOK
 =criarDIC 2 2 situacao3 periodo3 grau3 DIC_CondRetOK
 =criarDIC 3 3 situacao4 periodo4 grau4 DIC_CondRetOK
+=criarDIC 4 4 situacao5 periodo5 grau5 DIC_CondRetOK
+=recuperar
+=criarDIC 5 5 situacao6 periodo6 grau6 DIC_CondRetOK
+=recuperar
 
 == Set Disciplina do param1 em DisciplinasCursadas de index param2
 =setDIC 0 2 DIC_CondRetOK
 
 == Seta/Pega Situação de Disciplina Cursada
 =setSitDIC 3 "RF" DIC_CondRetOK
+=setSitDIC 3 "A"  DIC_CondRetOK
+=recuperar
 =getSitDIC 3 "RF" DIC_CondRetOK
+=setSitDIC 4 "APP" DIC_CondRetOK
+=recuperar
 
 == Seta/Pega grau da disciplina Cursada
 =setGrauDIC 2 "9.6" DIC_CondRetOK
+=setGrauDIC 2 "10.2" DIC_CondRetOK
+=recuperar
 =getGrauDIC 2 "9.6" DIC_CondRetOK
+=setGrauDIC 3 "-2" DIC_CondRetOK
+=recuperar
+
+== Seta/Pega periodo da disciplina Cursada
+=setPerDIC 1 "2018.1" DIC_CondRetOK
+=setPerDIC 1 "200001" DIC_CondRetOK
+=recuperar
+=getPerDIC 1 "2018.1" DIC_CondRetOK
+=setPerDIC 2 "12345678" DIC_CondRetOK
+=recuperar
+=setPerDIC 2 "20cc.1" DIC_CondRetOK
+=recuperar
+=setPerDIC 3 "2017.a" DIC_CondRetOK
+=recuperar
+=getPerDIC 1 "2018" DIC_CondRetOK
+=recuperar
 
 == Remove DisciplinaCursada
 =removeDIC 2 DIC_CondRetOK
+=removeDIC 4 DIC_CondRetOK
+=recuperar
+=removeDIC 5 DIC_CondRetOK
+=recuperar
 
 == Remove Disciplina
 =destruir 0 DIS_CondRetDisciplinaDeletada

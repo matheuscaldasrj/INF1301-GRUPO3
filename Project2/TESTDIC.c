@@ -118,11 +118,12 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
         		/* inicializa para qualquer coisa */
 
 	 int indexDC;
-	 char situacao[3];
-	 char periodo[7];
+	 char situacao[10];
+	 char periodo[10];
 	 float grau;
 	 char grauStr[5];
-	 char ValorObtidoString[3];
+	 char ValorObtidoStringSituacao[10];
+	 char ValorObtidoStringPeriodo[10];
 	 float ValorObtidoFloat = -1;
 	 double tolerancia = 0.5;
 
@@ -307,7 +308,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoString);
+			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoStringSituacao);
 
 			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
 
@@ -316,7 +317,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararString( situacao, ValorObtidoString, "Conteudo errado ao pegar a Situacao de uma Disciplina Cursada.");
+			return TST_CompararString( situacao, ValorObtidoStringSituacao, "Conteudo errado ao pegar a Situacao de uma Disciplina Cursada.");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -331,7 +332,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_getPeriodo(pDisciplinaCursada[indexDC], ValorObtidoString);
+			DIC_CondRetObtido = DIC_getPeriodo(pDisciplinaCursada[indexDC], ValorObtidoStringPeriodo);
 
 			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Periodo de uma Disciplina Cursada.");
 
@@ -340,7 +341,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararString( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
+			return TST_CompararString( periodo, ValorObtidoStringPeriodo,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
 		}
 	 
 	 
