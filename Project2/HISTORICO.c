@@ -543,14 +543,14 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 		DIS_get_creditos(disciplina, &creditos);
 		DIS_get_codigo(disciplina, &codigoDaDisc);
 
-		/*fprintf(f, "Periodo: " + *periodoDisc);
+		fprintf(f, "Periodo: " + *periodoDisc);
 		fprintf(f, "\n");
 		fprintf(f, codigoDaDisc);
 		fprintf(f, ": ");
 		fprintf(f, "%f", grau);
 		fprintf(f, "  ");
 		fprintf(f, situacao);
-		fprintf(f, "\n\n");*/
+		fprintf(f, "\n\n");
 	}
 	
 	fclose(f);
