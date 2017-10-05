@@ -18,6 +18,8 @@
 												set situacao, grau e periodo.
 *	1.0.2		  va       03/09/17			Correção de parametros do criarDisciplina e comparando string da situacao
 	1.0.3		 bp        04/10/17		    ajustando condicoes de retorno criaDisciplinaCursada
+	1.0.4		 bp        05/10/17			Novas condicoes de erro na setCodigo
+
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo DisciplinaCursada.
@@ -172,11 +174,18 @@ DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada *pDisciplinaCursada, float gr
 
 DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* periodo)
 {
+	int i;
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
-	
-	if (periodo == NULL || strlen(periodo) != 6)
+	if (periodo == NULL || strlen(periodo) != 6 || periodo[4] != '.' || periodo[6] != '1' || periodo[6] != '2' || periodo[0] == '0')
 		return DIC_CondRetParamInvalido;
+
+	for (i = 0 ; periodo[i] != '\0' ; i++ ){
+		if (i == 4)
+			continue;
+		if (periodo[i] <'0' || periodo[i] > '9')
+			return DIC_CondRetParamInvalido;
+	}
 	
 	strcpy(pDisciplinaCursada->periodo, periodo);
 
