@@ -86,4 +86,7 @@
 == Remove DisciplinaCursada
 =removeDIC 2 DIC_CondRetOK
 
+== Remove Disciplina
+=destruir 0
+
 //fim
