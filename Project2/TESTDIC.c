@@ -22,6 +22,7 @@
 *	2.5		PG		03/10/2017		Correção de diversos bugs graves. teste.script funcionando.
 *	2.6		BP 		05/10/2017		Adicionando teste de getPERIODO
 *	2.7		PG		05/10/2017		Adicionando base de Get Todos parametros Disc Cursada
+*	2.8		PG		05/10/2017		Adicionado Remove DISCIPLINA
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -52,9 +53,9 @@
 
 #define     GERA_INP_DIS_CMD    "=gerainp"
 #define     GERA_PAR_DIS_CMD    "=gerapar"
+#define		DESTROI_CMD 		"=destruir"
 
 /* Disciplinas Cursadas */
-
 
 #define    	CRIAR_DIC_CMD       "=criarDIC"
 #define		REMOVE_DIC_CMD		"=removeDIC"
@@ -147,7 +148,21 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
 
          } /* fim ativa: Testar DIS Gerar disciplina por parametros externos */
+	 
+	  /* Testar DIS Destruir disciplina */
+	  else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
+         {
+            NumLidos = LER_LerParametros( "ii", &indexDI, &DIS_CondRetEsperada ) ;
+            if ( NumLidos != 2 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
 
+            DIS_CondRetObtido = DIS_deleta_Disciplina( &pDisciplinas[indexDI]) ;
+
+            return TST_CompararInt( DIS_CondRetEsperada , DIS_CondRetObtido ,
+                                    "Retorno errado ao remover disciplina.\n" );
+         } /* fim ativa: DIS Destruir disciplina */
 
 	/* Disciplina Cursada */
 

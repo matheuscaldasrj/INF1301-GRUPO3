@@ -177,12 +177,15 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 	int i;
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
-	if (periodo == NULL || strlen(periodo) != 6 || periodo[4] != '.' || periodo[6] != '1' || periodo[6] != '2' || periodo[0] == '0')
+	if (strlen(periodo) != 6 || (periodo[5] != '1' && periodo[5] != '2') || periodo[0] == '0')
 		return DIC_CondRetParamInvalido;
 
 	for (i = 0 ; periodo[i] != '\0' ; i++ ){
-		if (i == 4)
-			continue;
+		if (i == 4){
+			if (periodo[i] != '.')
+				return DIC_CondRetParamInvalido;
+			else continue;
+		}
 		if (periodo[i] <'0' || periodo[i] > '9')
 			return DIC_CondRetParamInvalido;
 	}

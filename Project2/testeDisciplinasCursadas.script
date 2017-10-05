@@ -14,6 +14,8 @@
 == Declarar as condicoes de retorno
 =declararparm  DIC_CondRetOK             int 0
 =declararparm  DIS_CondRetDisciplinaCriada   int 2
+=declararparm  DIS_CondRetDisciplinaDeletada   int 3
+
 
 
 ==Declarar os conteudos de Disciplina
@@ -85,5 +87,11 @@
 
 == Remove DisciplinaCursada
 =removeDIC 2 DIC_CondRetOK
+
+== Remove Disciplina
+=destruir 0 DIS_CondRetDisciplinaDeletada
+=destruir 1 DIS_CondRetDisciplinaDeletada
+=destruir 2 DIS_CondRetDisciplinaDeletada
+=destruir 3 DIS_CondRetDisciplinaDeletada
 
 //fim
