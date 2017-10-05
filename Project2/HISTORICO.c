@@ -117,7 +117,7 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List* disci
 
 /**************************************************************************
 *                                                                        *
-* Funcao: HIS get historico completo                                  	  *
+* Funcao: HIS get historico do período                                 	  *
 **************************************************************************/
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
@@ -166,7 +166,7 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 
 /**************************************************************************
 *                                                                        *
-* Funcao: HIS get historico completo                                  	  *
+* Funcao: HIS get cr total                                  			 *
 **************************************************************************/
 
 HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
@@ -220,6 +220,64 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 	return HIS_CondRetOK;
 }
 /* Fim funcao: HIS get historico completo */
+
+/**************************************************************************
+*                                                                        *
+* Funcao: HIS get cr do período		                                  	  *
+**************************************************************************/
+HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr) {
+	// Inicialização de variáveis
+	int response = -1;
+	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
+
+	float grau = 0;
+	float somaGraus = 0;
+
+	int creditos = 0;
+	int somaCreditos = 0;
+
+	float crTotal = 0;
+
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
+	// Verificação dos parâmetros
+	if (pHistorico == NULL || cr == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;
+
+	// Copia o valor de pHistorico para uma variável local
+	copiaHistorico = *pHistorico;
+
+	// Apenas pra alocar o struct na memória
+	DIS_gera_param(disciplina, "X", "X", 0, "X", "X");
+	DIC_criarDisciplinaCursada(disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	// Percorre a lista até que ela esteja vazia
+	while (response != LIS_CondRetListaVazia) {
+		response = pop_front(copiaHistorico.disciplinasCursadas, disciplinaCursada);
+		DIC_getDisciplina(disciplinaCursada, disciplina);
+
+		DIC_getGrau(disciplinaCursada, &grau);
+		DIC_getPeriodo(disciplinaCursada, periodoDisc);
+		DIS_get_creditos(disciplina, &creditos);
+
+		if (strcmp(periodoDisc, periodo) == 0) {
+			somaGraus += grau;
+			somaCreditos += creditos;
+		}
+	}
+
+	crTotal = somaGraus / somaCreditos;
+	*cr = crTotal;
+
+	free(disciplina);
+	free(disciplinaCursada);
+	free(disciplinasPeriodo);
+
+	return HIS_CondRetOK;
+}
 
 /**************************************************************************
  *                                                                        *

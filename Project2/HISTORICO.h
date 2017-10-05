@@ -125,10 +125,25 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 *   HIS_CondRetParamInvalido
 *$EP Parametros
 *$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P cr: endereço de memória de uma variável float que receberá o valor do CR
+*$P cr: endereço de memória de uma variável float que receberá o valor do CR	
 *$.***********************************************************************/
 
 HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
+
+/***********************************************************************
+*$FC Função: HIS_getCrDoPeriodo
+*$ED Descrição da função
+*	Obtem o CR geral odo aluno
+*$FV Valor retornado
+*	HIS_CondRetOK
+*   HIS_CondRetParamInvalido
+*$EP Parametros
+*$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
+*$P periodo: array de caracteres com o período desejado
+*$P cr: endereço de memória de uma variável float que receberá o valor do CR
+*$.***********************************************************************/
+
+HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
 
 /***********************************************************************
 *$FC Função: HIS_removeHistorico
