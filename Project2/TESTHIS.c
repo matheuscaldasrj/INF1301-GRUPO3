@@ -100,11 +100,11 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   ////////////////////////////////////////////
 	   ////////////////////////////////////////////
 
-	   else if( strcmp( ComandoTeste , HIS_getHistoricoDoPeriodo ) == 0 )
+	   else if( strcmp( ComandoTeste , GET_HIS_PRD_CMD ) == 0 )
 	   {
 		  
 		   //----------------FAZER----------------//
 
 	   }
-
+ }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
