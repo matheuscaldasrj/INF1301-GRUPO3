@@ -12,32 +12,71 @@
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
-=declararparm  OK             int 0
-=declararparm  FaltaMemoria   int 1
-=declararparm  PonteiroNulo   int 2
-=declararparm  ParamInvalido  int 3
-
-==Declarar os conteudos de Disciplina Cursada
-=declararparm  creditoC      int  0
-=declararparm  nome          string "ALUNO"
-=declararparm  creditoA      int    2
-=declararparm  bibliografia  string "teste_biblio"
-=declararparm  ementa        string "ementa_teste"
-=declararparm  codigo        string "inf1301"
-=declararparm  ementaB       string "\0"
-=declararparm  nomeB         string "\0"
-=declararparm  bibliografiaB string "\0"
-=declararparm codigoB string "\0"
+=declararparm  DIS_CondRetOK             int 0
+=declararparm  DIS_CondRetDisciplinaCriada   int 2
 
 
+==Declarar os conteudos de Disciplina
+=declararparm  codigo1       string "inf1301"
+=declararparm  credito1      int    4
+=declararparm  nome1         string "Modular"
+=declararparm  bibliografia1 string "teste_biblio1"
+=declararparm  ementa1       string "ementa_teste1"
+
+=declararparm  codigo2       string "inf1504"
+=declararparm  credito2      int    4
+=declararparm  nome2         string "EDA"
+=declararparm  bibliografia2 string "teste_biblio2"
+=declararparm  ementa2       string "ementa_teste2"
+
+=declararparm  codigo3       string "mat1157"
+=declararparm  credito3      int    4
+=declararparm  nome3         string "CALCULO"
+=declararparm  bibliografia3 string "teste_biblio3"
+=declararparm  ementa3       string "ementa_teste3"
+
+=declararparm  codigo4       string "eng1456"
+=declararparm  credito4      int    4
+=declararparm  nome4         string "PROBABILIDADE"
+=declararparm  bibliografia4 string "teste_biblio4"
+=declararparm  ementa4       string "ementa_teste4"
+
+
+==Declarar os conteudos de DisciplinaCursada
 =declararparm	situacao1	string "AP"
-=declararparm	periodo1		string "2010.2"
-=declararparm	grau1		string "5.3"
+=declararparm	periodo1	string "2015.2"
+=declararparm	grau1		string "8.4"
+
+=declararparm	situacao2	string "RF"
+=declararparm	periodo2	string "2010.1"
+=declararparm	grau2		string "5.3"
+
+=declararparm	situacao3	string "RN"
+=declararparm	periodo3	string "2016.1"
+=declararparm	grau3		string "8.5"
+
+=declararparm	situacao4	string "AP"
+=declararparm	periodo4	string "2017.2"
+=declararparm	grau4		string "10"
+
 
 == Criar disciplina por parametro
-=gerapar nome codigo creditoA bibliografia ementa 2
+=gerapar 0 nome1 codigo1 credito1 bibliografia1 ementa1 DIS_CondRetDisciplinaCriada
+=gerapar 1 nome2 codigo2 credito2 bibliografia2 ementa2 DIS_CondRetDisciplinaCriada
+=gerapar 2 nome2 codigo3 credito3 bibliografia3 ementa3 DIS_CondRetDisciplinaCriada
+=gerapar 3 nome2 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
 
 == Crar disciplina cursada
-=criarDIC 0 "RN" periodo1 grau1 OK
+=criarDIC 0 0 situacao1 periodo1 grau1 DIS_CondRetOK
+=criarDIC 1 1 situacao2 periodo2 grau2 DIS_CondRetOK
+=criarDIC 2 2 situacao3 periodo3 grau3 DIS_CondRetOK
+=criarDIC 3 3 situacao4 periodo4 grau4 DIS_CondRetOK
+
+== Pega Situação de Disciplina Cursada
+=getSitDic 0 "RN" 0
+
+== Pega Grau de Disciplina Cursada
+=getGrauDic 0 grau1 0
+
 
 //fim
