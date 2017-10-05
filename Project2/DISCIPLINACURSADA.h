@@ -221,6 +221,24 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 
 DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
+/***********************************************************************
+*$FC Função: DIC_getTodosOsCampos
+*$ED Descrição da função
+*	Retorna por referência todos as informações referentes ao aluno em uma disciplina, sendo elas:
+*	ponteiro para disciplina cursada, situação do aluno na disciplina , período cursado e grau referente.
+*$FV Valor retornado
+*	DIC_CondRetOK
+*	CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	disciplina: endereco do ponteio para tipo estruturado disciplina a ser inserida.
+*$P	situacao: situação na disciplina a ser retornada
+*$P	periodo: periodo da disciplina a ser retornado
+*$P	grau: grau da disciplina ser retornado
+*$.***********************************************************************/
+
+DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float *grau)
+
 #undef DISCIPLINACURSADA_EXT
 
 /********** Fim do módulo de definição: Módulo DisciplinaCursada **********/
