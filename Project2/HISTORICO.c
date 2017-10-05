@@ -292,7 +292,7 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
 			return HIS_CondRetErroInterno;
 		}
 
-		functionResponse = DIC_getDisciplina(disciplinaCursada, disciplina);
+		functionResponse = DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		if (functionResponse != DIC_CondRetOK) {
 			free(disciplina);
@@ -370,7 +370,7 @@ HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, f
 	// Percorre a lista até que ela esteja vazia
 	while (response != LIS_CondRetListaVazia) {
 		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, disciplina);
+		DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		DIC_getGrau(disciplinaCursada, &grau);
 		DIC_getPeriodo(disciplinaCursada, periodoDisc);
@@ -512,18 +512,20 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	List *disciplinasPeriodo = NULL;
 	HIS_tpHistorico copiaHistorico;
 
-	FILE* f = fopen("historico.txt", "w");	
+	FILE* f = fopen("historico.txt", "w");
 
 	if (f == NULL)
 	{
 		printf("Error opening file!\n");
 		fclose(f);
-		//return HIS_CondRetErroAoAbrirArquivo;
+		return HIS_CondRetErroAoAbrirArquivo;
 	}
 
 	// Verificação dos parâmetros
-	if(disciplinasCursadas == NULL || pHistorico == NULL)
+	if(disciplinasCursadas == NULL)
 		return HIS_CondRetRecebeuPonteiroNulo;
+
+	copiaHistorico = *pHistorico;	
 
 	// Apenas pra alocar o struct na memória
 	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
