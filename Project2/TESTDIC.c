@@ -53,7 +53,7 @@
 
 #define     GERA_INP_DIS_CMD    "=gerainp"
 #define     GERA_PAR_DIS_CMD    "=gerapar"
-#define		DESTROI_CMD 	"=destruir"
+#define		DESTROI_CMD 		"=destruir"
 
 /* Disciplinas Cursadas */
 
