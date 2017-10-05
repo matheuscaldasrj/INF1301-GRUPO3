@@ -9,12 +9,12 @@
 *	Gestor:  DI/PUC-Rio
 *	Letras Identificadoras: DIC
 *	Autores: 
-*		 mc - Matheus Caldas
-*		 bp - Bruno Pedrazza
-*	     pg - Pedro Gomes
-*	     va - Vinícius Arcoverde
-*	     lf - Leon França
-*	     gc - Gabriel Costa
+*		 		mc - Matheus Caldas
+*		 		bp - Bruno Pedrazza
+*	    	pg - Pedro Gomes
+*	    	va - Vinícius Arcoverde
+*	    	lf - Leon França
+*	    	gc - Gabriel Costa
 *
 *$ED Descricao do modulo
 *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -22,7 +22,7 @@
 *
 *
 *$HA Alterações:
-*       Versao       Autor         Data            Observacoes
+*				Versao       Autor         Data            Observacoes
 *       1.0.0         mc        30/09/2017   	Inicio do desenvolvimento
 *		1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
 *												set situacao, grau e periodo.
@@ -31,6 +31,8 @@
 *		1.0.3		  va		03/09/2017		Documentacao setDisciplina
 *		1.0.4		  mc		05/09/2017		Updating getDisciplina header
 *
+*				1.0.4		  		va		05/10/2017		Documentacao setDisciplina
+*				1.0.5					lf		05/10/2017		Correção e finalização de documentação voltada ao cliente
 *$.***************************************************************************/
 
 #if defined( DISCIPLINACURSADA_OWN )
@@ -78,25 +80,38 @@ typedef enum {
 *$FC Função: DIC_criarDisciplinaCursada
 *$ED Descrição da função
 *	Cria uma DisciplinaCursada, chama todas as funções set para preencher todas as dependências nescessárias.
+*
 *$FV Valor retornado
 *	DIC_CondRetOK
 *	DIC_CondRetFaltouMemoria
 *	DIC_CondRetRecebeuPonteiroNulo
 *	DIC_CondRetParamInvalido
+*
 *$EP Parametros
 *	$P	pDisciplinaCursada: Ponteiro de ponteiro para tipo estruturado DisciplinaCursada onde será armazenada a DisciplinaCursada resultante.
-*	$P disciplina: endereco do ponteio para tipo estruturado disciplina
+*	$P  disciplina: endereco do ponteio para tipo estruturado disciplina
 *	$P	situacao: situação na disciplina a ser inserida
 *	$P	grau: grau da disciplina ser inserido
 *	$P	periodo: periodo da disciplina a ser inserida
-$EAE Assertivas de entrada
-*	disciplina com os parametros preenchidos
-*	situacao == "AP" || situacao ==  "RP" || situacao == "RN" || situacao == "TR" 
-*	periodo == string com 7 characteres
-*	grau >= 0 && <= 10
-*$EAE Assertivas de saída esperadas
-*	DIC_COndRetOK
-*	valores de disicplina cursada preenchidos com os parâmetros
+*
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada a ser criada.
+*	segundo ponteiro corrente referencia um tipo estruturado Disciplina não nulo.
+*	situacao válida é composta de 2 caracteres não nulos, podendo tomar os valores:
+* "AP" para *	condição de aluno AProvado, "RN" para condição de aluno Reprovado por Nota 
+* e "RF" para *	condição Reprovado por Falta.
+*	periodo valido é composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc.
+*	grau valido é caracterizado por um número (float) maior que zero (>0) e menor que 10 (<10), 
+*	limitando-se a uma única casa decimal.
+*
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos estruturados.
+*	A disciplina cursada foi criada com êxito.
+*	primeiro ponteiro corrente aponta para Disciplina Cursada resultante.
+*	campos de disicplina cursada foram devidamente preenchidos.
 *
 *$.***********************************************************************/
 
@@ -109,35 +124,41 @@ DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaC
 *	Remove uma DisciplinaCursada, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
 *	DIC_CondRetOK 
-*   DIC_CondRetParamInvalido                                                   
+* 	DIC_CondRetParamInvalido                                                   
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 $EAE Assertivas de entrada
-*	DisciplinaCursada != NULL
-*$EAE Assertivas de saída esperadas
-*	DIC_COndRetOK
-*	DisciplinaCursada == NULL
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada a ser removida.
+*
+*$EAS Assertivas de saída
+*	A disciplina cursada foi removida, juntamente com todos os dados contidos nela.
 *
 *$.***********************************************************************/
-
 DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada);
 
 
 /***********************************************************************
 *$FC Função: DIC_setDisciplinaCursada
 *$ED Descrição da função
-*	Define a disciplina que foi cursada
+*		Define a disciplina que foi cursada.
 *$FV Valor retornado
 *	DIC_CondRetOK 
-*   DIC_CondRetParamInvalido  
-*	CondRetRecebeuPonteiroNulo
+*   	DIC_CondRetParamInvalido  
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-*$P	disciplina: endereco do ponteio para tipo estruturado disciplina
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	disciplina: endereco do ponteio para tipo estruturado disciplina
+*
 $EAE Assertivas de entrada
-*	disciplina válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro referencia tipo estruturado DisciplinaCursada.
+*	segundo ponteiro referencia endereço de lista encadeada de tipo estruturado Disciplina não nulo.
+*
 *$EAE Assertivas de saída esperadas
-*pDisciplina->disciplina = disciplina
+*	ponteiro para tipo estruturado DisciplinaCursada contém a disciplina fornecida.
+*	valem as assertivas estruturais para tipos de dados estruturados.
 *
 *$.***********************************************************************/
 
@@ -149,18 +170,20 @@ DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, s
 *	define o grau da disciplina cursada fornecida
 *$FV Valor retornado
 *	DIC_CondRetOK 
-*   DIC_CondRetParamInvalido 
-*	CondRetRecebeuPonteiroNulo
+*   	DIC_CondRetParamInvalido 
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-$P	grau:: grau da disciplina ser inserido
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	grau: grau da disciplina a ser inserido
 $EAE Assertivas de entrada
-*	grau válido
+* valem as assertivas estruturais para tipos de dados estruturados.
+*	grau valido é caracterizado por um número (float) maior que zero (>0) e menor que 10 (<10), 
+*	limitando-se a uma única casa decimal.
+*
 *$EAE Assertivas de saída esperadas
-*pDisciplina->grau = grau
+*	 O grau do aluno foi inserido na disciplina cursada.
 *
 *$.***********************************************************************/
-
 DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau);
 
 /***********************************************************************
@@ -169,15 +192,20 @@ DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float g
 *	define o periodo da disciplina cursada fornecida
 *$FV Valor retornado
 *	DIC_CondRetOK 
-*   DIC_CondRetParamInvalido 
-*	CondRetRecebeuPonteiroNulo
+*  	DIC_CondRetParamInvalido 
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-$P	periodo: periodo da disciplina a ser inserida
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	periodo: periodo da disciplina a ser inserida
+*
 $EAE Assertivas de entrada
-*	periodo válido
+* valem as assertivas estruturais para tipos de dados estruturados.
+*	periodo valido é composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc.
+*
 *$EAE Assertivas de saída esperadas
-*pDisciplina->periodo = periodo
+* O período do aluno foi inserido na disciplina cursada.
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char *periodo);
@@ -188,15 +216,20 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 *	define a situação da disciplina cursada fornecida
 *$FV Valor retornado
 *	DIC_CondRetOK 
-*   DIC_CondRetParamInvalido 
-*	CondRetRecebeuPonteiroNulo
+*  	DIC_CondRetParamInvalido 
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 *$P	situacao: situação na disciplina a ser inserida
 $EAE Assertivas de entrada
-*	situacao válida
+* valem as assertivas estruturais para tipos de dados estruturados.
+*	situacao válida é composta de 2 caracteres não nulos, podendo tomar os valores:
+* "AP" para condição de aluno AProvado, "RN" para condição de aluno Reprovado por Nota 
+* e "RF" para	condição Reprovado por Falta.
+*
 *$EAE Assertivas de saída esperadas
-*pDisciplina->situacao = situacao
+* A situação do aluno foi inserida na disciplina cursada.
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
@@ -204,26 +237,33 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, cha
 /***********************************************************************
 *$FC Função: DIC_setTodosOsCampos
 *$ED Descrição da função
-*	insere todos as informações referentes ao aluno em uma disciplina, valendo
+*		insere todas as informações referentes ao aluno em uma disciplina
 *$FV Valor retornado
 *	DIC_CondRetOK
-*   DIC_CondRetParamInvalido
-*	CondRetRecebeuPonteiroNulo
+*	DIC_CondRetParamInvalido
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-*$P	situacao: situação na disciplina a ser inserida
-*$P	periodo: periodo da disciplina a ser inserida
-*$P	grau: grau da disciplina ser inserido
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	situacao: situação na disciplina a ser inserida
+*	$P	periodo: periodo da disciplina a ser inserida
+*	$P	grau: grau da disciplina ser inserido
+*
 $EAE Assertivas de entrada
-*	disiciplina valida
-*	situacao válida
-*	grau valido
-*	peridoo valido
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada a ser preenchida.
+*	segundo ponteiro referencia um tipo estruturado Disciplina não nulo.
+*	situacao válida é composta de 2 caracteres não nulos, podendo tomar os valores:
+* "AP" para *	condição de aluno AProvado, "RN" para condição de aluno Reprovado por Nota 
+* e "RF" para *	condição Reprovado por Falta.
+*	periodo valido é composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc.
+*	grau valido é caracterizado por um número (float) maior que zero (>0) e menor que 10 (<10), 
+*	limitando-se a uma única casa decimal.
+*
 *$EAE Assertivas de saída esperadas
-*	pDisciplina->situacao = situacao
-*	pDisciplina->grau = grau
-*	pDisciplina->disciplina = disciplina
-*	pDisciplina->periodo = periodo
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	Todos os dados do aluno foram preenchidos na disciplina cursada com êxito.
 *
 *$.***********************************************************************/
 
@@ -232,15 +272,19 @@ DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, 
 /***********************************************************************
 *$FC Função: DIC_getDisciplina
 *$ED Descrição da função
-*	pega a disciplina do struct DisciplinaCursada
+*	pega a disciplina do do tipo estruturado DisciplinaCursada
 *$FV Valor retornado
 *	DIC_CondRetOK
 *	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-*$P	disciplina: ponteiro para a variável que receberá o struct
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	disciplina: ponteiro para a variável que receberá o struct
 $EAE Assertivas de entrada
-*	pDisciplinaCursada válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada.
+*	segundo ponteiro referencia um tipo estruturado Disciplina.
+*
 *$EAE Assertivas de saída esperadas
 *	**disciplina = endereço de pDisciplinaCursada->disciplina
 *$.***********************************************************************/
@@ -250,17 +294,20 @@ DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, str
 /***********************************************************************
 *$FC Função: DIC_getGrau
 *$ED Descrição da função
-*	insere o grau de um aluno em uma disciplina em particular num ponteiro para uma variável float
+*	obtem o grau de um aluno em uma disciplina 
 *$FV Valor retornado
 *	DIC_CondRetOK
-*	CondRetRecebeuPonteiroNulo
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-*$P	grau: ponteiro para a variável float que receberá o grau
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	grau: ponteiro para a variável float que receberá o grau
 $EAE Assertivas de entrada
-*	pDisciplinaCursada válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada.
+*
 *$EAE Assertivas de saída esperadas
-*	*grau = pDisciplinaCursada->grau
+*	retorna endereço para valor do grau de aluno em disciplina cursada por referência.
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_getGrau(DIC_tpDisciplinaCursada * pDisciplinaCursada, float* grau);
@@ -268,18 +315,21 @@ DIC_tpCondRet DIC_getGrau(DIC_tpDisciplinaCursada * pDisciplinaCursada, float* g
 /***********************************************************************
 *$FC Função: DIC_getSituacao
 *$ED Descrição da função
-*	insere a situação de um aluno em uma disciplina em um array de caracteres
+*	obtém a situação de um aluno em uma disciplina
 *$FV Valor retornado
 *	DIC_CondRetOK
-*   DIC_CondRetParamInvalido
-*	CondRetRecebeuPonteiroNulo
+*   	DIC_CondRetParamInvalido
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
-*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
-*$P	situacao: situação na disciplina a ser inserida
+*	$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*	$P	situacao: ponteiro para array situação na disciplina
 $EAE Assertivas de entrada
-*	pDisciplinaCursada válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada.
+*
 *$EAE Assertivas de saída esperadas
-*	*situacao = pDisciplinaCursada->situacao
+*	retorna endereço para situacao do aluno em disciplina cursada por referência
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
@@ -287,7 +337,7 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 /***********************************************************************
 *$FC Função: DIC_getPeriodo
 *$ED Descrição da função
-*	insere o período que um aluno cursou uma disciplina em um array de caracteres
+*	obtem o período que um aluno cursou uma disciplina
 *$FV Valor retornado
 *	DIC_CondRetOK
 *	DIC_CondRetRecebeuPonteiroNulo
@@ -295,9 +345,13 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 *$P	periodo: ponteiro para ym array de caracteres que receberá o período da disciplina cursada
 $EAE Assertivas de entrada
-*	pDisciplinaCursada válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada.
+*
 *$EAE Assertivas de saída esperadas
-*	*periodo = pDisciplinaCursada->periodo
+*	retorna período em que uma disciplina foi cursada pelo aluno por referência
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
@@ -309,7 +363,7 @@ DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char*
 *	ponteiro para disciplina cursada, situação do aluno na disciplina , período cursado e grau referente.
 *$FV Valor retornado
 *	DIC_CondRetOK
-*	CondRetRecebeuPonteiroNulo
+*	DIC_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 *$P	disciplina: endereco do ponteio para tipo estruturado disciplina a ser inserida.
@@ -317,14 +371,14 @@ DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char*
 *$P	periodo: periodo da disciplina a ser retornado
 *$P	grau: grau da disciplina ser retornado
 $EAE Assertivas de entrada
-*	pDisciplinaCursada válida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	primeiro ponteiro corrente referenecia um endereço não nulo para tipo 
+* estruturado DisciplinaCursada.
+*
 *$EAE Assertivas de saída esperadas
-*	*grau = pDisciplinaCursada->grau
-*	*periodo = pDisciplinaCursada->periodo
-*	*situacao = pDisciplinaCursada->situacao
-*	*disciplina = pDisciplinaCursada->disciplina
+*	foram retornados todos os dados referentes ao aluno na disciplina cursada por referência
+*
 *$.***********************************************************************/
-
 DIC_tpCondRet DIC_getTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina *disciplina, char *situacao, char *periodo, float *grau);
 
 #undef DISCIPLINACURSADA_EXT
