@@ -216,7 +216,6 @@ HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, floa
 *	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
 *	HIS_CondRetOK 
-*   HIS_CondRetParamInvalido
 *   HIS_CondRetErroAoAbrirArquivo
 *   HIS_CondRetRecebeuPonteiroNulo
 *$EP Parametros
@@ -231,8 +230,6 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico,  struct list* d
 *	Obtem as disciplinas que foram trancadas 
 *$FV Valor retornado
 *	HIS_CondRetOK 
-*   HIS_CondRetParamInvalido
-*   HIS_CondRetErroAoAbrirArquivo
 *   HIS_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	disciplinasCursadas: List composta pelas disciplinas cursadas
