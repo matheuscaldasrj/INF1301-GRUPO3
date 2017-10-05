@@ -23,8 +23,12 @@
 *
 *
 *$HA Alterações:
-*       Versao       Autor         Data            Observacoes
-*       1.0.0         mc        30/09/2017   	Inicio do desenvolvimento
+*       Versao		Autor	Data            Observacoes
+*       1.0.0		mc	30/09/2017   	Inicio do desenvolvimento
+*	1.0.1		mc	01/10/2017	Implementação da função criarHistorico
+*	1.0.2		gc	04/10/2017	Implementação getCrDoPeriodo, getCrTotal, getHistoricoCompleto e getHistoricoDoPeriodo
+*	1.0.3		gc	05/10/2017	Implementação getDisciplinasReprovadoPorFalta
+*	1.0.4		lf	05/10/2017	Padronização e criação de documentação voltada ao cliente
 *
 *$.***************************************************************************/
 
