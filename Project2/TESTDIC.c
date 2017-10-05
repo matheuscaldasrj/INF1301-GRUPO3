@@ -321,7 +321,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararFloat( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
+			return TST_CompararString( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
 		}
 
 
