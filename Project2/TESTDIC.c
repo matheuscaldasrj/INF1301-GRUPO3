@@ -33,6 +33,7 @@
 
 #include    <string.h>
 #include    <stdio.h>
+#include	<stdlib.h>
 
 #include    "TST_ESPC.H"
 
@@ -117,6 +118,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 char situacao[3];
 	 char periodo[7];
 	 float grau;
+	 char grauStr[5];
 	 char ValorObtidoString[3];
 	 float ValorObtidoFloat = -1;
 	 double tolerancia = 0.5;
@@ -152,8 +154,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	 if( strcmp( ComandoTeste, CRIAR_DIC_CMD ) == 0 )
 	 {
 
-		 NumLidos = LER_LerParametros( "issfi", &indexDC, situacao, periodo, &grau, &DIC_CondRetEsperada);
-
+		 NumLidos = LER_LerParametros( "isssi", &indexDC, situacao, periodo, grauStr, &DIC_CondRetEsperada);
+		
+		 grau = atof(grauStr);
 		 if ( NumLidos != 5)
 		 {
 			 return TST_CondRetParm;

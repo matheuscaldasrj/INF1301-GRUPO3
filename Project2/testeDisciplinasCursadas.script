@@ -30,14 +30,14 @@
 =declararparm codigoB string "\0"
 
 
-=declararparm	situacao	string "a"
-=declararparm	periodo		string "2010.2"
-=declararparm	grau		float 5.0
+=declararparm	situacao1	string "AP"
+=declararparm	periodo1		string "2010.2"
+=declararparm	grau1		string "5.3"
 
 == Criar disciplina por parametro
-=gerapar 0 nome codigo creditoA bibliografia ementa 2
+=gerapar nome codigo creditoA bibliografia ementa 2
 
 == Crar disciplina cursada
-=criarDIC 0 situacao periodo grau
+=criarDIC 0 "RN" periodo1 grau1 OK
 
 //fim
