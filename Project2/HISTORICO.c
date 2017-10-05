@@ -330,24 +330,6 @@ HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, 
 }
 /* Fim funcao: HIS get historico completo */
 
-/**************************************************************************
- *                                                                        *
- * Funcao interna: HIS ordena removeHistorico                                            	  *
- **************************************************************************/
-
-//List* HIS_ordenaHistorico(List* disciplinasCursadas)
-//{
-//	List* tmp, listaOrdenada;
-//	tmp =  disciplinasCursadas->next;
-//
-//	while(tmp != NULL) 
-//	{
-//		int valPeriodoCursor = 00
-//		if (get_val_cursor(disciplinasCursadas)->periodo )
-//
-//		tmp = tmp->next;
-//	}
-//}
 
 /**************************************************************************
  *                                                                        *
