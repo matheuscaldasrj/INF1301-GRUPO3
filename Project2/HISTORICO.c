@@ -14,7 +14,9 @@
  *  $HA Historico de evolucao:
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       28/09/17			Criacao inicial do modulo
-  *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
+ *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
+ *	0.0.3		  gc       04/09/17			Implementacao de getHistrico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
+ *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -438,39 +440,73 @@ HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, 
 
 	return HIS_CondRetOK;
 }
-/* Fim funcao: HIS get historico completo */
-
 
 /**************************************************************************
  *                                                                        *
  * Funcao: HIS imprimeHistorico                                            	  *
  **************************************************************************/
-//HIS_tpCondRet HIS_imprimeHistorico(List* disciplinasCursadas)
-//{
-//	if(disciplinasCursadas == NULL)
-//		HIS_CondRetRecebeuPonteiroNulo;
-//	
-//	FILE*f = fopen("historico.txt", "w");
-//	if (f == NULL)
-//	{
-//		printf("Error opening file!\n");
-//		return HIS_CondRetErroAoAbrirArquivo ;
-//	}
-//
-//	List* tmp;
-//	tmp =  next(disciplinasCursadas);
-//	while(tmp != NULL) 
-//	{
-//		fprintf(f, "Periodo: " + get_val_cursor(tmp)->periodo);
-//		fprintf(f, get_val_cursor(tmp)->disciplina->nome + ": " + get_val_cursor(tmp)->grau + "  " + get_val_cursor(tmp)->situacao);
-//		tmp = tmp->next;
-//	}
-//	
-//	fclose(f);
-//
-//	return HIS_CondRetOK;
-//}
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplinasCursadas)
+{
+	// Inicialização de variáveis
+	int response = -1;
+	int creditos = 0;
+	float grau = 0; 
+
+	char* situacao = (char*)malloc(sizeof(char) * 3);
+	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
+	char* codigoDaDisc = (char*)malloc(sizeof(char) * 8);
+
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
+		FILE* f = fopen("historico.txt", "w");
+	if (f == NULL)
+	{
+		printf("Error opening file!\n");
+		return HIS_CondRetErroAoAbrirArquivo ;
+	}
+
+	// Verificação dos parâmetros
+	if(disciplinasCursadas == NULL)
+		HIS_CondRetRecebeuPonteiroNulo;
+
+	// Apenas pra alocar o struct na memória
+	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
+	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+	
+
+	while(response != LIS_CondRetListaVazia) 
+	{
+		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+		DIC_getDisciplina(disciplinaCursada, disciplina);
+
+		DIC_getGrau(disciplinaCursada, &grau);
+		DIC_getPeriodo(disciplinaCursada, periodoDisc);
+		DIS_get_creditos(disciplina, &creditos);
+		DIS_get_codigo(disciplina, &codigoDaDisc);
+
+		fprintf(f, "Periodo: " + *periodoDisc);
+		fprintf(f, "\n");
+		fprintf(f, codigoDaDisc);
+		fprintf(f, ": ");
+		fprintf(f, "%f", grau);
+		fprintf(f, "  ");
+		fprintf(f, situacao);
+		fprintf(f, "\n\n");
+	}
+	
+	fclose(f);
+
+	free(situacao);
+	free(periodoDisc);
+	free(codigoDaDisc);
+
+	return HIS_CondRetOK;
+}
 
  /* Fim funcao: HIS imprime Historico */
+
 
 /********** Fim do modulo de implementacao: Modulo Historico **********/
