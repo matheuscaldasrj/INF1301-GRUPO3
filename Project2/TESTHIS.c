@@ -38,6 +38,7 @@
 #include    "LERPARM.H"
 
 #include    "HISTORICO.H"
+#include	"listas.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
@@ -60,8 +61,10 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 
 	 int indexH; //indice Historico
 	 int  NumLidos = -1 ;
+	 int LIST_CondRetObtido = -999;
 	 char periodo[7];
 	 float cr;
+	 List* list;
 
 
 	 TST_tpCondRet Ret;
@@ -100,11 +103,24 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   ////////////////////////////////////////////
 	   ////////////////////////////////////////////
 
-	   else if( strcmp( ComandoTeste , GET_HIS_PRD_CMD ) == 0 )
+	   else if( strcmp( ComandoTeste , GET_HIS_CMPT_CMD ) == 0 )
 	   {
-		  
-		   //----------------FAZER----------------//
+		   NumLidos = LER_LerParametros("ii", &indexH, &HIS_CondRetEsperada);
+		   if (NumLidos != 2) {
+			   return TST_CondRetParm;
+		   }
 
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+
+		   HIS_CondRetObtido = HIS_getHistoricoCompleto(pHistorico[indexH], list);		   
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/

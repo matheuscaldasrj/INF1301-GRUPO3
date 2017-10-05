@@ -1,4 +1,4 @@
-//Script:     TesteHistorico.script
+// Script:     TesteHistorico.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
 // Proposito: Testar as funcoes do modulo Historico
@@ -7,8 +7,8 @@
 //  Autores: mc - Matheus Caldas
 //	     bp - Bruno Pedrazza
 //	     pg - Pedro Gomes
-//	     va - Vin√≠cius Arcoverde
-//	     lf - Leon Fran√ßa
+//	     va - VinÌcius Arcoverde
+//	     lf - Leon FranÁa
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
@@ -19,12 +19,20 @@
 
 ==Declarar os conteudos de Historico
 =declararparm  CR1	string "6.2"
-//LEMBRAR QUE AS NOTAS EST√ÉO ENTRANDO COMO STRING
+//LEMBRAR QUE AS NOTAS EST√O ENTRANDO COMO STRING
 
 =declararparm	periodo1	string "2010.2"
 
 == Criar Historico
 =criaHIS 0 OK
+
+== Pegar historico completo
+=getHisCompleto 0 OK
+=getHisCompleto 1 OK
+=recuperar
+=getHisCompleto 1 PonteiroNulo
+=getHisCompleto 0 ParamInvalido
+=recuperar
 
 == Remover Historico
 =removeHIS 0 OK
