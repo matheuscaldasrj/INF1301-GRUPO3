@@ -114,7 +114,7 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
 *$P disciplinas: ponteiro para uma lista onde serão armazenadas as disciplinas do período
 *$.***********************************************************************/
 
-HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas);
+HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, struct list* disciplinas);
 
 /***********************************************************************
 *$FC Função: HIS_getCrTotal
