@@ -255,5 +255,19 @@ DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada *pDisciplinaCursada, char*
 }
 /* Fim funcao: DIC get situacao da disciplina cursada */
 
+/**************************************************************************
+*                                                                        *
+* Funcao: DIC get periodo da disciplina cursada                         *
+**************************************************************************/
+DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada *pDisciplinaCursada, char* periodo)
+{
+	if (pDisciplinaCursada == NULL)
+		return DIC_CondRetRecebeuPonteiroNulo;
+
+	strcpy(periodo, pDisciplinaCursada->periodo);
+	return DIC_CondRetOK;
+}
+/* Fim funcao: DIC get situacao da disciplina cursada */
+
 
 /********** Fim do modulo de implementacao: Modulo DisciplinaCursada **********/

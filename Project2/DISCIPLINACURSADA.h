@@ -207,7 +207,19 @@ DIC_tpCondRet DIC_getGrau(DIC_tpDisciplinaCursada * pDisciplinaCursada, float* g
 
 DIC_tpCondRet DIC_getSituacao(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
+/***********************************************************************
+*$FC Função: DIC_getPeriodo
+*$ED Descrição da função
+*	insere o período que um aluno cursou uma disciplina em um array de caracteres
+*$FV Valor retornado
+*	DIC_CondRetOK
+*	DIC_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+*$P	periodo: ponteiro para ym array de caracteres que receberá o período da disciplina cursada
+*$.***********************************************************************/
 
+DIC_tpCondRet DIC_getPeriodo(DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
 
 #undef DISCIPLINACURSADA_EXT
 
