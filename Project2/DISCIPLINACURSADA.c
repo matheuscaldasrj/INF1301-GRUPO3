@@ -14,12 +14,12 @@
  *  $HA DisciplinaCursada de evolucao:
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       30/09/17			Criacao inicial do modulo
- *	1.0.1         va        30/09/2017   	Implementaçacao das funcoes de criar e
-												set situacao, grau e periodo.
-*	1.0.2		  va       03/09/17			Correção de parametros do criarDisciplina e comparando string da situacao
-	1.0.3		 bp        04/10/17		    ajustando condicoes de retorno criaDisciplinaCursada
-	1.0.4		 bp        05/10/17			Novas condicoes de erro na setCodigo
-
+ *	1.0.1         va       30/09/2017   	Implementaçacao das funcoes de criar e
+											set situacao, grau e periodo.
+*	1.0.2		  va        03/09/17		Correção de parametros do criarDisciplina e comparando string da situacao
+	1.0.3		 bp         04/10/17		ajustando condicoes de retorno criaDisciplinaCursada
+	1.0.4		 bp         05/10/17		Novas condicoes de erro na setCodigo
+*	1.0.5		  mc		05/09/2017		Updating getDisciplina header
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo DisciplinaCursada.
@@ -207,7 +207,7 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada *pDisciplinaCursada, char
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
-	if (strlen(situacao) > 3 ||
+	if (strlen(situacao) != 2 ||
 		( strcmp(situacao, "AP") != 0 && strcmp(situacao, "RN") != 0 && strcmp(situacao, "RF") && strcmp(situacao, "TR")) != 0){
 		return DIC_CondRetParamInvalido;
 	}
@@ -252,12 +252,12 @@ DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, 
  * Funcao: DIC get disicplina da disciplina cursada                                                *
  **************************************************************************/
 
-DIC_tpCondRet DIC_getDisciplina (DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina)
+DIC_tpCondRet DIC_getDisciplina (DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina **disciplina)
 {
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 
-	disciplina = pDisciplinaCursada->disciplina;
+	*disciplina = pDisciplinaCursada->disciplina;
 
     return DIC_CondRetOK;
 } 

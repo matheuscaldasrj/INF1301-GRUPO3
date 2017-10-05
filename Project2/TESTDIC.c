@@ -23,6 +23,7 @@
 *	2.6		BP 		05/10/2017		Adicionando teste de getPERIODO
 *	2.7		PG		05/10/2017		Adicionando base de Get Todos parametros Disc Cursada
 *	2.8		PG		05/10/2017		Adicionado Remove DISCIPLINA
+*	2.9		mc		05/10/2017		Adicionado Testes da getDisciplina
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -46,7 +47,6 @@
 
 #include    "disciplina.h"
 
-
 /* Tabela dos nomes dos comandos de teste específicos */
 
 /* Disciplinas */
@@ -59,7 +59,8 @@
 
 #define    	CRIAR_DIC_CMD       "=criarDIC"
 #define		REMOVE_DIC_CMD		"=removeDIC"
-#define		SET_DIC_CMD			"=setDIC"
+#define		SET_DIC_CMD			"=setDIS"
+#define		GET_DIS_CMD			"=getDIS"
 #define		SET_GRAU_DIC_CMD	"=setGrauDIC"
 #define		GET_GRAU_DIC_CMD	"=getGrauDIC"
 #define		SET_PER_DIC_CMD		"=setPerDIC"
@@ -88,6 +89,7 @@
 *
 ***********************************************************************/
 #define MAX_DISC 15
+
 
 Disciplina *pDisciplinas[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
@@ -118,14 +120,15 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
         		/* inicializa para qualquer coisa */
 
 	 int indexDC;
-	 char situacao[3];
-	 char periodo[7];
+	 char situacao[10];
+	 char periodo[10];
 	 float grau;
 	 char grauStr[5];
-	 char ValorObtidoString[3];
+	 char ValorObtidoStringSituacao[10];
+	 char ValorObtidoStringPeriodo[10];
 	 float ValorObtidoFloat = -1;
 	 double tolerancia = 0.5;
-
+	 struct disciplina *disciplinaLida;
 
 	TST_tpCondRet Ret ;
 
@@ -295,6 +298,30 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 			return TST_CompararFloat( grau, ValorObtidoFloat, tolerancia, "Conteudo errado ao obter grau.");
 		}
 
+		else if( strcmp (ComandoTeste, GET_DIS_CMD) == 0)
+		{	
+			
+			NumLidos = LER_LerParametros("iii", &indexDC, &indexDI, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getDisciplina(pDisciplinaCursada[indexDC], &disciplinaLida);
+
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Grau de uma Disciplina Cursada.");
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararPonteiro(pDisciplinas[indexDI], disciplinaLida,"Conteudo errado pegar Disciplina de DisciplinaCursada");
+	
+		}
+
 		///////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 
@@ -307,7 +334,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoString);
+			DIC_CondRetObtido = DIC_getSituacao(pDisciplinaCursada[indexDC], ValorObtidoStringSituacao);
 
 			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
 
@@ -316,7 +343,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararString( situacao, ValorObtidoString, "Conteudo errado ao pegar a Situacao de uma Disciplina Cursada.");
+			return TST_CompararString( situacao, ValorObtidoStringSituacao, "Conteudo errado ao pegar a Situacao de uma Disciplina Cursada.");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -331,7 +358,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 				return TST_CondRetParm;
 			}
 
-			DIC_CondRetObtido = DIC_getPeriodo(pDisciplinaCursada[indexDC], ValorObtidoString);
+			DIC_CondRetObtido = DIC_getPeriodo(pDisciplinaCursada[indexDC], ValorObtidoStringPeriodo);
 
 			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Periodo de uma Disciplina Cursada.");
 
@@ -340,7 +367,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararString( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
+			return TST_CompararString( periodo, ValorObtidoStringPeriodo,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
 		}
 	 
 	 

@@ -440,6 +440,56 @@ HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, 
 
 	return HIS_CondRetOK;
 }
+ /* Fim funcao: HIS reprovados por falta */
+
+/**************************************************************************
+*                                                                        *
+* Funcao: HIS get disciplinas trancadas                    	  *
+**************************************************************************/
+
+HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico, List* disciplinas)
+{
+	// Inicialização de variáveis
+	int response = -1;
+	char* situacao = (char*)malloc(sizeof(char) * 3);
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
+	// Verificação dos parâmetros
+	if (pHistorico == NULL || disciplinas == NULL)
+		return HIS_CondRetRecebeuPonteiroNulo;
+
+	// Copia o valor de pHistorico para uma variável local
+	copiaHistorico = *pHistorico;
+
+	// Apenas pra alocar o struct na memória
+	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
+	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+
+	// Instancia uma nova lista vazia
+	createList(&disciplinasPeriodo);
+
+	// Percorre a lista até que ela esteja vazia
+	while (response != LIS_CondRetListaVazia) {
+		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+		DIC_getSituacao(disciplinaCursada, situacao);
+
+		if (strcmp(situacao, "TR") == 0) {
+			push_back(disciplinasPeriodo, disciplinaCursada);
+		}
+	}
+
+	disciplinas = disciplinasPeriodo;
+	free(situacao);
+	free(disciplina);
+	free(disciplinaCursada);
+	free(disciplinasPeriodo);
+
+	return HIS_CondRetOK;
+}
+ /* Fim funcao: HIS trancadas */
 
 /**************************************************************************
  *                                                                        *
@@ -482,7 +532,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	while(response != LIS_CondRetListaVazia) 
 	{
 		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, disciplina);
+		DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		DIC_getGrau(disciplinaCursada, &grau);
 		DIC_getPeriodo(disciplinaCursada, periodoDisc);
@@ -504,6 +554,10 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	free(situacao);
 	free(periodoDisc);
 	free(codigoDaDisc);
+	free(situacao);
+	free(disciplina);
+	free(disciplinaCursada);
+	free(disciplinasPeriodo);
 
 	return HIS_CondRetOK;
 }

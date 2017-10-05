@@ -48,7 +48,7 @@
 #define	GET_HIS_CMPT_CMD	"=getHisCompleto"
 #define	GET_HIS_PRD_CMD		"=getHisPeriodo"
 #define	GET_CR_TOTAL_CMD	"=getCrTotal"
-#define	GET_CR_PRD_CMD		"=getCrPeioro"
+#define	GET_CR_PRD_CMD		"=getCrPeriodo"
 #define IMPRIME_HIST_CMD	"=imprimeHist"
 
 #define MAX 15

@@ -29,6 +29,7 @@
 *	1.0.2		gc	04/10/2017	Implementação getCrDoPeriodo, getCrTotal, getHistoricoCompleto e getHistoricoDoPeriodo
 *	1.0.3		gc	05/10/2017	Implementação getDisciplinasReprovadoPorFalta
 *	1.0.4		lf	05/10/2017	Padronização e criação de documentação voltada ao cliente
+*	1.0.4		va	05/10/2017	getdisplinas trancadas e imprimehistorico
 *
 *$.***************************************************************************/
 
@@ -216,15 +217,48 @@ HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, f
 *	Imprime em um arquivo toda a informação contida em um histórico
 *$FV Valor retornado
 *	HIS_CondRetOK 
-*   HIS_CondRetParamInvalido
 *   HIS_CondRetErroAoAbrirArquivo
 *   HIS_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P pHistorico: Endereço do ponteiro para tipo estruturado historico.
 *$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para arrays de caractéres
+*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
+*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc.
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para listas encadeadas.
+*	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
 *$.***********************************************************************/
 
-HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, struct list* disciplinasCursadas);
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico,  struct list* disciplinasCursadas);
+
+/***********************************************************************
+*$FC Função: HIS_getDisciplinasTrancadas
+*$ED Descrição da função
+*	Obtem as disciplinas que foram trancadas 
+*$FV Valor retornado
+*	HIS_CondRetOK 
+*   HIS_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para arrays de caractéres
+*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
+*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc.
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para listas encadeadas.
+*	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
+*
+
+*$.***********************************************************************/
+HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct list* disciplinas);
 
 /***********************************************************************
 *$FC Função: HIS_removeHistorico
@@ -237,6 +271,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, struct list* di
 *$EP Parametros
 *$P	disciplinasCursadas: List composta pelas disciplinas cursadas
 *$.***********************************************************************/
+
 
 #undef HISTORICO_EXT
 
