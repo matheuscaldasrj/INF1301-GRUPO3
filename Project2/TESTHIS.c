@@ -16,6 +16,7 @@
 *      Versão  Autor    Data     	Observações
 *	1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
 *	1.5		PG		05/10/2017		Adicionando Criação e Remoção
+*   1.7     GC		05/10/2017		Adicionando geraPar, geraDisc, getHistoricoCompleto, getHistoricoPeriodo, getCrTotal, getCrPeriodo e imprimeHistorico
 *	
 *       1.00	BP   	01/10/2017  	Criação do arquivo básico de testes
 *$ED Descrição do módulo
@@ -40,11 +41,17 @@
 #include    "HISTORICO.H"
 #include	"listas.h"
 #include	"disciplina.h"
+#include	"DISCIPLINACURSADA.h"
+
+
+#define GERA_PAR_DIS_CMD		"=gerapar"
+#define GERA_DISC_CRIADA_CMD	"=geradisc"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define	CRIA_HIST_CMD		"=criaHIS"
 #define	REMOVE_HIST_CMD		"=removeHIS"
+#define ADIC_DISC_HIS_CMD	"=adicDisc"
 #define	GET_HIS_CMPT_CMD	"=getHisCompleto"
 #define	GET_HIS_PRD_CMD		"=getHisPeriodo"
 #define	GET_CR_TOTAL_CMD	"=getCrTotal"
@@ -62,17 +69,50 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 											/* inicializa para qualquer coisa */
 
 	 int i = 0;
-	 int indexH; //indice Historico
+	 int indexH, indexDI, indexDC, ValorDado3Creditos, DIS_CondRetEsperada, DIS_CondRetObtido, DIC_CondRetEsperada, DIC_CondRetObtido;
 	 int  NumLidos = -1 ;
 	 int LIST_CondRetObtido = -999;
-	 char periodo[7];
-	 float cr;
+	 char periodo[10], ValorDado1Nome[20], ValorDado2Codigo[20], ValorDado4Bib[20], ValorDado5Ementa[20], situacao[10], grauStr[10];
+	 float cr, grau;
 	 List* list;
-	 Disciplina* disciplinas[5];
+	 Disciplina* pDisciplinas[10];
+	 DIC_tpDisciplinaCursada* pDisciplinaCursada[10];
 
 	 TST_tpCondRet Ret;
 
-	   if ( strcmp( ComandoTeste , CRIA_HIST_CMD ) == 0 )
+	   if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
+	   {
+
+			 NumLidos = LER_LerParametros( "ississi" , &indexDI, &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &DIS_CondRetEsperada ) ;
+            if ( NumLidos != 7 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+			DIS_CondRetObtido = DIS_gera_param( &pDisciplinas[indexDI], ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+
+            return TST_CompararInt( DIS_CondRetEsperada , DIS_CondRetObtido ,
+                                    "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
+
+       } /* fim ativa: Testar DIS Gerar disciplina por parametros externos */
+
+	   else if( strcmp( ComandoTeste, GERA_DISC_CRIADA_CMD ) == 0 )
+		 {
+
+			 NumLidos = LER_LerParametros( "iisssi", &indexDC, &indexDI, situacao, periodo, grauStr, &DIC_CondRetEsperada);
+		
+			 grau = atof(grauStr);
+			 if ( NumLidos != 6)
+			 {
+				 return TST_CondRetParm;
+			 } /* if */
+
+			 DIC_CondRetObtido = DIC_criarDisciplinaCursada (&pDisciplinaCursada[indexDC], pDisciplinas[indexDI], situacao, periodo, grau);
+
+			 return TST_CompararInt ( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao criar Disciplina Cursada.");
+		 }
+
+	   else if ( strcmp( ComandoTeste , CRIA_HIST_CMD ) == 0 )
 	   {
 			NumLidos = LER_LerParametros("ii", &indexH, &HIS_CondRetEsperada);
 			if( NumLidos != 2)
@@ -212,6 +252,25 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   HIS_CondRetObtido = HIS_imprimeHistorico(pHistorico[indexH], list);
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
+	   }
+
+	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
+	   {
+		   NumLidos = LER_LerParametros("iii", &indexH, &indexDC, &HIS_CondRetEsperada);
+		   if (NumLidos != 3) {
+			   return TST_CondRetParm;
+		   }
+
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+		   HIS_CondRetObtido = HIS_adicionaDisciplinaCursada(pHistorico[indexH], pDisciplinaCursada[indexDC]);
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao adicionar disciplina cursada ao historico");
 	   }
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
