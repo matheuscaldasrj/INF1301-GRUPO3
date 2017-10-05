@@ -72,5 +72,11 @@
 =criarDIC 2 2 situacao3 periodo3 grau3 DIS_CondRetOK
 =criarDIC 3 3 situacao4 periodo4 grau4 DIS_CondRetOK
 
+== Pega Situação de Disciplina Cursada
+=getSitDic 0 "RN" 0
+
+== Pega Grau de Disciplina Cursada
+=getGrauDic 0 grau1 0
+
 
 //fim
