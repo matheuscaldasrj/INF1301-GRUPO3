@@ -21,6 +21,7 @@
 *	2.1		PG		03/10/2017		Correção de parametros de criar disciplinas
 *	2.5		PG		03/10/2017		Correção de diversos bugs graves. teste.script funcionando.
 *	2.6		BP 		05/10/2017		Adicionando teste de getPERIODO
+*	2.7		PG		05/10/2017		Adicionando base de Get Todos parametros Disc Cursada
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -206,7 +207,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp (ComandoTeste, SET_GRAU_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("isi", &indexDC, grauStr, &DIC_CondRetEsperada);
+
+			grau = atof(grauStr);
 
 			if( NumLidos != 3)
 			{
@@ -324,7 +327,33 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 			return TST_CompararString( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
 		}
+	 
+	 
+		/* PROTOTIPO GET TODOS COMPONENTES 
+		
+		
+		else if( strcmp (ComandoTeste, GET_TDS_CMPS_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("iisssi", &indexDC, &indexDI, situacao, periodo, grauStr, &DIC_CondRetEsperada);
+			grau = atof(grauStr);
+			if( NumLidos != 6)
+			{
+				return TST_CondRetParm;
+			}
 
+			DIC_CondRetObtido = DIC_getTodosOsCampos(pDisciplinaCursada[indexDC], pDisciplinas[indexDI], ValorObtidoString, ValorObtidoString1, &ValorObtidoFloat);
+
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar todos parametros de uma Disciplina Cursada.");
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+				return TST_Comparar... ?
+
+		}*/
 
 	 return TST_CondRetNaoConhec ;
 

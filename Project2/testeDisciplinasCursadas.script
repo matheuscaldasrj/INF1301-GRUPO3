@@ -72,11 +72,16 @@
 =criarDIC 2 2 situacao3 periodo3 grau3 DIC_CondRetOK
 =criarDIC 3 3 situacao4 periodo4 grau4 DIC_CondRetOK
 
-== Pega Situação de Disciplina Cursada
-=getSitDIC 0 situacao1 0
+== Set Disciplina do param1 em DisciplinasCursadas de index param2
+=setDIC 0 2 DIC_CondRetOK
 
+== Pega Situação de Disciplina Cursada
+=getSitDIC 0 situacao1 DIC_CondRetOK
+
+== Seta grau da disciplina Cursada
+=setGrauDIC 2 "9.6" DIC_CondRetOK
 == Pega Grau de Disciplina Cursada
-=getGrauDIC 0 grau1 0
+=getGrauDIC 2 "9.6" DIC_CondRetOK
 
 == Remove DisciplinaCursada
 =removeDIC 2 DIC_CondRetOK
