@@ -226,7 +226,7 @@ $EAE Assertivas de entrada
 *
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float grau);
+DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina *disciplina, char *situacao, char *periodo, float grau);
 
 /***********************************************************************
 *$FC Função: DIC_getDisciplina
@@ -244,7 +244,7 @@ $EAE Assertivas de entrada
 *	*disciplina = pDisciplinaCursada->disciplina
 *$.***********************************************************************/
 
-DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina);
+DIC_tpCondRet DIC_getDisciplina(DIC_tpDisciplinaCursada *pDisciplinaCursada, struct disciplina  *disciplina);
 
 /***********************************************************************
 *$FC Função: DIC_getGrau

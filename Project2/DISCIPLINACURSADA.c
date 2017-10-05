@@ -96,7 +96,7 @@ DIC_tpCondRet DIC_criarDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplina
 			return retornoRemove;
 		else return retornoSet;
 	}
-	retornoSet = IC_setSituacao(*pDisciplinaCursada, situacao);
+	retornoSet = DIC_setSituacao(*pDisciplinaCursada, situacao);
 	if (retornoSet != DIC_CondRetOK) {
 		retornoRemove = DIC_removeDisciplinaCursada (pDisciplinaCursada);
 		if (retornoRemove != DIC_CondRetOK)
