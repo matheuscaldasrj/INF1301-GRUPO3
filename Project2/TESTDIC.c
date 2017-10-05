@@ -189,17 +189,16 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp ( ComandoTeste, SET_DIC_CMD) == 0)
 		{
-			//NumLidos = LER_LerParametros("iii", &indexDC, &pDisciplina, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("iii", &indexDI, &indexDC, &DIC_CondRetEsperada);
 
 			if( NumLidos != 3)
 			{
 				return TST_CondRetParm;
 			}
 
-			//DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplina);
+			DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplinas[indexDI]);
 
-			//return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
-			return TST_CompararInt( 1, 1, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
 
 		}
 
