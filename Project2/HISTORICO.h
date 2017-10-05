@@ -10,12 +10,12 @@
 *	Gestor:  DI/PUC-Rio
 *	Letras Identificadoras: HIS
 *	Autores: 
-*		 mc - Matheus Caldas
-*		 bp - Bruno Pedrazza
-*	     pg - Pedro Gomes
-*	     va - Vinícius Arcoverde
-*	     lf - Leon França
-*	     gc - Gabriel Costa
+*		mc - Matheus Caldas
+*		bp - Bruno Pedrazza
+*		pg - Pedro Gomes
+*		va - Vinícius Arcoverde
+*		lf - Leon França
+*		gc - Gabriel Costa
 *
 *$ED Descricao do modulo
 *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -74,15 +74,21 @@ typedef enum {
 /***********************************************************************
 *$FC Função: HIS_criarHistorico
 *$ED Descrição da função
-*	Cria um historico, chama todas as funções set para preencher todas as dependências nescessárias.
+*	Cria um historico, chamando todas as funções set para preencher todas as dependências nescessárias.
 *$FV Valor retornado
 *	HIS_CondRetOK
 *	HIS_CondRetFaltouMemoria
 *	HIS_CondRetRecebeuPonteiroNulo
+*	HIS_CondRetProblemaListaDisciplinas
 *	HIS_CondRetParamInvalido
 *$EP Parametros
-*$P	pHistorico: Ponteiro de ponteiro para tipo estruturado historico onde será armazenada o historico resultante.
-*
+*$P	pHistorico: Ponteiro de ponteiro para tipo estruturado historico.
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	ponteiro corrente referencia Histórico do aluno a ser criado
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	o Histórico do aluno foi criado com êxito
 *$.***********************************************************************/
 
 
@@ -93,10 +99,16 @@ HIS_tpCondRet HIS_criarHistorico(HIS_tpHistorico ** pHistorico);
 *$ED Descrição da função
 *	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
-*	HIS_CondRetOK 
-*   HIS_CondRetParamInvalido                                                   
+*	HIS_CondRetOK
+*	HIS_CondRetRecebeuPonteiroNulo                                     
 *$EP Parametros
 *$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	ponteiro corrente referencia Histórico do aluno a ser destruido.
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	o Histórico do aluno foi destruido com êxito.
 *$.***********************************************************************/
 
 HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
@@ -121,11 +133,25 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, struct list
 *	Obtem todas as disciplinas cursadas em um determinado período
 *$FV Valor retornado
 *	HIS_CondRetOK
-*   HIS_CondRetParamInvalido
+* HIS_CondRetRecebeuPonteiroNulo
 *$EP Parametros
 *$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P periodo: array de caracteres com o período desejado
-*$P disciplinas: ponteiro para uma lista onde serão armazenadas as disciplinas do período
+*$P periodo: array de caracteres com o período desejado.
+*$P disciplinas: ponteiro para uma lista onde serão armazenadas as disciplinas do período.
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para arrays de caractéres.
+* valem as assertivas estruturais para listas encadeadas.
+*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
+*	segundo ponteiro corrente referencia endereço de lista encadeada de tipo estruturado Disciplina não nulo.
+*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
+*	"2016.1" ou "2013.2" etc
+*
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+* valem as assertivas estruturais para listas encadeadas.
+*	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
+*
 *$.***********************************************************************/
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, struct list* disciplinas);

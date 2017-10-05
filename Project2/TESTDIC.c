@@ -20,7 +20,7 @@
 *	2.0		PG		03/10/2017		Adicionando Todos sets e todos Gets
 *	2.1		PG		03/10/2017		Correção de parametros de criar disciplinas
 *	2.5		PG		03/10/2017		Correção de diversos bugs graves. teste.script funcionando.
-*
+*	2.6		BP 		05/10/2017		Adicionando teste de getPERIODO
 *$ED Descrição do módulo
 *     Este modulo contém as funções específicas para o teste do
 *     módulo Disciplinas Cursadas.
@@ -59,10 +59,13 @@
 #define		REMOVE_DIC_CMD		"=removeDIC"
 #define		SET_DIC_CMD			"=setDIC"
 #define		SET_GRAU_DIC_CMD	"=setGrauDIC"
-#define		SET_PER_DIC_CMD		"=setPerDic"
-#define		SET_SIT_DIC_CMD		"=setSitDic"
-#define		GET_SIT_DIC_CMD		"=getSitDic"
-#define		GET_GRAU_DIC_CMD	"=getGrauDic"
+#define		GET_GRAU_DIC_CMD	"=getGrauDIC"
+#define		SET_PER_DIC_CMD		"=setPerDIC"
+#define		GET_PER_DIC_CMD		"=getPerDIC"
+#define		SET_SIT_DIC_CMD		"=setSitDIC"
+#define		GET_SIT_DIC_CMD		"=getSitDIC"
+
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -186,17 +189,16 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp ( ComandoTeste, SET_DIC_CMD) == 0)
 		{
-			//NumLidos = LER_LerParametros("iii", &indexDC, &pDisciplina, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("iii", &indexDI, &indexDC, &DIC_CondRetEsperada);
 
 			if( NumLidos != 3)
 			{
 				return TST_CondRetParm;
 			}
 
-			//DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplina);
+			DIC_CondRetObtido = DIC_setDisciplina(pDisciplinaCursada[indexDC], pDisciplinas[indexDI]);
 
-			//return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
-			return TST_CompararInt( 1, 1, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
+			return TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao associar Disciplina a Disciplina Cursada.");
 
 		}
 
@@ -204,7 +206,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp (ComandoTeste, SET_GRAU_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("isi", &indexDC, grauStr, &DIC_CondRetEsperada);
+
+			grau = atof(grauStr);
 
 			if( NumLidos != 3)
 			{
@@ -255,8 +259,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp (ComandoTeste, GET_GRAU_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("isi", &indexDC, &grauStr, &DIC_CondRetEsperada);
 
+			grau = atof(grauStr);
 			if( NumLidos != 3)
 			{
 				return TST_CondRetParm;
@@ -295,11 +300,33 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
                return Ret ;
 			} 
 
-			return TST_CompararString( situacao, ValorObtidoString, "Retorno errado ao pegar a Situacao de uma Disciplina Cursada.");
+			return TST_CompararString( situacao, ValorObtidoString, "Conteudo errado ao pegar a Situacao de uma Disciplina Cursada.");
 		}
 
 		///////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
+
+		else if( strcmp (ComandoTeste, GET_PER_DIC_CMD) == 0)
+		{
+			NumLidos = LER_LerParametros("isi", &indexDC, periodo, &DIC_CondRetEsperada);
+
+			if( NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			}
+
+			DIC_CondRetObtido = DIC_getPeriodo(pDisciplinaCursada[indexDC], ValorObtidoString);
+
+			Ret = TST_CompararInt( DIC_CondRetEsperada, DIC_CondRetObtido, "Retorno errado ao pegar o Periodo de uma Disciplina Cursada.");
+
+			if ( Ret != TST_CondRetOK )
+            {
+               return Ret ;
+			} 
+
+			return TST_CompararString( periodo, ValorObtidoString,  "Conteudo errado ao pegar o Periodo de uma Disciplina Cursada.");
+		}
+
 
 	 return TST_CondRetNaoConhec ;
 

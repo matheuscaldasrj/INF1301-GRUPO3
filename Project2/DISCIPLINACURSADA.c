@@ -175,7 +175,7 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 	if (pDisciplinaCursada == NULL)
 		return DIC_CondRetRecebeuPonteiroNulo;
 	
-	if (periodo == NULL || strlen(periodo) != 7)
+	if (periodo == NULL || strlen(periodo) != 6)
 		return DIC_CondRetParamInvalido;
 	
 	strcpy(pDisciplinaCursada->periodo, periodo);
