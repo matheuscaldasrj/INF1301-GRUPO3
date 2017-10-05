@@ -83,11 +83,19 @@ typedef enum {
 *	DIC_CondRetRecebeuPonteiroNulo
 *	DIC_CondRetParamInvalido
 *$EP Parametros
-*$P	pDisciplinaCursada: Ponteiro de ponteiro para tipo estruturado DisciplinaCursada onde será armazenada a DisciplinaCursada resultante.
-*$P disciplina: endereco do ponteio para tipo estruturado disciplina
-*$P	situacao: situação na disciplina a ser inserida
-*$P	periodo: periodo da disciplina a ser inserida
-*$P	grau: grau da disciplina ser inserido
+*	$P	pDisciplinaCursada: Ponteiro de ponteiro para tipo estruturado DisciplinaCursada onde será armazenada a DisciplinaCursada resultante.
+*	$P disciplina: endereco do ponteio para tipo estruturado disciplina
+*	$P	situacao: situação na disciplina a ser inserida
+*	$P	grau: grau da disciplina ser inserido
+*	$P	periodo: periodo da disciplina a ser inserida
+$EAE Assertivas de entrada
+*	disicplina válida
+*	situacao válida
+*	periodo váldio
+*	grau válido
+*$EAE Assertivas de saída esperadas
+*	DIC_COndRetOK
+*	valores de disicplina cursada preenchidos com os parâmetros
 *
 *$.***********************************************************************/
 
@@ -103,6 +111,12 @@ DIC_tpCondRet DIC_criarDisciplinaCursada(DIC_tpDisciplinaCursada ** pDisciplinaC
 *   DIC_CondRetParamInvalido                                                   
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
+$EAE Assertivas de entrada
+*	DisciplinaCursada != NULL
+*$EAE Assertivas de saída esperadas
+*	DIC_COndRetOK
+*	DisciplinaCursada == NULL
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplinaCursada);
@@ -119,6 +133,11 @@ DIC_tpCondRet DIC_removeDisciplinaCursada (DIC_tpDisciplinaCursada ** pDisciplin
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 *$P	disciplina: endereco do ponteio para tipo estruturado disciplina
+$EAE Assertivas de entrada
+*	disciplina válida
+*$EAE Assertivas de saída esperadas
+*pDisciplina->disciplina = disciplina
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, struct disciplina *disciplina);
@@ -134,6 +153,11 @@ DIC_tpCondRet DIC_setDisciplina (DIC_tpDisciplinaCursada * pDisciplinaCursada, s
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 $P	grau:: grau da disciplina ser inserido
+$EAE Assertivas de entrada
+*	grau válido
+*$EAE Assertivas de saída esperadas
+*pDisciplina->grau = grau
+*
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float grau);
@@ -149,6 +173,10 @@ DIC_tpCondRet DIC_setGrau (DIC_tpDisciplinaCursada * pDisciplinaCursada, float g
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 $P	periodo: periodo da disciplina a ser inserida
+$EAE Assertivas de entrada
+*	periodo válido
+*$EAE Assertivas de saída esperadas
+*pDisciplina->periodo = periodo
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char *periodo);
@@ -164,6 +192,10 @@ DIC_tpCondRet DIC_setPeriodo (DIC_tpDisciplinaCursada * pDisciplinaCursada, char
 *$EP Parametros
 *$P	pDisciplinaCursada: Endereço do ponteiro para tipo estruturado DisciplinaCursada.
 *$P	situacao: situação na disciplina a ser inserida
+$EAE Assertivas de entrada
+*	situacao válida
+*$EAE Assertivas de saída esperadas
+*pDisciplina->situacao = situacao
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, char* situacao);
@@ -181,6 +213,16 @@ DIC_tpCondRet DIC_setSituacao (DIC_tpDisciplinaCursada * pDisciplinaCursada, cha
 *$P	situacao: situação na disciplina a ser inserida
 *$P	periodo: periodo da disciplina a ser inserida
 *$P	grau: grau da disciplina ser inserido
+$EAE Assertivas de entrada
+*	disiciplina valida
+*	situacao válida
+*	grau valido
+*	peridoo valido
+*$EAE Assertivas de saída esperadas
+*pDisciplina->situacao = situacao
+*pDisciplina->grau = grau
+*pDisciplina->disciplina = disciplina
+*pDisciplina->periodo = periodo
 *$.***********************************************************************/
 
 DIC_tpCondRet DIC_setTodosOsCampos(DIC_tpDisciplinaCursada *pDisciplinaCursada, Disciplina *disciplina, char *situacao, char *periodo, float grau);
