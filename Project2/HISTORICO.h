@@ -10,12 +10,12 @@
 *	Gestor:  DI/PUC-Rio
 *	Letras Identificadoras: HIS
 *	Autores: 
-*		 mc - Matheus Caldas
-*		 bp - Bruno Pedrazza
-*	     pg - Pedro Gomes
-*	     va - Vinícius Arcoverde
-*	     lf - Leon França
-*	     gc - Gabriel Costa
+*		mc - Matheus Caldas
+*		bp - Bruno Pedrazza
+*		pg - Pedro Gomes
+*		va - Vinícius Arcoverde
+*		lf - Leon França
+*		gc - Gabriel Costa
 *
 *$ED Descricao do modulo
 *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -74,7 +74,7 @@ typedef enum {
 /***********************************************************************
 *$FC Função: HIS_criarHistorico
 *$ED Descrição da função
-*	Cria um historico, chama todas as funções set para preencher todas as dependências nescessárias.
+*	Cria um historico, chamando todas as funções set para preencher todas as dependências nescessárias.
 *$FV Valor retornado
 *	HIS_CondRetOK
 *	HIS_CondRetFaltouMemoria
@@ -82,7 +82,12 @@ typedef enum {
 *	HIS_CondRetParamInvalido
 *$EP Parametros
 *$P	pHistorico: Ponteiro de ponteiro para tipo estruturado historico onde será armazenada o historico resultante.
-*
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	ponteiro corrente referencia Histórico do aluno a ser criado
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	o Histórico do aluno foi criado com êxito
 *$.***********************************************************************/
 
 
