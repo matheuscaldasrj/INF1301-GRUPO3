@@ -54,8 +54,8 @@
 #define     GERA_INP_DIS_CMD    "=gerainp"
 #define     GERA_PAR_DIS_CMD    "=gerapar"
 #define		DESTROI_CMD 	"=destruir"
-/* Disciplinas Cursadas */
 
+/* Disciplinas Cursadas */
 
 #define    	CRIAR_DIC_CMD       "=criarDIC"
 #define		REMOVE_DIC_CMD		"=removeDIC"
@@ -152,8 +152,7 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 	  /* Testar DIS Destruir disciplina */
 	  else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
-            NumLidos = LER_LerParametros( "ii", &indexDI
-                               &CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "ii", &indexDI, &DIS_CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
