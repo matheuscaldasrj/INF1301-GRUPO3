@@ -206,7 +206,9 @@ DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX_DISC] = {NULL, NULL, NULL, NULL,
 
 		else if( strcmp (ComandoTeste, SET_GRAU_DIC_CMD) == 0)
 		{
-			NumLidos = LER_LerParametros("ifi", &indexDC, &grau, &DIC_CondRetEsperada);
+			NumLidos = LER_LerParametros("isi", &indexDC, grauStr, &DIC_CondRetEsperada);
+
+			grau = atof(grauStr);
 
 			if( NumLidos != 3)
 			{
