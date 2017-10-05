@@ -88,5 +88,8 @@
 
 == Remove Disciplina
 =destruir 0
+=destruir 1
+=destruir 2
+=destruir 3
 
 //fim
