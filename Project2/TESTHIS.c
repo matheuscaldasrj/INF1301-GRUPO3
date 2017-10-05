@@ -122,5 +122,24 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
+
+	   else if( strcmp( ComandoTeste , GET_HIS_PRD_CMD ) == 0 )
+	   {
+		   NumLidos = LER_LerParametros("isi", &indexH, &periodo, &HIS_CondRetEsperada);
+		   if (NumLidos != 3) {
+			   return TST_CondRetParm;
+		   }
+
+		   list = NULL;
+		   LIST_CondRetObtido = createList(&list);
+
+		   if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+		   }
+		   
+		   HIS_CondRetObtido = HIS_getHistoricoDoPeriodo(pHistorico[indexH], periodo, list);		   
+
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
+	   }
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/

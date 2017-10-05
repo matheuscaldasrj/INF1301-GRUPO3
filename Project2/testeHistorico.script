@@ -16,6 +16,7 @@
 =declararparm  FaltaMemoria   int 1
 =declararparm  PonteiroNulo   int 2
 =declararparm  ParamInvalido  int 3
+=declararparm  ErroInterno    int 6
 
 ==Declarar os conteudos de Historico
 =declararparm  CR1	string "6.2"
@@ -32,6 +33,17 @@
 =recuperar
 =getHisCompleto 1 PonteiroNulo
 =getHisCompleto 0 ParamInvalido
+=recuperar
+
+== Pegar historico do periodo
+=getHisPeriodo 0 periodo1 ErroInterno
+=getHisPeriodo 1 periodo1 PonteiroNulo
+=getHisPeriodo 1 CR1 2
+=getHisPeriodo 0 periodo1 OK
+=recuperar
+=getHisPeriodo 1 periodo1 OK
+=recuperar
+=getHisPeriodo 1 CR1 ErroInterno
 =recuperar
 
 == Remover Historico
