@@ -510,9 +510,9 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	Disciplina *disciplina = NULL;
 	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
 	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
+	HIS_tpHistorico *copiaHistorico;
 
-	FILE* f = fopen("historico.txt", "w");
+	FILE* f = fopen("historico.txt", "w");	
 
 	if (f == NULL)
 	{
@@ -522,10 +522,11 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 	}
 
 	// Verificação dos parâmetros
-	if(disciplinasCursadas == NULL)
+	if(disciplinasCursadas == NULL || pHistorico == NULL)
 		return HIS_CondRetRecebeuPonteiroNulo;
 
-	copiaHistorico = *pHistorico;	
+	HIS_criarHistorico(&copiaHistorico);
+	*copiaHistorico = *pHistorico;
 
 	// Apenas pra alocar o struct na memória
 	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
@@ -534,7 +535,7 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 
 	while(response != LIS_CondRetListaVazia) 
 	{
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
+		response = pop_front(copiaHistorico->disciplinasCursadas, (void**) disciplinaCursada);
 		DIC_getDisciplina(disciplinaCursada, &disciplina);
 
 		DIC_getGrau(disciplinaCursada, &grau);
