@@ -59,11 +59,11 @@
 #define		REMOVE_DIC_CMD		"=removeDIC"
 #define		SET_DIC_CMD			"=setDIC"
 #define		SET_GRAU_DIC_CMD	"=setGrauDIC"
-#define		SET_PER_DIC_CMD		"=setPerDIC"
-#define		SET_SIT_DIC_CMD		"=setSitDIC"
-#define		GET_SIT_DIC_CMD		"=getSitDIC"
-#define		GET_GRAU_DIC_CMD	"=getGrauDIC"
-
+#define    GET_GRAU_DIC_CMD		"=getGrauDIC"
+#define    SET_PER_DIC_CMD		"=setPerDIC"
+#define    GET_PER_DIC_CMD		"=getPerDIC"
+#define    SET_SIT_DIC_CMD		"=setSitDIC"
+#define    GET_SIT_DIC_CMD		"=getSitDIC" 
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
