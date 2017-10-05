@@ -30,6 +30,7 @@
 *	1.0.3		gc	05/10/2017	Implementação getDisciplinasReprovadoPorFalta
 *	1.0.4		lf	05/10/2017	Padronização e criação de documentação voltada ao cliente
 *	1.0.4		va	05/10/2017	getdisplinas trancadas e imprimehistorico
+*   1.0.5		gc	05/10/2017  Implementação adicionaDisciplinaCursada
 *
 *$.***************************************************************************/
 
@@ -259,6 +260,25 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico,  struct list* d
 
 *$.***********************************************************************/
 HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct list* disciplinas);
+
+/***********************************************************************
+*$FC Função: HIS_adicionaDisciplinaCursada
+*$ED Descrição da função
+*	Adiciona uma disciplina cursada ao histórico do aluno
+*$FV Valor retornado
+*	HIS_CondRetOK 
+*   HIS_CondRetRecebeuPonteiroNulo
+*   HIS_CondRetErroInterno
+*$EP Parametros
+*$P	disc: disciplina cursada
+*$EAE Assertivas de entrada
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
+*$EAS Assertivas de saida
+*	valem as assertivas estruturais para tipos de dados estruturados.
+*	valem as assertivas estruturais para listas encadeadas.
+*$.***********************************************************************/
+HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, struct DIC_tagDisciplinaCursada* disc );
 
 /***********************************************************************
 *$FC Função: HIS_removeHistorico

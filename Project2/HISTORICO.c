@@ -15,8 +15,9 @@
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       28/09/17			Criacao inicial do modulo
  *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
- *	0.0.3		  gc       04/09/17			Implementacao de getHistrico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
+ *	0.0.3		  gc       04/09/17			Implementacao de getHistórico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
  *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
+ *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -563,6 +564,25 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplin
 }
 
  /* Fim funcao: HIS imprime Historico */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: HIS adiciona disciplina cursada                                *
+ **************************************************************************/
+HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tpDisciplinaCursada* disc ) {
+	int listResponse = -1;
+	
+	if (pHistorico == NULL || disc == NULL) {
+		return HIS_CondRetRecebeuPonteiroNulo;
+	}
+
+	listResponse = push_front(pHistorico->disciplinasCursadas, disc);
+	if (listResponse != LIS_CondRetOK) {
+		return HIS_CondRetErroInterno;
+	}
+
+	return HIS_CondRetOK;
+}
 
 
 /********** Fim do modulo de implementacao: Modulo Historico **********/
