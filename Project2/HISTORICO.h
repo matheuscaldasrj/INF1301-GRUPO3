@@ -211,7 +211,7 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
 HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
 
 /***********************************************************************
-*$FC Função: HIS_removeHistorico
+*$FC Função: HIS_imprimeHistorico
 *$ED Descrição da função
 *	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
 *$FV Valor retornado
@@ -223,7 +223,22 @@ HIS_tpCondRet pegaCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, floa
 *$P	disciplinasCursadas: List composta pelas disciplinas cursadas
 *$.***********************************************************************/
 
-//HIS_tpCondRet HIS_imprimeHistorico (HIS_tpHistorico ** pHistorico);
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico,  struct list* disciplinasCursadas);
+
+/***********************************************************************
+*$FC Função: HIS_getDisciplinasTrancadas
+*$ED Descrição da função
+*	Obtem as disciplinas que foram trancadas 
+*$FV Valor retornado
+*	HIS_CondRetOK 
+*   HIS_CondRetParamInvalido
+*   HIS_CondRetErroAoAbrirArquivo
+*   HIS_CondRetRecebeuPonteiroNulo
+*$EP Parametros
+*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$.***********************************************************************/
+
+HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct list* disciplinas);
 
 #undef HISTORICO_EXT
 
