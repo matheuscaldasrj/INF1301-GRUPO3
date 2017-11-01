@@ -7,8 +7,8 @@
 //  Autores: mc - Matheus Caldas
 //	     bp - Bruno Pedrazza
 //	     pg - Pedro Gomes
-//	     va - Vinícius Arcoverde
-//	     lf - Leon França
+//	     va - Vin?us Arcoverde
+//	     lf - Leon Fran?
 //	     gc - Gabriel Costa
 
 == Declarar as condicoes de retorno
@@ -99,7 +99,7 @@
 =criaHIS 0 OK
 =criaHIS 4 OK
 
-== Adicionar disciplinas a um histórico
+== Adicionar disciplinas a um hist??o
 =adicDisc 0 2 OK
 =adicDisc 0 3 OK
 =adicDisc 0 1 OK
@@ -109,7 +109,7 @@
 =adicDisc 0 2 PonteiroNulo
 =recuperar
 
-== Imprimir histórico
+== Imprimir hist??o
 =imprimeHist 0 OK
 
 == Pegar historico completo

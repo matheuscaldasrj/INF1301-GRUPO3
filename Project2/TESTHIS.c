@@ -60,6 +60,10 @@
 
 #define MAX 15
 
+
+Disciplina *pDisciplinas[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+DIC_tpDisciplinaCursada *pDisciplinaCursada[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+
 HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
  TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
@@ -75,8 +79,6 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	 char periodo[10], ValorDado1Nome[20], ValorDado2Codigo[20], ValorDado4Bib[20], ValorDado5Ementa[20], situacao[10], grauStr[10];
 	 float cr, grau;
 	 List* list;
-	 Disciplina* pDisciplinas[10];
-	 DIC_tpDisciplinaCursada* pDisciplinaCursada[10];
 
 	 TST_tpCondRet Ret;
 
@@ -161,7 +163,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   }
 		   
 
-		   HIS_CondRetObtido = HIS_getHistoricoCompleto(pHistorico[indexH], list);		   
+		   HIS_CondRetObtido = HIS_getHistoricoCompleto(pHistorico[indexH], &list);		   
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
@@ -249,13 +251,13 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 			   return TST_CondRetErro;
 		   }
 		   
-		   HIS_CondRetObtido = HIS_imprimeHistorico(pHistorico[indexH], list);
+		   HIS_CondRetObtido = HIS_imprimeHistorico(pHistorico[indexH]);
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
 	   }
 
 	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
-	   {
+	   {   
 		   NumLidos = LER_LerParametros("iii", &indexH, &indexDC, &HIS_CondRetEsperada);
 		   if (NumLidos != 3) {
 			   return TST_CondRetParm;

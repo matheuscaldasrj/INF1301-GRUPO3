@@ -131,10 +131,10 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico);
 *   HIS_CondRetParamInvalido
 *$EP Parametros
 *$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P disciplinas: ponteiro para uma lista onde serão armazenadas as disciplinas do período
+*$P disciplinas: endereço do ponteiro para uma lista onde serão armazenadas as disciplinas do período
 *$.***********************************************************************/
 
-HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, struct list* disciplinas);
+HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, struct list** disciplinas);
 
 /***********************************************************************
 *$FC Função: HIS_getHistoricoDoPeriodo
@@ -235,7 +235,7 @@ HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, f
 *	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
 *$.***********************************************************************/
 
-HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico,  struct list* disciplinasCursadas);
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico);
 
 /***********************************************************************
 *$FC Função: HIS_getDisciplinasTrancadas

@@ -108,12 +108,12 @@ HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
  * Funcao: HIS get historico completo                                  	  *
  **************************************************************************/
 
-HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List* disciplinasCursadas)
+HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List** disciplinasCursadas)
 {
 	if (pHistorico == NULL || disciplinasCursadas == NULL)
 		return HIS_CondRetRecebeuPonteiroNulo;	
 
-	disciplinasCursadas = pHistorico->disciplinasCursadas;
+	*disciplinasCursadas = pHistorico->disciplinasCursadas;
 	return HIS_CondRetOK;
 }
 /* Fim funcao: HIS remove Historico */
@@ -496,72 +496,59 @@ HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico, List* di
  *                                                                        *
  * Funcao: HIS imprimeHistorico                                            	  *
  **************************************************************************/
-HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico, List* disciplinasCursadas)
-{
+HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico)
+{	
 	// Inicialização de variáveis
-	int response = -1;
 	int creditos = 0;
 	float grau = 0; 
-
 	char* situacao = (char*)malloc(sizeof(char) * 3);
 	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
 	char* codigoDaDisc = (char*)malloc(sizeof(char) * 8);
+	char* nome = (char*)malloc(sizeof(char) * 40);
+	Disciplina *pDisciplina;
+ 
+	List* list;
+	List *listAux;
+	void *retVoid;
+	DIC_tpDisciplinaCursada *pDisciplinaCursada;
+	FILE* file = fopen("historico.txt", "w"); 
+	
 
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico *copiaHistorico;
+	HIS_tpCondRet ret = HIS_getHistoricoCompleto(pHistorico, &list);
 
-	FILE* f = fopen("historico.txt", "w");	
-
-	if (f == NULL)
-	{
+	createList(&listAux);
+ 
+	  if (file == NULL)
+	  {
 		printf("Error opening file!\n");
-		fclose(f);
+		fclose(file);
 		return HIS_CondRetErroAoAbrirArquivo;
-	}
+	  }
+ 
+	while(pop_back(list,&retVoid) != LIS_CondRetListaVazia){
+		pDisciplinaCursada = (struct DIC_tagDisciplinaCursada*)retVoid;
 
-	// Verificação dos parâmetros
-	if(disciplinasCursadas == NULL || pHistorico == NULL)
-		return HIS_CondRetRecebeuPonteiroNulo;
 
-	HIS_criarHistorico(&copiaHistorico);
-	*copiaHistorico = *pHistorico;
-
-	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
-	
-
-	while(response != LIS_CondRetListaVazia) 
-	{
-		response = pop_front(copiaHistorico->disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, &disciplina);
-
-		DIC_getGrau(disciplinaCursada, &grau);
-		DIC_getPeriodo(disciplinaCursada, periodoDisc);
-		DIS_get_creditos(disciplina, &creditos);
-		DIS_get_codigo(disciplina, &codigoDaDisc);
-
-		fprintf(f, "Periodo: " + *periodoDisc);
-		fprintf(f, "\n");
-		fprintf(f, codigoDaDisc);
-		fprintf(f, ": ");
-		fprintf(f, "%f", grau);
-		fprintf(f, "  ");
-		fprintf(f, situacao);
-		fprintf(f, "\n\n");
+		DIC_getGrau(pDisciplinaCursada, &grau);
+		DIC_getPeriodo(pDisciplinaCursada, periodoDisc);
+		DIC_getSituacao(pDisciplinaCursada,situacao);
+		DIC_getDisciplina(pDisciplinaCursada,&pDisciplina);
+		DIS_get_nome(pDisciplina,&nome);
+		DIS_get_codigo(pDisciplina,&codigoDaDisc);
+		
+		fprintf(file,"%s-%s", codigoDaDisc, nome);
+		fprintf(file, "\nPeriodo: %s", periodoDisc);
+		fprintf(file,"\nSituacao: %s", situacao);
+		fprintf(file, "\n");
+		fprintf(file, "Grau: ");
+		fprintf(file, "%.1f", grau);
+		fprintf(file, "\n\n\n\n");
+ 
+		//adicionando de volta ao historico
+		push_back(listAux,pDisciplinaCursada);
 	}
 	
-	fclose(f);
-
-	free(situacao);
-	free(periodoDisc);
-	free(codigoDaDisc);
-	free(situacao);
-	free(disciplina);
-	free(disciplinaCursada);
-	free(disciplinasPeriodo);
+	pHistorico->disciplinasCursadas = listAux;
 
 	return HIS_CondRetOK;
 }
