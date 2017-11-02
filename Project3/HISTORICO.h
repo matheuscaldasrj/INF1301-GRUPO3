@@ -40,6 +40,12 @@
    #define HISTORICO_EXT extern
 #endif
 
+#define tamDisciplina   8
+#define tamSituacao     3
+#define tamGrau         5
+#define tamMatricula    20
+#define tamPeriodo      7
+
 
 /***** Declarações exportadas pelo módulo *****/
 //TODO
@@ -281,16 +287,30 @@ HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct 
 HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, struct DIC_tagDisciplinaCursada* disc );
 
 /***********************************************************************
-*$FC Função: HIS_removeHistorico
+*$FC Função: HIS_printHistoricoCompleto
 *$ED Descrição da função
-*	Remove um historico, destruindo toda as informações contidas no tipo estruturado.
+*	
 *$FV Valor retornado
-*	HIS_CondRetOK 
-*   HIS_CondRetErroAoAbrirArquivo
-*   HIS_CondRetRecebeuPonteiroNulo
+*	 
+*   
+*   
 *$EP Parametros
-*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
+*$P	
 *$.***********************************************************************/
+HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula);
+
+/***********************************************************************
+*$FC Função: HIS_printHistoricoPeriodo
+*$ED Descrição da função
+* 
+*$FV Valor retornado
+*  
+*   
+*   
+*$EP Parametros
+*$P 
+*$.***********************************************************************/
+HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
 
 
 #undef HISTORICO_EXT

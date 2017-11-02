@@ -18,6 +18,9 @@
  *	0.0.3		  gc       04/09/17			Implementacao de getHistórico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
  *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
  *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
+ *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
+ *
+ *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -39,6 +42,18 @@
 #define HISTORICO_OWN
 #include "HISTORICO.H"
 #undef HISTORICO_OWN
+
+
+
+/* Declaração funções internas */
+
+static float HIS_getCrAcumulado (FILE *historico);
+static float HIS_getCrPeriodo (FILE *historico, char *periodo);
+
+/* Fim declaração funções internas */
+
+
+
 
 /***********************************************************************
  *
@@ -574,5 +589,115 @@ HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tp
 	return HIS_CondRetOK;
 }
 
+ /* Fim funcao: HIS adicionaDisciplinaCursada */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: HIS printHistoricoCompleto                                     *
+ **************************************************************************/
+
+HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
+	FILE *historico;
+	float CR;
+	char creditos, mat[tamMatricula], periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
+	
+	sprintf(mat,"%u",matricula);
+	strcat(mat,".txt");
+	historico = fopen(mat,"r");
+	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
+	
+	CR = HIS_getCrAcumulado (historico);
+	rewind(historico);
+	printf("\n\t\tCR Acumulado : %.1f\n\n",CR);
+	
+	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n");
+	
+	while (fscanf(historico,"%s%s%s%s%d",periodo,disciplina,grau,situacao,&creditos) == 5){
+		if (strcmp(periodo,periodoCorrente) != 0){
+			strcpy(periodoCorrente,periodo);
+			printf("\n");
+		}
+		printf("%s\t\t%s\t\t%s\t%s\t\t%d\n",periodo, disciplina, grau, situacao, creditos);
+	}
+
+	printf("\n");	
+	fclose(historico);
+	return HIS_CondRetOK;
+}
+
+/* Fim funcao: HIS printHistoricoCompleto */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: HIS printHistoricoPeriodo                                      *
+ **************************************************************************/
+
+HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
+	FILE *historico;
+	float CR;
+	char creditos, mat[tamMatricula], periodoArq[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau] ;
+	
+	if (periodo == NULL) return HIS_CondRetParamInvalido;
+	sprintf(mat,"%u",matricula);
+	strcat(mat,".txt");
+	historico = fopen(mat,"r");
+	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
+	
+	CR = HIS_getCrPeriodo (historico,periodo);
+	rewind(historico);
+	printf("\n\t\tCR Periodo %s : %.1f\n\n",periodo,CR);
+	
+	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n\n");
+	while (fscanf(historico,"%s%s%s%s%d",periodoArq,disciplina,grau,situacao,&creditos) == 5){
+		if (strcmp(periodoArq,periodo) == 0)
+			printf("%s\t\t%s\t\t%s\t%s\t\t%d\n",periodoArq, disciplina, grau, situacao, creditos);
+	}
+	
+	printf("\n");	
+	fclose(historico);
+	return HIS_CondRetOK;
+}
+
+/* Fim funcao: HIS printHistoricoPeriodo */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao interna: HIS getCrAcumulado                                     *
+ **************************************************************************/
+
+static float HIS_getCrAcumulado (FILE *historico){
+	char lixo[10];
+	float grau, cred, somaCred=0, somaGrau=0;
+	while (fscanf(historico,"%s %s %f %s %f",&lixo,&lixo,&grau,&lixo,&cred) == 5){
+		somaGrau += grau*cred;
+		somaCred += cred;
+	}
+	return somaGrau/somaCred;
+}
+
+/* Fim funcao: HIS getCrAcumulado */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao interna: HIS getCrPeriodo                                       *
+ **************************************************************************/
+
+static float HIS_getCrPeriodo (FILE *historico, char *periodo){
+	char lixo[10], periodoaux[tamPeriodo];
+	float grau, cred, somaCred=0, somaGrau=0;
+	while (fscanf(historico," %s %s %f %s %f",&periodoaux,&lixo,&grau,&lixo,&cred) == 5){
+		if (!strcmp(periodoaux,periodo)){
+			somaGrau += grau*cred;
+			somaCred += cred;
+		}
+	}
+	return somaGrau/somaCred;
+}
+
+/* Fim funcao: HIS getCrPeriodo */
 
 /********** Fim do modulo de implementacao: Modulo Historico **********/
