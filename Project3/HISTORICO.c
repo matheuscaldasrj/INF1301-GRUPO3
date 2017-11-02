@@ -19,7 +19,7 @@
  *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
  *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
  *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
- *
+ *	1.0.1		  bp	   02/11/17			Implementacao montaNomeArq
  *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -49,6 +49,7 @@
 
 static float HIS_getCrAcumulado (FILE *historico);
 static float HIS_getCrPeriodo (FILE *historico, char *periodo);
+static char* HIS_montaNomeArq (unsigned int matricula);
 
 /* Fim declaração funções internas */
 
@@ -600,11 +601,10 @@ HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tp
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	FILE *historico;
 	float CR;
-	char creditos, mat[tamMatricula], periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
+	unsigned int creditos;
+	char periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
 	
-	sprintf(mat,"%u",matricula);
-	strcat(mat,".txt");
-	historico = fopen(mat,"r");
+	historico = fopen(HIS_montaNomeArq(matricula),"r");
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	CR = HIS_getCrAcumulado (historico);
@@ -613,12 +613,12 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	
 	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n");
 	
-	while (fscanf(historico,"%s%s%s%s%d",periodo,disciplina,grau,situacao,&creditos) == 5){
+	while (fscanf(historico,"%s%s%s%s%u",periodo,disciplina,grau,situacao,&creditos) == 5){
 		if (strcmp(periodo,periodoCorrente) != 0){
 			strcpy(periodoCorrente,periodo);
 			printf("\n");
 		}
-		printf("%s\t\t%s\t\t%s\t%s\t\t%d\n",periodo, disciplina, grau, situacao, creditos);
+		printf("%s\t\t%s\t\t%s\t%s\t\t%u\n",periodo, disciplina, grau, situacao, creditos);
 	}
 
 	printf("\n");	
@@ -637,12 +637,10 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	FILE *historico;
 	float CR;
-	char creditos, mat[tamMatricula], periodoArq[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau] ;
-	
-	if (periodo == NULL) return HIS_CondRetParamInvalido;
-	sprintf(mat,"%u",matricula);
-	strcat(mat,".txt");
-	historico = fopen(mat,"r");
+	unsigned int creditos;
+	char periodoArq[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau] ;
+
+	historico = fopen(HIS_montaNomeArq(matricula),"r");
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	CR = HIS_getCrPeriodo (historico,periodo);
@@ -650,9 +648,9 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	printf("\n\t\tCR Periodo %s : %.1f\n\n",periodo,CR);
 	
 	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n\n");
-	while (fscanf(historico,"%s%s%s%s%d",periodoArq,disciplina,grau,situacao,&creditos) == 5){
+	while (fscanf(historico,"%s%s%s%s%u",periodoArq,disciplina,grau,situacao,&creditos) == 5){
 		if (strcmp(periodoArq,periodo) == 0)
-			printf("%s\t\t%s\t\t%s\t%s\t\t%d\n",periodoArq, disciplina, grau, situacao, creditos);
+			printf("%s\t\t%s\t\t%s\t%s\t\t%u\n",periodoArq, disciplina, grau, situacao, creditos);
 	}
 	
 	printf("\n");	
@@ -699,5 +697,21 @@ static float HIS_getCrPeriodo (FILE *historico, char *periodo){
 }
 
 /* Fim funcao: HIS getCrPeriodo */
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao interna: HIS montaNomeArq                                       *
+ **************************************************************************/
+static char* HIS_montaNomeArq (unsigned int matricula){
+	char *nomeArq, mat[tamMatricula];
+	nomeArq = (char*) malloc (sizeof(char)*tamNomeArq);
+	sprintf(mat,"%u",matricula);
+	strcpy(nomeArq,"..\\Historico\\");
+	strcat(mat,".txt");
+	strcat(nomeArq,mat);
+	return nomeArq;
+}
+
+/* Fim funcao: HIS montaNomeArq */
 
 /********** Fim do modulo de implementacao: Modulo Historico **********/
