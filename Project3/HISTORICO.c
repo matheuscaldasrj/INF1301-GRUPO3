@@ -636,7 +636,7 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	respostaCR = HIS_getCrAcumulado (historico,&CR);
-	if (respostaCR != HIS_CondRetOK) return respostaCR;
+	if (respostaCR != HIS_CondRetOK) {fclose(historico); return respostaCR;}
 
 	rewind(historico);
 	printf("\n\t\tCR Acumulado : %.1f\n\n",CR);
@@ -675,7 +675,13 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	respostaCR = HIS_getCrPeriodo (historico,periodo,&CR);
-	if (respostaCR != HIS_CondRetOK) return respostaCR;
+	if (respostaCR != HIS_CondRetOK) {fclose(historico); return respostaCR;}
+
+	if (CR == -1){
+		printf("Aluno nao matriculado no periodo %s\n",periodo);
+		fclose(historico);
+		return HIS_CondRetOK;
+	}
 
 	rewind(historico);
 	printf("\n\t\tCR Periodo %s : %.1f\n\n",periodo,CR);
@@ -734,6 +740,12 @@ static HIS_tpCondRet HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR
 			somaCred += cred;
 		}
 	}
+
+	if (somaCred == 0){
+		*CR = -1;
+		return HIS_CondRetOK;
+	}
+
 	*CR = somaGrau/somaCred;
 	if (*CR < 0 || *CR > 10) return HIS_CondRetErroInterno;
 
