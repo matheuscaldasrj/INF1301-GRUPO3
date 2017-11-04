@@ -322,6 +322,21 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
 HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula);
 
 
+
+/***********************************************************************
+*$FC Função: HIS_getDisciplinasReprovadoPorFalta
+*$ED Descrição da função
+* 
+*$FV Valor retornado
+*  
+*   
+*   
+*$EP Parametros
+*$P 
+*$.***********************************************************************/
+HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, struct list * disciplinas);
+
+
 #undef HISTORICO_EXT
 
 /********** Fim do módulo de definição: Módulo Historico **********/
