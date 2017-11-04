@@ -267,24 +267,41 @@ HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico);
 *$.***********************************************************************/
 HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct list* disciplinas);
 
+
+// Agora encapsulada
+//HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, struct DIC_tagDisciplinaCursada* disc );
+
+
+
 /***********************************************************************
-*$FC Função: HIS_adicionaDisciplinaCursada
+*$FC Função: HIS_adicionaDisciplina
 *$ED Descrição da função
-*	Adiciona uma disciplina cursada ao histórico do aluno
+*	Adiciona uma disciplina ao histórico do aluno
 *$FV Valor retornado
 *	HIS_CondRetOK 
 *   HIS_CondRetRecebeuPonteiroNulo
 *   HIS_CondRetErroInterno
 *$EP Parametros
-*$P	disc: disciplina cursada
+
+*$P	pHistorico: ponteiro para historico
+*$P	disciplina: ponteiro para disciplina a ser adicionada
+*$P	situacao: situacao do aluno
+*$P	periodo: periodo da disciplina a ser adicionada
+*$P	disciplina: grau obtido na disciplina
 *$EAE Assertivas de entrada
 *	valem as assertivas estruturais para tipos de dados estruturados.
 *	ponteiro corrente referencia Histórico do aluno de valor não nulo.
+*	ponteiro corrente referencia disciplina de valor não nulo.
+*	situacao é uma situacao valida não nula
+*	periodo é o peridoo válido e não nulo
+*	grau é um grau valido não nulo
+*	
 *$EAS Assertivas de saida
 *	valem as assertivas estruturais para tipos de dados estruturados.
 *	valem as assertivas estruturais para listas encadeadas.
+*	disciplina corretamente adicionada ao historico
 *$.***********************************************************************/
-HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, struct DIC_tagDisciplinaCursada* disc );
+HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , struct disciplina *disciplina, char *situacao, char* periodo, float grau );
 
 /***********************************************************************
 *$FC Função: HIS_printHistoricoCompleto

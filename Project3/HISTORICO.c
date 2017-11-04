@@ -589,8 +589,32 @@ HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tp
 
 	return HIS_CondRetOK;
 }
+/* Fim funcao: HIS adiciona disciplina cursada */
 
- /* Fim funcao: HIS adicionaDisciplinaCursada */
+/**************************************************************************
+ * Funcao: HIS adiciona disciplina ao historico                           *
+ **************************************************************************/
+HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , Disciplina *disciplina, char *situacao, char* periodo, float grau ) {
+
+	DIC_tpDisciplinaCursada * disciplinaCursada;
+	DIC_tpCondRet retCriacao;
+	HIS_tpCondRet retAdicaoDisciplinaCursada;
+	
+	if (pHistorico == NULL || disciplina == NULL) {
+		return HIS_CondRetRecebeuPonteiroNulo;
+	}
+
+	retCriacao = DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, situacao, periodo, grau);
+
+	if(retCriacao != DIC_CondRetOK) {
+		return HIS_CondRetProblemaListaDisciplinas;
+	}
+
+	return HIS_adicionaDisciplinaCursada(pHistorico, disciplinaCursada);
+	
+
+}
+/* Fim funcao: HIS adiciona disciplina*/
 
 
 /**************************************************************************
