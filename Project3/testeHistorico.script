@@ -4,7 +4,7 @@
 // Proposito: Testar as funcoes do modulo Historico
 //			  Para garantir seu correto funcionamento
 //
-//  Autores: mc - Matheus Caldas
+//  Autores: mc - MATheus Caldas
 //	     bp - Bruno Pedrazza
 //	     pg - Pedro Gomes
 //	     va - Vin?us Arcoverde
@@ -20,37 +20,37 @@
 =declararparm  DIS_CondRetDisciplinaCriada   int 2
 
 ==Declarar os conteudos de Disciplina
-=declararparm  codigo1       string "inf1301"
+=declararparm  codigo1       string "INF1301"
 =declararparm  credito1      int    4
 =declararparm  nome1         string "Modular"
 =declararparm  bibliografia1 string "teste_biblio1"
 =declararparm  ementa1       string "ementa_teste1"
 
-=declararparm  codigo2       string "inf1504"
+=declararparm  codigo2       string "INF1504"
 =declararparm  credito2      int    4
 =declararparm  nome2         string "EDA"
 =declararparm  bibliografia2 string "teste_biblio2"
 =declararparm  ementa2       string "ementa_teste2"
 
-=declararparm  codigo3       string "mat1157"
+=declararparm  codigo3       string "MAT1157"
 =declararparm  credito3      int    4
 =declararparm  nome3         string "CALCULO"
 =declararparm  bibliografia3 string "teste_biblio3"
 =declararparm  ementa3       string "ementa_teste3"
 
-=declararparm  codigo4       string "eng1456"
+=declararparm  codigo4       string "ENG1456"
 =declararparm  credito4      int    4
 =declararparm  nome4         string "PROBABILIDADE"
 =declararparm  bibliografia4 string "teste_biblio4"
 =declararparm  ementa4       string "ementa_teste4"
 
-=declararparm  codigo5       string "inf1018"
+=declararparm  codigo5       string "INF1018"
 =declararparm  credito5      int    6
 =declararparm  nome5         string "SOFTWARE"
 =declararparm  bibliografia5 string "teste_biblio5"
 =declararparm  ementa5       string "ementa_teste5"
 
-=declararparm  codigo6       string "fis1051"
+=declararparm  codigo6       string "FIS1051"
 =declararparm  credito6      int    2
 =declararparm  nome6         string "FISICA"
 =declararparm  bibliografia6 string "teste_biblio6"
@@ -58,11 +58,11 @@
 
 ==Declarar os conteudos de DisciplinaCursada
 =declararparm	situacao1	string "AP"
-=declararparm	periodo1	string "2015.2"
+=declararparm	periodo1	string "2015.1"
 =declararparm	grau1		string "8.4"
 
 =declararparm	situacao2	string "RF"
-=declararparm	periodo2	string "2010.1"
+=declararparm	periodo2	string "2015.2"
 =declararparm	grau2		string "5.3"
 
 =declararparm	situacao3	string "RN"
@@ -70,15 +70,15 @@
 =declararparm	grau3		string "8.5"
 
 =declararparm	situacao4	string "AP"
-=declararparm	periodo4	string "2017.2"
+=declararparm	periodo4	string "2016.2"
 =declararparm	grau4		string "10"
 
 =declararparm	situacao5	string "AP"
-=declararparm	periodo5	string "0017.2"
+=declararparm	periodo5	string "2017.1"
 =declararparm	grau5		string "2.3"
 
 =declararparm	situacao6	string "AP"
-=declararparm	periodo6	string "2017.3"
+=declararparm	periodo6	string "2017.2"
 =declararparm	grau6		string "9.2"
 
 == Criar disciplina por parametro
@@ -89,28 +89,58 @@
 =gerapar 4 nome5 codigo5 credito5 bibliografia5 ementa5 DIS_CondRetDisciplinaCriada
 =gerapar 5 nome6 codigo6 credito6 bibliografia6 ementa6 DIS_CondRetDisciplinaCriada
 
-== Criar disciplinas cursadas
-=geradisc 0 0 situacao1 periodo1 grau1 0
-=geradisc 1 1 situacao2 periodo2 grau2 0
-=geradisc 2 2 situacao3 periodo3 grau3 0
-=geradisc 3 3 situacao4 periodo4 grau4 0
+
 
 == Criar Historico
 =criaHIS 0 OK
 =criaHIS 4 OK
 
-== Adicionar disciplinas a um hist??o
-=adicDiscCursada 0 2 OK
-=adicDiscCursada 0 3 OK
-=adicDiscCursada 0 1 OK
-=adicDiscCursada 1 2 PonteiroNulo
-=adicDiscCursada 1 0 OK
-=recuperar
-=adicDiscCursada 0 2 PonteiroNulo
-=recuperar
+== Adiciona disciplinas ao historico diretamente utilizando indiretamente o método adicionaDisciplinaCursada
+=adicDisc 0 0 situacao1 periodo1 grau1 OK
+=adicDisc 0 1 situacao2 periodo1 grau2 OK
+=adicDisc 0 2 situacao3 periodo1 grau3 OK
+=adicDisc 0 3 situacao4 periodo1 grau4 OK
+=adicDisc 0 4 situacao5 periodo1 grau5 OK
+=adicDisc 0 5 situacao6 periodo1 grau6 OK
 
-== Imprimir hist??o
-=imprimeHist 0 OK
+=adicDisc 0 0 situacao1 periodo2 grau1 OK
+=adicDisc 0 1 situacao2 periodo2 grau2 OK
+=adicDisc 0 2 situacao3 periodo2 grau3 OK
+=adicDisc 0 3 situacao4 periodo2 grau4 OK
+=adicDisc 0 4 situacao5 periodo2 grau5 OK
+=adicDisc 0 5 situacao6 periodo2 grau6 OK
+
+=adicDisc 0 0 situacao1 periodo3 grau1 OK
+=adicDisc 0 1 situacao2 periodo3 grau2 OK
+=adicDisc 0 2 situacao3 periodo3 grau3 OK
+=adicDisc 0 3 situacao4 periodo3 grau4 OK
+=adicDisc 0 4 situacao5 periodo3 grau5 OK
+=adicDisc 0 5 situacao6 periodo3 grau6 OK
+
+=adicDisc 0 0 situacao1 periodo4 grau1 OK
+=adicDisc 0 1 situacao2 periodo4 grau2 OK
+=adicDisc 0 2 situacao3 periodo4 grau3 OK
+=adicDisc 0 3 situacao4 periodo4 grau4 OK
+=adicDisc 0 4 situacao5 periodo4 grau5 OK
+=adicDisc 0 5 situacao6 periodo4 grau6 OK
+
+
+=adicDisc 0 0 situacao1 periodo5 grau1 OK
+=adicDisc 0 1 situacao2 periodo5 grau2 OK
+=adicDisc 0 2 situacao3 periodo5 grau3 OK
+=adicDisc 0 3 situacao4 periodo5 grau4 OK
+=adicDisc 0 4 situacao5 periodo5 grau5 OK
+=adicDisc 0 5 situacao6 periodo5 grau6 OK
+
+
+=adicDisc 0 0 situacao1 periodo6 grau1 OK
+=adicDisc 0 1 situacao2 periodo6 grau2 OK
+=adicDisc 0 2 situacao3 periodo6 grau3 OK
+=adicDisc 0 3 situacao4 periodo6 grau4 OK
+=adicDisc 0 4 situacao5 periodo6 grau5 OK
+=adicDisc 0 5 situacao6 periodo6 grau6 OK
+
+
 
 == Pegar historico completo
 =getHisCompleto 0 OK
@@ -132,10 +162,10 @@
 =recuperar
 
 
-== Adiciona disciplinas ao historico diretamente utilizando indiretamente o método adicionaDisciplinaCursada
-=adicDisc 0 0 situacao1 periodo1 grau1 OK
-=adicDisc 0 1 situacao2 periodo2 grau2 OK
-=adicDisc 0 2 situacao3 periodo3 grau3 OK
+== Salva historico no arquivo
+=salvaHistArquivo 0 1474985 OK
+=salvaHistArquivo 4 1312785 OK
+
 
 == Remover Historico
 =removeHIS 0 OK
