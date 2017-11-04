@@ -50,7 +50,7 @@
 static float HIS_getCrAcumulado (FILE *historico);
 static float HIS_getCrPeriodo (FILE *historico, char *periodo);
 static char* HIS_montaNomeArq (unsigned int matricula);
-
+static HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tpDisciplinaCursada* disc );
 /* Fim declaração funções internas */
 
 #define TAM_NOME_ARQ 35

@@ -51,7 +51,6 @@
 
 #define	CRIA_HIST_CMD			"=criaHIS"
 #define	REMOVE_HIST_CMD			"=removeHIS"
-#define ADIC_DISC_CURSADA_HIS_CMD	"=adicDiscCursada"
 #define ADIC_DISC_HIS_CMD		"=adicDisc"
 #define	GET_HIS_CMPT_CMD		"=getHisCompleto"
 #define	GET_HIS_PRD_CMD			"=getHisPeriodo"
@@ -257,24 +256,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
 	   }
 
-	   else if( strcmp( ComandoTeste , ADIC_DISC_CURSADA_HIS_CMD ) == 0 )
-	   {   
-		   NumLidos = LER_LerParametros("iii", &indexH, &indexDC, &HIS_CondRetEsperada);
-		   if (NumLidos != 3) {
-			   return TST_CondRetParm;
-		   }
 
-		   list = NULL;
-		   LIST_CondRetObtido = createList(&list);
-
-		   if (LIST_CondRetObtido != LIS_CondRetOK) {
-			   return TST_CondRetErro;
-		   }
-		   
-		   HIS_CondRetObtido = HIS_adicionaDisciplinaCursada(pHistorico[indexH], pDisciplinaCursada[indexDC]);
-
-		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao adicionar disciplina cursada ao historico");
-	   }
 	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
 	   {   
 		   
