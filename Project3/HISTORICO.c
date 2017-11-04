@@ -53,7 +53,7 @@ static char* HIS_montaNomeArq (unsigned int matricula);
 
 /* Fim declaração funções internas */
 
-
+#define TAM_NOME_ARQ 35
 
 
 /***********************************************************************
@@ -728,7 +728,7 @@ static float HIS_getCrPeriodo (FILE *historico, char *periodo){
  **************************************************************************/
 static char* HIS_montaNomeArq (unsigned int matricula){
 	char *nomeArq, mat[tamMatricula];
-	nomeArq = (char*) malloc (sizeof(char)*tamNomeArq);
+	nomeArq = (char*) malloc (sizeof(char)*TAM_NOME_ARQ);
 	sprintf(mat,"%u",matricula);
 	strcpy(nomeArq,"..\\Historico\\");
 	strcat(mat,".txt");
