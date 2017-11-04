@@ -43,7 +43,7 @@
 #include	"disciplina.h"
 #include	"DISCIPLINACURSADA.h"
 
-
+//funcoes para criar disciplinas !!
 #define GERA_PAR_DIS_CMD		"=gerapar"
 #define GERA_DISC_CRIADA_CMD	"=geradisc"
 
@@ -56,7 +56,7 @@
 #define	GET_HIS_PRD_CMD			"=getHisPeriodo"
 #define	GET_CR_TOTAL_CMD		"=getCrTotal"
 #define	GET_CR_PRD_CMD			"=getCrPeriodo"
-#define IMPRIME_HIST_CMD		"=imprimeHist"
+#define SALVA_HIST_ARQUIVO		"=salvaHistArquivo"
 
 #define MAX 15
 
@@ -77,6 +77,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	 int  NumLidos = -1 ;
 	 int LIST_CondRetObtido = -999;
 	 char periodo[10], ValorDado1Nome[20], ValorDado2Codigo[20], ValorDado4Bib[20], ValorDado5Ementa[20], situacao[10], grauStr[10];
+	 unsigned int matricula;
 	 float cr, grau;
 	 List* list;
 
@@ -234,28 +235,19 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
 
-	   ////////////////////////////////////////////
-	   ////////////////////////////////////////////
-
-	   else if( strcmp( ComandoTeste , IMPRIME_HIST_CMD ) == 0 )
+	   	   else if( strcmp( ComandoTeste , SALVA_HIST_ARQUIVO ) == 0 )
 	   {
-		   NumLidos = LER_LerParametros("ii", &indexH, &HIS_CondRetEsperada);
-		   if (NumLidos != 2) {
+		   NumLidos = LER_LerParametros("iii", &indexH, &matricula, &HIS_CondRetEsperada);
+		   if (NumLidos != 3) {
 			   return TST_CondRetParm;
 		   }
 
-		   list = NULL;
-		   LIST_CondRetObtido = createList(&list);
+		   HIS_CondRetObtido = HIS_salvaHistoricoEmArquivo(&pHistorico[indexH], matricula);
 
-		   if (LIST_CondRetObtido != LIS_CondRetOK) {
-			   return TST_CondRetErro;
-		   }
-		   
-		   HIS_CondRetObtido = HIS_imprimeHistorico(pHistorico[indexH]);
+		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao salvar historico no arquivo");
 
-		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
+
 	   }
-
 
 	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
 	   {   

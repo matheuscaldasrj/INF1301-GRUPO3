@@ -219,30 +219,6 @@ HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
 
 HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
 
-/***********************************************************************
-*$FC Função: HIS_imprimeHistorico
-*$ED Descrição da função
-*	Imprime em um arquivo toda a informação contida em um histórico
-*$FV Valor retornado
-*	HIS_CondRetOK 
-*   HIS_CondRetErroAoAbrirArquivo
-*   HIS_CondRetRecebeuPonteiroNulo
-*$EP Parametros
-*$P pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
-*$EAE Assertivas de entrada
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	valem as assertivas estruturais para arrays de caractéres
-*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
-*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
-*	"2016.1" ou "2013.2" etc.
-*$EAS Assertivas de saida
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	valem as assertivas estruturais para listas encadeadas.
-*	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
-*$.***********************************************************************/
-
-HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico);
 
 /***********************************************************************
 *$FC Função: HIS_getDisciplinasTrancadas
@@ -329,6 +305,21 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula);
 *$P 
 *$.***********************************************************************/
 HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
+
+
+
+/***********************************************************************
+*$FC Função: HIS_salvaHistoricoEmArquivo
+*$ED Descrição da função
+* 
+*$FV Valor retornado
+*  
+*   
+*   
+*$EP Parametros
+*$P 
+*$.***********************************************************************/
+HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula);
 
 
 #undef HISTORICO_EXT

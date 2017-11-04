@@ -20,6 +20,8 @@
  *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
  *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
  *	1.0.1		  bp	   02/11/17			Implementacao montaNomeArq
+ *	1.0.2		  mc	   03/11/17			Implmentacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
+ *
  *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -66,9 +68,7 @@ static HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico,
  ***********************************************************************/
 
 struct HIS_tagHistorico  {   
-	//TODO
 	List *disciplinasCursadas;
-	//Lista<DisplinaCursadas>;
 };
 
 
@@ -101,6 +101,71 @@ HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
     return HIS_CondRetOK ;
 } 
 /* Fim funcao: HIS Criar Historico */
+
+
+/**************************************************************************
+ *                                                                        *
+ * Funcao: HIS Salva Historico                                                 *
+ **************************************************************************/
+
+HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula)
+{
+	// Inicialização de variáveis
+	int creditos = 0;
+	float grau = 0; 
+	char situacao[3];
+	char periodoDisc[7];
+
+	// por malloc porque a funcao da disciplina exige ** char (?)
+	char* codigoDaDisc = (char*)malloc(sizeof(char) * 8);
+	char* nome = (char*)malloc(sizeof(char) * 40);
+
+	Disciplina *pDisciplina;
+ 
+	List* list;
+	List *listAux;
+	void *retVoid;
+	DIC_tpDisciplinaCursada *pDisciplinaCursada;
+	char *nomeDoArquivo = HIS_montaNomeArq(matricula);
+	FILE* file = fopen(nomeDoArquivo, "a"); 
+	
+
+	HIS_tpCondRet ret = HIS_getHistoricoCompleto(*pHistorico, &list);
+
+	createList(&listAux);
+ 
+	  if (file == NULL)
+	  {
+		printf("Error opening file!\n");
+		return HIS_CondRetErroAoAbrirArquivo;
+	  }
+
+
+	//ussando pop_back e re-adcionando pois o next não está legal
+	while(pop_back(list,&retVoid) != LIS_CondRetListaVazia){
+		pDisciplinaCursada = (struct DIC_tagDisciplinaCursada*)retVoid;
+
+
+		DIC_getGrau(pDisciplinaCursada, &grau);
+		DIC_getPeriodo(pDisciplinaCursada, periodoDisc);
+		DIC_getSituacao(pDisciplinaCursada,situacao);
+		DIC_getDisciplina(pDisciplinaCursada,&pDisciplina);
+		DIS_get_nome(pDisciplina,&nome);
+		DIS_get_codigo(pDisciplina,&codigoDaDisc);
+		
+		fprintf(file,"%s %s %.1f %s %d\n", periodoDisc, codigoDaDisc, grau, situacao, creditos);
+
+		//adicionando de volta ao historico
+		push_back(listAux,pDisciplinaCursada);
+	}
+	
+	(*pHistorico)->disciplinasCursadas = listAux;
+
+	return HIS_CondRetOK;
+} 
+/* Fim funcao: HIS Criar Historico */
+
+
 
 
 /**************************************************************************
@@ -508,68 +573,6 @@ HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico, List* di
 }
  /* Fim funcao: HIS trancadas */
 
-/**************************************************************************
- *                                                                        *
- * Funcao: HIS imprimeHistorico                                            	  *
- **************************************************************************/
-HIS_tpCondRet HIS_imprimeHistorico(HIS_tpHistorico * pHistorico)
-{	
-	// Inicialização de variáveis
-	int creditos = 0;
-	float grau = 0; 
-	char* situacao = (char*)malloc(sizeof(char) * 3);
-	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
-	char* codigoDaDisc = (char*)malloc(sizeof(char) * 8);
-	char* nome = (char*)malloc(sizeof(char) * 40);
-	Disciplina *pDisciplina;
- 
-	List* list;
-	List *listAux;
-	void *retVoid;
-	DIC_tpDisciplinaCursada *pDisciplinaCursada;
-	FILE* file = fopen("historico.txt", "w"); 
-	
-
-	HIS_tpCondRet ret = HIS_getHistoricoCompleto(pHistorico, &list);
-
-	createList(&listAux);
- 
-	  if (file == NULL)
-	  {
-		printf("Error opening file!\n");
-		fclose(file);
-		return HIS_CondRetErroAoAbrirArquivo;
-	  }
- 
-	while(pop_back(list,&retVoid) != LIS_CondRetListaVazia){
-		pDisciplinaCursada = (struct DIC_tagDisciplinaCursada*)retVoid;
-
-
-		DIC_getGrau(pDisciplinaCursada, &grau);
-		DIC_getPeriodo(pDisciplinaCursada, periodoDisc);
-		DIC_getSituacao(pDisciplinaCursada,situacao);
-		DIC_getDisciplina(pDisciplinaCursada,&pDisciplina);
-		DIS_get_nome(pDisciplina,&nome);
-		DIS_get_codigo(pDisciplina,&codigoDaDisc);
-		
-		fprintf(file,"%s-%s", codigoDaDisc, nome);
-		fprintf(file, "\nPeriodo: %s", periodoDisc);
-		fprintf(file,"\nSituacao: %s", situacao);
-		fprintf(file, "\n");
-		fprintf(file, "Grau: ");
-		fprintf(file, "%.1f", grau);
-		fprintf(file, "\n\n\n\n");
- 
-		//adicionando de volta ao historico
-		push_back(listAux,pDisciplinaCursada);
-	}
-	
-	pHistorico->disciplinasCursadas = listAux;
-
-	return HIS_CondRetOK;
-}
-
- /* Fim funcao: HIS imprime Historico */
 
 /**************************************************************************
  *                                                                        *
@@ -750,7 +753,7 @@ static char* HIS_montaNomeArq (unsigned int matricula){
 	if (nomeArq == 	NULL) return NULL;
 
 	sprintf(mat,"%u",matricula);
-	strcpy(nomeArq,"..\\Historico\\");
+	strcpy(nomeArq,"Historico\\");
 	strcat(mat,".txt");
 	strcat(nomeArq,mat);
 	return nomeArq;
