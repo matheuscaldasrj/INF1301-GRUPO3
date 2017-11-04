@@ -45,6 +45,7 @@
 #define tamGrau         5
 #define tamMatricula    20
 #define tamPeriodo      7
+#define TAM_NOME_ARQ    35
 
 
 /***** Declarações exportadas pelo módulo *****/
