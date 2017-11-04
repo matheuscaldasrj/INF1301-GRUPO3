@@ -20,7 +20,7 @@
  *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
  *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
  *	1.0.1		  bp	   02/11/17			Implementacao montaNomeArq
- *
+ *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -47,13 +47,13 @@
 
 /* Declaração funções internas */
 
-static float HIS_getCrAcumulado (FILE *historico);
-static float HIS_getCrPeriodo (FILE *historico, char *periodo);
+static HIS_tpCondRet HIS_getCrAcumulado (FILE *historico, float *CR);
+static HIS_tpCondRet HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR);
 static char* HIS_montaNomeArq (unsigned int matricula);
 static HIS_tpCondRet HIS_adicionaDisciplinaCursada(HIS_tpHistorico * pHistorico, DIC_tpDisciplinaCursada* disc );
+
 /* Fim declaração funções internas */
 
-#define TAM_NOME_ARQ 35
 
 
 /***********************************************************************
@@ -624,6 +624,7 @@ HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , Disciplina *
 
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	FILE *historico;
+	HIS_tpCondRet respostaCR;
 	float CR;
 	unsigned int creditos;
 	char periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
@@ -631,7 +632,9 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
-	CR = HIS_getCrAcumulado (historico);
+	respostaCR = HIS_getCrAcumulado (historico,&CR);
+	if (respostaCR != HIS_CondRetOK) return respostaCR;
+
 	rewind(historico);
 	printf("\n\t\tCR Acumulado : %.1f\n\n",CR);
 	
@@ -660,6 +663,7 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 
 HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	FILE *historico;
+	HIS_tpCondRet respostaCR;
 	float CR;
 	unsigned int creditos;
 	char periodoArq[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau] ;
@@ -667,7 +671,9 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
 	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
 	
-	CR = HIS_getCrPeriodo (historico,periodo);
+	respostaCR = HIS_getCrAcumulado (historico,periodo,&CR);
+	if (respostaCR != HIS_CondRetOK) return respostaCR;
+
 	rewind(historico);
 	printf("\n\t\tCR Periodo %s : %.1f\n\n",periodo,CR);
 	
@@ -690,14 +696,19 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
  * Funcao interna: HIS getCrAcumulado                                     *
  **************************************************************************/
 
-static float HIS_getCrAcumulado (FILE *historico){
+static HIS_tpCondRet HIS_getCrAcumulado (FILE *historico, float *CR){
 	char lixo[10];
 	float grau, cred, somaCred=0, somaGrau=0;
+
 	while (fscanf(historico,"%s %s %f %s %f",&lixo,&lixo,&grau,&lixo,&cred) == 5){
 		somaGrau += grau*cred;
 		somaCred += cred;
 	}
-	return somaGrau/somaCred;
+	*CR = somaGrau/somaCred;
+
+	if (*CR < 0 || *CR > 10) return HIS_CondRetErroInterno;
+
+	return HIS_CondRetOK;
 }
 
 /* Fim funcao: HIS getCrAcumulado */
@@ -708,16 +719,22 @@ static float HIS_getCrAcumulado (FILE *historico){
  * Funcao interna: HIS getCrPeriodo                                       *
  **************************************************************************/
 
-static float HIS_getCrPeriodo (FILE *historico, char *periodo){
+static float HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR){
 	char lixo[10], periodoaux[tamPeriodo];
 	float grau, cred, somaCred=0, somaGrau=0;
+
+	if (periodo == NULL) return  HIS_CondRetErroInterno;
+
 	while (fscanf(historico," %s %s %f %s %f",&periodoaux,&lixo,&grau,&lixo,&cred) == 5){
 		if (!strcmp(periodoaux,periodo)){
 			somaGrau += grau*cred;
 			somaCred += cred;
 		}
 	}
-	return somaGrau/somaCred;
+	*CR = somaGrau/somaCred;
+	if (*CR < 0 || *CR > 10) return HIS_CondRetErroInterno;
+
+	return HIS_CondRetOK;
 }
 
 /* Fim funcao: HIS getCrPeriodo */
@@ -728,7 +745,10 @@ static float HIS_getCrPeriodo (FILE *historico, char *periodo){
  **************************************************************************/
 static char* HIS_montaNomeArq (unsigned int matricula){
 	char *nomeArq, mat[tamMatricula];
+
 	nomeArq = (char*) malloc (sizeof(char)*TAM_NOME_ARQ);
+	if (nomeArq == 	NULL) return NULL;
+
 	sprintf(mat,"%u",matricula);
 	strcpy(nomeArq,"..\\Historico\\");
 	strcat(mat,".txt");
