@@ -23,6 +23,7 @@
  *	1.0.2		  mc	   03/11/17			Implmentacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
  *
  *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
+ *  1.0.3         bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
@@ -633,10 +634,16 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	char periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
 	
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
-	if (historico == NULL) {printf("Erro na abertura do historico do aluno.\n"); return HIS_CondRetErroAoAbrirArquivo;}
+	if (historico == NULL) {printf("Nao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	respostaCR = HIS_getCrAcumulado (historico,&CR);
 	if (respostaCR != HIS_CondRetOK) {fclose(historico); return respostaCR;}
+
+	if (CR == -1){
+		printf("Aluno de matricula %u nao realizou nenhuma disciplina.\n",matricula);
+		fclose(historico);
+		return HIS_CondRetOK;
+	}
 
 	rewind(historico);
 	printf("\n\t\tCR Acumulado : %.1f\n\n",CR);
@@ -713,6 +720,12 @@ static HIS_tpCondRet HIS_getCrAcumulado (FILE *historico, float *CR){
 		somaGrau += grau*cred;
 		somaCred += cred;
 	}
+
+	if (somaCred == 0){
+		*CR = -1;
+		return HIS_CondRetOK;
+	}
+
 	*CR = somaGrau/somaCred;
 
 	if (*CR < 0 || *CR > 10) return HIS_CondRetErroInterno;
