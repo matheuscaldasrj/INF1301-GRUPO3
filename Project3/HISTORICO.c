@@ -719,7 +719,7 @@ static HIS_tpCondRet HIS_getCrAcumulado (FILE *historico, float *CR){
  * Funcao interna: HIS getCrPeriodo                                       *
  **************************************************************************/
 
-static float HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR){
+static HIS_tpCondRet HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR){
 	char lixo[10], periodoaux[tamPeriodo];
 	float grau, cred, somaCred=0, somaGrau=0;
 
