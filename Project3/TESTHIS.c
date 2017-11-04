@@ -57,6 +57,8 @@
 #define	GET_CR_TOTAL_CMD		"=getCrTotal"
 #define	GET_CR_PRD_CMD			"=getCrPeriodo"
 #define SALVA_HIST_ARQUIVO		"=salvaHistArquivo"
+#define PRINT_HIST_PERIODO		"=printHistPeriodo"
+#define PRINT_HIST_COMPLETO		"=printHistCompleto"
 
 #define MAX 15
 
@@ -263,5 +265,36 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   
 		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao adicionar disciplina ao historico");
 	   }
+
+	   else if( strcmp( ComandoTeste , PRINT_HIST_PERIODO ) == 0 )
+	   {   
+		   
+		   NumLidos = LER_LerParametros("iisi", &indexH, &matricula, periodo, &HIS_CondRetEsperada);
+
+		    if ( NumLidos != 4 )
+            {
+               return TST_CondRetParm ;
+            } 
+
+		   HIS_CondRetObtido = HIS_printHistoricoPeriodo(matricula,periodo);
+		   
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao printar historico do periodo");
+	   }
+
+	   	else if( strcmp( ComandoTeste , PRINT_HIST_COMPLETO ) == 0 )
+	   {   
+		   
+		   NumLidos = LER_LerParametros("iii", &indexH, &matricula, &HIS_CondRetEsperada);
+
+			if ( NumLidos != 3 )
+			{
+				return TST_CondRetParm ;
+			} 
+
+		   HIS_CondRetObtido = HIS_printHistoricoCompleto(matricula);
+		   
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao printar historico completo");
+	   }
+
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
