@@ -49,14 +49,15 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define	CRIA_HIST_CMD		"=criaHIS"
-#define	REMOVE_HIST_CMD		"=removeHIS"
-#define ADIC_DISC_HIS_CMD	"=adicDisc"
-#define	GET_HIS_CMPT_CMD	"=getHisCompleto"
-#define	GET_HIS_PRD_CMD		"=getHisPeriodo"
-#define	GET_CR_TOTAL_CMD	"=getCrTotal"
-#define	GET_CR_PRD_CMD		"=getCrPeriodo"
-#define IMPRIME_HIST_CMD	"=imprimeHist"
+#define	CRIA_HIST_CMD			"=criaHIS"
+#define	REMOVE_HIST_CMD			"=removeHIS"
+#define ADIC_DISC_CURSADA_HIS_CMD	"=adicDiscCursada"
+#define ADIC_DISC_HIS_CMD		"=adicDisc"
+#define	GET_HIS_CMPT_CMD		"=getHisCompleto"
+#define	GET_HIS_PRD_CMD			"=getHisPeriodo"
+#define	GET_CR_TOTAL_CMD		"=getCrTotal"
+#define	GET_CR_PRD_CMD			"=getCrPeriodo"
+#define IMPRIME_HIST_CMD		"=imprimeHist"
 
 #define MAX 15
 
@@ -256,7 +257,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao imprimir historico");
 	   }
 
-	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
+	   else if( strcmp( ComandoTeste , ADIC_DISC_CURSADA_HIS_CMD ) == 0 )
 	   {   
 		   NumLidos = LER_LerParametros("iii", &indexH, &indexDC, &HIS_CondRetEsperada);
 		   if (NumLidos != 3) {
@@ -273,6 +274,20 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   HIS_CondRetObtido = HIS_adicionaDisciplinaCursada(pHistorico[indexH], pDisciplinaCursada[indexDC]);
 
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao adicionar disciplina cursada ao historico");
+	   }
+	   else if( strcmp( ComandoTeste , ADIC_DISC_HIS_CMD ) == 0 )
+	   {   
+		   
+		   NumLidos = LER_LerParametros("iisssi", &indexH, &indexDI, situacao, periodo, grauStr , &HIS_CondRetEsperada);
+
+		   grau = atof(grauStr);
+		   if (NumLidos != 6) {
+			   return TST_CondRetParm;
+		   }
+
+		  HIS_CondRetObtido = HIS_adicionaDisciplina(pHistorico[indexH], pDisciplinas[indexDI], situacao, periodo, grau);
+		   
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao adicionar disciplina ao historico");
 	   }
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/

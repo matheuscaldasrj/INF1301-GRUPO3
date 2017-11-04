@@ -100,13 +100,13 @@
 =criaHIS 4 OK
 
 == Adicionar disciplinas a um hist??o
-=adicDisc 0 2 OK
-=adicDisc 0 3 OK
-=adicDisc 0 1 OK
-=adicDisc 1 2 PonteiroNulo
-=adicDisc 1 0 OK
+=adicDiscCursada 0 2 OK
+=adicDiscCursada 0 3 OK
+=adicDiscCursada 0 1 OK
+=adicDiscCursada 1 2 PonteiroNulo
+=adicDiscCursada 1 0 OK
 =recuperar
-=adicDisc 0 2 PonteiroNulo
+=adicDiscCursada 0 2 PonteiroNulo
 =recuperar
 
 == Imprimir hist??o
@@ -130,6 +130,12 @@
 =recuperar
 =getHisPeriodo 1 grau1 ErroInterno
 =recuperar
+
+
+== Adiciona disciplinas ao historico diretamente utilizando indiretamente o método adicionaDisciplinaCursada
+=adicDisc 0 0 situacao1 periodo1 grau1 OK
+=adicDisc 0 1 situacao2 periodo2 grau2 OK
+=adicDisc 0 2 situacao3 periodo3 grau3 OK
 
 == Remover Historico
 =removeHIS 0 OK
