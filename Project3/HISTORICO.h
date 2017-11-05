@@ -293,16 +293,26 @@ HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , struct disci
 *$.***********************************************************************/
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula);
 
-/***********************************************************************
-*$FC Função: HIS_printHistoricoPeriodo
-*$ED Descrição da função
-* 
-*$FV Valor retornado
-*  
-*   
-*   
-*$EP Parametros
-*$P 
+/**************************************************************************
+ *                                                                        
+ *  $FC Função: HIS printHistoricoPeriodo
+ *
+ *  $ED Descrição da função
+ *		 Recebe uma matricula, procura no arquivo de histórico a informação referente ao período dado e a imprime no terminal.
+ *  $EP Parâmetros
+ *	  $P matricula - número de matricula do aluno desejado
+ *	  $P periodo - array de caracteres com o período desejado
+ *	$FV Valor retornado
+ *		 HIS_CondRetOK
+ *		 HIS_CondRetErroAoAbrirArquivo
+ *		 respostaCR						- Condição de erro variável, se houver será dada pela função HIS_getCrAcumulado.
+ *		 HIS_CondRetErroInterno			- Erro em função interna.
+ *	$EAE Assertivas de entrada
+ *		Matricula fornecida precisa ser válida.
+ *		Período deve ser composto apenas de um caracter.
+ *	$EAS Assertivas de saida
+ *		O histórico foi devidamente impresso no terminal, senão relata mensagem de erro.
+ *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
 
