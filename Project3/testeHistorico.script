@@ -1,4 +1,4 @@
-// Script:     TesteHistorico.script
+﻿// Script:     TesteHistorico.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
 // Proposito: Testar as funcoes do modulo Historico
@@ -16,6 +16,7 @@
 =declararparm  FaltaMemoria   int 1
 =declararparm  PonteiroNulo   int 2
 =declararparm  ParamInvalido  int 3
+=declararparm  ErroAoAbrirArquivo int 5
 =declararparm  ErroInterno    int 6
 =declararparm  DIS_CondRetDisciplinaCriada   int 2
 
@@ -304,6 +305,13 @@
 == Salva historico no arquivo
 =salvaHistArquivo 0 1474985 OK
 =salvaHistArquivo 4 1312785 OK
+
+== Imprime historico completo no terminal
+=printHistCompleto 1474985 OK
+=printHistCompleto 1312795 ErroAoAbrirArquivo
+
+==Imprime historico do periodo no terminal
+=printHistPeriodo 1474985 "2016.2" OK
 
 
 == Remover Historico
