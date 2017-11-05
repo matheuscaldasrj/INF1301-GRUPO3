@@ -56,6 +56,7 @@
 #define	GET_HIS_PRD_CMD			"=getHisPeriodo"
 #define	GET_CR_TOTAL_CMD		"=getCrTotal"
 #define	GET_DISC_REPF_CMD		"=getDiscReprFalta"
+#define	GET_DISC_TRANC_CMD		"=getDiscTrancadas"
 #define	GET_CR_PRD_CMD			"=getCrPeriodo"
 #define SALVA_HIST_ARQUIVO		"=salvaHistArquivo"
 #define PRINT_HIST_PERIODO		"=printHistPeriodo"
@@ -219,7 +220,32 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   ////////////////////////////////////////////
 	   ////////////////////////////////////////////
 
-	      else if( strcmp( ComandoTeste , GET_DISC_REPF_CMD ) == 0 )
+	   else if( strcmp( ComandoTeste , GET_DISC_REPF_CMD ) == 0 )
+	   {   
+		   
+		   NumLidos = LER_LerParametros("iii",  &indexH, &list, &HIS_CondRetEsperada);
+
+			if ( NumLidos != 3 )
+			{
+				return TST_CondRetParm ;
+			} 
+			
+			list = NULL;
+			LIST_CondRetObtido = createList(&list);
+
+			if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+			}
+
+			HIS_CondRetObtido = HIS_getDisciplinasReprovadoPorFalta(pHistorico[indexH], list);
+		   
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao pegar disciplinas reprovadas por falta");
+	   }
+	    ////////////////////////////////////////////
+	   ////////////////////////////////////////////
+
+
+	   else if( strcmp( ComandoTeste , GET_DISC_TRANC_CMD ) == 0 )
 	   {   
 		   
 		   NumLidos = LER_LerParametros("iii",  &indexH, &list, &HIS_CondRetEsperada);
@@ -262,7 +288,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   return TST_CompararInt(HIS_CondRetEsperada , HIS_CondRetObtido, "Retorno errado ao pegar historico completo");
 	   }
 
-	   	   else if( strcmp( ComandoTeste , SALVA_HIST_ARQUIVO ) == 0 )
+	   else if( strcmp( ComandoTeste , SALVA_HIST_ARQUIVO ) == 0 )
 	   {
 		   NumLidos = LER_LerParametros("iii", &indexH, &matricula, &HIS_CondRetEsperada);
 		   if (NumLidos != 3) {

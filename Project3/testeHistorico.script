@@ -307,6 +307,13 @@
 =getHisPeriodo 1 grau1 ErroInterno
 =recuperar
 
+== Pegar disciplinas trancadas
+=getDiscTrancadas 0 1 OK
+=getDiscTrancadas 1 1 OK
+=recuperar
+
+== Pegar disciplinas reprovadas por falta
+=getDiscReprFalta 0 1 OK
 
 == Salva historico no arquivo
 =salvaHistArquivo 0 1474985 OK
