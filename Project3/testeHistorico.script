@@ -45,9 +45,9 @@
 =declararparm  bibliografia4 string "teste_biblio4"
 =declararparm  ementa4       string "ementa_teste4"
 
-=declararparm  codigo5       string "INF1018"
-=declararparm  credito5      int    6
-=declararparm  nome5         string "SOFTWARE"
+=declararparm  codigo5       string "INF1403"
+=declararparm  credito5      int    4
+=declararparm  nome5         string "IHC"
 =declararparm  bibliografia5 string "teste_biblio5"
 =declararparm  ementa5       string "ementa_teste5"
 
@@ -56,6 +56,102 @@
 =declararparm  nome6         string "FISICA"
 =declararparm  bibliografia6 string "teste_biblio6"
 =declararparm  ementa6       string "ementa_teste6"
+
+=declararparm  codigo7       string "INF1025"
+=declararparm  credito7      int    2
+=declararparm  nome7         string "INTRODUCAO"
+=declararparm  bibliografia7 string "teste_biblio7"
+=declararparm  ementa7       string "ementa_teste7"
+
+=declararparm  codigo8       string "inf1009"
+=declararparm  credito8      int    4
+=declararparm  nome8         string "LOGICA"
+=declararparm  bibliografia8 string "teste_biblio8"
+=declararparm  ementa8       string "ementa_teste8"
+
+=declararparm  codigo9       string "inf1007"
+=declararparm  credito9      int    4
+=declararparm  nome9         string "PROGRAMACAOII"
+=declararparm  bibliografia9 string "teste_biblio9"
+=declararparm  ementa9       string "ementa_teste9"
+
+=declararparm  codigo10       string "MAT1260"
+=declararparm  credito10      int    4
+=declararparm  nome10         string "ALGEBRA"
+=declararparm  bibliografia10 string "teste_biblio10"
+=declararparm  ementa10       string "ementa_teste10"
+
+=declararparm  codigo11       string "INF1012"
+=declararparm  credito11      int    2
+=declararparm  nome11         string "MODELAGEM"
+=declararparm  bibliografia11 string "teste_biblio11"
+=declararparm  ementa11       string "ementa_teste11"
+
+=declararparm  codigo12       string "INF1018"
+=declararparm  credito12      int    4
+=declararparm  nome12         string "SOFTWARE"
+=declararparm  bibliografia12 string "teste_biblio12"
+=declararparm  ementa12       string "ementa_teste12"
+
+=declararparm  codigo13       string "INF1383"
+=declararparm  credito13      int    2
+=declararparm  nome13         string "BD"
+=declararparm  bibliografia13 string "teste_biblio13"
+=declararparm  ementa13       string "ementa_teste13"
+
+=declararparm  codigo14       string "INF1626"
+=declararparm  credito14      int    4
+=declararparm  nome14         string "LFA"
+=declararparm  bibliografia14 string "teste_biblio15"
+=declararparm  ementa14       string "ementa_teste15"
+
+=declararparm  codigo15       string "INF1636"
+=declararparm  credito15      int    4
+=declararparm  nome15         string "POO"
+=declararparm  bibliografia15 string "teste_biblio13"
+=declararparm  ementa15       string "ementa_teste13"
+
+=declararparm  codigo16       string "INF1721"
+=declararparm  credito16      int    4
+=declararparm  nome16         string "AA"
+=declararparm  bibliografia16 string "teste_biblio16"
+=declararparm  ementa16       string "ementa_teste16"
+
+=declararparm  codigo17       string "INF1771"
+=declararparm  credito17      int    4
+=declararparm  nome17         string "IA"
+=declararparm  bibliografia17 string "teste_biblio17"
+=declararparm  ementa17       string "ementa_teste17"
+
+=declararparm  codigo18       string "INF1721"
+=declararparm  credito18      int    4
+=declararparm  nome18         string "MODELAGEMDESOFTWARE"
+=declararparm  bibliografia18 string "teste_biblio18"
+=declararparm  ementa18       string "ementa_teste18"
+
+=declararparm  codigo19       string "INF1950"
+=declararparm  credito19      int    2
+=declararparm  nome19         string "PROJFINALI"
+=declararparm  bibliografia19 string "teste_biblio19"
+=declararparm  ementa19       string "ementa_teste19"
+
+=declararparm  codigo20       string "INF1015"
+=declararparm  credito20      int    4
+=declararparm  nome20         string "COMPUTABILIDADE"
+=declararparm  bibliografia20 string "teste_biblio20"
+=declararparm  ementa20       string "ementa_teste20"
+
+=declararparm  codigo21       string "INF1951"
+=declararparm  credito21      int    4
+=declararparm  nome21         string "PROJFINALII"
+=declararparm  bibliografia21 string "teste_biblio21"
+=declararparm  ementa21       string "ementa_teste21"
+
+=declararparm  codigo22       string "INF1413"
+=declararparm  credito22      int    4
+=declararparm  nome22         string "TESTE"
+=declararparm  bibliografia22 string "teste_biblio22"
+=declararparm  ementa22       string "ementa_teste22"
 
 ==Declarar os conteudos de DisciplinaCursada
 =declararparm	situacao1	string "AP"
@@ -89,6 +185,22 @@
 =gerapar 3 nome4 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
 =gerapar 4 nome5 codigo5 credito5 bibliografia5 ementa5 DIS_CondRetDisciplinaCriada
 =gerapar 5 nome6 codigo6 credito6 bibliografia6 ementa6 DIS_CondRetDisciplinaCriada
+=gerapar 6 nome7 codigo7 credito7 bibliografia7 ementa7 DIS_CondRetDisciplinaCriada
+=gerapar 7 nome8 codigo8 credito8 bibliografia8 ementa8 DIS_CondRetDisciplinaCriada
+=gerapar 8 nome9 codigo9 credito9 bibliografia9 ementa9 DIS_CondRetDisciplinaCriada
+=gerapar 9 nome10 codigo10 credito10 bibliografia10 ementa10 DIS_CondRetDisciplinaCriada
+=gerapar 10 nome11 codigo11 credito11 bibliografia11 ementa11 DIS_CondRetDisciplinaCriada
+=gerapar 11 nome12 codigo12 credito12 bibliografia12 ementa12 DIS_CondRetDisciplinaCriada
+=gerapar 12 nome13 codigo13 credito13 bibliografia13 ementa13 DIS_CondRetDisciplinaCriada
+=gerapar 13 nome14 codigo14 credito14 bibliografia14 ementa14 DIS_CondRetDisciplinaCriada
+=gerapar 14 nome15 codigo15 credito15 bibliografia15 ementa15 DIS_CondRetDisciplinaCriada
+=gerapar 15 nome16 codigo16 credito16 bibliografia16 ementa16 DIS_CondRetDisciplinaCriada
+=gerapar 16 nome17 codigo17 credito17 bibliografia17 ementa17 DIS_CondRetDisciplinaCriada
+=gerapar 17 nome18 codigo18 credito18 bibliografia18 ementa18 DIS_CondRetDisciplinaCriada
+=gerapar 18 nome19 codigo19 credito19 bibliografia19 ementa19 DIS_CondRetDisciplinaCriada
+=gerapar 19 nome20 codigo20 credito20 bibliografia20 ementa20 DIS_CondRetDisciplinaCriada
+=gerapar 20 nome21 codigo21 credito21 bibliografia21 ementa21 DIS_CondRetDisciplinaCriada
+=gerapar 21 nome22 codigo22 credito22 bibliografia22 ementa22 DIS_CondRetDisciplinaCriada
 
 
 
@@ -96,7 +208,7 @@
 =criaHIS 0 OK
 =criaHIS 4 OK
 
-== Adiciona disciplinas ao historico diretamente utilizando indiretamente o método adicionaDisciplinaCursada
+== Adiciona disciplinas ao historico diretamente utilizando indiretamente o mÃ©todo adicionaDisciplinaCursada
 =adicDisc 0 0 situacao1 periodo1 grau1 OK
 =adicDisc 0 1 situacao2 periodo1 grau2 OK
 =adicDisc 0 2 situacao3 periodo1 grau3 OK
@@ -125,14 +237,12 @@
 =adicDisc 0 4 situacao5 periodo4 grau5 OK
 =adicDisc 0 5 situacao6 periodo4 grau6 OK
 
-
 =adicDisc 0 0 situacao1 periodo5 grau1 OK
 =adicDisc 0 1 situacao2 periodo5 grau2 OK
 =adicDisc 0 2 situacao3 periodo5 grau3 OK
 =adicDisc 0 3 situacao4 periodo5 grau4 OK
 =adicDisc 0 4 situacao5 periodo5 grau5 OK
 =adicDisc 0 5 situacao6 periodo5 grau6 OK
-
 
 =adicDisc 0 0 situacao1 periodo6 grau1 OK
 =adicDisc 0 1 situacao2 periodo6 grau2 OK
@@ -141,7 +251,42 @@
 =adicDisc 0 4 situacao5 periodo6 grau5 OK
 =adicDisc 0 5 situacao6 periodo6 grau6 OK
 
+=adicDisc 4 0 situacao1 periodo1 grau1 OK
+=adicDisc 4 1 situacao2 periodo1 grau2 OK
+=adicDisc 4 2 situacao3 periodo1 grau3 OK
+=adicDisc 4 3 situacao4 periodo1 grau4 OK
+=adicDisc 4 4 situacao5 periodo1 grau5 OK
+=adicDisc 4 5 situacao6 periodo1 grau6 OK
 
+=adicDisc 4 6 situacao1 periodo2 grau1 OK
+=adicDisc 4 7 situacao2 periodo2 grau2 OK
+=adicDisc 4 8 situacao3 periodo2 grau3 OK
+=adicDisc 4 9 situacao4 periodo2 grau4 OK
+=adicDisc 4 10 situacao5 periodo2 grau5 OK
+=adicDisc 4 11 situacao6 periodo2 grau6 OK
+
+=adicDisc 4 12 situacao1 periodo3 grau1 OK
+=adicDisc 4 13 situacao2 periodo3 grau2 OK
+=adicDisc 4 14 situacao3 periodo3 grau3 OK
+=adicDisc 4 15 situacao4 periodo3 grau4 OK
+=adicDisc 4 16 situacao5 periodo3 grau5 OK
+=adicDisc 4 17 situacao6 periodo3 grau6 OK
+
+=adicDisc 4 18 situacao1 periodo4 grau1 OK
+=adicDisc 4 19 situacao2 periodo4 grau2 OK
+=adicDisc 4 20 situacao3 periodo4 grau3 OK
+
+=adicDisc 4 19 situacao1 periodo5 grau1 OK
+=adicDisc 4 1 situacao1 periodo5 grau2 OK
+=adicDisc 4 2 situacao1 periodo5 grau3 OK
+=adicDisc 4 7 situacao4 periodo5 grau4 OK
+=adicDisc 4 8 situacao5 periodo5 grau5 OK
+=adicDisc 4 13 situacao6 periodo5 grau6 OK
+
+=adicDisc 4 21 situacao1 periodo6 grau1 OK
+=adicDisc 4 14 situacao1 periodo6 grau2 OK
+=adicDisc 4 19 situacao3 periodo6 grau3 OK
+=adicDisc 4 20 situacao4 periodo6 grau4 OK
 
 == Pegar historico completo
 =getHisCompleto 0 OK
