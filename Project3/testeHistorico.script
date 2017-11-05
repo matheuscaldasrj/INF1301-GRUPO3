@@ -169,10 +169,16 @@
 
 == Imprime historico completo no terminal
 =printHistCompleto 1474985 OK
-=printHistCompleto 1312795 ErroAoAbrirArquivo
+=printHistCompleto 1312795 OK
+=recuperar
+=printHistCompleto 1417498 OK
 
 ==Imprime historico do periodo no terminal
 =printHistPeriodo 1474985 "2016.2" OK
+=printHistPeriodo 1417498 "2017.1" OK
+=printHistPeriodo 1417498 "2017.2" OK
+=printHistPeriodo 1417234 "2017.1" OK
+=recuperar
 
 
 == Remover Historico
