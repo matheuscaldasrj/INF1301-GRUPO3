@@ -280,16 +280,24 @@ HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct 
 *$.***********************************************************************/
 HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , struct disciplina *disciplina, char *situacao, char* periodo, float grau );
 
-/***********************************************************************
-*$FC Função: HIS_printHistoricoCompleto
-*$ED Descrição da função
-*	
-*$FV Valor retornado
-*	 
-*   
-*   
-*$EP Parametros
-*$P	
+/**************************************************************************
+ *  
+ *  $FC Funçaão: HIS printHistoricoCompleto
+ *
+ *  $ED Descrição da função
+ *		 Recebe uma matricula, procura o arquivo de histórico e o imprime no terminal.
+ *  $EP Parâmetros	
+ *	  $P matricula:		número de matricula do aluno
+ *	$FV Valor retornado
+ *		 HIS_CondRetOK
+ *		 HIS_CondRetErroAoAbrirArquivo
+ *		 HIS_CondRetErroInterno:		Erro em função interna.
+ *	$EAE Assertivas de entrada
+ *		Matricula fornecida deve possuir 7 caracteres numéricos.
+ *		Valem as assertivas estruturais para tipos de caracteres inteiros unsigned.
+ *	$EAS Assertivas de saida
+ *		O histórico referente ao período dado foi devidamente impresso no terminal, senão relata mensagem de erro.
+ *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula);
 
@@ -300,15 +308,16 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula);
  *  $ED Descrição da função
  *		 Recebe uma matricula, procura no arquivo de histórico a informação referente ao período dado e a imprime no terminal.
  *  $EP Parâmetros
- *	  $P matricula - número de matricula do aluno desejado
- *	  $P periodo - array de caracteres com o período desejado
+ *	  $P matricula: número de matricula do aluno desejado
+ *	  $P periodo: array de caracteres com o período desejado
  *	$FV Valor retornado
  *		 HIS_CondRetOK
  *		 HIS_CondRetErroAoAbrirArquivo
- *		 respostaCR						- Condição de erro variável, se houver será dada pela função HIS_getCrAcumulado.
- *		 HIS_CondRetErroInterno			- Erro em função interna.
+ *		 HIS_CondRetErroInterno:		Erro em função interna.
  *	$EAE Assertivas de entrada
- *		Matricula fornecida precisa ser válida.
+ *		Valem as assertivas estruturais para tipos de caracteres inteiros unsigned.
+ *		Valem as assertivas estruturais para arrays de caracteres.
+ *		Matricula fornecida deve possuir 7 caracteres numéricos.
  *		Período deve ser composto apenas de um caracter.
  *	$EAS Assertivas de saida
  *		O histórico foi devidamente impresso no terminal, senão relata mensagem de erro.
@@ -330,14 +339,14 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
  *	$FV Valor retornado
  *		 HIS_CondRetOK
  *		 HIS_CondRetErroAoAbrirArquivo
- *		 HIS_CondRetErroInterno			- Erro em função interna.
+ *		 HIS_CondRetErroInterno:		Erro em função interna.
  *	$EAE Assertivas de entrada
  *		Valem as assertivas estruturais para tipos de dados estruturados.
+ *		Valem as assertivas estruturais para tipos de caracteres inteiros unsigned.
  *		Ponteiro corrente referencia lista de matérias do aluno a serem adicionadas ao histórico, podendo estar vazia.
- *		Matricula fornecida precisa ser válida.
+ *		Matricula fornecida deve possuir 7 caracteres numéricos.
  *	$EAS Assertivas de saida
  *		O histórico foi editado com exito, senão retorna mensagem de erro no terminal e não aplica nenhuma mudança no arquivo.
- *		Valem as assertivas estruturais para tipos de dados estruturados.
  *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula);
