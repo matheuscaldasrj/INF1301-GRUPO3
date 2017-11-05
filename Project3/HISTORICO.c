@@ -153,7 +153,8 @@ HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsign
 		DIC_getDisciplina(pDisciplinaCursada,&pDisciplina);
 		DIS_get_nome(pDisciplina,&nome);
 		DIS_get_codigo(pDisciplina,&codigoDaDisc);
-		
+		DIS_get_creditos(pDisciplina,&creditos);
+
 		fprintf(file,"%s %s %.1f %s %d\n", periodoDisc, codigoDaDisc, grau, situacao, creditos);
 
 		//adicionando de volta ao historico
@@ -161,7 +162,7 @@ HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsign
 	}
 	
 	(*pHistorico)->disciplinasCursadas = listAux;
-
+	fclose(file);
 	return HIS_CondRetOK;
 } 
 /* Fim funcao: HIS Criar Historico */

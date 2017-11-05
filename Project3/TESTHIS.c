@@ -269,9 +269,9 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   else if( strcmp( ComandoTeste , PRINT_HIST_PERIODO ) == 0 )
 	   {   
 		   
-		   NumLidos = LER_LerParametros("iisi", &indexH, &matricula, periodo, &HIS_CondRetEsperada);
+		   NumLidos = LER_LerParametros("isi", &matricula, periodo, &HIS_CondRetEsperada);
 
-		    if ( NumLidos != 4 )
+		    if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } 
@@ -284,9 +284,9 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   	else if( strcmp( ComandoTeste , PRINT_HIST_COMPLETO ) == 0 )
 	   {   
 		   
-		   NumLidos = LER_LerParametros("iii", &indexH, &matricula, &HIS_CondRetEsperada);
+		   NumLidos = LER_LerParametros("ii", &matricula, &HIS_CondRetEsperada);
 
-			if ( NumLidos != 3 )
+			if ( NumLidos != 2 )
 			{
 				return TST_CondRetParm ;
 			} 
