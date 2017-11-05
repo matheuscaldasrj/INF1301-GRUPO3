@@ -1,4 +1,4 @@
-﻿// Script:     TesteHistorico.script
+// Script:    TesteHistorico.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
 // Proposito: Testar as funcoes do modulo Historico
@@ -96,7 +96,7 @@
 =criaHIS 0 OK
 =criaHIS 4 OK
 
-== Adiciona disciplinas ao historico diretamente utilizando indiretamente o método adicionaDisciplinaCursada
+== Adiciona disciplinas ao historico diretamente utilizando indiretamente o m�todo adicionaDisciplinaCursada
 =adicDisc 0 0 situacao1 periodo1 grau1 OK
 =adicDisc 0 1 situacao2 periodo1 grau2 OK
 =adicDisc 0 2 situacao3 periodo1 grau3 OK
