@@ -6,7 +6,7 @@
 *$AD Módulo de definição
 *	Arquivo: HISTORICO.h
 *	Proprietário: Grupo 3 INF1301 17.2
-*	Projeto: Trabalho 1
+*	Projeto: Trabalho 3
 *	Gestor:  DI/PUC-Rio
 *	Letras Identificadoras: HIS
 *	Autores: 
@@ -15,7 +15,6 @@
 *		pg - Pedro Gomes
 *		va - Vinícius Arcoverde
 *		lf - Leon França
-*		gc - Gabriel Costa
 *
 *$ED Descricao do modulo
 *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -30,8 +29,15 @@
 *	1.0.3		gc	05/10/2017	Implementação getDisciplinasReprovadoPorFalta
 *	1.0.4		lf	05/10/2017	Padronização e criação de documentação voltada ao cliente
 *	1.0.4		va	05/10/2017	getdisplinas trancadas e imprimehistorico
-*   1.0.5		gc	05/10/2017  Implementação adicionaDisciplinaCursada
-*
+*   	1.0.5		gc	05/10/2017  	Implementação adicionaDisciplinaCursada
+*	1.0.6		bp	02/11/2017	Implementação getCrAcumulado, getCrPeriodo, printHistoricoCompleto, printHistoricoPeriodo
+*	1.0.7		mc	04/11/2017	Remoção adicionaDisciplinaCursada, agora encapsulada no módulo Historico
+*	1.0.7		mc	04/11/2017	Implementação adiconaDisciplina
+*	1.0.8		mc	04/11/2017	Implementação salvaHistoricoEmArquivo e remoção imprimeHistorico
+*	1.0.9		mc	04/11/2017	Implementação getDisicplinasReprovadoPorFalta
+*	1.1.0		lf	05/11/2017	Documentação printHistoricoCompleto, salvaHistoricoEmArquivo e printHistoricoPeriodo
+*	1.1.0		lf	05/11/2017	Manutenção do histórico de alterações
+* 
 *$.***************************************************************************/
 
 #if defined( HISTORICO_OWN )
