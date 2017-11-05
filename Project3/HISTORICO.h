@@ -318,16 +318,27 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
 
 
 
-/***********************************************************************
-*$FC Função: HIS_salvaHistoricoEmArquivo
-*$ED Descrição da função
-* 
-*$FV Valor retornado
-*  
-*   
-*   
-*$EP Parametros
-*$P 
+/**************************************************************************
+ *                                                                        
+ *  $FC Função: HIS SalvaHistoricoEmArquivo
+ *
+ *  $ED Descrição da função
+ *		Escreve no histórico a relação de matérias que o aluno com a matricula fornecida cursou no período.
+ *  $EP Parâmetros
+ *	  $P pHistorico - Ponteiro de ponteiro para tipo estruturado Histórico, contendo lista de diciplinas cursadas no período
+ *	  $P matricula - número de matricula do aluno desejado
+ *	$FV Valor retornado
+ *		 HIS_CondRetOK
+ *		 HIS_CondRetErroAoAbrirArquivo
+ *		 HIS_CondRetErroInterno			- Erro em função interna.
+ *	$EAE Assertivas de entrada
+ *		Valem as assertivas estruturais para tipos de dados estruturados.
+ *		Ponteiro corrente referencia lista de matérias do aluno a serem adicionadas ao histórico, podendo estar vazia.
+ *		Matricula fornecida precisa ser válida.
+ *	$EAS Assertivas de saida
+ *		O histórico foi editado com exito, senão retorna mensagem de erro no terminal e não aplica nenhuma mudança no arquivo.
+ *		Valem as assertivas estruturais para tipos de dados estruturados.
+ *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula);
 
