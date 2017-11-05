@@ -635,13 +635,13 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
 	char periodo[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau], periodoCorrente[tamPeriodo] ;
 	
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
-	if (historico == NULL) {printf("Nao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
+	if (historico == NULL) {printf("\nNao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	respostaCR = HIS_getCrAcumulado (historico,&CR);
 	if (respostaCR != HIS_CondRetOK) {fclose(historico); return respostaCR;}
 
 	if (CR == -1){
-		printf("Aluno de matricula %u nao realizou nenhuma disciplina.\n",matricula);
+		printf("\nAluno de matricula %u nao realizou nenhuma disciplina.\n",matricula);
 		fclose(historico);
 		return HIS_CondRetOK;
 	}
@@ -680,13 +680,13 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
 	char periodoArq[tamPeriodo], disciplina[tamDisciplina], situacao[tamSituacao], grau[tamGrau] ;
 
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
-	if (historico == NULL) {printf("Nao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
+	if (historico == NULL) {printf("\nNao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
 	
 	respostaCR = HIS_getCrPeriodo (historico,periodo,&CR);
 	if (respostaCR != HIS_CondRetOK) {fclose(historico); return respostaCR;}
 
 	if (CR == -1){
-		printf("Aluno nao matriculado no periodo %s\n",periodo);
+		printf("\nAluno nao matriculado no periodo %s\n",periodo);
 		fclose(historico);
 		return HIS_CondRetOK;
 	}
