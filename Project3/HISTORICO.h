@@ -353,16 +353,27 @@ HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsign
 
 
 
-/***********************************************************************
-*$FC Função: HIS_getDisciplinasReprovadoPorFalta
-*$ED Descrição da função
-* 
-*$FV Valor retornado
-*  
-*   
-*   
-*$EP Parametros
-*$P 
+/**************************************************************************
+ *                                                                        
+ *  $FC Função: HIS getDisciplinasReprovadoPorFalta
+ *
+ *  $ED Descrição da função
+ *		Gera lista de disciplinas as quais o aluno reprovou por falta.
+ *  $EP Parâmetros
+ *	  $P pHistorico:		Ponteiro para tipo estruturado Histórico, contendo lista de diciplinas cursadas do aluno.
+ *	  $P disciplinas:		Ponteiro para lista de disciplinas.
+ *	$FV Valor retornado
+ *		 HIS_CondRetOK
+ *		 HIS_CondRetRecebeuPonteiroNulo
+ *	$EAE Assertivas de entrada
+ *		Valem as assertivas estruturais para tipos de dados estruturados.
+ *		Valem as assertivas estruturais para listas duplamente encadeadas.
+ *		Primeiro ponteiro corrente não nulo referencia histórico do aluno a ser pesquisado. Pode conter lista vazia de disciplinas cursadas.
+ *		Segundo ponteiro corrente não nulo referencia lista de disciplinas a ser preenchida pela função.
+ *	$EAS Assertivas de saida
+ *		Lista de disciplinas reprovadas por faltas foi gerada com êxito, sendo retornada por referência.
+ *		Valem as assertivas estruturais para listas duplamente encadeadas.
+ *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, struct list * disciplinas);
 
