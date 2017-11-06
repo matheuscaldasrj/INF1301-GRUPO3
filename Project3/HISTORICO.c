@@ -714,28 +714,31 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
  **************************************************************************/
 
 static HIS_tpCondRet HIS_getCrAcumulado (FILE *historico, float *CR){
+	
+	// Inicialização de variáveis
 	char lixo[10];
 	float grau, cred, somaCred=0, somaGrau=0;
-
+	
+	// Cálculo da montante do Grau e do número de Créditos totais
 	while (fscanf(historico,"%s %s %f %s %f",&lixo,&lixo,&grau,&lixo,&cred) == 5){
 		somaGrau += grau*cred;
 		somaCred += cred;
 	}
 
+	// Verifica se resultado é válido
 	if (somaCred == 0){
 		*CR = -1;
 		return HIS_CondRetOK;
 	}
 
+	// Calculo e verificação da validade do resultado
 	*CR = somaGrau/somaCred;
-
 	if (*CR < 0 || *CR > 10) return HIS_CondRetErroInterno;
 
 	return HIS_CondRetOK;
 }
 
 /* Fim funcao: HIS getCrAcumulado */
-
 
 /**************************************************************************
  *                                                                        *
