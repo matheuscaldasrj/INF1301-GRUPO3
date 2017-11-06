@@ -5,29 +5,30 @@
  *  Letras identificadoras:      HIS
  *
  *  Autores: 
-*		 mc - Matheus Caldas
- *	     bp - Bruno Pedrazza
- *	     pg - Pedro Gomes
- *	     va - Vinícius Arcoverde
- *	     lf - Leon França
- *	     gc - Gabriel Costa
+*		mc - Matheus Caldas
+ *	        bp - Bruno Pedrazza
+ *	        pg - Pedro Gomes
+ *	        va - Vinícius Arcoverde
+ *	        lf - Leon França
+ *	        gc - Gabriel Costa
  *  $HA Historico de evolucao:
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       28/09/17			Criacao inicial do modulo
  *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
  *	0.0.3		  gc       04/09/17			Implementacao de getHistórico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
  *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
- *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
- *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
+ *  	0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
+ *  	1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
  *	1.0.1		  bp	   02/11/17			Implementacao montaNomeArq
- *	1.0.2		  mc	   03/11/17			Implmentacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
- *
+ *	1.0.2		  mc	   03/11/17			Implementacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
+ *	1.0.2		  mc	   04/11/17			Implementação salvaHistoricoEmArquivo e remoção de imprimeHistorico
  *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
- *  1.0.3         bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
+ * 	1.0.3		  bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
+ *	1.0.3		  lf	   05/11/17			Documentação de funções internas
+ *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
- *
  *
  *
  ***************************************************************************/
