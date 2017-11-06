@@ -79,12 +79,11 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	 int i = 0;
 	 int indexH, indexDI, indexDC, ValorDado3Creditos, DIS_CondRetEsperada, DIS_CondRetObtido, DIC_CondRetEsperada, DIC_CondRetObtido;
 	 int  NumLidos = -1 ;
-	 int listS1, listS2;
 	 int LIST_CondRetObtido = -999;
 	 char periodo[10], ValorDado1Nome[20], ValorDado2Codigo[20], ValorDado4Bib[20], ValorDado5Ementa[20], situacao[10], grauStr[10];
 	 unsigned int matricula;
 	 float cr, grau;
-	 List* list, *list2;
+	 List* list;
 
 	 TST_tpCondRet Ret;
 
@@ -223,29 +222,24 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 
 	   else if( strcmp( ComandoTeste , GET_DISC_REPF_CMD ) == 0 )
 	   {   
-		   int Ret;
-
+		   
 		   NumLidos = LER_LerParametros("iii",  &indexH, &list, &HIS_CondRetEsperada);
 
 			if ( NumLidos != 3 )
 			{
 				return TST_CondRetParm ;
 			} 
-			HIS_CondRetObtido = HIS_getDisciplinasReprovadoPorFalta(pHistorico[indexH], list2);
-
-			Ret = TST_CompararInt( HIS_CondRetEsperada , HIS_CondRetObtido ,
-                                  "Retorno errado ao pegar disciplinas reprovadas por falta" );
-            if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } 
-			list_size(list2, listS1);
-			list_size(list, listS2);
-
-	
 			
+			list = NULL;
+			LIST_CondRetObtido = createList(&list);
+
+			if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+			}
+
+			HIS_CondRetObtido = HIS_getDisciplinasReprovadoPorFalta(pHistorico[indexH], list);
 		   
-		  return TST_CompararInt(listS1, listS2, "Conteudo errado ao pegar disciplinas reprovadas por falta");
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao pegar disciplinas reprovadas por falta");
 	   }
 	    ////////////////////////////////////////////
 	   ////////////////////////////////////////////
@@ -255,23 +249,22 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	   {   
 		   
 		   NumLidos = LER_LerParametros("iii",  &indexH, &list, &HIS_CondRetEsperada);
+
 			if ( NumLidos != 3 )
 			{
 				return TST_CondRetParm ;
 			} 
 			
-			HIS_CondRetObtido = HIS_getDisciplinasTrancadas(pHistorico[indexH], list2);
+			list = NULL;
+			LIST_CondRetObtido = createList(&list);
 
-			Ret = TST_CompararInt( HIS_CondRetEsperada , HIS_CondRetObtido ,
-                                  "Retorno errado ao pegar disciplinas trancadas" );
-            if ( Ret != TST_CondRetOK )
-            {
-               return Ret ;
-            } 
-			list_size(list2, listS1);
-			list_size(list, listS2);
-			
-		  return TST_CompararInt( listS1, listS2, "Conteudo errado ao pegar disciplinas reprovadas por trancamento");
+			if (LIST_CondRetObtido != LIS_CondRetOK) {
+			   return TST_CondRetErro;
+			}
+
+			HIS_CondRetObtido = HIS_getDisciplinasReprovadoPorFalta(pHistorico[indexH], list);
+		   
+		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao pegar disciplinas reprovadas por falta");
 	   }
 	    ////////////////////////////////////////////
 	   ////////////////////////////////////////////

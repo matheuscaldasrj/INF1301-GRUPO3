@@ -314,8 +314,6 @@
 
 == Pegar disciplinas reprovadas por falta
 =getDiscReprFalta 0 1 OK
-=getDiscReprFalta 1 1 OK
-=recuperar
 
 == Salva historico no arquivo
 =salvaHistArquivo 0 1474985 OK
