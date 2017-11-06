@@ -84,7 +84,8 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 	 char periodo[10], ValorDado1Nome[20], ValorDado2Codigo[20], ValorDado4Bib[20], ValorDado5Ementa[20], situacao[10], grauStr[10];
 	 unsigned int matricula;
 	 float cr, grau;
-	 List* list, *list2;
+	 List* list;
+	 List* list2;
 
 	 TST_tpCondRet Ret;
 
@@ -223,8 +224,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 
 	   else if( strcmp( ComandoTeste , GET_DISC_REPF_CMD ) == 0 )
 	   {   
-		   int Ret;
-
+		   
 		   NumLidos = LER_LerParametros("iii",  &indexH, &list, &HIS_CondRetEsperada);
 
 			if ( NumLidos != 3 )
