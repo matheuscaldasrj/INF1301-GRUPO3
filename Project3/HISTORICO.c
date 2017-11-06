@@ -782,14 +782,19 @@ static HIS_tpCondRet HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR
  * Funcao interna: HIS montaNomeArq                                       *
  **************************************************************************/
 static char* HIS_montaNomeArq (unsigned int matricula){
+	
+	// Inicialização de variáveis
 	char *nomeArq, mat[tamMatricula];
-
 	nomeArq = (char*) malloc (sizeof(char)*TAM_NOME_ARQ);
 	if (nomeArq == 	NULL) return NULL;
 
+	//grava no array mat a matricula dada pelo parametro
 	sprintf(mat,"%u",matricula);
+	//insere prefixo
 	strcpy(nomeArq,"Historico\\");
+	//concatena string forçando formato do arquivo
 	strcat(mat,".txt");
+	//finalmente concatena as trings resultantes na primeira delas, gerando o resultado final
 	strcat(nomeArq,mat);
 	return nomeArq;
 }
