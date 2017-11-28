@@ -25,6 +25,7 @@
  *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
  * 	1.0.3		  bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
  *	1.0.3		  lf	   05/11/17			Documentação de funções internas
+ *	1.1.0		  pg	   28/11/17			Inicio da Instrumentação
  *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -629,6 +630,15 @@ HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , Disciplina *
  **************************************************************************/
 
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
+
+#ifdef _DEBUG
+
+	if( matricula < 0)
+		printf("Matricula invalida. O valor recebido e %d. Apenas valores positivos são aceitos.", matricula);
+
+#endif
+
+
 	FILE *historico;
 	HIS_tpCondRet respostaCR;
 	float CR;
@@ -673,7 +683,8 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
  * Funcao: HIS printHistoricoPeriodo                                      *
  **************************************************************************/
 
-HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
+HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){	
+
 	FILE *historico;
 	HIS_tpCondRet respostaCR;
 	float CR;
