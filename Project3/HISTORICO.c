@@ -26,6 +26,8 @@
  * 	1.0.3		  bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
  *	1.0.3		  lf	   05/11/17			Documentação de funções internas
  *	1.1.0		  pg	   28/11/17			Inicio da Instrumentação
+ *	1.1.1		  pg	   30/11/17			Finalizada Instrumentação da função HIS_getHistoricoDoPeriodo
+ *
  *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -210,6 +212,27 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List** disc
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
 {
+#ifdef _DEBUG
+	printf("Assertivas Executaveis de entrada de HIS_getHistoricoDoPeriodo\n");
+	if(pHistorico == NULL)
+		printf("O ponteiro pHistorico recebido eh NULL.\n");
+	else
+		printf("pHistorico esta dentro do esperado.\n");
+
+	if(strlen(periodo) != 6)
+		printf("O periodo recebido possui uma quantidade de digitos diferentes de 6. Um periodo deveria ter exatamente 6 caracteres\n");
+	else
+		printf("Periodo esta dentro do esperado.\n");
+
+	if(disciplinas == NULL)
+		printf("O ponteiro para lista o inicio da lista de disciplinas cursadas eh NULL. \n");
+	else
+		printf("Ponteiro para lista de disciplinas cursadas esta ok\n");
+
+	printf("Fim das Assertivas Executaveis de entrada\n");
+
+#endif
+
 	// Inicialização de variáveis
 	int listResponse = -1;
 	int functionResponse = -1;
@@ -225,6 +248,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida desta funcao eh HIS_CondRetRecebeuPonteiroNulo.\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetRecebeuPonteiroNulo;
 	}
 
@@ -233,6 +267,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetParamInvalido.\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetParamInvalido;
 	}
 
@@ -247,6 +292,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -257,6 +313,18 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -268,6 +336,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -280,6 +359,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 			free(disciplina);
 			free(disciplinaCursada);
 			free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 			return HIS_CondRetErroInterno;
 		}
 
@@ -290,6 +380,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 			free(disciplina);
 			free(disciplinaCursada);
 			free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 			return HIS_CondRetErroInterno;
 		}
 
@@ -301,6 +402,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 				free(disciplina);
 				free(disciplinaCursada);
 				free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 				return HIS_CondRetErroInterno;
 			}
 		}
@@ -311,6 +423,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 	free(disciplina);
 	free(disciplinaCursada);
 	free(disciplinasPeriodo);
+
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetOK\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
 
 	return HIS_CondRetOK;
 }
@@ -630,14 +753,6 @@ HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , Disciplina *
  **************************************************************************/
 
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
-
-#ifdef _DEBUG
-
-	if( matricula < 0)
-		printf("Matricula invalida. O valor recebido e %d. Apenas valores positivos são aceitos.", matricula);
-
-#endif
-
 
 	FILE *historico;
 	HIS_tpCondRet respostaCR;
