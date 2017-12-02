@@ -5,29 +5,33 @@
  *  Letras identificadoras:      HIS
  *
  *  Autores: 
-*		 mc - Matheus Caldas
- *	     bp - Bruno Pedrazza
- *	     pg - Pedro Gomes
- *	     va - Vinícius Arcoverde
- *	     lf - Leon França
- *	     gc - Gabriel Costa
+*		mc - Matheus Caldas
+ *	        bp - Bruno Pedrazza
+ *	        pg - Pedro Gomes
+ *	        va - Vinícius Arcoverde
+ *	        lf - Leon França
+ *	        gc - Gabriel Costa
  *  $HA Historico de evolucao:
  *  Versao       Autor		Data            Observacoes
  *	0.0.1		  mc       28/09/17			Criacao inicial do modulo
  *	0.0.2		  va       04/09/17			inicio implementacao de imprimeHistorico
  *	0.0.3		  gc       04/09/17			Implementacao de getHistórico do perido, getHistoricoCompleto, getCrPeriodo,getCrcompleto
  *	0.0.4		  va       05/09/17			Implementacao de imprimeHistorico
- *  0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
- *  1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
+ *  	0.0.5		  gc	   05/10/17			Implementação de adicionarDisciplinaCursada
+ *  	1.0.0		  bp       02/11/17			Implementação printHistoricoCompleto, printHistoricoPeriodo, getCrAcumulado, getCrPeriodo
  *	1.0.1		  bp	   02/11/17			Implementacao montaNomeArq
- *	1.0.2		  mc	   03/11/17			Implmentacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
- *
+ *	1.0.2		  mc	   03/11/17			Implementacao da adicionaDisciciplina e mudanca na adicionaDisciplina cursada para ser um método interno
+ *	1.0.2		  mc	   04/11/17			Implementação salvaHistoricoEmArquivo e remoção de imprimeHistorico
  *	1.0.2		  bp       04/11/17			Ajustando ondicoes de retorno getCR	
- *  1.0.3         bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
+ * 	1.0.3		  bp       04/11/17			Ajustando printHistoricoCompleto e printHistoricoPeriodo
+ *	1.0.3		  lf	   05/11/17			Documentação de funções internas
+ *	1.1.0		  pg	   28/11/17			Inicio da Instrumentação
+ *	1.1.1		  pg	   30/11/17			Finalizada Instrumentação da função HIS_getHistoricoDoPeriodo
+ *
+ *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
  *     atributos do módulo Historico.
- *
  *
  *
  ***************************************************************************/
@@ -208,6 +212,27 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List** disc
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
 {
+#ifdef _DEBUG
+	printf("Assertivas Executaveis de entrada de HIS_getHistoricoDoPeriodo\n");
+	if(pHistorico == NULL)
+		printf("O ponteiro pHistorico recebido eh NULL.\n");
+	else
+		printf("pHistorico esta dentro do esperado.\n");
+
+	if(strlen(periodo) != 6)
+		printf("O periodo recebido possui uma quantidade de digitos diferentes de 6. Um periodo deveria ter exatamente 6 caracteres\n");
+	else
+		printf("Periodo esta dentro do esperado.\n");
+
+	if(disciplinas == NULL)
+		printf("O ponteiro para lista o inicio da lista de disciplinas cursadas eh NULL. \n");
+	else
+		printf("Ponteiro para lista de disciplinas cursadas esta ok\n");
+
+	printf("Fim das Assertivas Executaveis de entrada\n");
+
+#endif
+
 	// Inicialização de variáveis
 	int listResponse = -1;
 	int functionResponse = -1;
@@ -223,6 +248,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida desta funcao eh HIS_CondRetRecebeuPonteiroNulo.\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetRecebeuPonteiroNulo;
 	}
 
@@ -231,6 +267,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetParamInvalido.\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetParamInvalido;
 	}
 
@@ -245,6 +292,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -255,6 +313,18 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -266,6 +336,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 		free(disciplina);
 		free(disciplinaCursada);
 		free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 		return HIS_CondRetErroInterno;
 	}
 
@@ -278,6 +359,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 			free(disciplina);
 			free(disciplinaCursada);
 			free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 			return HIS_CondRetErroInterno;
 		}
 
@@ -288,6 +380,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 			free(disciplina);
 			free(disciplinaCursada);
 			free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 			return HIS_CondRetErroInterno;
 		}
 
@@ -299,6 +402,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 				free(disciplina);
 				free(disciplinaCursada);
 				free(disciplinasPeriodo);
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetErroInterno\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
+
 				return HIS_CondRetErroInterno;
 			}
 		}
@@ -309,6 +423,17 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 	free(disciplina);
 	free(disciplinaCursada);
 	free(disciplinasPeriodo);
+
+
+#ifdef _DEBUG
+
+		printf("Inicio Assertiva Executavel de saida.\n");
+
+		printf("A saida da funcao eh HIS_CondRetOK\n");
+
+		printf("Fim Assertiva Executavel de saida.\n");
+
+#endif
 
 	return HIS_CondRetOK;
 }
@@ -628,6 +753,7 @@ HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , Disciplina *
  **************************************************************************/
 
 HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
+
 	FILE *historico;
 	HIS_tpCondRet respostaCR;
 	float CR;
@@ -672,7 +798,8 @@ HIS_tpCondRet HIS_printHistoricoCompleto (unsigned int matricula){
  * Funcao: HIS printHistoricoPeriodo                                      *
  **************************************************************************/
 
-HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){
+HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo){	
+
 	FILE *historico;
 	HIS_tpCondRet respostaCR;
 	float CR;
@@ -782,14 +909,19 @@ static HIS_tpCondRet HIS_getCrPeriodo (FILE *historico, char *periodo, float *CR
  * Funcao interna: HIS montaNomeArq                                       *
  **************************************************************************/
 static char* HIS_montaNomeArq (unsigned int matricula){
+	
+	// Inicialização de variáveis
 	char *nomeArq, mat[tamMatricula];
-
 	nomeArq = (char*) malloc (sizeof(char)*TAM_NOME_ARQ);
 	if (nomeArq == 	NULL) return NULL;
 
+	//grava no array mat a matricula dada pelo parametro
 	sprintf(mat,"%u",matricula);
+	//insere prefixo
 	strcpy(nomeArq,"Historico\\");
+	//concatena string forçando formato do arquivo
 	strcat(mat,".txt");
+	//finalmente concatena as trings resultantes na primeira delas, gerando o resultado final
 	strcat(nomeArq,mat);
 	return nomeArq;
 }
