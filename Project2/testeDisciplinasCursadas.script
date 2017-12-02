@@ -1,0 +1,151 @@
+﻿//Script:     TesteDisciplinasCursadas.script
+// Autor:     Grupo 3 - Modular 17.2
+// Data:      01/10/2017
+// Proposito: Testar as funcoes do modulo DisciplinasCursadas
+//			  Para garantir seu correto funcionamento
+//
+//  Autores: mc - Matheus Caldas
+//	     bp - Bruno Pedrazza
+//	     pg - Pedro Gomes
+//	     va - Vinícius Arcoverde
+//	     lf - Leon França
+//	     gc - Gabriel Costa
+
+== Declarar as condicoes de retorno
+=declararparm  DIC_CondRetOK             int 0
+=declararparm  DIS_CondRetDisciplinaCriada   int 2
+=declararparm  DIS_CondRetDisciplinaDeletada   int 3
+
+
+
+==Declarar os conteudos de Disciplina
+=declararparm  codigo1       string "inf1301"
+=declararparm  credito1      int    4
+=declararparm  nome1         string "Modular"
+=declararparm  bibliografia1 string "teste_biblio1"
+=declararparm  ementa1       string "ementa_teste1"
+
+=declararparm  codigo2       string "inf1504"
+=declararparm  credito2      int    4
+=declararparm  nome2         string "EDA"
+=declararparm  bibliografia2 string "teste_biblio2"
+=declararparm  ementa2       string "ementa_teste2"
+
+=declararparm  codigo3       string "mat1157"
+=declararparm  credito3      int    4
+=declararparm  nome3         string "CALCULO"
+=declararparm  bibliografia3 string "teste_biblio3"
+=declararparm  ementa3       string "ementa_teste3"
+
+=declararparm  codigo4       string "eng1456"
+=declararparm  credito4      int    4
+=declararparm  nome4         string "PROBABILIDADE"
+=declararparm  bibliografia4 string "teste_biblio4"
+=declararparm  ementa4       string "ementa_teste4"
+
+=declararparm  codigo5       string "inf1018"
+=declararparm  credito5      int    6
+=declararparm  nome5         string "SOFTWARE"
+=declararparm  bibliografia5 string "teste_biblio5"
+=declararparm  ementa5       string "ementa_teste5"
+
+=declararparm  codigo6       string "fis1051"
+=declararparm  credito6      int    2
+=declararparm  nome6         string "FISICA"
+=declararparm  bibliografia6 string "teste_biblio6"
+=declararparm  ementa6       string "ementa_teste6"
+
+
+==Declarar os conteudos de DisciplinaCursada
+=declararparm	situacao1	string "AP"
+=declararparm	periodo1	string "2015.2"
+=declararparm	grau1		string "8.4"
+
+=declararparm	situacao2	string "RF"
+=declararparm	periodo2	string "2010.1"
+=declararparm	grau2		string "5.3"
+
+=declararparm	situacao3	string "RN"
+=declararparm	periodo3	string "2016.1"
+=declararparm	grau3		string "8.5"
+
+=declararparm	situacao4	string "AP"
+=declararparm	periodo4	string "2017.2"
+=declararparm	grau4		string "10"
+
+=declararparm	situacao5	string "AP"
+=declararparm	periodo5	string "0017.2"
+=declararparm	grau5		string "2.3"
+
+=declararparm	situacao6	string "AP"
+=declararparm	periodo6	string "2017.3"
+=declararparm	grau6		string "9.2"
+
+
+== Criar disciplina por parametro
+=gerapar 0 nome1 codigo1 credito1 bibliografia1 ementa1 DIS_CondRetDisciplinaCriada
+=gerapar 1 nome2 codigo2 credito2 bibliografia2 ementa2 DIS_CondRetDisciplinaCriada
+=gerapar 2 nome3 codigo3 credito3 bibliografia3 ementa3 DIS_CondRetDisciplinaCriada
+=gerapar 3 nome4 codigo4 credito4 bibliografia4 ementa4 DIS_CondRetDisciplinaCriada
+=gerapar 4 nome5 codigo5 credito5 bibliografia5 ementa5 DIS_CondRetDisciplinaCriada
+=gerapar 5 nome6 codigo6 credito6 bibliografia6 ementa6 DIS_CondRetDisciplinaCriada
+
+== Criar disciplina cursada
+=criarDIC 0 0 situacao1 periodo1 grau1 DIC_CondRetOK
+=criarDIC 1 1 situacao2 periodo2 grau2 DIC_CondRetOK
+=criarDIC 2 2 situacao3 periodo3 grau3 DIC_CondRetOK
+=criarDIC 3 3 situacao4 periodo4 grau4 DIC_CondRetOK
+=criarDIC 4 4 situacao5 periodo5 grau5 DIC_CondRetOK
+=recuperar
+=criarDIC 5 5 situacao6 periodo6 grau6 DIC_CondRetOK
+=recuperar
+
+== Set Disciplina do param1 em DisciplinasCursadas de index param2
+=setDIS 0 2 DIC_CondRetOK
+== Get disciplina de DisciplinaCursada[param1] e compara com Disciplinas[param2]
+=getDIS 1 1 DIC_CondRetOK
+
+== Seta/Pega Situação de Disciplina Cursada
+=setSitDIC 3 "RF" DIC_CondRetOK
+=setSitDIC 3 "A"  DIC_CondRetOK
+=recuperar
+=getSitDIC 3 "RF" DIC_CondRetOK
+=setSitDIC 4 "APP" DIC_CondRetOK
+=recuperar
+
+== Seta/Pega grau da disciplina Cursada
+=setGrauDIC 2 "9.6" DIC_CondRetOK
+=setGrauDIC 2 "10.2" DIC_CondRetOK
+=recuperar
+=getGrauDIC 2 "9.6" DIC_CondRetOK
+=setGrauDIC 3 "-2" DIC_CondRetOK
+=recuperar
+
+== Seta/Pega periodo da disciplina Cursada
+=setPerDIC 1 "2018.1" DIC_CondRetOK
+=setPerDIC 1 "200001" DIC_CondRetOK
+=recuperar
+=getPerDIC 1 "2018.1" DIC_CondRetOK
+=setPerDIC 2 "12345678" DIC_CondRetOK
+=recuperar
+=setPerDIC 2 "20cc.1" DIC_CondRetOK
+=recuperar
+=setPerDIC 3 "2017.a" DIC_CondRetOK
+=recuperar
+=getPerDIC 1 "2018" DIC_CondRetOK
+=recuperar
+
+== Remove DisciplinaCursada
+=removeDIC 2 DIC_CondRetOK
+=removeDIC 4 DIC_CondRetOK
+=recuperar
+=removeDIC 5 DIC_CondRetOK
+=recuperar
+
+== Remove Disciplina
+=destruir 0 DIS_CondRetDisciplinaDeletada
+=destruir 1 DIS_CondRetDisciplinaDeletada
+=destruir 2 DIS_CondRetDisciplinaDeletada
+=destruir 3 DIS_CondRetDisciplinaDeletada
+
+//fim
