@@ -212,6 +212,16 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List** disc
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, List* disciplinas)
 {
+
+	// Inicialização de variáveis
+	int listResponse = -1;
+	int functionResponse = -1;
+	char* discPeriodo = (char*) malloc(sizeof(char) * 7);
+	Disciplina *disciplina = NULL;
+	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
+	List *disciplinasPeriodo = NULL;
+	HIS_tpHistorico copiaHistorico;
+
 #ifdef _DEBUG
 	printf("Assertivas Executaveis de entrada de HIS_getHistoricoDoPeriodo\n");
 	if(pHistorico == NULL)
@@ -233,14 +243,7 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 
 #endif
 
-	// Inicialização de variáveis
-	int listResponse = -1;
-	int functionResponse = -1;
-	char* discPeriodo = (char*) malloc(sizeof(char) * 7);
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
+	
 
 	// Verificação dos parâmetros
 	if (pHistorico == NULL || disciplinas == NULL) {
