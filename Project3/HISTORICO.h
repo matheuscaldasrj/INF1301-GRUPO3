@@ -178,77 +178,30 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, struct list
 
 HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* periodo, struct list* disciplinas);
 
-/***********************************************************************
-*$FC Função: HIS_getCrTotal
-*$ED Descrição da função
-*	Obtem o CR geral do aluno
-*$FV Valor retornado
-*	HIS_CondRetOK
-*	HIS_CondRetRecebeuPonteiroNulo
-*$EP Parametros
-*$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P 	cr: endereço de memória de uma variável float que receberá o valor do CR
-*$EAE Assertivas de entrada
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
-*
-*$EAS Assertivas de saida
-*	a obtenção do CR foi bem sucedida.
-*	ponteiro cr retorna CR Total do aluno por referência.
-*
+
+/**************************************************************************
+ *  
+ *  $FC Funçaão: HIS printHistoricoPorSituacao
+ *
+ *  $ED Descrição da função
+ *     Recebe uma matricula, procura o arquivo de histórico e o imprime no terminal as disciplinas
+ *        com a situação passada como parâmetro.
+ *  $EP Parâmetros  
+ *    $P matricula:   número de matricula do aluno
+ *    $P situacao:    situacao desejada pelo cliente  ("AP","RP","RF","TR")
+ *  $FV Valor retornado
+ *     HIS_CondRetOK
+ *     HIS_CondRetErroAoAbrirArquivo
+ *     HIS_CondRetParamInvalido
+ *  $EAE Assertivas de entrada
+ *    Matricula fornecida deve possuir 7 caracteres numéricos.
+ *    Valem as assertivas estruturais para tipos de caracteres inteiros unsigned.
+ *    Situacao fornecida deve ser uma da 4 descritas.
+ *  $EAS Assertivas de saida
+ *    O histórico referente à situacao dada foi devidamente impresso no terminal, senão relata mensagem de erro.
+ *
 *$.***********************************************************************/
-
-HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr);
-
-/***********************************************************************
-*$FC Função: HIS_getCrDoPeriodo
-*$ED Descrição da função
-*	Obtem o CR do aluno referente ao período fornecido.
-*$FV Valor retornado
-*	HIS_CondRetOK
-*	HIS_CondRetRecebeuPonteiroNulo
-*$EP Parametros
-*$P	pHistorico: Endereço do ponteiro para tipo estruturado historico.
-*$P 	periodo: array de caracteres com o período desejado
-*$P 	cr: endereço de memória de uma variável float que receberá o valor do CR
-*$EAE Assertivas de entrada
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	valem as assertivas estruturais para arrays de caractéres
-*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
-*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
-*	"2016.1" ou "2013.2" etc.
-*$EAS Assertivas de saida
-*	a obtenção do CR foi bem sucedida.
-*	ponteiro cr retorna CR do período do aluno por referência.
-*
-*$.***********************************************************************/
-
-HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr);
-
-
-/***********************************************************************
-*$FC Função: HIS_getDisciplinasTrancadas
-*$ED Descrição da função
-*	Obtem as disciplinas que foram trancadas 
-*$FV Valor retornado
-*	HIS_CondRetOK 
-*   HIS_CondRetRecebeuPonteiroNulo
-*$EP Parametros
-*$P	disciplinasCursadas: List composta pelas disciplinas cursadas
-*$EAE Assertivas de entrada
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	valem as assertivas estruturais para arrays de caractéres
-*	ponteiro corrente referencia Histórico do aluno de valor não nulo.
-*	periodo valido é um array composto de 6 caracteres, deve vir no formato exemplificado a seguir: 
-*	"2016.1" ou "2013.2" etc.
-*$EAS Assertivas de saida
-*	valem as assertivas estruturais para tipos de dados estruturados.
-*	valem as assertivas estruturais para listas encadeadas.
-*	ponteiro Disciplinas retorna lista de tipo estruturado Disciplinas cursadas no período.
-*
-
-*$.***********************************************************************/
-HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct list* disciplinas);
+HIS_tpCondRet HIS_printHistoricoPorSituacao(unsigned int matricula, char *situacao);
 
 
 // Agora encapsulada
@@ -284,6 +237,8 @@ HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico,  struct 
 *	valem as assertivas estruturais para listas encadeadas.
 *	disciplina corretamente adicionada ao historico
 *$.***********************************************************************/
+
+
 HIS_tpCondRet HIS_adicionaDisciplina(HIS_tpHistorico * pHistorico , struct disciplina *disciplina, char *situacao, char* periodo, float grau );
 
 /**************************************************************************
@@ -356,32 +311,6 @@ HIS_tpCondRet HIS_printHistoricoPeriodo (unsigned int matricula, char *periodo);
  *
 *$.***********************************************************************/
 HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula);
-
-
-
-/**************************************************************************
- *                                                                        
- *  $FC Função: HIS getDisciplinasReprovadoPorFalta
- *
- *  $ED Descrição da função
- *		Gera lista de disciplinas as quais o aluno reprovou por falta.
- *  $EP Parâmetros
- *	  $P pHistorico:		Ponteiro para tipo estruturado Histórico, contendo lista de diciplinas cursadas do aluno.
- *	  $P disciplinas:		Ponteiro para lista de disciplinas.
- *	$FV Valor retornado
- *		 HIS_CondRetOK
- *		 HIS_CondRetRecebeuPonteiroNulo
- *	$EAE Assertivas de entrada
- *		Valem as assertivas estruturais para tipos de dados estruturados.
- *		Valem as assertivas estruturais para listas duplamente encadeadas.
- *		Primeiro ponteiro corrente não nulo referencia histórico do aluno a ser pesquisado. Pode conter lista vazia de disciplinas cursadas.
- *		Segundo ponteiro corrente não nulo referencia lista de disciplinas a ser preenchida pela função.
- *	$EAS Assertivas de saida
- *		Lista de disciplinas reprovadas por faltas foi gerada com êxito, sendo retornada por referência.
- *		Valem as assertivas estruturais para listas duplamente encadeadas.
- *
-*$.***********************************************************************/
-HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, struct list * disciplinas);
 
 
 #undef HISTORICO_EXT

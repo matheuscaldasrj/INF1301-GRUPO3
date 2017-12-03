@@ -27,7 +27,7 @@
  *	1.0.3		  lf	   05/11/17			Documentação de funções internas
  *	1.1.0		  pg	   28/11/17			Inicio da Instrumentação
  *	1.1.1		  pg	   30/11/17			Finalizada Instrumentação da função HIS_getHistoricoDoPeriodo
- *
+ *	1.2.0		  bp       03/12/17			Implementação print Historico por Situacao
  *
  *  $ED Descrição do módulo
  *     Este módulo implementa um conjunto de funcoes para criar e manipular
@@ -110,7 +110,7 @@ HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
 
 /**************************************************************************
  *                                                                        *
- * Funcao: HIS Salva Historico                                                 *
+ * Funcao: HIS Salva Historico                                            *
  **************************************************************************/
 
 HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsigned int matricula)
@@ -169,14 +169,12 @@ HIS_tpCondRet HIS_salvaHistoricoEmArquivo (HIS_tpHistorico ** pHistorico, unsign
 	fclose(file);
 	return HIS_CondRetOK;
 } 
-/* Fim funcao: HIS Criar Historico */
-
-
+/* Fim funcao: HIS Salva Historico  */
 
 
 /**************************************************************************
  *                                                                        *
- * Funcao: HIS remove removeHistorico                                            	  *
+ * Funcao: HIS remove Historico                                           *
  **************************************************************************/
  
 HIS_tpCondRet HIS_removeHistorico (HIS_tpHistorico ** pHistorico)
@@ -203,7 +201,7 @@ HIS_tpCondRet HIS_getHistoricoCompleto(HIS_tpHistorico * pHistorico, List** disc
 	*disciplinasCursadas = pHistorico->disciplinasCursadas;
 	return HIS_CondRetOK;
 }
-/* Fim funcao: HIS remove Historico */
+/* Fim funcao: HIS get historico completo */
 
 /**************************************************************************
 *                                                                        *
@@ -444,264 +442,39 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
 
 /**************************************************************************
 *                                                                        *
-* Funcao: HIS get cr total                                  			 *
+* Funcao: HIS print Historico por situação                      		 *
 **************************************************************************/
 
-HIS_tpCondRet HIS_getCrTotal(HIS_tpHistorico * pHistorico, float* cr)
-{
+HIS_tpCondRet HIS_printHistoricoPorSituacao(unsigned int matricula, char *situacao){
+
 	// Inicialização de variáveis
-	int functionResponse = -1;
-	int listResponse = -1;
+	FILE *historico;
+	char periodo[tamPeriodo], disciplina[tamDisciplina], situacaoArq[tamSituacao], grau[tamGrau];
 
-	float grau = 0;
-	float somaGraus = 0;	
-	
-	int creditos = 0;
-	int somaCreditos = 0;
+	//Verificação do parâmetro
+	if (situacao == NULL) return HIS_CondRetParamInvalido;
+	if (strcmp(situacao,"AP") && strcmp(situacao,"RP") && strcmp(situacao,"RF") && strcmp(situacao,"TR")) return HIS_CondRetParamInvalido;
 
-	float crTotal = 0;
+	//Abre o arquivo referente à matrícula dada
+	historico = fopen(HIS_montaNomeArq(matricula),"r");
+	if (historico == NULL) {printf("\nNao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
 
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
-
-	// Verificação dos parâmetros
-	if (pHistorico == NULL || cr == NULL)
-		return HIS_CondRetRecebeuPonteiroNulo;
-
-	// Copia o valor de pHistorico para uma variável local
-	copiaHistorico = *pHistorico;
-
-	// Apenas pra alocar o struct na memória
-	functionResponse = DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-
-	if (functionResponse != DIS_CondRetOK) {
-		free(disciplina);
-		free(disciplinaCursada);
-		free(disciplinasPeriodo);
-		return HIS_CondRetErroInterno;
+	//Imprime apenas as disciplinas necessárias
+	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n\n");
+	while (fscanf(historico,"%s%s%s%s%u",periodo,disciplina,grau,situacaoArq,&creditos) == 5){
+		if (!strcmp(situacao,situacaoArq)){
+			printf("%s\t\t%s\t\t%s\t%s\t\t%u\n",periodo, disciplina, grau, situacaoArq, creditos);
+		}
 	}
 
-	functionResponse = DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
+	printf("\n");	
 
-	if (functionResponse != DIC_CondRetOK) {
-		free(disciplina);
-		free(disciplinaCursada);
-		free(disciplinasPeriodo);
-		return HIS_CondRetErroInterno;
-	}
-
-	// Percorre a lista até que ela esteja vazia
-	while (listResponse != LIS_CondRetListaVazia) {
-		listResponse = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-
-		if (listResponse != LIS_CondRetOK && listResponse != LIS_CondRetListaVazia) {
-			free(disciplina);
-			free(disciplinaCursada);
-			free(disciplinasPeriodo);
-			return HIS_CondRetErroInterno;
-		}
-
-		functionResponse = DIC_getDisciplina(disciplinaCursada, &disciplina);
-
-		if (functionResponse != DIC_CondRetOK) {
-			free(disciplina);
-			free(disciplinaCursada);
-			free(disciplinasPeriodo);
-			return HIS_CondRetErroInterno;
-		}
-		
-		functionResponse = DIC_getGrau(disciplinaCursada, &grau);
-
-		if (functionResponse != DIC_CondRetOK) {
-			free(disciplina);
-			free(disciplinaCursada);
-			free(disciplinasPeriodo);
-			return HIS_CondRetErroInterno;
-		}
-
-		functionResponse = DIS_get_creditos(disciplina, &creditos);
-
-		if (functionResponse != DIS_CondRetOK) {
-			free(disciplina);
-			free(disciplinaCursada);
-			free(disciplinasPeriodo);
-			return HIS_CondRetErroInterno;
-		}
-
-		somaGraus += grau;
-		somaCreditos += creditos;
-	}
-
-	crTotal = somaGraus / somaCreditos;
-	*cr = crTotal;
-
-	free(disciplina);
-	free(disciplinaCursada);
-	free(disciplinasPeriodo);
+	//Fecha o arquivo
+	fclose(historico);
 
 	return HIS_CondRetOK;
 }
-/* Fim funcao: HIS get historico completo */
-
-/**************************************************************************
-*                                                                        *
-* Funcao: HIS get cr do período		                                  	  *
-**************************************************************************/
-HIS_tpCondRet HIS_getCrDoPeriodo(HIS_tpHistorico * pHistorico, char * periodo, float *cr) {
-	// Inicialização de variáveis
-	int response = -1;
-	char* periodoDisc = (char*)malloc(sizeof(char) * 7);
-
-	float grau = 0;
-	float somaGraus = 0;
-
-	int creditos = 0;
-	int somaCreditos = 0;
-
-	float crTotal = 0;
-
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
-
-	// Verificação dos parâmetros
-	if (pHistorico == NULL || cr == NULL)
-		return HIS_CondRetRecebeuPonteiroNulo;
-
-	// Copia o valor de pHistorico para uma variável local
-	copiaHistorico = *pHistorico;
-
-	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
-
-	// Percorre a lista até que ela esteja vazia
-	while (response != LIS_CondRetListaVazia) {
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getDisciplina(disciplinaCursada, &disciplina);
-
-		DIC_getGrau(disciplinaCursada, &grau);
-		DIC_getPeriodo(disciplinaCursada, periodoDisc);
-		DIS_get_creditos(disciplina, &creditos);
-
-		if (strcmp(periodoDisc, periodo) == 0) {
-			somaGraus += grau;
-			somaCreditos += creditos;
-		}
-	}
-
-	crTotal = somaGraus / somaCreditos;
-	*cr = crTotal;
-
-	free(disciplina);
-	free(disciplinaCursada);
-	free(disciplinasPeriodo);
-
-	return HIS_CondRetOK;
-}
-
-/* Fim funcao: HIS get cr do período */
-
-/**************************************************************************
-*                                                                        *
-* Funcao: HIS get disciplinas reprovado por falta                     	  *
-**************************************************************************/
-
-HIS_tpCondRet HIS_getDisciplinasReprovadoPorFalta(HIS_tpHistorico * pHistorico, List* disciplinas)
-{
-	// Inicialização de variáveis
-	int response = -1;
-	char* situacao = (char*)malloc(sizeof(char) * 3);
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
-
-	// Verificação dos parâmetros
-	if (pHistorico == NULL || disciplinas == NULL)
-		return HIS_CondRetRecebeuPonteiroNulo;
-
-	// Copia o valor de pHistorico para uma variável local
-	copiaHistorico = *pHistorico;
-
-	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
-
-	// Instancia uma nova lista vazia
-	createList(&disciplinasPeriodo);
-
-	// Percorre a lista até que ela esteja vazia
-	while (response != LIS_CondRetListaVazia) {
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getSituacao(disciplinaCursada, situacao);
-
-		if (strcmp(situacao, "RP") == 0) {
-			push_back(disciplinasPeriodo, disciplinaCursada);
-		}
-	}
-
-	disciplinas = disciplinasPeriodo;
-	free(situacao);
-	free(disciplina);
-	free(disciplinaCursada);
-	free(disciplinasPeriodo);
-
-	return HIS_CondRetOK;
-}
- /* Fim funcao: HIS reprovados por falta */
-
-/**************************************************************************
-*                                                                        *
-* Funcao: HIS get disciplinas trancadas                    	  *
-**************************************************************************/
-
-HIS_tpCondRet HIS_getDisciplinasTrancadas(HIS_tpHistorico * pHistorico, List* disciplinas)
-{
-	// Inicialização de variáveis
-	int response = -1;
-	char* situacao = (char*)malloc(sizeof(char) * 3);
-	Disciplina *disciplina = NULL;
-	DIC_tpDisciplinaCursada *disciplinaCursada = NULL;
-	List *disciplinasPeriodo = NULL;
-	HIS_tpHistorico copiaHistorico;
-
-	// Verificação dos parâmetros
-	if (pHistorico == NULL || disciplinas == NULL)
-		return HIS_CondRetRecebeuPonteiroNulo;
-
-	// Copia o valor de pHistorico para uma variável local
-	copiaHistorico = *pHistorico;
-
-	// Apenas pra alocar o struct na memória
-	DIS_gera_param(&disciplina, "X", "X", 0, "X", "X");
-	DIC_criarDisciplinaCursada(&disciplinaCursada, disciplina, "AP", "2017.2", 10.0);
-
-	// Instancia uma nova lista vazia
-	createList(&disciplinasPeriodo);
-
-	// Percorre a lista até que ela esteja vazia
-	while (response != LIS_CondRetListaVazia) {
-		response = pop_front(copiaHistorico.disciplinasCursadas, (void**) disciplinaCursada);
-		DIC_getSituacao(disciplinaCursada, situacao);
-
-		if (strcmp(situacao, "TR") == 0) {
-			push_back(disciplinasPeriodo, disciplinaCursada);
-		}
-	}
-
-	disciplinas = disciplinasPeriodo;
-	free(situacao);
-	free(disciplina);
-	free(disciplinaCursada);
-	free(disciplinasPeriodo);
-
-	return HIS_CondRetOK;
-}
- /* Fim funcao: HIS trancadas */
+ /* Fim funcao: HIS print Historico por situação */
 
 
 /**************************************************************************
