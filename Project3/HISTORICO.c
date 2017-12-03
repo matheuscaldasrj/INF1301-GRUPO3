@@ -81,7 +81,7 @@ struct HIS_tagHistorico  {
 
 /**************************************************************************
  *                                                                        *
- * Funcao: HIS Criar Historico                                                 *
+ * Funcao: HIS Criar Historico                                            *
  **************************************************************************/
 
 HIS_tpCondRet HIS_criarHistorico (HIS_tpHistorico ** pHistorico)
@@ -450,17 +450,18 @@ HIS_tpCondRet HIS_printHistoricoPorSituacao(unsigned int matricula, char *situac
 	// Inicialização de variáveis
 	FILE *historico;
 	char periodo[tamPeriodo], disciplina[tamDisciplina], situacaoArq[tamSituacao], grau[tamGrau];
+	unsigned int creditos;
 
 	//Verificação do parâmetro
-	if (situacao == NULL) return HIS_CondRetParamInvalido;
-	if (strcmp(situacao,"AP") && strcmp(situacao,"RP") && strcmp(situacao,"RF") && strcmp(situacao,"TR")) return HIS_CondRetParamInvalido;
-
+	if (situacao == NULL || strlen(situacao) != 2) return HIS_CondRetParamInvalido;
+	if (strcmp(situacao,"AP") && strcmp(situacao,"RN") && strcmp(situacao,"RF") && strcmp(situacao,"TR")) return HIS_CondRetParamInvalido;
+	
 	//Abre o arquivo referente à matrícula dada
 	historico = fopen(HIS_montaNomeArq(matricula),"r");
 	if (historico == NULL) {printf("\nNao foi encontrado registro de historico do aluno de matricula %u.\n",matricula); return HIS_CondRetErroAoAbrirArquivo;}
 
 	//Imprime apenas as disciplinas necessárias
-	printf("Periodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n\n");
+	printf("\nPeriodo\t\tDisciplina\tGrau\tSituacao\tCreditos\n\n");
 	while (fscanf(historico,"%s%s%s%s%u",periodo,disciplina,grau,situacaoArq,&creditos) == 5){
 		if (!strcmp(situacao,situacaoArq)){
 			printf("%s\t\t%s\t\t%s\t%s\t\t%u\n",periodo, disciplina, grau, situacaoArq, creditos);

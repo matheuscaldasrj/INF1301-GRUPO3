@@ -188,7 +188,7 @@ HIS_tpCondRet HIS_getHistoricoDoPeriodo(HIS_tpHistorico * pHistorico, char* peri
  *        com a situação passada como parâmetro.
  *  $EP Parâmetros  
  *    $P matricula:   número de matricula do aluno
- *    $P situacao:    situacao desejada pelo cliente  ("AP","RP","RF","TR")
+ *    $P situacao:    situacao desejada pelo cliente  ("AP","RN","RF","TR")
  *  $FV Valor retornado
  *     HIS_CondRetOK
  *     HIS_CondRetErroAoAbrirArquivo

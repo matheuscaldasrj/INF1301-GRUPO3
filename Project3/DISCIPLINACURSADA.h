@@ -46,7 +46,7 @@
 /*Tipo estruturado tpDisciplinaCursada é constituido por quatro(4) tipos de dados diferentes criados para identificação, categorização
 e manipulação das DISCIPLINAS CURSADAS peloas alunos de informática da PUC-Rio, são eles a disciplinaque foi cursada que é um tipo 
 estruturado contendo os dados proprios a ela(para maiores detalhes verificar docuemntacao do modulo), um parâmetro para definir a situação do
-aluno após a  conclusão da disciplina que pode ser "AP" como aprovada, "RP" reprovado por nota ou então "RF" reprovado por faltas ou então "TR" que é para as disicplinas q foram trancadas, outro parâmetro 
+aluno após a  conclusão da disciplina que pode ser "AP" como aprovada, "RN" reprovado por nota ou então "RF" reprovado por faltas ou então "TR" que é para as disicplinas q foram trancadas, outro parâmetro 
 é o periodo em que a matéria foi feita (exs:2014.1, 2017.2, 3000.3) e por fim o grau final obtido na materia*/
 typedef struct DIC_tagDisciplinaCursada DIC_tpDisciplinaCursada;
 

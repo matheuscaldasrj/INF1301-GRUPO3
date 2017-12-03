@@ -1,4 +1,4 @@
-// Script:    TesteHistorico.script
+﻿// Script:    TesteHistorico.script
 // Autor:     Grupo 3 - Modular 17.2
 // Data:      01/10/2017
 // Proposito: Testar as funcoes do modulo Historico
@@ -307,17 +307,22 @@
 =getHisPeriodo 1 grau1 ErroInterno
 =recuperar
 
-== Pegar disciplinas trancadas
-=getDiscTrancadas 0 1 OK
-=getDiscTrancadas 1 1 OK
-=recuperar
-
-== Pegar disciplinas reprovadas por falta
-=getDiscReprFalta 0 1 OK
-
 == Salva historico no arquivo
 =salvaHistArquivo 0 1474985 OK
 =salvaHistArquivo 4 1312785 OK
+
+==Imprime historico por situacao no terminal
+=printHistSituacao 1312785 "AP" OK
+=printHistSituacao 1312785 "RN" OK
+=printHistSituacao 1312785 "RF" OK
+=printHistSituacao 1312785 "APP" OK
+=recuperar
+=printHistSituacao 1312785 "A" OK
+=recuperar
+=printHistSituacao 1312785 "GR" OK
+=recuperar
+=printHistSituacao 123456  "AP" OK
+=recuperar
 
 == Imprime historico completo no terminal
 =printHistCompleto 1474985 OK
@@ -328,6 +333,8 @@
 =printHistPeriodo 1474985 "2016.2" OK
 =printHistPeriodo 1417234 "2017.1" OK
 =recuperar
+
+
 
 
 == Remover Historico
