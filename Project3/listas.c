@@ -289,3 +289,139 @@ LIS_tpCondRet prev(List* l)
 	else l->cursor = l->cursor->prev;
 	return LIS_CondRetOK;
 } /* Fim função: LIS prev */
+
+
+
+#ifdef _DEBUG
+
+// DETURPACOES E VERIFICACOES
+LIS_tpCondRet deturpaListaNull(List **l) {
+	*l = NULL;
+
+	return LIS_CondRetOK;
+}
+
+
+LIS_tpCondRet verificaListaNull(List** l, int *erro) {
+	
+	*erro = 0;
+	if(* l == NULL){
+		*erro = 1;
+	}
+
+	return LIS_CondRetOK;
+}
+
+LIS_tpCondRet deturpaCursorNull(List* l) {
+	
+	l->cursor = NULL;
+
+	return LIS_CondRetOK;
+	
+}
+
+LIS_tpCondRet verificaCursorNull(List* l, int *erro){
+
+	if(l == NULL) {
+		*erro = 1;
+		return LIS_CondRetOK;
+	}
+
+	*erro = 0;
+	if(l->cursor == NULL)
+	{		
+		*erro = 1;
+	}
+	return LIS_CondRetOK;
+}
+
+LIS_tpCondRet deturpaLastNull(List* l) {
+	l->last = NULL;
+
+	return LIS_CondRetOK;
+
+}
+LIS_tpCondRet verificaLastNull(List* l, int *erro) {
+
+	if(l == NULL) {
+		*erro = 1;
+		return LIS_CondRetOK;
+	}
+
+
+	*erro = 0;
+	if(l->last == NULL) {
+		*erro = 1;
+	}
+
+	return LIS_CondRetOK;
+}
+
+LIS_tpCondRet deturpapAnteriorNull(List* l) {
+
+	l->cursor->prev = NULL;
+
+	return LIS_CondRetOK;
+}
+LIS_tpCondRet verificapAnteriorNull(List* l, int *erro) {
+
+	
+	if(l == NULL) {
+		*erro = 1;
+		return LIS_CondRetOK;
+	}
+
+	*erro = 0;
+
+	if(l->cursor->prev == NULL) {
+		*erro = 1;
+	}
+
+	return LIS_CondRetOK;
+
+}
+
+LIS_tpCondRet deturpaFirstNull(List* l) {
+	l->first = NULL;
+
+	return LIS_CondRetOK;
+}
+LIS_tpCondRet verificaFirstNull(List* l, int *erro) {
+	
+	
+	if(l == NULL) {
+		*erro = 1;
+		return LIS_CondRetOK;
+	}
+
+	*erro = 0;
+
+	if(l->first == NULL){
+		*erro = 1;
+	}
+
+	return LIS_CondRetOK;
+}
+
+
+LIS_tpCondRet deturpaValorCorrenteNull(List* l) {
+	l->cursor->val = NULL;
+
+	return LIS_CondRetOK;
+}
+LIS_tpCondRet verificaValorCorrenteNull(List* l, int * erro) {
+	if(l == NULL) {
+		*erro = 1;
+		return LIS_CondRetOK;
+	}
+
+	*erro = 0;
+
+	if(l->cursor->val == NULL){
+		*erro = 1;
+	}
+
+	return LIS_CondRetOK;
+}
+
+#endif

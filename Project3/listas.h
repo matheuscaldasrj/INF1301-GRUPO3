@@ -157,3 +157,26 @@ LIS_tpCondRet next(List* l);//atualiza o cursor para o próximo nó
 *
 ***********************************************************************/
 LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
+
+
+
+#ifdef _DEBUG
+LIS_tpCondRet deturpaListaNull(List** l);
+LIS_tpCondRet verificaListaNull(List** l, int * error);
+
+LIS_tpCondRet deturpaCursorNull(List* l);
+LIS_tpCondRet verificaCursorNull(List* l, int * error);
+
+LIS_tpCondRet deturpaValorCorrenteNull(List* l);
+LIS_tpCondRet verificaValorCorrenteNull(List* l, int * error);
+
+LIS_tpCondRet deturpaLastNull(List* l);
+LIS_tpCondRet verificaLastNull(List* l, int * error);
+
+LIS_tpCondRet deturpapAnteriorNull(List* l);
+LIS_tpCondRet verificapAnteriorNull(List* l, int * error);
+
+LIS_tpCondRet deturpaFirstNull(List* l);
+LIS_tpCondRet verificaFirstNull(List* l, int * error);
+#endif
+

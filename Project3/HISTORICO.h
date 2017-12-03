@@ -87,8 +87,12 @@ typedef enum {
   HIS_CondRetErroAoAbrirArquivo = 5 ,
     /* Erro ao abrir arquivo de texto*/ 
 
-  HIS_CondRetErroInterno = 6
+  HIS_CondRetErroInterno = 6,
 	/* Erro causado por alguma função que se comportou de forma inesperada */
+
+  HIS_ErroNaEstruturaDisciplinasCursadas = 7
+	/* Erro causado por um problema no encadeamento das estruturas cursadas */
+
 
 } HIS_tpCondRet ;
 
