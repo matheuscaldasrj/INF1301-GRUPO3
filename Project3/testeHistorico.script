@@ -18,7 +18,6 @@
 =declararparm  ParamInvalido  int 3
 =declararparm  ErroAoAbrirArquivo int 5
 =declararparm  ErroInterno    int 6
-=declararparm  ErroListaDeDisciplinas    int 7
 =declararparm  DIS_CondRetDisciplinaCriada   int 2
 
 ==Declarar os conteudos de Disciplina
@@ -289,11 +288,6 @@
 =adicDisc 4 19 situacao3 periodo6 grau3 OK
 =adicDisc 4 20 situacao4 periodo6 grau4 OK
 
-==Verifica historicos que estão Ok
-=verifica 4 0K
-=verifica 0 0K
-
-
 == Pegar historico completo
 =getHisCompleto 0 OK
 =getHisCompleto 1 OK
@@ -339,78 +333,6 @@
 =printHistPeriodo 1474985 "2016.2" OK
 =printHistPeriodo 1417234 "2017.1" OK
 =recuperar
-
-
-
-
-==Deturpacao 1
-=deturpa 4 1 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
-
-=criaHIS 4 OK
-=adicDisc 4 0 situacao1 periodo1 grau1 OK
-=adicDisc 4 1 situacao2 periodo1 grau2 OK
-=adicDisc 4 2 situacao3 periodo1 grau3 OK
-=adicDisc 4 3 situacao4 periodo1 grau4 OK
-=adicDisc 4 4 situacao5 periodo1 grau5 OK
-=adicDisc 4 5 situacao6 periodo1 grau6 OK
-
-==Deturpacao 2
-=deturpa 4 2 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
-
-=criaHIS 4 OK
-=adicDisc 4 0 situacao1 periodo1 grau1 OK
-=adicDisc 4 1 situacao2 periodo1 grau2 OK
-=adicDisc 4 2 situacao3 periodo1 grau3 OK
-=adicDisc 4 3 situacao4 periodo1 grau4 OK
-=adicDisc 4 4 situacao5 periodo1 grau5 OK
-=adicDisc 4 5 situacao6 periodo1 grau6 OK
-==Deturpacao 3
-=deturpa 4 3 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
-
-
-=criaHIS 4 OK
-=adicDisc 4 0 situacao1 periodo1 grau1 OK
-=adicDisc 4 1 situacao2 periodo1 grau2 OK
-=adicDisc 4 2 situacao3 periodo1 grau3 OK
-=adicDisc 4 3 situacao4 periodo1 grau4 OK
-=adicDisc 4 4 situacao5 periodo1 grau5 OK
-=adicDisc 4 5 situacao6 periodo1 grau6 OK
-==Deturpacao 4
-=deturpa 4 4 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
-
-
-=criaHIS 4 OK
-=adicDisc 4 0 situacao1 periodo1 grau1 OK
-=adicDisc 4 1 situacao2 periodo1 grau2 OK
-=adicDisc 4 2 situacao3 periodo1 grau3 OK
-=adicDisc 4 3 situacao4 periodo1 grau4 OK
-=adicDisc 4 4 situacao5 periodo1 grau5 OK
-=adicDisc 4 5 situacao6 periodo1 grau6 OK
-==Deturpacao 5
-=deturpa 4 5 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
-
-
-=criaHIS 4 OK
-=adicDisc 4 0 situacao1 periodo1 grau1 OK
-=adicDisc 4 1 situacao2 periodo1 grau2 OK
-=adicDisc 4 2 situacao3 periodo1 grau3 OK
-=adicDisc 4 3 situacao4 periodo1 grau4 OK
-=adicDisc 4 4 situacao5 periodo1 grau5 OK
-=adicDisc 4 5 situacao6 periodo1 grau6 OK
-==Deturpacao 6
-=deturpa 4 6 OK
-==Verificao de estrutura com erro
-=verifica 4 ErroListaDeDisciplinas
 
 
 
