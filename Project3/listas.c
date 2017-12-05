@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listas.h"
+#include "CONTA.H"
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
@@ -471,18 +472,21 @@ LIS_tpCondRet LIS_verificaLista(List * list) {
 	verificaListaNull(&list,&error);
 	if(error == 1){
 		printf("==================Detectou erro ao verificar que lista eh nulo==================");
+		CNT_CONTAR("erro-list-null");
 		return LIS_ErroNaEstrutura;
 	}
 
 	verificaCursorNull(list,&error);
 	if(error == 1){
 		printf("==================Detectou erro ao verificar que cursor eh nulo==================");
+		CNT_CONTAR("error-cursor-null");
 		return LIS_ErroNaEstrutura;
 	}
 
 	verificaFirstNull(list,&error);
 	if(error == 1){
 		printf("==================Detectou erro ao verificar que first eh nulo==================");
+		CNT_CONTAR("erro-first-null");
 		return LIS_ErroNaEstrutura;
 	}
 
@@ -490,6 +494,7 @@ LIS_tpCondRet LIS_verificaLista(List * list) {
 	verificapAnteriorNull(list,&error);
 	if(error == 1){
 		printf("==================Detectou erro ao verificar que anterior eh nulo==================");
+		CNT_CONTAR("erro-anterior-null");
 		return LIS_ErroNaEstrutura;
 	}
 
@@ -497,12 +502,14 @@ LIS_tpCondRet LIS_verificaLista(List * list) {
 	verificaLastNull(list,&error);
 	if(error == 1){
 		printf("================Detectou erro ao verificar que last eh nulo==================");
+		CNT_CONTAR("erro-last-null");
 		return LIS_ErroNaEstrutura;
 	}
 
 	verificaValorCorrenteNull(list,&error);
 	if(error == 1){
 		printf("==================Detectou erro ao verificar que valor corrente eh nulo==================");
+		CNT_CONTAR("erro-valor-corrente-null");
 		return LIS_ErroNaEstrutura;
 	}
 
