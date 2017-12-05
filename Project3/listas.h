@@ -10,19 +10,21 @@
 *
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
-*  Autores:   mrol - Matheus Rodrigues de Oliveira Leal
-*             SaintL - Leonardo Abreu Santos
-*	      	  ngtgmp - Felipe Nogueira de Souza
-	          LL - Clayton Lucas Mendes Lima
-			  mc - Matheus Caldas
-*	
+*  Autores:		mrol - Matheus Rodrigues de Oliveira Leal
+*				SaintL - Leonardo Abreu Santos
+*	      		ngtgmp - Felipe Nogueira de Souza
+*				LL - Clayton Lucas Mendes Lima
+*				mc - Matheus Caldas
+*				lf - Leon França
+*
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
 *       0.01   ngtgmp   10/09/2017 Início do desenvolvimento
 *		0.02   ngtgmp   21/09/2017 Implementação de mais funções
 *		0.03   ngtgmp   27/09/2017 Preparo para os testes automatizados e revisão do código
 *		0.04   ngtgmp   01/10/2017 Reparos após testes e revisão
-*		1.0    mc		05/12/2017 Adicao de verificacoes e deturpacoes completas
+*		1.0		mc		05/12/2017 Adicao de verificacoes e deturpacoes completas
+*		1.1		lf		05/12/2017 Documentação de verificadores e deturpadores
 *  $ED Descrição do módulo
 *     Este módulo implementa o módulo lista duplamente encadeada para ser utilizada pelos demais módulos do projeto "Sistema Acadêmico da turma 3wb".
 *	  Uma lista(list) contém um cabeçalho, com um nó apontanto para o primeiro item da lista, um apontando para o último e outro apontando para o nó cursor.
@@ -177,24 +179,118 @@ LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
 
 
 #ifdef _DEBUG
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaListaNull
+*$ED	Descricao da funcao:
+*	Deturpa endereco para lista, modificando-o para um endereco nulo.
+*
+$.**************************************************************************/
 LIS_tpCondRet deturpaListaNull(List** l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaListaNull
+*$ED	Descricao da funcao:
+*	Verifica se endereco para lista esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
 LIS_tpCondRet verificaListaNull(List** l, int * error);
-
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaCursorNull
+*$ED	Descricao da funcao:
+*	Deturpa ponteiro para no cursor modificando-o para um endereco nulo.
+*
+$.**************************************************************************/
 LIS_tpCondRet deturpaCursorNull(List* l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaCursorNull
+*$ED	Descricao da funcao:
+*	Verifica se ponteiro para no cursor esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
 LIS_tpCondRet verificaCursorNull(List* l, int * error);
-
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaLastNull
+*$ED	Descricao da funcao:
+*	Deturpa ponteiro para ultimo no da lista modificando-o para um endereco nulo.
+*
+$.**************************************************************************/
+LIS_tpCondRet deturpaLastNull(List* l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaLastNull
+*$ED	Descricao da funcao:
+*	Verifica se ponteiro para ultimo no da lista esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
+LIS_tpCondRet verificaLastNull(List* l, int * error);
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpapAnteriorNull
+*$ED	Descricao da funcao:
+*	Deturpa ponteiro para no anterior ao cursor da lista modificando-o para um endereco nulo.
+*
+$.**************************************************************************/
+LIS_tpCondRet deturpapAnteriorNull(List* l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificapAnteriorNull
+*$ED	Descricao da funcao:
+*	Verifica se ponteiro para no anterior ao cursor esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
+LIS_tpCondRet verificapAnteriorNull(List* l, int * error);
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaFirstNull
+*$ED	Descricao da funcao:
+*	Deturpa ponteiro para para primeiro no da lista modificando-o para um endereco nulo.
+*
+$.**************************************************************************/
+LIS_tpCondRet deturpaFirstNull(List* l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaFirstNull
+*$ED	Descricao da funcao:
+*	Verifica se ponteiro para primeiro no da lista esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
+LIS_tpCondRet verificaFirstNull(List* l, int * error);
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaValorCorrenteNull
+*$ED	Descricao da funcao:
+*	Deturpa valor contido em no corrente da lista modificando-o para um valor nulo.
+*
+$.**************************************************************************/
 LIS_tpCondRet deturpaValorCorrenteNull(List* l);
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaValorCorrenteNull
+*$ED	Descricao da funcao:
+*	Verifica se valor contido em no corrente da lista esta vazio. Retorna condicao de erro por referencia.
+*
+$.**************************************************************************/
 LIS_tpCondRet verificaValorCorrenteNull(List* l, int * error);
 
-LIS_tpCondRet deturpaLastNull(List* l);
-LIS_tpCondRet verificaLastNull(List* l, int * error);
-
-LIS_tpCondRet deturpapAnteriorNull(List* l);
-LIS_tpCondRet verificapAnteriorNull(List* l, int * error);
-
-LIS_tpCondRet deturpaFirstNull(List* l);
-LIS_tpCondRet verificaFirstNull(List* l, int * error);
-
+/***************************************************************************
+*
+*$FC	Funcao: LIS verificaLista
+*$ED	Descricao da funcao:
+*	Faz a verificacao de todas as condicoes de erro supracitadas
+*
+$.**************************************************************************/
 LIS_tpCondRet LIS_verificaLista(List * list);
+
+/***************************************************************************
+*
+*$FC	Funcao: LIS deturpaLista
+*$ED	Descricao da funcao:
+*	Faz a deturpacao em todas as condicoes de erro supracitadas
+*
+$.**************************************************************************/
 LIS_tpCondRet LIS_deturpaLista (List ** list , int acaoDeDeturpacao );
 #endif
