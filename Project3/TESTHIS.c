@@ -59,8 +59,7 @@
 #define PRINT_HIST_COMPLETO		"=printHistCompleto"
 #define PRINT_HIST_SITUACAO     "=printHistSituacao"
 
-#define DETURPA					"=deturpa"
-#define VERIFICA				"=verifica"
+
 #define MAX 30
 
 
@@ -272,33 +271,7 @@ HIS_tpHistorico *pHistorico[MAX] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NU
 		   
 		  return TST_CompararInt(HIS_CondRetObtido, HIS_CondRetEsperada, "Retorno errado ao printar historico completo");
 	   }
-		else if( strcmp( ComandoTeste , DETURPA ) == 0 ) {   
-		   
-		   NumLidos = LER_LerParametros("iii", &indexH, &deturpacaoNumero, &HIS_CondRetEsperada);
-
-			if ( NumLidos != 3 )
-			{
-				return TST_CondRetParm ;
-			} 
-
-		 return TST_CompararInt( HIS_CondRetOK , HIS_deturpaListaDeHistorico(pHistorico[indexH], deturpacaoNumero), "Erro ao tentar deturpar"  ) ;
-		   
-	   }
-		else if( strcmp( ComandoTeste , VERIFICA ) == 0 ) {   
-		   
-		NumLidos = LER_LerParametros("ii", &indexH , &HIS_CondRetEsperada);
-
-		if ( NumLidos != 2 )
-		{
-			return TST_CondRetParm ;
-		} 
-		
-			
-
-		return TST_CompararInt( HIS_CondRetEsperada , HIS_verificaHistorico(pHistorico[indexH]), "Verificacao indiciou erro"  ) ;
-		   
-	   }
-
+	
 
  }
 /********** Fim do módulo de implementação: Módulo de teste específico **********/

@@ -1,0 +1,146 @@
+// Script:    testeLista.script
+// Autor:     Matheus Rodrigues de Oliveira Leal
+// Data:      6/set/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de uma lista usando parâmetros simbólicos
+//            Verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  Vazia        int 1
+=declararparm  Memoria      int 2
+=declararparm  NoFinal      int 3
+=declararparm  NoInicio     int 3
+=declararparm  ErroNaEstrutura     int 5
+
+
+== Declarar os conteudos
+=declararparm  listaTam  int  0
+
+== Criar lista
+=geralist OK
+
+=verifica ErroNaEstrutura
+== Insere um elemento no final da lista
+=pushb OK
+
+== Insere um elemento no começo da lista
+=pushf OK
+
+== Insere um elemento no final da lista
+=pushb OK
+
+== Obtem tamanho da lista
+=sizelist listaTam OK
+
+== Pega valor do cursor
+=pegaval OK
+
+== Atualiza o cursor para o proximo no
+=nextno OK
+
+== Atualiza o cursor para o no anterior
+=prevno OK
+
+== Retorna a referencia para o valor do ultimo no, e retira o no da lista
+=popb OK
+
+== Retorna a referencia para o valor do começo no, e retira o no da lista
+=popf OK
+
+== Atualiza para o primeiro no da lista
+=firstlist OK
+
+== Limpa uma lista
+=clearlist OK
+
+==Deleta uma lista
+=dellist OK
+
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+
+==Deturpacao 1
+=deturpa 1 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+==Deturpacao 2
+=deturpa 2 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+==Deturpacao 3
+=deturpa 3 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+==Deturpacao 4
+=deturpa 4 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+==Deturpacao 5
+=deturpa 5 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+== Criar nova lista
+=geralist OK
+== Insere um elemento no final da lista
+=pushf OK
+== Insere um elemento no final da lista
+=pushf OK
+=verifica OK
+==Deturpacao 6
+=deturpa 6 OK
+==Verifica
+=verifica ErroNaEstrutura
+
+
+
+
+
+// fim

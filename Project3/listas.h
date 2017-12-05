@@ -10,14 +10,19 @@
 *
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
-*  Autores: ngtgmp - Felipe Nogueira de Souza
-*
+*  Autores:   mrol - Matheus Rodrigues de Oliveira Leal
+*             SaintL - Leonardo Abreu Santos
+*	      	  ngtgmp - Felipe Nogueira de Souza
+	          LL - Clayton Lucas Mendes Lima
+			  mc - Matheus Caldas
+*	
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
 *       0.01   ngtgmp   10/09/2017 Início do desenvolvimento
 *		0.02   ngtgmp   21/09/2017 Implementação de mais funções
 *		0.03   ngtgmp   27/09/2017 Preparo para os testes automatizados e revisão do código
-*
+*		0.04   ngtgmp   01/10/2017 Reparos após testes e revisão
+*		1.0    mc		05/12/2017 Adicao de verificacoes e deturpacoes completas
 *  $ED Descrição do módulo
 *     Este módulo implementa o módulo lista duplamente encadeada para ser utilizada pelos demais módulos do projeto "Sistema Acadêmico da turma 3wb".
 *	  Uma lista(list) contém um cabeçalho, com um nó apontanto para o primeiro item da lista, um apontando para o último e outro apontando para o nó cursor.
@@ -44,7 +49,8 @@ typedef struct list List;
      LIS_CondRetCursorNoFinal = 3,
 	 /* Impossível obter próximo */
 	 LIS_CondRetCursorNoInicio = 4
-	 /* Impossível obter anterior*/
+	 /* Impossível obter anterior*/,
+	 LIS_ErroNaEstrutura = 5
 
    }LIS_tpCondRet;
 /***********************************************************************
@@ -138,7 +144,16 @@ LIS_tpCondRet get_val_cursor(List* l, void** val);
 *    Atualiza o parametro size para o tamanho da lista.
 *
 ***********************************************************************/
-LIS_tpCondRet list_size(List* l, unsigned int size); //retorna a quantidade de elementos na List
+LIS_tpCondRet list_size(List* l, unsigned int* size); //retorna a quantidade de elementos na List
+/***********************************************************************
+*
+*  $FC Função: LIS first
+*
+*  $ED Descrição da função
+*    Atualiza para o primeiro nó da lista
+*
+***********************************************************************/
+LIS_tpCondRet first(List* l);
 /***********************************************************************
 *
 *  $FC Função: LIS next
@@ -160,6 +175,7 @@ LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
 
 
 
+
 #ifdef _DEBUG
 LIS_tpCondRet deturpaListaNull(List** l);
 LIS_tpCondRet verificaListaNull(List** l, int * error);
@@ -178,5 +194,7 @@ LIS_tpCondRet verificapAnteriorNull(List* l, int * error);
 
 LIS_tpCondRet deturpaFirstNull(List* l);
 LIS_tpCondRet verificaFirstNull(List* l, int * error);
-#endif
 
+LIS_tpCondRet LIS_verificaLista(List * list);
+LIS_tpCondRet LIS_deturpaLista (List ** list , int acaoDeDeturpacao );
+#endif

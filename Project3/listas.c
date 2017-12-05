@@ -14,12 +14,15 @@
 *             SaintL - Leonardo Abreu Santos
 *	      	  ngtgmp - Felipe Nogueira de Souza
 	          LL - Clayton Lucas Mendes Lima
+			  mc - Matheus Caldas
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
 *       0.01   ngtgmp   10/09/2017 Início do desenvolvimento
 *		0.02   ngtgmp   21/09/2017 Implementação de mais funções
 *		0.03   ngtgmp   27/09/2017 Preparo para os testes automatizados e revisão do código
+*		0.04   ngtgmp   01/10/2017 Reparos após testes e revisão
+*		1.0    mc		05/12/2017 Adicao de verificacoes e deturpacoes completas
 *
 ***************************************************************************/
 #include <stdio.h>
@@ -156,7 +159,10 @@ LIS_tpCondRet push_front(List* l, void* val)
 LIS_tpCondRet pop_back(List* l, void** val)
 {
 	Node* tnode;
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia; }
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	}
 
 	*val = l->last->val;
 
@@ -182,7 +188,10 @@ LIS_tpCondRet pop_back(List* l, void** val)
 LIS_tpCondRet pop_front(List* l, void** val)
 {
 	Node* tnode;
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	}
 
 	*val = l->first->val;
 
@@ -214,10 +223,13 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 		return pop_back(l, val);
 	else
 	{
-		if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
-
+		if(l->first == NULL) {
+			/* Lista Vazia! */
+			return LIS_CondRetListaVazia;
+		}
+		
 		*val = l->cursor->val;
-
+	
 		if (l->first == l->last)
 		{
 		l->first = NULL;
@@ -240,7 +252,10 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 *  ****/
 LIS_tpCondRet get_val_cursor(List* l, void** val)
 {
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	} 
 	*val = l->cursor->val;
 	return LIS_CondRetOK;
 }/* Fim função: LIS get val cursor */
@@ -248,27 +263,47 @@ LIS_tpCondRet get_val_cursor(List* l, void** val)
 *
 *  Função: LIS list size
 *  ****/
-LIS_tpCondRet list_size(List* l, unsigned int size)
+LIS_tpCondRet list_size(List* l, unsigned int* size)
 {
-	Node* Tnode;
-	size = 0;
-	Tnode = l->first;
+	Node* Tnode = l->first;
 	if(l->first == NULL)
 		return LIS_CondRetListaVazia;
-	while(Tnode != l->last)
-		size++;
+	*size = 0;
+	while(Tnode != NULL)
+	{
+		Tnode = Tnode->next;
+		*size = *size +1;
+	}
 	return LIS_CondRetOK;
 } /* Fim função: LIS list size */
+
+/***************************************************************************
+*
+*  Função: LIS first
+*  ****/
+LIS_tpCondRet first(List* l){
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	}
+	l->cursor = l->first;
+	return LIS_CondRetOK;
+}
+
+
 /***************************************************************************
 *
 *  Função: LIS next
 *  ****/
 LIS_tpCondRet next(List* l)
 {
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n");return LIS_CondRetListaVazia;}
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	}
 	else if(l->cursor->next == NULL)
 	{
-		printf("\n\n <!> Cursor ja posicionado no final da lista <!> \n\n");
+		/* Cursor ja posicionado no final da lista */
 		return LIS_CondRetCursorNoFinal;
 	}
 	else l->cursor = l->cursor->next;
@@ -280,15 +315,19 @@ LIS_tpCondRet next(List* l)
 *  ****/
 LIS_tpCondRet prev(List* l)
 {
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
+	if(l->first == NULL) {
+		/* Lista Vazia! */
+		return LIS_CondRetListaVazia;
+	}
 	else if(l->cursor->prev == NULL)
 	{
-		printf("\n\n <!> Cursor ja posicionado no inicio da lista <!> \n\n");
+		/* Cursor ja posicionado no inicio da lista */
 		return LIS_CondRetCursorNoInicio;
 	}
 	else l->cursor = l->cursor->prev;
 	return LIS_CondRetOK;
 } /* Fim função: LIS prev */
+
 
 
 
@@ -424,4 +463,86 @@ LIS_tpCondRet verificaValorCorrenteNull(List* l, int * erro) {
 	return LIS_CondRetOK;
 }
 
-#endif
+/* Inicio das deturpacoes e verificacoes */
+LIS_tpCondRet LIS_verificaLista(List * list) {
+	int totalErrors = 0;
+	int error = 0;
+
+	verificaListaNull(&list,&error);
+	if(error == 1){
+		printf("==================Detectou erro ao verificar que lista eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+	verificaCursorNull(list,&error);
+	if(error == 1){
+		printf("==================Detectou erro ao verificar que cursor eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+	verificaFirstNull(list,&error);
+	if(error == 1){
+		printf("==================Detectou erro ao verificar que first eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+
+	verificapAnteriorNull(list,&error);
+	if(error == 1){
+		printf("==================Detectou erro ao verificar que anterior eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+
+	verificaLastNull(list,&error);
+	if(error == 1){
+		printf("================Detectou erro ao verificar que last eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+	verificaValorCorrenteNull(list,&error);
+	if(error == 1){
+		printf("==================Detectou erro ao verificar que valor corrente eh nulo==================");
+		return LIS_ErroNaEstrutura;
+	}
+
+	return LIS_CondRetOK;
+}
+
+
+
+
+
+
+LIS_tpCondRet LIS_deturpaLista (List ** list , int acaoDeDeturpacao ) {
+
+	if( acaoDeDeturpacao == 1 )
+	{
+		// LISTA FICA NULL
+		deturpaListaNull(list);
+	} 	
+	else if( acaoDeDeturpacao == 2 )
+	{
+		// CURSOR fica null
+		deturpaCursorNull(*list);
+	} else if (acaoDeDeturpacao == 3) {
+
+		// LAST FICA NULO
+		deturpaLastNull(*list);
+	} else if(acaoDeDeturpacao == 4) {
+		// ANTERIOR FUCA NULLO
+		deturpapAnteriorNull(*list);
+	} else if(acaoDeDeturpacao == 5) {
+		// FIRST FICA NULLO
+		deturpaFirstNull(*list);
+	}  else if(acaoDeDeturpacao == 6) {
+		// VALOR CORRENTE FICA NULLO
+		deturpaValorCorrenteNull(*list);
+	}
+	
+	return LIS_CondRetOK ;
+}
+
+#endif _DEBUG
+/* Fim das deturpacoes e verificacoes */
+
