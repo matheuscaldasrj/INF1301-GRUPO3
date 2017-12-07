@@ -13,6 +13,7 @@
 =declararparm  NoFinal      int 3
 =declararparm  NoInicio     int 3
 =declararparm  ErroNaEstrutura     int 5
+=declararparm  ErroNoTipo   int 6
 
 
 == Inicializar contadores
@@ -25,17 +26,18 @@
 =declararparm  listaTam  int  0
 
 == Criar lista
-=geralist OK
+=geralist 'l' OK
 
 =verifica ErroNaEstrutura
 == Insere um elemento no final da lista
-=pushb OK
+=pushb 'l' OK
 
 == Insere um elemento no começo da lista
-=pushf OK
+=pushf 'l' OK
 
 == Insere um elemento no final da lista
-=pushb OK
+=pushb 'q' OK
+=recuperar
 
 == Obtem tamanho da lista
 =sizelist listaTam OK
@@ -67,11 +69,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 
 ==Deturpacao 1
@@ -81,11 +83,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 ==Deturpacao 2
 =deturpa 2 OK
@@ -95,11 +97,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 ==Deturpacao 3
 =deturpa 3 OK
@@ -108,11 +110,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 ==Deturpacao 4
 =deturpa 4 OK
@@ -121,11 +123,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 ==Deturpacao 5
 =deturpa 5 OK
@@ -134,11 +136,11 @@
 
 
 == Criar nova lista
-=geralist OK
+=geralist 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 == Insere um elemento no final da lista
-=pushf OK
+=pushf 'l' OK
 =verifica OK
 ==Deturpacao 6
 =deturpa 6 OK

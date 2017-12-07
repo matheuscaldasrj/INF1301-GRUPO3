@@ -28,7 +28,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listas.h"
-#include "CONTA.H"
+
+#ifdef _DEBUG
+	#include "GENERICO.H"
+	#include "CONTA.H"
+	#include "CESPDIN.H"
+#endif
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
@@ -58,12 +64,35 @@ struct list
 	Node* first;  //Aponta para o primeiro nó
 	Node* last;	  //Aponta para o último nó
 	Node* cursor; //Aponta para o nó cursor
+
+	#ifdef _DEBUG
+		char tipo;
+	#endif
 };
 /***************************************************************************
 *
 *  Função: LIS create list
 *  ****/
-LIS_tpCondRet createList(List** l){ (*l) = (List*) calloc(1, sizeof(List)); if(!l) return LIS_CondRetFaltouMemoria; (*l)->first = NULL; (*l)->last = NULL; (*l)->cursor = NULL; return LIS_CondRetOK; }
+LIS_tpCondRet createList(List** l
+#ifdef _DEBUG 
+	,char tipoin 
+#endif 
+	)
+{ 
+	(*l) = (List*) calloc(1, sizeof(List)); 
+	if(!l) return LIS_CondRetFaltouMemoria; 
+	(*l)->first = NULL; 
+	(*l)->last = NULL; 
+	(*l)->cursor = NULL; 
+
+	#ifdef _DEBUG
+		(*l)->tipo = tipoin;
+		CED_MarcarEspacoAtivo(l);
+	#endif
+
+
+	return LIS_CondRetOK;
+}
 /* Fim função: LIS create lista */
 /***************************************************************************
 *
@@ -73,6 +102,13 @@ LIS_tpCondRet del(List* l)
 {
 	Node* tnode = l->first;
 	l->cursor = l->first;
+
+	#ifdef _DEBUG
+
+        CED_MarcarEspacoNaoAtivo(l);
+
+    #endif
+
 	while(tnode != NULL)
 	{
 		l->cursor = l->cursor->next;
@@ -105,9 +141,14 @@ LIS_tpCondRet clear(List* l)
 *
 *  Função: LIS push back
 *  ****/
-LIS_tpCondRet push_back(List* l, void* val)
+LIS_tpCondRet push_back(List* l, void* val 
+#ifdef _DEBUG 
+	,char tipoin 
+#endif 
+	)
 {
 	Node* Nnode;
+
 	Nnode = (Node*) calloc (1, sizeof(Node));
 	if(!Nnode)
 		return LIS_CondRetFaltouMemoria;
@@ -125,15 +166,25 @@ LIS_tpCondRet push_back(List* l, void* val)
 		l->last->next = Nnode;
 	}
 	l->last = Nnode;
+
+	#ifdef _DEBUG
+		if ((*l).tipo != tipoin) return LIS_ErroNoTipo;
+	#endif 
+
 	return LIS_CondRetOK;
 } /* Fim função: LIS push back */
 /***************************************************************************
 *
 *  Função: LIS push front
 *  ****/
-LIS_tpCondRet push_front(List* l, void* val)
+LIS_tpCondRet push_front(List* l, void* val 
+#ifdef _DEBUG 
+	,char tipoin 
+#endif
+	)
 {
 	Node* Nnode;
+
 	Nnode = (Node*) calloc(1, sizeof(Node));
 	if(!Nnode)
 		return LIS_CondRetFaltouMemoria;
@@ -151,6 +202,12 @@ LIS_tpCondRet push_front(List* l, void* val)
 		l->first->prev = Nnode;
 	}
 	l->first = Nnode;
+
+	#ifdef _DEBUG
+		if ((*l).tipo != tipoin) return LIS_ErroNoTipo;
+
+	#endif 
+
 	return LIS_CondRetOK;
 } /* Fim função: LIS push front */
 /***************************************************************************
@@ -550,6 +607,6 @@ LIS_tpCondRet LIS_deturpaLista (List ** list , int acaoDeDeturpacao ) {
 	return LIS_CondRetOK ;
 }
 
-#endif _DEBUG
+#endif
 /* Fim das deturpacoes e verificacoes */
 

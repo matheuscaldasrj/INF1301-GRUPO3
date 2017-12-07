@@ -60,6 +60,12 @@
 #include    "lerparm.h"
 #include    "listas.h"
 
+#ifdef _DEBUG
+   
+#include "CESPDIN.H"
+
+#endif
+
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define     GERA_LIST    "=geralist"
@@ -75,9 +81,12 @@
 #define     CLEAR_LIST   "=clearlist"
 #define     FIRST_LIST   "=firstlist"
 
-#define DETURPA					"=deturpa"
-#define VERIFICA				"=verifica"
+#ifdef _DEBUG
 
+   #define DETURPA				"=deturpa"
+   #define VERIFICA				"=verifica"
+
+#endif
 /*****  Código das funções exportadas pelo módulo  *****/
 
 
@@ -112,18 +121,19 @@ List *lst = NULL;
 	  int a[3] = {10,120,570};
       TST_tpCondRet Ret;
 	  int deturpacaoNumero = -1;
+     char tipo = 'x';
       /* Testar LST Gerar lista */
 
          if ( strcmp( ComandoTeste , GERA_LIST ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,&CondRetEsperada) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ci", &tipo ,&CondRetEsperada) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = createList( &lst ) ;
+            CondRetObtido = createList( &lst, tipo ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao gerar lista.\n" );
@@ -135,13 +145,13 @@ List *lst = NULL;
          else if ( strcmp( ComandoTeste , PUSH_BACK ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ci",&tipo,&CondRetEsperada ) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = push_back( lst, &(a[1]) ) ;
+            CondRetObtido = push_back( lst, &(a[1]), tipo ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao inserir um elemento no final da lista." );
@@ -154,13 +164,13 @@ List *lst = NULL;
          else if ( strcmp( ComandoTeste , PUSH_FRONT ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ci",&tipo,&CondRetEsperada) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = push_front( lst, &(a[0]) ) ;
+            CondRetObtido = push_front( lst, &(a[0]), tipo ) ;
 
 			return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao inserir um elemento no inicio da lista.\n" );
@@ -327,6 +337,8 @@ List *lst = NULL;
 
    } /* fim ativa: Testar deletar uma lista já criada */
 
+   #ifdef _DEBUG
+
    	else if( strcmp( ComandoTeste , DETURPA ) == 0 ) {   
 		   
 		   NumLidos = LER_LerParametros("ii", &deturpacaoNumero, &CondRetEsperada);
@@ -339,7 +351,7 @@ List *lst = NULL;
 			return TST_CompararInt( CondRetEsperada , LIS_deturpaLista(&lst, deturpacaoNumero), "Erro ao tentar deturpar"  ) ;
 		   
 	   }
-	else if( strcmp( ComandoTeste , VERIFICA ) == 0 ) {   
+	  else if( strcmp( ComandoTeste , VERIFICA ) == 0 ) {   
 		   
 			NumLidos = LER_LerParametros("i", &CondRetEsperada);
 
@@ -351,6 +363,8 @@ List *lst = NULL;
 			return TST_CompararInt( CondRetEsperada , LIS_verificaLista(lst) , "Verificacao indiciou erro"  ) ;
 		   
 	}
+
+   #endif
 
 
       return TST_CondRetNaoConhec ;

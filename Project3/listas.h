@@ -49,10 +49,16 @@ typedef struct list List;
      LIS_CondRetFaltouMemoria = 2 ,
      /* Faltou memória ao alocar dados */
      LIS_CondRetCursorNoFinal = 3,
-	 /* Impossível obter próximo */
-	 LIS_CondRetCursorNoInicio = 4
-	 /* Impossível obter anterior*/,
-	 LIS_ErroNaEstrutura = 5
+	   /* Impossível obter próximo */
+	   LIS_CondRetCursorNoInicio = 4,
+	   /* Impossível obter anterior*/
+
+   #ifdef _DEBUG
+
+	   LIS_ErroNaEstrutura = 5,
+     LIS_ErroNoTipo = 6
+
+   #endif
 
    }LIS_tpCondRet;
 /***********************************************************************
@@ -63,7 +69,11 @@ typedef struct list List;
 *    Cria uma lista vazia
 *
 ***********************************************************************/
-LIS_tpCondRet createList(List** l);
+LIS_tpCondRet createList(List** l 
+#ifdef _DEBUG 
+	, char tipoin 
+#endif
+	);
 /***********************************************************************
 *
 *  $FC Função: LIS del
@@ -90,7 +100,11 @@ LIS_tpCondRet clear(List* l);
 *    Insere um elemento no final da List
 *
 ***********************************************************************/
-LIS_tpCondRet push_back(List* l, void* val);
+LIS_tpCondRet push_back(List* l, void* val 
+#ifdef _DEBUG 
+	, char tipoin 
+#endif
+	);
 /***********************************************************************
 *
 *  $FC Função: LIS push front
@@ -99,7 +113,11 @@ LIS_tpCondRet push_back(List* l, void* val);
 *    Insere um elemento no começo da List
 *
 ***********************************************************************/
-LIS_tpCondRet push_front(List* l, void* val);
+LIS_tpCondRet push_front(List* l, void* val 
+#ifdef _DEBUG 
+	, char tipoin 
+#endif
+	);
 /***********************************************************************
 *
 *  $FC Função: LIS pop back
